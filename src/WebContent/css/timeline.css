@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+#displayBox .cm_box {
+  display: none;
+}
+#displayBox .cm_box.active {
+  display: block;
+}
+
+.searchBox{
+	text-align: center;
+}
+
+.diaryInfo{
+	border: 1px;
+}
