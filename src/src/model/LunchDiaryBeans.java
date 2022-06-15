@@ -7,7 +7,7 @@ public class LunchDiaryBeans implements Serializable{
 	private int lunchId;
 	private String emailAddress;
 	private String ldFoodType;
-	private String resName;
+	private String ldResName;
 	private String ldFoodPhoto;
 	private String ldCategory;
 	private String style;
@@ -40,11 +40,11 @@ public class LunchDiaryBeans implements Serializable{
 	public void setLdFoodType(String ldFoodType) {
 		this.ldFoodType = ldFoodType;
 	}
-	public String getResName() {
-		return resName;
+	public String getLdResName() {
+		return ldResName;
 	}
-	public void setResName(String resName) {
-		this.resName = resName;
+	public void setLdResName(String resName) {
+		this.ldResName = resName;
 	}
 	public String getLdFoodPhoto() {
 		return ldFoodPhoto;
