@@ -35,7 +35,6 @@
                 <input type="submit" name="tuGoUpdate" value="更新する">
                 <input type="submit" name="tuGoDelete" value="削除する">
             </form>
-        </c:forEach>
     </main>
 </body>
 </html>
