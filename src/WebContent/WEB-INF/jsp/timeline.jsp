@@ -79,7 +79,7 @@
 
 <div class="diaryInfo">
 テスト
-	<c:forEach var="e" items="${}" >
+	<c:forEach var="e" items="${diary}" >
 	</c:forEach>
 </div>
  <!--
