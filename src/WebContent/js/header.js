@@ -11,5 +11,10 @@ window.onload = function () {
     });
 };
 
-
-
+/*登録をクリックしたときにメニューを表示と非表示を切り替えるjQuery */
+/*$(document).ready(function(){
+	$('#regist').on('click',function(){
+		$(this).
+	});
+});
+*/
