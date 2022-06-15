@@ -1,0 +1,169 @@
+@charset "UTF-8";
+
+/*ヘッダーロゴの設定*/
+
+header {
+	position: fixed;
+	text-align: center;
+	width: 100%;
+
+
+}
+h1.headerLogo{
+	margin-top: 0%;
+	display: block;
+	background-color: white;
+	margin: 0;
+	width: 100%;
+	padding: 0;
+	left:0;
+	height: 110px;
+	position: fixed;
+	top: 0;
+	z-index: 2;
+	box-shadow: 2px 2px 4px gray;
+	background-color: #FFEE63;
+}
+/*
+hamburger(ハンバーガーアイコン)
+=================================== */
+.hamburger {
+  position: absolute;
+  left: 20px;
+  top: 30px;
+  width: 50px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 300;
+}
+
+.hamburger__line {
+  position: absolute;
+  width: 50px;
+  height: 3px;
+  right: 0;
+  background-color: #000;
+  transition: all 0.5s;
+}
+
+.hamburger__line--1 {
+  top: 1px;
+}
+
+.hamburger__line--2 {
+  top: 18px;
+}
+
+.hamburger__line--3 {
+  top: 36px;
+}
+
+/*ハンバーガーがクリックされたら*/
+.open .hamburger__line--1 {
+  transform: rotate(-45deg);
+  top: 11px;
+}
+
+.open .hamburger__line--2 {
+  opacity: 0;
+}
+
+.open .hamburger__line--3 {
+  transform: rotate(45deg);
+  top: 11px;
+}
+
+/*
+sp-nav(ナビ)
+=================================== */
+.sp-nav {
+  position: fixed;
+  left: -100%; /*ハンバーガーがクリックされる前はWindow右側に隠す*/
+  top: 0;
+  width: 20%; /* 出てくるスライドメニューの幅 */
+  height: 100vh;
+  background-color: #FF8D29;
+  transition: all 0.5s;
+  z-index: 200;
+  overflow-y: auto; /* メニューが多くなったらスクロールできるように */
+}
+
+/*ハンバーガーがクリックされたら右からスライド*/
+.open .sp-nav {
+  left: 0;
+}
+
+/*
+black-bg(ハンバーガーメニュー解除用bg)
+=================================== */
+.black-bg {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 5;
+  background-color: #000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s;
+  cursor: pointer;
+  z-index: 100;
+}
+
+/*ハンバーガーメニューが開いたら表示*/
+.open .black-bg {
+  opacity: 0.3;
+  visibility: visible;
+}
+
+/*ハンバーガーメニューを開いたときのメニュー内css*/
+ul{
+	margin-top: 100px;
+	padding-left: 0;
+}
+li {
+	display: block;
+	height: 10%;
+	line-height: 80px;
+	margin-left: 0%;
+	margin-bottom: 0%;
+	width: 100%;
+	text-align: center;
+	text-decoration: none;
+	color: white;
+
+}
+li:hover {
+	color: #FF8D29;
+	background-color: white;
+	opacity: 0.8;
+	transition: background-color 0.5s, color 0.5s;
+
+}
+a{
+	display: block;
+	height: 10%;
+	line-height: 80px;
+	margin-left: 0%;
+	margin-bottom: 0%;
+	width: 100%;
+	text-decoration: none;
+	color: white;
+
+}
+a:hover{
+	color: #FF8D29;
+	background-color: white;
+	opacity: 0.8;
+	transition: background-color 0.5s, color 0.5s;
+
+}
+/*デフォルトでは登録以下のメニューを非表示にする*/
+.hidden{
+	display: none;
+}
+/*メインコンテンツ部分のCSS*/
+body{
+	background-color: #fef9a7;
+}
