@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>LunchBox</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript" src="js/header.js"></script>
 <link href="css/header.css" rel="stylesheet" type="text/css" />
 </head>
@@ -23,7 +24,7 @@
 	    <ul>
 	      <li><a href="/lunchBox/TimelineServlet">タイムライン</a></li>
 	      <li><a href= "/lunchBox/MypageServlet">マイページ</a></li>
-	      <li  id="regist">登録</li>
+	      <li id="regist">登録</li>
 	      <div class= "hidden">
 		      <li><a href= "/lunchBox/RegistLunchServlet">ランチ日記登録</a></li>
 		      <li><a href = "/lunchBox/RegistHandMadeServlet">手作り日記</a></li>
