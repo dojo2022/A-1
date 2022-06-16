@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+h1{
+    width: 100px;
+    margin: auto;
+}
+
+body{
+    width: 400px;
+    margin: auto;
+
+}
+
+div{
+	width:170px;
+    margin:auto;
+
+}
+.kousin{
+	width:100px;
+    margin:auto;
+}
+.center{
+	text-align:center;
+}
+
+
+
