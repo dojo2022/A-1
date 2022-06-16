@@ -16,8 +16,8 @@
 <p>登録内容</p>
 <form method="POST" action="/lunchBox/RegistLunchServlet"enctype="multipart/form-data">
 <div id="radioBtn">
-	<label><input type="radio" name="contentsRadio" value="lunch_regist"checked="checked">外食</label>
-	<label><input type="radio" name="contentsRadio" value="handmade_regist">手作り</label>
+	<label><input type="radio" name="lunch" value="lunch_regist" checked="checked">外食</label>
+	<label><input type="radio" name="lunch" value="handmade_regist">手作り</label>
 </div>
 
 <div id="displayBox">
@@ -26,6 +26,7 @@
 			<input type="text" name="resName"></p>
 		<p>写真<br>
 			<input type="file" name="foodPhoto" accept="image/*" onchange="previewImage(this);"></p>
+			<canvas id="preview" style="max-width:200px;"></canvas><br>
 		<p>ジャンル<br>
 			<select name=category>
 			<option value="">選択してください</option>
@@ -93,7 +94,7 @@
 		</p>
 		<input type="submit" name="registNewAccount" value="登録する"><br>
 	</div>
-</div>
+
 
 
 	<div class="cm_box">
@@ -102,7 +103,7 @@
 
 		<p>写真<br>
 			<input type="file" name="foodPhoto" accept="image/*" onchange="previewImage(this);"></p>
-
+			<canvas id="preview" style="max-width:200px;"></canvas><br>
 		<p>所要時間<br>
 			<select name="cookTime">
 				<option value="">選択してください</option>
@@ -151,6 +152,7 @@
 
 		<input type="submit" name="registNewAccount" value="登録する"><br>
 	</div>
+</div>
 </form>
 </body>
 </html>

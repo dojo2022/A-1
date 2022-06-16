@@ -113,11 +113,29 @@ public class LunchDiaryDAO {
 			String ldRegistTime){
 		return null;
 	}
-	public boolean updateLd(LunchDiaryBeans ld) {
+	public boolean updateLd(
+			int lunch_id,
+			String emailAddress,
+			String ldFoodType,
+			String ldResName,
+			String ldFoodPhoto,
+			String ldCategory,
+			String style,
+			String ldDate,
+			String ldFoodName,
+			String ldCost,
+			String time,
+			String distance,
+			int ldStar,
+			String ldFeeling,
+			int lunchFlag,
+			String ldRegistTime) {
 		return false;
 	}
 
-	public boolean updateLdFlag(LunchDiaryBeans ld) {
+	public boolean updateLdFlag(int lunch_id) {
+		//そのランチIDに結び付くテーブルのフラグを０にするだけ
+		//where lunch_id = ?を忘れずに！！！！！！
 		return false;
 	}
 }
