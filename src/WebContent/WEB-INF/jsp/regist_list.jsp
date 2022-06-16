@@ -30,7 +30,7 @@
                 <option value="other">その他</option>
             </select>
             <h2>メモ</h2>
-            <textarea name="TOGO_MEMO" cols="40" rows="5" placeholder="Add Text"></textarea>
+            <textarea name="TOGO_MEMO" cols="40" rows="5" placeholder="Add Text"></textarea><br>
             <input type="submit" name="tuGoRegist" value="登録する">
         </form>
     </main>

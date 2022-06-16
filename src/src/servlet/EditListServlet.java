@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class RegistListServlet
  */
-@WebServlet("/RegistListServlet")
-public class RegistListServlet extends HttpServlet {
+@WebServlet("/EditListServlet")
+public class EditListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegistListServlet() {
+    public EditListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,8 +36,8 @@ public class RegistListServlet extends HttpServlet {
 			return;
 		} */
 
-		// 行きたい場所リスト登録ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/regist_list.jsp");
+		// 行きたい場所リスト編集・削除ページにフォワードする
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/edit_list.jsp");
 				dispatcher.forward(request, response);
 	}
 
@@ -50,11 +50,16 @@ public class RegistListServlet extends HttpServlet {
 		if (session.getAttribute("id") == null) {
 			response.sendRedirect("/simpleBC/LoginServlet");
 			return;
-		}  */
+		}
 
-		//　 リクエストパラメータを取得
+		// リクエストパラメータを取得
 		// request.setCharacterEncoding("UTF-8");
 		// 途中です
+
+		// マイページにフォワードする
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/myPage.jsp");
+			dispatcher.forward(request, response);
+			*/
 
 	}
 

@@ -15,11 +15,11 @@
     </header>
     <main>
         <h1>行きたい場所リスト編集・削除</h1>
-            <form method="post" action="/lunchBox/RegistListServlet">
+            <form method="post" action="/lunchBox/EditListServlet">
                 <h2>店名 ※必須</h2>
-                <input type="text" name="RES_NAME" placeholder="店舗名(例:鳥貴族 新宿店)まで入力してください" value="${cardList.~~~~}">
+                <input type="text" name="RES_NAME" placeholder="店舗名(例:鳥貴族 新宿店)まで入力してください" ><!-- あとでvalue値にスコープで挿入  -->
                 <h2>ジャンル</h2>
-                <select name="CATEGORY" id="" value="${cardList.~~~~}">
+                <select name="CATEGORY" id="" ><!-- あとでvalue値にスコープで挿入  -->
                     <option value="">選択してください</option>
                     <option value="japan">和食</option>
                     <option value="china">中華</option>
@@ -30,7 +30,7 @@
                     <option value="other">その他</option>
                 </select>
                 <h2>メモ</h2>
-                <textarea name="TOGO_MEMO" cols="40" rows="5" placeholder="Add Text" value="${cardList.~~~~}"></textarea><br>
+                <textarea name="TOGO_MEMO" cols="40" rows="5" placeholder="Add Text" ><!-- あとでvalue値にスコープで挿入  --></textarea><br>
                 <p></p>
                 <input type="submit" name="tuGoUpdate" value="更新する">
                 <input type="submit" name="tuGoDelete" value="削除する">
