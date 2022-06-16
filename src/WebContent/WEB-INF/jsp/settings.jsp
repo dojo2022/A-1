@@ -54,7 +54,7 @@
 <input type="submit" name="SUBMIT" value="更新する">
 </div>
 <div >
-<p><a href="LeaveServlet.java" class="leave">退会する方はこちら</a></p>
+<p><a href="/lunchBox/LeaveServlet" class="leave">退会する方はこちら</a></p>
 </div>
 
 
