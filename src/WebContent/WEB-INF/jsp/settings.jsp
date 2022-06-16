@@ -29,8 +29,9 @@
 	<table>
 
 	<tr>
-	<td colspan="2"><input type="file"name="IMAGE"accept="image/*"onchange="previewImage(this);">アイコン<br>
-	<div class="center"></div><canvas id="preview" style="max-width:200px;"></canvas><br></td>
+	<th colspan="2"><input type="file"name="IMAGE"accept="image/*"onchange="previewImage(this);">
+	<br></th>
+	<div class="center"><canvas id="preview" style="max-width:200px;"></canvas></div>
 
 	</tr>
 	<tr>

@@ -32,6 +32,21 @@ public class MyPageServlet extends HttpServlet {
 		//System.out.println("サーブレットの実行");
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		//フォワード先の指定
 		RequestDispatcher dispatcher =  request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp");
 
