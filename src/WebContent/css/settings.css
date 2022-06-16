@@ -2,26 +2,43 @@
 
 h1{
 	width:400px;
+	text-align: center;
+	padding-top: 70px;
+	margin: auto;
+
 }
 
 body{
-    width: 400px;
+    width: 800px;
     margin: auto;
 
 }
 
 div{
-	width:170px;
+	width:200px;
     margin:auto;
-
 }
+
+table.tableForm{
+	margin: auto;
+}
+.tableLeft {
+	width: 230px;
+}
+
 .kousin{
 	width:100px;
     margin:auto;
+    text-align:center;
 }
 .center{
+	width: 200px;
 	text-align:center;
 }
-
+.leave {
+	text-align:center;
+	border-color: none;
+	color: orengered;
+}
 
 
