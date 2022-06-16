@@ -11,8 +11,9 @@
 
 </head>
 <body>
-    <header>
-    </header>
+
+<jsp:include page="header.jsp" />
+
     <main>
 	    <div class="display">
 	        <h1>行きたい場所リスト登録</h1>

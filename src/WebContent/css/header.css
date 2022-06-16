@@ -73,6 +73,9 @@ hamburger(ハンバーガーアイコン)
   top: 11px;
 }
 
+#js-hamburger.hamburger{
+	position:fixed;
+}
 /*
 sp-nav(ナビ)
 =================================== */
@@ -167,10 +170,10 @@ a:hover{
 
 body {
 	background-color: #fef9a7;
-	width: 960px;
+	width: 70%;
     margin: auto;
 }
 
 main {
-	margin-top: 15%;
+	margin-top: 10%;
 }
