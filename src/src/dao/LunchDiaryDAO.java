@@ -104,7 +104,7 @@ public class LunchDiaryDAO {
 			String style,
 			String ldDate,
 			String ldFoodName,
-			String ldCos,
+			String ldCost,
 			String time,
 			String distance,
 			int ldStar,

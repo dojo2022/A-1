@@ -6,19 +6,23 @@ import model.HandmadeDiaryBeans;
 
 public class HandmadeDiaryDAO {
 
-	public ArrayList<HandmadeDiaryBeans> selectLunch(String distance, String time, String category, String cost, String resName) {
+	//手作り日記の検索を行うメソッド（タイムラインの検索ボックス用）
+	public ArrayList<HandmadeDiaryBeans> selectHandmade(String cooktime, String hdFoodName) {
 		return null;
 	}
 
+	//手作り日記の全件検索を行うメソッド(タイムライン表示用)
 	public ArrayList<HandmadeDiaryBeans> select() {
 		return null;
 	}
 
-	public boolean updateLd(String lunchId, String emailAddress, String foodType,String resName, String foodPhoto, String category, String style, String date, String foodName, String cost, String time, String distance, int star) {
+	//手作り日記の更新を行うメソッド
+	public boolean updateHd(String hdFoodphoto, String hdCategory, String hdDate, String hdCost, String hdStar, String hdFeeling, String cooktime) {
 		return false;
 	}
 
-	public boolean updateLdFlag(int  lunchFlag) {
+	//手作り日記の論理削除を行うメソッド
+	public boolean updateHdFlag(int handmadeFlag) {
 		return false;
 	}
 }
