@@ -42,19 +42,6 @@ public class TimelineServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 
-		//リクエストパラメータ（検索ボックスに入力された文字列の情報）を取得する
-		/*
-		request.setCharacterEncoding("UTF-8");
-		String distance = request.getParameter("distance");
-		String time = request.getParameter("time");
-		String category = request.getParameter("category");
-		String cost = request.getParameter("cost");
-		String resName = request.getParameter("res_name");
-		String foodName = request.getParameter("food_name")
-		//検索処理を行う
-
-		 */
-
 		//検索ボタンが押されたら検索結果ページにフォワードする
 	}
 

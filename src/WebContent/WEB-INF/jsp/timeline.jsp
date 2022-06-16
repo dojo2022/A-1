@@ -10,73 +10,83 @@
 <link href="css/timeline.css" rel="stylesheet" type="text/css" />
 </head>
 
+<header>
+<jsp:include page="header.jsp" />
+</header>
+
 <body>
 
 <div class="searchBox">
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<form method="POST" action="/lunchBox/SearchServlet" target="_new">
 <div id="radioBtn">
-	<label><input name="sample" type="radio" value="01" checked="checked" />ランチ日記</label>
-	<label><input name="sample" type="radio" value="02" />手作り日記</label>
+	<label><input name="lunch" type="radio" value="lunch_diary" checked="checked" />ランチ日記</label>
+	<label><input name="lunch" type="radio" value="handmade_diary" />手作り日記</label>
 </div>
 
 <div id="displayBox">
 	<div class="cm_box active">
-		<form method="POST" action="/lunchBox/SearchServlet">
+
 			<select name="distance">
 				<option value="">会社からの所要時間</option>
-				<option value="選択肢1">3分未満</option>
-				<option value="選択肢2">3～5分</option>
-				<option value="選択肢3">5～7分</option>
-				<option value="選択肢4">7～10分</option>
-				<option value="選択肢5">10分以上</option>
+				<option value="3分未満">3分未満</option>
+				<option value="3～5分">3～5分</option>
+				<option value="5～7分">5～7分</option>
+				<option value="7～10分">7～10分</option>
+				<option value="10分以上">10分以上</option>
 			</select>
 			<select name="time">
 				<option value="">提供時間</option>
-				<option value="選択肢1">5分未満</option>
-				<option value="選択肢2">5～10分</option>
-				<option value="選択肢3">10～15分</option>
-				<option value="選択肢5">15分以上</option>
+				<option value="5分未満">5分未満</option>
+				<option value="5～10分">5～10分</option>
+				<option value="10～15分">10～15分</option>
+				<option value="15分以上">15分以上</option>
 			</select>
 			<select name="category">
 				<option value="">ジャンル</option>
-				<option value="選択肢1">和食</option>
-				<option value="選択肢2">中華</option>
-				<option value="選択肢3">洋食</option>
-				<option value="選択肢4">イタリアン</option>
-				<option value="選択肢5">パン</option>
-				<option value="選択肢6">ラーメン</option>
-				<option value="選択肢7">その他</option>
+				<option value="和食">和食</option>
+				<option value="中華">中華</option>
+				<option value="洋食">洋食</option>
+				<option value="イタリアン">イタリアン</option>
+				<option value="パン">パン</option>
+				<option value="ラーメン">ラーメン</option>
+				<option value="その他">その他</option>
 			</select>
 			<select name="cost">
 				<option value="">費用</option>
-				<option value="選択肢1">100円未満</option>
-				<option value="選択肢2">100～300円</option>
-				<option value="選択肢3">300円～500円</option>
-				<option value="選択肢4">500～700円</option>
-				<option value="選択肢5">700円～1000円</option>
-				<option value="選択肢6">1000円以上</option>
+				<option value="100円未満">100円未満</option>
+				<option value="100～300円">100～300円</option>
+				<option value="300円～500円">300円～500円</option>
+				<option value="500～700円">500～700円</option>
+				<option value="700円～1000円">700円～1000円</option>
+				<option value="1000円以上">1000円以上</option>
 			</select>
 			<input type="text" name="resName" placeholder="店名">
 			<input type="submit" name="searchSubmit" value="検索">
-		</form>
 	</div>
-
 	<div class="cm_box">
-		<form method="POST" action="/lunchBox/SearchServlet">
 			<select name="time">
 				<option value="">所要時間</option>
-				<option value="選択肢1">3分未満</option>
-				<option value="選択肢2">3～5分</option>
-				<option value="選択肢3">5～7分</option>
-				<option value="選択肢4">7～10分</option>
-				<option value="選択肢5">10分以上</option>
+				<option value="3分未満">3分未満</option>
+				<option value="3～5分">3～5分</option>
+				<option value="5～7分">5～7分</option>
+				<option value="7～10分">7～10分</option>
+				<option value="10分以上">10分以上</option>
 			</select>
 			<input type="text" name="foodName" placeholder="料理名">
 			<input type="submit" name="searchSubmit" value="検索">
-		</form>
+
 	</div>
 </div>
+</form>
 </div>
-
 <div class="diaryInfo">
 テスト
 	<c:forEach var="e" items="${diary}" >

@@ -21,6 +21,7 @@ public class LunchDiaryBeans implements Serializable{
 	private int lunchFlag;
 	private String ldRegistTime;
 
+
 	//ゲッターとセッター
 	public int getLunchId() {
 		return lunchId;
