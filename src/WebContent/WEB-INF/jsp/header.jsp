@@ -25,7 +25,7 @@
 	      <li><a href="/lunchBox/TimelineServlet">タイムライン</a></li>
 	      <li><a href= "/lunchBox/MypageServlet">マイページ</a></li>
 	      <li id="regist">登録</li>
-	      <div class= "hidden">
+	      <div class = "hidden" id = "hidden">
 		      <li><a href= "/lunchBox/RegistLunchServlet">ランチ日記登録</a></li>
 		      <li><a href = "/lunchBox/RegistHandMadeServlet">手作り日記</a></li>
 		      <li><a href = "/lunchBox/RegistListServlet">行きたい場所リスト登録</a></li>

@@ -134,13 +134,14 @@ li {
 	color: white;
 
 }
+/*メニューにかざすと色が反転*/
 li:hover {
 	color: #FF8D29;
 	background-color: white;
 	opacity: 0.8;
 	transition: background-color 0.5s, color 0.5s;
-
 }
+/*一つ当たりのメニューのcss*/
 a{
 	display: block;
 	height: 10%;
@@ -159,11 +160,12 @@ a:hover{
 	transition: background-color 0.5s, color 0.5s;
 
 }
-/*デフォルトでは登録以下のメニューを非表示にする*/
-.hidden{
+.hidden li{
 	display: none;
+
 }
-/*メインコンテンツ部分のCSS*/
+ */}
+
 body{
 	background-color: #fef9a7;
 }
