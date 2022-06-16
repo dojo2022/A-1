@@ -11,8 +11,9 @@
 
 </head>
 <body>
-    <header>
-    </header>
+
+<jsp:include page="header.jsp" />
+
     <main>
         <h1>行きたい場所リスト登録</h1>
         <form method="post" action="/lunchBox/RegistListServlet">
