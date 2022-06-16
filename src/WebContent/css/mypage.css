@@ -1,33 +1,32 @@
 @charset "UTF-8";
-
-.et_pb_module {
-  display: inline-block;
+.tab-group{
+  display: flex;
+  justify-content: center;
 }
 
-
-.secList {
-  display: inline-block;
-  padding: 3em 1em;
-  text-decoration: none;
-  color: #67c5ff;
-  border: solid 2px #67c5ff;
-  border-radius: 3px;
-  transition: .4s;
+.tab{
+  flex-grow: 1;
+  padding:5px;
+  list-style:none;
+  border-bottom:solid 1px black;
+  text-align:center;
+  cursor:pointer;
 }
-
-.secList:hover {
-  background: #67c5ff;
-  color: white;
+.panel-group{
+  height:100px;
+  border-bottom:solid 1px #CCC;
+  border-top:none;
+  background:#eee;
 }
-
-.et_pb_text_inner1 {
-  background-color: #EAD9FF;
+.panel{
+  display:none;
+  text-align: center;
 }
-
-.et_pb_text_inner2 {
-  background-color: #FFD5EC;
+.tab.is-active{
+  background:orange;
+  color:#FFF;
+  transition: all 0.5s ease-out;
 }
-
-.et_pb_text_inner3 {
-  background-color: #FFDBC9;
+.panel.is-show{
+  display:block;
 }

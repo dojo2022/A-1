@@ -10,6 +10,7 @@
 <link href="css/settings.css" rel="stylesheet" type="text/css" />
 
 </head>
+<jsp:include page="header.jsp" />
 <body>
 <h1>設定</h1>
 
@@ -20,27 +21,25 @@
 
 
 
-<table>
-<tr>
-<td>
 
-
-
-	<table>
+	<table class="tableForm">
 
 	<tr>
-	<td colspan="2"><input type="file"name="IMAGE"accept="image/*"onchange="previewImage(this);">アイコン<br>
-	<div class="center"></div><canvas id="preview" style="max-width:200px;"></canvas><br></td>
+	<th colspan="2"><input type="file"name="IMAGE"accept="image/*"onchange="previewImage(this);">
+	<br></th>
+	<div class="center">
+	<canvas id="preview" style="max-width:200px;"></canvas>
+	</div>
 
 	</tr>
 	<tr>
-	<td>名前<br><input type="text" name="ACCOUNTNAME" value="${e.accountName}"></td>
+	<td class="tableLeft">名前<br><input type="text" name="ACCOUNTNAME" value="${e.accountName}"></td>
 	<td>パスワード<br><input type="password" name="PW" value="${e.pw}"></td>
   <tr>
-	<td>部署名<br><input type="text" name="DEPNAME" value="${e.depname}"></td>
+	<td class="tableLeft">部署名<br><input type="text" name="DEPNAME" value="${e.depname}"></td>
 	<td>パスワード確認用<br><input type="password" name="PWCHECK" value="${e.pwCheck}"></td>
   <tr>
-  <td>メールアドレス<br><input type="email" name="EMAILADDRESS" value="${e.emailAddress}"></td>
+  <td class="tableLeft">メールアドレス<br><input type="email" name="EMAILADDRESS" value="${e.emailAddress}"></td>
 	<td>公開設定<br>
 	<input class="koukai" type="radio" name="RANGE" value="${e.range}" id="one">
 		<label for="one">公開</label>
@@ -51,14 +50,11 @@
 </table>
 
 
-</td>
-</tr>
-</table>
 <div class="kousin">
 <input type="submit" name="SUBMIT" value="更新する">
 </div>
-<div>
-<p><a href="LeaveServlet.java">退会する方はこちら</a></p>
+<div >
+<p><a href="LeaveServlet.java" class="leave">退会する方はこちら</a></p>
 </div>
 
 

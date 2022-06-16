@@ -1,24 +1,11 @@
-$(function(){
-  $('.section').hide();
-
-  $('.secList').on('click',function(){
-        // クリックした要素の ID と違うクラス名のセクションを非表示
-    $('.section').not($('.'+$(this).attr('id'))).hide();
-    // クリックした要素の ID と同じクラスのセクションを表示
-    $('.'+$(this).attr('id')).show(1000);
-
-    // toggle にすると、同じボタンを 2 回押すと非表示になる
-    // $('.'+$(this).attr('id')).toggle();
+jQuery(function($){
+  $('.tab').click(function(){
+    $('.is-active').removeClass('is-active');
+    $(this).addClass('is-active');
+    $('.is-show').removeClass('is-show');
+    // クリックしたタブからインデックス番号を取得
+    const index = $(this).index();
+    // クリックしたタブと同じインデックス番号をもつコンテンツを表
+    $('.panel').eq(index).addClass('is-show');
   });
 });
-
-
-
-
-
-
-
-
-/**
- *
- */

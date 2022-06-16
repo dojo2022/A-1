@@ -6,67 +6,33 @@
 <meta charset="UTF-8">
 <title>Insert </title>
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript" src="js/mypage.js"></script>
 <link href="css/mypage.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
+<h1 align="center">マイページ</h1>
 
-<h1>マイページ</h1>
-<!--  <h1 class="手作り記録"><a href="/lunchBox/RegistServlet"></a></h1>
-<h1 class="ランチ日記"><a href="/lunchBox/SearchServlet"></a></h1>
-<h1 class="メールアドレス"><a href="/lunchBox/RegistListServlet"></a></h1>
--->
+<!--タブ-->
+<ul class="tab-group">
+  <li class="tab">手作り記録</li>
+  <li class="tab is-active">ランチ日記</li>
+  <li class="tab">行きたい場所リスト</li>
+</ul>
 
-
-
-
-<!-- List -->
-<div class="et_pb_module">
-  <button id="fuu" class='secList'>Section1</button>
-</div>
-
-<div class="et_pb_module">
-  <button id="euu" class='secList'>Section2</button>
-</div>
-
-<div class="et_pb_module">
-  <button id="guu" class='secList'>Section3</button>
-</div>
-
-<!-- Sections -->
-<div class="fuu section">
-  <div class="et_pb_text_inner1">
-    <h2>Section1</h2>
-    <p>hoge1</p>
+<!--タブを切り替えて表示するコンテンツ-->
+<div class="panel-group">
+  <div class="panel">
+		手作り記録hogehoge
+  </div>
+  <div class="panel is-show">
+  		ランチ日記hogehoge
+  </div>
+  <div class="panel">
+  		行きたい場所リストhogehoge
   </div>
 </div>
-
-<div class="euu section">
-  <div class="et_pb_text_inner2">
-    <h2>Section2</h2>
-    <p>hoge2</p>
-  </div>
-</div>
-
-<div class="guu section">
-  <div class="et_pb_text_inner3">
-    <h2>Section3</h2>
-    <p>hoge3</p>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
 
 
 </body>
