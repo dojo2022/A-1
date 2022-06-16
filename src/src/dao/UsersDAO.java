@@ -17,7 +17,7 @@ public class UsersDAO {
 	}
 
 	//フラグを更新するメソッド
-	public boolean updateUserFlag(int userFlag) {
+	public boolean updateUserFlag(String reason) {
 		return false;
 	}
 

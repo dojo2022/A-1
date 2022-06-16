@@ -165,7 +165,12 @@ a:hover{
 
 }
 
-
-body{
+body {
 	background-color: #fef9a7;
+	width: 960px;
+    margin: auto;
+}
+
+main {
+	margin-top: 15%;
 }
