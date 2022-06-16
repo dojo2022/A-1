@@ -5,50 +5,48 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="js/diary_form.js"></script>
 <link href="css/diary_form.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
-<form>
+
 
 <p>登録内容</p>
-<input type="radio" id="disp" name="contentsRadio" onclick="buttonClick()">外食
-<input type="radio" id="hide" name="contentsRadio" onclick="buttonClick()">手作り
+<form method="POST" action="/lunchBox/RegistLunchServlet"enctype="multipart/form-data">
+<div id="radioBtn">
+	<label><input type="radio" name="contentsRadio" value="lunch_regist"checked="checked">外食</label>
+	<label><input type="radio" name="contentsRadio" value="handmade_regist">手作り</label>
+</div>
 
-<div id="gaisyoku">
-	<form method="POST" action="/lunchBox/RegistLunchServlet"enctype="multipart/form-data">
-		<p>お店の名前※必須<br>>
-		<input type="text" name="resName"></p>
-
+<div id="displayBox">
+	<div class="cm_box active">
+		<p>お店の名前※必須<br>
+			<input type="text" name="resName"></p>
 		<p>写真<br>
-		<input type="file" name="foodPhoto" accept="image/*" onchange="previewImage(this);"></p>
-
+			<input type="file" name="foodPhoto" accept="image/*" onchange="previewImage(this);"></p>
 		<p>ジャンル<br>
 			<select name=category>
-				<option value="">選択してください</option>
-                <option value="japan">和食</option>
-                <option value="china">中華</option>
-                <option value="western">洋食</option>
-                <option value="italy">イタリアン</option>
-                <option value="bread">パン</option>
-                <option value="ra-men">ラーメン</option>
-                <option value="other">その他</option>
+			<option value="">選択してください</option>
+				<option value="japan">和食</option>
+				<option value="china">中華</option>
+				<option value="western">洋食</option>
+				<option value="italy">イタリアン</option>
+				<option value="bread">パン</option>
+				<option value="ra-men">ラーメン</option>
+				<option value="other">その他</option>
 			</select></p>
-
 		<p>店内利用<br>
 			<select name="style">
 				<option value="">選択してください</option>
 				<option value="イートイン">イートイン</option>
 				<option value="テイクアウト">テイクアウト</option>
 			</select></p>
-
 		<p>日付※必須</p>
 			<input type="date" name="date">
-
 		<p>料理名<br>
 			<input type="text" name="foodName" value="" placeholder="例：オムライス"><br></p>
-
 		<p>費用<br>
 			<select name="cost">
 				<option value="">選択してください</option>
@@ -59,7 +57,6 @@
 				<option value="～１５００円">～１５００円</option>
 				<option value="１５００円～">１５００円～</option>
 			</select></p>
-
 		<p>提供時間<br>
 			<select name="time">
 				<option value="">選択してください</option>
@@ -69,7 +66,6 @@
 				<option value="１５分以上">１５分以上</option>
 			</select>
 		</p>
-
 		<p>会社からの所要時間<br>
 			<select name="distance">
 				<option value="">選択してください</option>
@@ -80,7 +76,6 @@
 				<option value="１０分以上">１０分以上</option>
 			</select>
 		</p>
-
 		<p>評価<br>
 			<input id="star5" type="radio" name="star" value="5" />
     		<label for="star5">★</label>
@@ -93,19 +88,15 @@
     		<input id="star1" type="radio" name="star" value="1" />
     		<label for="star1">★</label>
 		</p>
-
 		<p>感想<br>
-			<textarea name="feeling" value="" placeholder="ここに記入してください"></textarea>
+			<textarea name="feeling"  placeholder="ここに記入してください"></textarea>
 		</p>
-
 		<input type="submit" name="registNewAccount" value="登録する"><br>
-	</form>
+	</div>
 </div>
 
 
-<div id="cook">
-	<form method="POST" action="/lunchBox/RegistHandmadeServlet"enctype="multipart/form-data">
-
+	<div class="cm_box">
 		<p>料理名<br>
 			<input type="text" name="foodName" value="" placeholder="例：オムライス"><br></p>
 
@@ -155,12 +146,11 @@
 
 
 		<p>感想（自由記入）<br>
-			<textarea name="feeling" value="" placeholder="ここに記入してください"></textarea>
+			<textarea name="feeling" placeholder="ここに記入してください"></textarea>
 		</p>
 
 		<input type="submit" name="registNewAccount" value="登録する"><br>
-	</form>
-</div>
+	</div>
 </form>
 </body>
 </html>
