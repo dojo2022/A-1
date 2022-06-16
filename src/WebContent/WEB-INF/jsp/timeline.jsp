@@ -9,22 +9,14 @@
 <script type="text/javascript" src="js/timeline.js"></script>
 <link href="css/timeline.css" rel="stylesheet" type="text/css" />
 </head>
-
-<header>
-<jsp:include page="header.jsp" />
-</header>
-
 <body>
 
+<jsp:include page="header.jsp" />
+
+
+
+<main>
 <div class="searchBox">
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <form method="POST" action="/lunchBox/SearchServlet" target="_new">
 <div id="radioBtn">
 	<label><input name="lunch" type="radio" value="lunch_diary" checked="checked" />ランチ日記</label>
@@ -88,7 +80,8 @@
 </form>
 </div>
 <div class="diaryInfo">
-テスト
+テストあああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ
+
 	<c:forEach var="e" items="${diary}" >
 	</c:forEach>
 </div>
@@ -124,5 +117,6 @@
 </div>
 </div>
  -->
+</main>
 </body>
 </html>
