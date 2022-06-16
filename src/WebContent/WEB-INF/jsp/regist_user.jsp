@@ -18,13 +18,13 @@
 	<table>
 	 <!-- - <caption>新規会員登録</caption>-->
 			<tr>
-			<th colspan="4"><input type="file" name="IMAGE" accept="image/*" onchange="previewImage(this);"><br></th>
+			<th colspan="4"><input type="file" name="icon" accept="image/*" onchange="previewImage(this);"><br></th>
 			<div class="center"><canvas id="preview" style="max-width:200px;"></canvas></div>
 			</tr>
 
 			<tr>
 			<th>アカウント名</th>
-				<td><input type="text" name="accountName" value="" placeholder="例：山田太郎"><br></td>
+				<td><input type="text" name="caccountName" value="" placeholder="例：山田太郎"><br></td>
 			<th>部署名</th>
 				<td><input type="text" name="depName" value="" placeholder="例：人事部"><br></td>
 			</tr>
