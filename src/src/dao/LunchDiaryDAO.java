@@ -14,6 +14,8 @@ public class LunchDiaryDAO {
 	Connection conn = null;
 	ArrayList<LunchDiaryBeans> lunchDiary = new ArrayList<LunchDiaryBeans>();
 	ArrayList<AllColumnBeans> AllLunch = new ArrayList<AllColumnBeans>();
+	//ランチ日記表示に必要なデータを取得するメソッド
+
 	// タイムラインから検索ボックスで指定された引数を元に該当するランチ日記を検索するメソッド
 	public ArrayList<LunchDiaryBeans> selectLunch(
 		String ldResName,
