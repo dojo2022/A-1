@@ -15,85 +15,86 @@ public class LunchDiaryDAO {
 	ArrayList<LunchDiaryBeans> lunchDiary = new ArrayList<LunchDiaryBeans>();
 	ArrayList<AllColumnBeans> AllLunch = new ArrayList<AllColumnBeans>();
 	// タイムラインから検索ボックスで指定された引数を元に該当するランチ日記を検索するメソッド
-	/*	public ArrayList<LunchDiaryBeans> selectLunch(
-			String ldResName,
-			String ldCategory,
-			String ldCost,
-			String time,
-			String distance
-			){
+	public ArrayList<LunchDiaryBeans> selectLunch(
+		String ldResName,
+		String ldCategory,
+		String ldCost,
+		String time,
+		String distance
+		){
 
-			try {
-				// JDBCドライバを読み込む
-				Class.forName("org.h2.Driver");
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
 
-				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
-				// SQL文を準備する<<ここに改造を施す>>
-				String sql = "SELECT * from lunch_diary WHERE distance LIKE ? AND time LIKE ? AND category LIKE ? AND cost LIKE ? AND res_name LIKE ? AND lunch_flag = 1 ORDER BY ld_regist_time DESC";
-				PreparedStatement pStmt = conn.prepareStatement(sql);
+			// SQL文を準備する<<ここに改造を施す>>
+			String sql = "SELECT lunch_id, email_address, food_type, res_name, food_photo, category, style, date, food_name, cost, time, distance, star, feeling FROM lunch_diary WHERE distance LIKE ? AND time LIKE ? AND category LIKE ? AND cost LIKE ? AND res_name LIKE ? AND lunch_flag = 1 ORDER BY ld_regist_time DESC";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-				// SQL文を完成させる
+			// SQL文を完成させる
 
-					pStmt.setString(1, "%" + distance + "%"); //%はワイルドカード
-					pStmt.setString(2, "%" + time + "%");
-					pStmt.setString(3, "%" + ldCategory + "%");
-					pStmt.setString(4, "%" + ldCost + "%");
-					pStmt.setString(5, "%" + ldResName + "%");
+				pStmt.setString(1, "%" + distance + "%"); //%はワイルドカード
+				pStmt.setString(2, "%" + time + "%");
+				pStmt.setString(3, "%" + ldCategory + "%");
+				pStmt.setString(4, "%" + ldCost + "%");
+				pStmt.setString(5, "%" + ldResName + "%");
 
-				// SQL文を実行し、結果表を取得する
-				//右にexecuteQuery()がある場合はなんでも入るボックスResultSet rs を入れる
-				//DAOの中じゃないとつかっちゃダメ
-				//beanに格納したうえでアレイリストに格納しなきゃダメ
-				//
-				ResultSet rs = pStmt.executeQuery();
+			// SQL文を実行し、結果表を取得する
+			//右にexecuteQuery()がある場合はなんでも入るボックスResultSet rs を入れる
+			//DAOの中じゃないとつかっちゃダメ
+			//beanに格納したうえでアレイリストに格納しなきゃダメ
+			//
+			ResultSet rs = pStmt.executeQuery();
 
-				// 結果表をコレクションにコピーする
-				while (rs.next()) {
-					LunchDiaryBeans ld = new LunchDiaryBeans();
-					allLd.setLunchId(rs.getInt("lunchId"));
-					allLd.setEmailAddress(rs.getString("emailAddress"));
-					allLd.setLdFoodType(rs.getString("ldFoodType"));
-					allLd.setLdResName(rs.getString("ldResName"));
-					allLd.setLdFoodPhoto(rs.getString("ldFoodPhoto"));
-					allLd.setLdCategory(rs.getString("ldCategory"));
-					allLd.setStyle(rs.getString("style"));
-					allLd.setLdDate(rs.getString("ldDate"));
-					allLd.setLdFoodName(rs.getString("ldFoodName"));
-					allLd.setLdCost(rs.getString("ldCost"));
-					allLd.setTime(rs.getString("time"));
-					allLd.setDistance(rs.getString("distance"));
-					allLd.setLdStar(rs.getInt("ldStar"));
-					allLd.setLdFeeling(rs.getString("ldFeeling"));
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				LunchDiaryBeans ld = new LunchDiaryBeans();
+				ld.setLunchId(rs.getInt("lunchId"));
+				ld.setLunchId(rs.getInt("lunch_id"));
+				ld.setEmailAddress(rs.getString("email_address"));
+				ld.setLdFoodType(rs.getString("food_type"));
+				ld.setLdResName(rs.getString("res_name"));
+				ld.setLdFoodPhoto(rs.getString("food_photo"));
+				ld.setLdCategory(rs.getString("category"));
+				ld.setStyle(rs.getString("style"));
+				ld.setLdDate(rs.getString("date"));
+				ld.setLdFoodName(rs.getString("food_name"));
+				ld.setLdCost(rs.getString("cost"));
+				ld.setTime(rs.getString("time"));
+				ld.setDistance(rs.getString("distance"));
+				ld.setLdStar(rs.getInt("star"));
+				ld.setLdFeeling(rs.getString("feeling"));
 
-					AllLunch.add(allLd);
+				lunchDiary.add(ld);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			lunchDiary = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			lunchDiary = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					lunchDiary = null;
 				}
 			}
-			catch (SQLException e) {
-				e.printStackTrace();
-				AllLunch = null;
-			}
-			catch (ClassNotFoundException e) {
-				e.printStackTrace();
-				AllLunch = null;
-			}
-			finally {
-				// データベースを切断
-				if (conn != null) {
-					try {
-						conn.close();
-					}
-					catch (SQLException e) {
-						e.printStackTrace();
-						AllLunch = null;
-					}
-				}
-			}
+		}
 
-			// 結果を返す
-				return AllLunch;
-	}*/
+		// 結果を返す
+			return lunchDiary;
+}
 	// すべてのランチ日記の検索を行うメソッド
 	//名前取得のためにjoinが必要説
 	public ArrayList<LunchDiaryBeans> select(){
@@ -104,7 +105,7 @@ public class LunchDiaryDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
 			//SQL文
-			String sql = "SELECT * FROM lunch_diary WHERE lunch_flag = 1 ORDER BY ld_regist_time DESC";
+			String sql = "SELECT lunch_id, email_address, food_type, res_name, food_photo, category, style, date, food_name, cost, time, distance, star, feeling FROM lunch_diary WHERE lunch_flag = 1 ORDER BY ld_regist_time DESC";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			//SQL文を実行
@@ -120,6 +121,8 @@ public class LunchDiaryDAO {
 					ld.setLdFoodPhoto(rs.getString("food_photo"));
 					ld.setLdCategory(rs.getString("category"));
 					ld.setStyle(rs.getString("style"));
+					ld.setLdDate(rs.getString("date"));
+					ld.setLdFoodName(rs.getString("food_name"));
 					ld.setLdCost(rs.getString("cost"));
 					ld.setTime(rs.getString("time"));
 					ld.setDistance(rs.getString("distance"));
