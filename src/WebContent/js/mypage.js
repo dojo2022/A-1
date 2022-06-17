@@ -9,3 +9,8 @@ jQuery(function($){
     $('.panel').eq(index).addClass('is-show');
   });
 });
+
+
+document.getElementById("sample").addEventListener("click", function () {
+  location.replace("/lunchBox/LeaveServlet");
+}, false);

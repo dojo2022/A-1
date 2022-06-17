@@ -16,6 +16,7 @@ public class AllColumnBeans implements Serializable{
 	//LunchDiary
 	private int lunchId;
 	private String ldfoodType;
+	private String ldFoodPhoto;
 	private String ldResName;
 	private String ldFoodType;
 	private String ldCategory;
@@ -142,6 +143,12 @@ public class AllColumnBeans implements Serializable{
 	}
 	public void setLdFoodType(String ldFoodType) {
 		this.ldFoodType = ldFoodType;
+	}
+	public String getLdFoodPhoto() {
+		return ldFoodPhoto;
+	}
+	public void setLdFoodPhoto(String ldFoodPhoto) {
+		this.ldFoodPhoto = ldFoodPhoto;
 	}
 	public String getLdCategory() {
 		return ldCategory;
