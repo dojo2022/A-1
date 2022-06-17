@@ -8,6 +8,7 @@
 }
 
 .searchBox{
+	position:fixed;
 	text-align: center;
 }
 

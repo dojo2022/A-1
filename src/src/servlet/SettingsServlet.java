@@ -26,15 +26,6 @@ public class SettingsServlet extends HttpServlet {
      * @see HttpServlet#HttpServlet()
      */
 
-
-
-
-
-
-
-
-
-
     public SettingsServlet() {
         super();
         // TODO Auto-generated constructor stub
@@ -67,52 +58,71 @@ public class SettingsServlet extends HttpServlet {
 
 
 
-
-
 		request.setCharacterEncoding("UTF-8");
 
-
-
-
-		String icon = request.getParameter("ICON");
-		String accountName = request.getParameter("ACCOUNTNAME");
-		String pw = request.getParameter("PW");
-		String depname = request.getParameter("DEPNAME");
-		String bangou = request.getParameter("BANGOU");
-		String pwCheck = request.getParameter("PWCHECK");
-		String emailaddress = request.getParameter("EMAILADDRESS");
-		String range = request.getParameter("RANGE");
-
-
-
-		UsersDAO bDao = new UsersDAO();
-
-
-
-
-
-
-
-
-
-
-
-		Part part = request.getPart("IMAGE"); // getPartで取得
+//		String icon = request.getParameter("icon");
+		Part part = request.getPart("icon"); // getPartで取得
 
 		String image = this.getFileName(part);
 		request.setAttribute("image", image);
 		// サーバの指定のファイルパスへファイルを保存
         //場所はクラス名↑の上に指定してある
+
 		part.write(image);
+		String accountName = request.getParameter("accountName");
+		String pw = request.getParameter("pw");
+		String depName = request.getParameter("depName");
+		String emailAddress = request.getParameter("emailAddress");
+		String range = request.getParameter("range");
+
+		request.setAttribute("image", image);
+		request.setAttribute("accountName", accountName);
+		request.setAttribute("depName", depName);
+		request.setAttribute("emailAddress", emailAddress);
+		request.setAttribute("range", range);
 
 
+		//ここで確認する
+		//System.out.println(image+","+accountName+","+pw+","+depName+","+emailAddress+","+range);
 
-        //ディスパッチ
-		//↓jspを表示する(settingsフォワードする）
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/myPage.jsp");
-		dispatcher.forward(request, response);}
+		//パスワードの入力チェック
+		if(pw.length()<8 || pw.length()>=20) {
+			request.setAttribute("msg","パスワードを８文字以上２０文字以下で入力してください");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/settings.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
 
-	//jsp表示ここまで
+
+		//DAOを呼んでくる
+		UsersDAO uDao = new UsersDAO();
+		//DAOに変更してねって依頼をする
+		boolean ans = uDao.updateUser(emailAddress, pw, accountName, depName, 1, image, range);
+
+		//アップデートが成功したら
+		if(ans == true) {
+			request.setAttribute("msg","変更が完了しました");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/myPage.jsp");
+			dispatcher.forward(request, response);
+
+		//アップデートが失敗したら
+		}/*else {
+			request.setAttribute("msg","更新失敗しました");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/settings.jsp");
+			dispatcher.forward(request, response);
+		}*/
+
+
+		//↓押されたボタンの値を取得(更新を押されたら、request.getParameter("SUBMIT")が更新という文字列に代わる。
+
+						//登録されているユーザの情報を持ってくる
+			             //更新に成功したらマイページ画面に移動する
+	}			//編集をした際にパスワードの基準8文字以上20文字以内、メールには＠マークつけるなどを満たしているかをチェック
+						//更新に失敗したらエラーメッセージを表示し、非同期処理にて設定画面の入力された状態に戻る
+
+
+//セットアトリビュート：結果をリクエストスコープに格納するカードりリストに格納してデータを取ってこれるようにする
+//リクエストスコープ：JSPとサーブレットの間にあるデータを格納する場所
 
 
 	//ファイルの名前を取得してくる

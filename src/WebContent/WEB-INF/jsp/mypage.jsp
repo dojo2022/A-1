@@ -10,6 +10,7 @@
 <script type="text/javascript" src="js/mypage.js"></script>
 <link href="css/mypage.css" rel="stylesheet" type="text/css" />
 </head>
+<jsp:include page="header.jsp" />
 <body>
 
 <h1 align="center">マイページ</h1>
@@ -34,6 +35,6 @@
   </div>
 </div>
 
-
+<p id="sample">編集</p>
 </body>
 </html>
