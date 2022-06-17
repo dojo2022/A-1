@@ -152,8 +152,24 @@
 「メロス、君は、まっぱだかじゃないか。早くそのマントを着るがいい。この可愛い娘さんは、メロスの裸体を、皆に見られるのが、たまらなく口惜しいのだ。」
 　勇者は、ひどく赤面した。
 
-	<c:forEach var="e" items="${diary}" >
+	<c:forEach var="e" items="${lunchDiary}" >
+	${e.ldFoodtype}
+	${e.ldResName}
+	${e.ldFoodPhoto}
+	${e.ldCategory}
+	${e.style}
+	${e.ldDate}
+	${e.ldFoodName}
+	${e.ldCost}
+	${e.time}
+	${e.distance}
+	${e.ldStar}
+	${e.ldFeeling}
 	</c:forEach>
+
+
+
+
 </div>
  <!--
 <div class="hidden_box">
