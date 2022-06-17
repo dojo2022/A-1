@@ -10,9 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.BcDAO;
-import model.Bc;
-import model.Result;
+import dao.UsersDAO;
+
 
 /**
  * Servlet implementation class RegistUserServlet
@@ -39,33 +38,32 @@ public class RegistUserServlet extends HttpServlet {
 
 	// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
+
 		String  icon = request.getParameter("icon");
 		String  accountName = request.getParameter("accountName");
 		String  depName = request.getParameter("depName");
 		String  emailAddress = request.getParameter("emailAddress");
-		String  emailCheck = request.getParameter("emailCheck");
 		String  pw = request.getParameter("pw");
-		String  pwCheck = request.getParameter("pwcheck");
 
 
-	//	登録を行う
+
+	//	UsersDAOを呼び出す
 		UsersDAO uDao = new UsersDAO();
 
-	//
-		if (uDao.insert(new Users(icon, accountName, depName, emailAddress, pw))) {	// 登録成功
-			request.setAttribute("result",
-			new Result("登録成功！", "レコードを登録しました。", "/lunchBox/loginServlet"));
+	// 登録成功した時の処理
+	/*	if(uDao.insert(icon, accountName, depName, emailAddress, pw)) {
+			request.setAttribute("result","登録成功！アカウントをを登録しました。");
 		}
 		else {												// 登録失敗
-			request.setAttribute("result",
-			new Result("登録失敗！", "レコードを登録できませんでした。"));
+			request.setAttribute("result","登録失敗！アカウントを登録できませんでした。");
 		}
+*/
 
 		//ログイン画面に遷移
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/lunchBox/jsp/login.jsp");
-				dispatcher.forward(request, response);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/lunchBox/jsp/login.jsp");
+		dispatcher.forward(request, response);
 
 	}
-
+}
 
 
