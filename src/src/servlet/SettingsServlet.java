@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import dao.UsersDAO;
+
 /**
  * Servlet implementation class RegistListServlet
  */
@@ -72,7 +74,7 @@ public class SettingsServlet extends HttpServlet {
 
 
 
-		/*String icon = request.getParameter("ICON");
+		String icon = request.getParameter("ICON");
 		String accountName = request.getParameter("ACCOUNTNAME");
 		String pw = request.getParameter("PW");
 		String depname = request.getParameter("DEPNAME");
@@ -81,9 +83,9 @@ public class SettingsServlet extends HttpServlet {
 		String emailaddress = request.getParameter("EMAILADDRESS");
 		String range = request.getParameter("RANGE");
 
-		*/
 
 
+		UsersDAO bDao = new UsersDAO();
 
 
 
