@@ -27,13 +27,13 @@
 		<p>ジャンル<br>
 			<select name=category>
 				<option value="">選択してください</option>
-                <option value="japan">和食</option>
-                <option value="china">中華</option>
-                <option value="western">洋食</option>
-                <option value="italy">イタリアン</option>
-                <option value="bread">パン</option>
-                <option value="ra-men">ラーメン</option>
-                <option value="other">その他</option>
+				<option value="japan">和食</option>
+				<option value="china">中華</option>
+				<option value="western">洋食</option>
+				<option value="italy">イタリアン</option>
+				<option value="bread">パン</option>
+				<option value="ra-men">ラーメン</option>
+				<option value="other">その他</option>
 			</select></p>
 
 		<p>店内利用<br>

@@ -1,1 +1,13 @@
 @charset "UTF-8";
+
+#displayBox .cm_box {
+  display: none;
+}
+#displayBox .cm_box.active {
+  display: block;
+}
+
+.searchBox{
+	position: absolute;
+	top: 10%;
+}

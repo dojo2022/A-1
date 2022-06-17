@@ -10,10 +10,7 @@
 <link href="css/timeline.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-
 <jsp:include page="header.jsp" />
-
-
 
 <main>
 <div class="searchBox">
