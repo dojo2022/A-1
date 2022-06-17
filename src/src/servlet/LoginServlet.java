@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.UsersDAO;
 import model.UserMasterBeans;
 
 /**
@@ -41,7 +42,7 @@ public class LoginServlet extends HttpServlet {
 		UsersDAO uDao = new UsersDAO();
 
 		//uDaoにユーザーの情報を取ってきてもらう
-		UserMasterBeans user = uDao.select(emailAddress,pw);
+		UserMasterBeans user = uDao.select(emailAddress, pw);
 
 		if(user != null) {
 			//ちゃんとidとpwが合っていて、データを取得できた場合
