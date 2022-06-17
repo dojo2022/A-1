@@ -39,12 +39,6 @@ public class LeaveServlet extends HttpServlet {
 		String reason = request.getParameter("reason").trim();
 		String buttonName = request.getParameter("leaveButton");//ボタンのvalue
 
-		if(reason.length()==0) {
-			request.setAttribute("errMsg", "退会理由を入力してください！");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/leave.jsp");
-			dispatcher.forward(request, response);
-			return;
-		}
 
 		if(buttonName.equals("退会する")) {
 
@@ -66,6 +60,12 @@ public class LeaveServlet extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/leave_result.jsp");
 				dispatcher.forward(request, response);
 			}else {
+				if(reason.length()==0) {
+					request.setAttribute("errMsg", "退会理由を入力してください！");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/leave.jsp");
+					dispatcher.forward(request, response);
+					return;
+				}
 				request.setAttribute("errMsg", "退会出来ませんでした。管理者へ問い合わせてください。");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/leave.jsp");
 				dispatcher.forward(request, response);

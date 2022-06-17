@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="js/login.js"></script>
 <link href="css/login.css" rel="stylesheet" type="text/css" />
 <title>LunchBox</title>
@@ -20,20 +20,32 @@
 	        <input type="text" name="emailAddress" placeholder="メールアドレス" required>
 	      </p>
 	      <p>
-	        <input type="password" name="pw" placeholder="パスワード" required>
-	         <span class="field-icon">
-            <i toggle="#password-field" class="mdi mdi-eye toggle-password"></i>
-          </span>
+	        <input type="password" name="pw" placeholder="パスワード" id="pw" required>
 	      </p>
 	      <p>
- 			<c:if test="${errMsg == 'メールアドレス、もしくはパスワードが異なります' }">
-				メールアドレスまたはパスワードが間違っています！
-			</c:if>
+	        <label><input type="checkbox" name="ch" >パスワードの表示</label>
+	      </p>
+	      <p>
+ 			${errMsg}
 	      </p>
 	      <p>
 	        <input type="submit" name="loginButton" value="ログイン">
 	      </p>
 	        <a href ="/lunchBox/RegistUserServlet">新規会員登録</a>
 	</form>
+	<script>
+	//チェックボックスが変動したら
+	jQuery('input[type=checkbox]').change(function() {
+		//●●表示だったら
+		if($('#pw').get(0).type == 'password'){
+			//typeをtextに変更する
+			$('#pw').get(0).type = 'text';
+		//ちゃんと表示されていたら
+		}else{
+			//typeをpasswordに変更する
+			$('#pw').get(0).type = 'password';
+		}
+	});
+	</script>
 </body>
 </html>
