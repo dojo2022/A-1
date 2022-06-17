@@ -10,9 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.BcDAO;
-import model.Bc;
-import model.Result;
+import dao.UsersDAO;
 
 /**
  * Servlet implementation class RegistUserServlet
@@ -57,7 +55,8 @@ public class RegistUserServlet extends HttpServlet {
 			request.setAttribute("result",
 			new Result("登録失敗！", "レコードを登録できませんでした。"));
 		}
-
+	}
+}
 
 
 

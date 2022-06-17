@@ -9,6 +9,8 @@
 <title>退会フォーム</title>
 </head>
 <body>
+<jsp:include page="header.jsp" />
+
 	<form method="POST" action="/lunchBox/LeaveServlet">
 		<h1>退会</h1>
 		<hr>
