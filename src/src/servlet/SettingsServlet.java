@@ -26,15 +26,6 @@ public class SettingsServlet extends HttpServlet {
      * @see HttpServlet#HttpServlet()
      */
 
-
-
-
-
-
-
-
-
-
     public SettingsServlet() {
         super();
         // TODO Auto-generated constructor stub
@@ -67,12 +58,7 @@ public class SettingsServlet extends HttpServlet {
 
 
 
-
-
 		request.setCharacterEncoding("UTF-8");
-
-
-
 
 //		String icon = request.getParameter("icon");
 		Part part = request.getPart("icon"); // getPartで取得
@@ -86,7 +72,6 @@ public class SettingsServlet extends HttpServlet {
 		String accountName = request.getParameter("accountName");
 		String pw = request.getParameter("pw");
 		String depName = request.getParameter("depName");
-		String pwCheck = request.getParameter("pwCheck");
 		String emailAddress = request.getParameter("emailAddress");
 		String range = request.getParameter("range");
 
@@ -107,7 +92,6 @@ public class SettingsServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 			return;
 		}
-
 
 
 		//DAOを呼んでくる
@@ -138,6 +122,7 @@ public class SettingsServlet extends HttpServlet {
 
 
 //セットアトリビュート：結果をリクエストスコープに格納するカードりリストに格納してデータを取ってこれるようにする
+//リクエストスコープ：JSPとサーブレットの間にあるデータを格納する場所
 
 
 	//ファイルの名前を取得してくる
