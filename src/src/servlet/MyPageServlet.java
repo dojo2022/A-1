@@ -35,17 +35,56 @@ public class MyPageServlet extends HttpServlet {
 		RequestDispatcher dispatcher =  request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp");
 		        dispatcher.forward(request, response);
 		    }
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+ 	*/
+	/*
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	// TODO Auto-generated method stub
 
-		/**
-		 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 	*/
-		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-
-			request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 
 
-		}
+		Part part = request.getPart("icon"); // getPartで取得
+
+		String image = this.getFileName(part);
+		request.setAttribute("image", image);
+		part.write(image);
+		String accountName = request.getParameter("accountName");
+		String depName = request.getParameter("depName");
+		String emailAddress = request.getParameter("emailAddress");
+		//新規会員登録で入力された情報を表示するだけだから、
+		//リクエストゲットパラメータでJSPからデータをサーブレットに取ってこなくてよい？
+
+
+		//ログインしている人を区別(主キーのメールアドレスで）して表示する
+		//メールアドレスをタップするとメールを送れるようになる仕組みを作る
+
+		//３つのタブ(手作り記録・ランチ日記・行きたい場所リスト）ごとにログインしている人のデータを持ってくる
+		//手作り日記・ランチ日記・行きたい場所リストで登録された情報を持ってくる？？
+		//下記の４つのDAOを使い分ける！？！？
+		UsersDAO uDao = new UsersDAO();
+
+
+		LunchDiaryDAO ldDao = new LunchDiaryDAO();
+		//ランチ日記のDAO
+		ListDAO liDao new ListDAO();
+		//行きたい場所リストのDAO
+		HandmadeDiaryDAO HdDao new HandmadeDiaryDAO();
+		//手作り日記のDAO
+
+
+			//ファイルの名前を取得してくる
+			private String getFileName(Part part) {
+		        String name = null;
+		        for (String dispotion : part.getHeader("Content-Disposition").split(";")) {
+		            if (dispotion.trim().startsWith("filename")) {
+		                name = dispotion.substring(dispotion.indexOf("=") + 1).replace("\"", "").trim();
+		                name = name.substring(name.lastIndexOf("\\") + 1);
+		                break;}
+		           }
+			}
+*/
 
 		}
 
