@@ -12,7 +12,11 @@
 <body>
 <jsp:include page="header.jsp" />
 
-<main>
+
+<header>
+
+
+
 <div class="searchBox">
 <form method="POST" action="/lunchBox/SearchServlet" target="_new">
 <div id="radioBtn">
@@ -76,6 +80,10 @@
 </div>
 </form>
 </div>
+</header>
+
+<main>
+
 
 <!--タブ-->
 <ul class="tab-group">
@@ -86,14 +94,6 @@
 <!--タブを切り替えて表示するコンテンツ-->
 <div class="panel-group">
   <div class="panel is-show">
-
-	</div>
-  <div class="panel">
-
-	</div>
-</div>
-
-
 	<c:forEach var="e" items="${lunchDiary}" >
 	${e.ldFoodType}<br>
 	${e.ldResName}<br>
@@ -107,7 +107,18 @@
 	${e.distance}<br>
 	${e.ldStar}<br>
 	${e.ldFeeling}<br>
+
+	<input type="button" name="ToGo" value="行きたい">
+	<input type="button" name="ToTellMe" value="教えて">
+	<input type="button" name="ToUseidea" value="参考にします"><br>
+	<input type="text" name="commentInput" placeholder="コメント入力">
+	<input type="submit" name="commentSubmit" value="送信"><br>
 	</c:forEach>
+	</div>
+  <div class="panel">
+
+	</div>
+</div>
 
 
 
@@ -158,6 +169,23 @@ jQuery(function($){
     $('.panel').eq(index).addClass('is-show');
   });
 });
+/*
+<a href="#" id="link">
+$(function() {
+
+	// テキストフォームを監視して入力があるたびに実行
+	$('#link').change(function() {
+
+		// テキストを取得
+		var param = $(this).val();
+
+		// リンクを書き換え
+		$('#link').attr('href', 'http://maps.google.co.jp/maps?q=' + param);
+
+	});
+
+});
+ */
 </script>
 </body>
 </html>
