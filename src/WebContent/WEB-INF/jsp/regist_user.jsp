@@ -12,7 +12,7 @@
 <!--  --><h1 align="center">新規会員登録</h1>
 <!-- -<h1 align="center"><img src="img/headerLogo.png"></h1>--->
 
-<form method="POST" action="/lunchBox/regist_userServlet"enctype="multipart/form-data">
+<form method="POST" action="/lunchBox/RegistUserServlet"enctype="multipart/form-data">
 <div class="center"style="padding: 5px; margin-bottom: 0px; border: 3px solid #333333; border-radius: 10px;">
 
 	<table>
