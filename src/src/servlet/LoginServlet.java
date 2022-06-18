@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,14 +43,14 @@ public class LoginServlet extends HttpServlet {
 		UsersDAO uDao = new UsersDAO();
 
 		//uDaoにユーザーの情報を取ってきてもらう
-		UserMasterBeans user = uDao.select(emailAddress, pw);
+		ArrayList<UserMasterBeans> user = uDao.selectUser(emailAddress, pw);
 
 		if(user != null) {
 			//ちゃんとidとpwが合っていて、データを取得できた場合
 			 //sessionを使うための準備をする
 			HttpSession session = request.getSession();
 			//sessionにもらってきたuserの情報を格納する
-			session.setAttribute("user", user);
+			session.setAttribute("user", user.get(0));
 
 			//リダイレクト
 			response.sendRedirect("/lunchBox/TimelineServlet");

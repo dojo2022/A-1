@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.UsersDAO;
+import model.UserMasterBeans;
 
 /**
  * Servlet implementation class LeaveServlet
@@ -37,17 +38,27 @@ public class LeaveServlet extends HttpServlet {
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 		String reason = request.getParameter("reason").trim();
+		HttpSession session = request.getSession();
+		//ユーザー情報を全て取得してきた
+		UserMasterBeans user = (UserMasterBeans) session.getAttribute("user");
 		String buttonName = request.getParameter("leaveButton");//ボタンのvalue
 
 
 		if(buttonName.equals("退会する")) {
+			if(reason.length()==0) {
+				request.setAttribute("errMsg", "退会理由を入力してください！");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/leave.jsp");
+				dispatcher.forward(request, response);
+				return;
+			}
 
 			//退会理由の登録とフラグの変更処理を行う
 			UsersDAO uDao = new UsersDAO();
-			boolean ans =uDao.updateUserFlag(reason);
+			//ユーザのemailAddressを渡してあげた
+			boolean ans =uDao.updateUserFlag(user.getEmailAddress(),reason);
 
 			if(ans == true) {
-				HttpSession session = request.getSession();
+
 				//sessionの中身のデータを全て削除する
 				//sessinにある全ての要素名を取得する
 				Enumeration values = session.getAttributeNames();
@@ -60,12 +71,7 @@ public class LeaveServlet extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/leave_result.jsp");
 				dispatcher.forward(request, response);
 			}else {
-				if(reason.length()==0) {
-					request.setAttribute("errMsg", "退会理由を入力してください！");
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/leave.jsp");
-					dispatcher.forward(request, response);
-					return;
-				}
+
 				request.setAttribute("errMsg", "退会出来ませんでした。管理者へ問い合わせてください。");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/leave.jsp");
 				dispatcher.forward(request, response);
