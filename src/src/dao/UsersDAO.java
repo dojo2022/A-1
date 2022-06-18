@@ -141,8 +141,7 @@ public class UsersDAO {
 			String pw,
 			String accountName,
 			String depName,
-			String icon,
-			String reason) {
+			String icon) {
 
 			boolean result = false;
 
@@ -154,7 +153,7 @@ public class UsersDAO {
 				conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
 				// SQL文を準備する
-				String sql = "update user_master set pw=?, account_name=?, dep_name=?, icon=?, reason=? where email_address=?";
+				String sql = "update user_master set pw=?, account_name=?, dep_name=?, icon=? where email_address=?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる
@@ -162,8 +161,7 @@ public class UsersDAO {
 				pStmt.setString(2, accountName);
 				pStmt.setString(3, depName);
 				pStmt.setString(4, icon);
-				pStmt.setString(5, reason);
-				pStmt.setString(6, emailAddress);
+				pStmt.setString(5, emailAddress);
 
 
 				// SQL文を実行する
@@ -277,7 +275,7 @@ public class UsersDAO {
 					us.setDepName(rs.getString("dep_name"));
 					us.setUserFlag(rs.getInt("user_flag"));
 					us.setIcon(rs.getString("icon"));
-					us.setReason(rs.getString("reason"));
+				//us.setReason(rs.getString("reason"));
 
 					user.add(us);
 				}
@@ -336,7 +334,7 @@ public class UsersDAO {
 				us.setDepName(rs.getString("dep_name"));
 				us.setUserFlag(rs.getInt("user_flag"));
 				us.setIcon(rs.getString("icon"));
-				us.setReason(rs.getString("reason"));
+			//us.setReason(rs.getString("reason"));
 
 				user.add(us);
 			}
