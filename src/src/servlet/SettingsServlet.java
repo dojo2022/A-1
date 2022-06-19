@@ -97,7 +97,7 @@ public class SettingsServlet extends HttpServlet {
 		//DAOを呼んでくる
 		UsersDAO uDao = new UsersDAO();
 		//DAOに変更してねって依頼をする
-		boolean ans = uDao.updateUser(emailAddress, pw, accountName, depName, 1, image, range);
+		boolean ans = uDao.updateUser(emailAddress, pw, accountName, depName,1,image, range);
 
 		//アップデートが成功したら
 		if(ans == true) {

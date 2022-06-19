@@ -60,10 +60,11 @@
 <!--タブを切り替えて表示するコンテンツ-->
 <div class="panel-group">
   <div class="panel">
-		手作り記録hogehoge
+		ここにデータベースの情報を貼り付ける！？！？
+
   </div>
   <div class="panel is-show">
-  		ランチ日記hogehoge
+  		ここにデータベースの情報を貼り付ける！？！？
   </div>
   <div class="panel">
   		行きたい場所リストhogehoge
@@ -72,7 +73,7 @@
 
 
 
-<a><button type="button">編集</button></a>
+<a href="/lunchBox/EditLunchServlet" class="editLunch"><button type="button">編集</button></a>
 
 
 
