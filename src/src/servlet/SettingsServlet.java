@@ -63,19 +63,19 @@ public class SettingsServlet extends HttpServlet {
 //		String icon = request.getParameter("icon");
 		Part part = request.getPart("icon"); // getPartで取得
 
-		String image = this.getFileName(part);
-		request.setAttribute("image", image);
+		String icon = this.getFileName(part);
+		request.setAttribute("image", icon);
 		// サーバの指定のファイルパスへファイルを保存
         //場所はクラス名↑の上に指定してある
 
-		part.write(image);
+		part.write(icon);
 		String accountName = request.getParameter("accountName");
 		String pw = request.getParameter("pw");
 		String depName = request.getParameter("depName");
 		String emailAddress = request.getParameter("emailAddress");
 		String range = request.getParameter("range");
 
-		request.setAttribute("image", image);
+		request.setAttribute("image", icon);
 		request.setAttribute("accountName", accountName);
 		request.setAttribute("depName", depName);
 		request.setAttribute("emailAddress", emailAddress);
@@ -97,7 +97,7 @@ public class SettingsServlet extends HttpServlet {
 		//DAOを呼んでくる
 		UsersDAO uDao = new UsersDAO();
 		//DAOに変更してねって依頼をする
-		boolean ans = uDao.updateUser(emailAddress, pw, accountName, depName,1,image, range);
+		boolean ans = uDao.updateUser(emailAddress, pw, accountName, depName,icon, range);
 
 		//アップデートが成功したら
 		if(ans == true) {
