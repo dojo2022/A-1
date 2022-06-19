@@ -170,10 +170,10 @@ a:hover{
 
 body {
 	background-color: #fef9a7;
-	width: 70%;
+/* 	width: 70%; */
     margin: auto;
 }
 
-main {
-	margin-top: 15%;
-}
+/* main{
+	width:70%;
+} */

@@ -37,8 +37,6 @@
 	  <div class="black-bg" id="js-black-bg"></div>
 	 </div>
 
-	<main>
 
-	</main>
 </body>
 </html>
