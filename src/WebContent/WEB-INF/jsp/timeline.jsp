@@ -80,16 +80,17 @@
 </div>
 </form>
 </div>
-</header>
-
-<main>
-
-
 <!--タブ-->
 <ul class="tab-group">
   <li class="tab is-active">ランチ日記</li>
   <li class="tab">手作り記録</li>
 </ul>
+</header>
+
+<main>
+
+
+
 
 <!--タブを切り替えて表示するコンテンツ-->
 <div class="panel-group">
