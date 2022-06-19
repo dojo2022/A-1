@@ -11,6 +11,7 @@ public class UserMasterBeans implements Serializable{
 	private String depName;
 	private int userFlag;
 	private String icon;
+	private int range;
 	private String reason;
 
 	//ゲッターとセッター
@@ -49,6 +50,12 @@ public class UserMasterBeans implements Serializable{
 	}
 	public void setIcon(String icon) {
 		this.icon = icon;
+	}
+	public int getRange() {
+		return range;
+	}
+	public void setRange(int range) {
+		this.range = range;
 	}
 	public String getReason() {
 		return reason;
