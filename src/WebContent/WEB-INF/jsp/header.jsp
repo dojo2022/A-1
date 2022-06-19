@@ -30,7 +30,7 @@
 		      <li><a href = "/lunchBox/RegistHandMadeServlet">手作り日記</a></li>
 		      <li><a href = "/lunchBox/RegistListServlet">行きたい場所リスト登録</a></li>
 	      </div>
-	      <li><a href ="/lunchBox/SettingServlet">設定</a></li>
+	      <li><a href ="/lunchBox/SettingsServlet">設定</a></li>
 	      <li><a href ="/lunchBox/LogoutServlet">ログアウト</a></li>
 	    </ul>
 	  </nav>

@@ -17,7 +17,6 @@
 
 
 <form action="/lunchBox/MyPageServlet" method="post" enctype="multipart/form-data">
-
 <table class="tableTotalMypage" >
 
 		<tr>
@@ -75,7 +74,7 @@
 
 <a href="/lunchBox/EditLunchServlet" class="editLunch"><button type="button">編集</button></a>
 
-
+</form>
 
 </body>
 </html>

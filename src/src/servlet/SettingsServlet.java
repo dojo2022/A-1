@@ -1,5 +1,6 @@
 package servlet;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -9,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import dao.UsersDAO;
@@ -22,18 +24,7 @@ import dao.UsersDAO;
 public class SettingsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
 
-    public SettingsServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// pageで指定した場所へ遷移させる（引数のpathでどこに遷移するか判断する）
 		// TODO Auto-generated method stub
@@ -64,11 +55,20 @@ public class SettingsServlet extends HttpServlet {
 		Part part = request.getPart("icon"); // getPartで取得
 
 		String icon = this.getFileName(part);
+
+		HttpSession session = request.getSession();
 		request.setAttribute("image", icon);
 		// サーバの指定のファイルパスへファイルを保存
         //場所はクラス名↑の上に指定してある
 
-		part.write(icon);
+		//アイコンを変更しなかった場合の挙動
+		try {
+			part.write(icon);
+		}catch(FileNotFoundException e) {
+			icon = (String)session.getAttribute("icon");
+		}catch(IOException e) {
+			icon = (String)session.getAttribute("icon");
+		}
 		String accountName = request.getParameter("accountName");
 		String pw = request.getParameter("pw");
 		String depName = request.getParameter("depName");
@@ -103,15 +103,19 @@ public class SettingsServlet extends HttpServlet {
 		//アップデートが成功したら
 		if(ans == true) {
 			request.setAttribute("msg","変更が完了しました");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/myPage.jsp");
+			UsersDAO dao = new UsersDAO();
+			session.setAttribute("user",dao.selectUser(emailAddress).get(0));
+			System.out.println("成功");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp");
 			dispatcher.forward(request, response);
 
 		//アップデートが失敗したら
-		}/*else {
+		}else {
 			request.setAttribute("msg","更新失敗しました");
+			System.out.println("失敗");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/settings.jsp");
 			dispatcher.forward(request, response);
-		}*/
+		}
 
 
 		//↓押されたボタンの値を取得(更新を押されたら、request.getParameter("SUBMIT")が更新という文字列に代わる。

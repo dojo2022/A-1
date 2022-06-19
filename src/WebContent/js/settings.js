@@ -1,5 +1,8 @@
-function previewImage(obj){
+alert("aa");
+$(document).ready(function(){
 
+function previewImage(obj){
+		alert("aaa");
 		var fileReader = new FileReader();
 
 		// 読み込み後に実行する処理
@@ -22,3 +25,4 @@ function previewImage(obj){
 		fileReader.readAsDataURL(obj.files[0]);
 		console.log(fileReader.result) // ← (確認用)null
 	}
+});

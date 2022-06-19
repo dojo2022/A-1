@@ -8,14 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-//import dao.UsersDAO;
-//import dao.LunchDiaryDAO
-//import dao.ListDAO
-//import dao.HandmadeDiaryDAO
-
-
-
+//import java.util*;
 
 /**
  * Servlet implementation class MyPageServlet
@@ -47,21 +40,21 @@ public class MyPageServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
  	*/
-	/*
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	// TODO Auto-generated method stub
 
 		request.setCharacterEncoding("UTF-8");
 
 
-		Part part = request.getPart("icon"); // getPartで取得
+//		Part part = request.getPart("icon"); // getPartで取得
 
-		String image = this.getFileName(part);
-		request.setAttribute("image", image);
-		part.write(image);
-		String accountName = request.getParameter("accountName");
-		String depName = request.getParameter("depName");
-		String emailAddress = request.getParameter("emailAddress");
+//		String image = this.getFileName(part);
+//		request.setAttribute("image", image);
+//		part.write(image);
+//		String accountName = request.getParameter("accountName");
+//		String depName = request.getParameter("depName");
+//		String emailAddress = request.getParameter("emailAddress");
 		//新規会員登録で入力された情報を表示するだけだから、
 		//リクエストゲットパラメータでJSPからデータをサーブレットに取ってこなくてよい？
 
@@ -69,32 +62,45 @@ public class MyPageServlet extends HttpServlet {
 		//ログインしている人を区別(主キーのメールアドレスで）して表示する
 		//メールアドレスをタップするとメールを送れるようになる仕組みを作る
 
-		//３つのタブ(手作り記録・ランチ日記・行きたい場所リスト）ごとにログインしている人のデータを持ってくる
-		//手作り日記・ランチ日記・行きたい場所リストで登録された情報を持ってくる？？
-		//下記の４つのDAOを使い分ける！？！？
-		//もっと見るボタンを押すとしまわれている部分が見えるようになる仕組み
-		UsersDAO uDao = new UsersDAO();
+//		３つのタブ(手作り記録・ランチ日記・行きたい場所リスト）ごとにログインしている人のデータを持ってくる
+//		手作り日記・ランチ日記・行きたい場所リストで登録された情報を持ってくる？？
+//		下記の４つのDAOを使い分ける！？！？
+//		もっと見るボタンを押すとしまわれている部分が見えるようになる仕組み
 
-
-		LunchDiaryDAO ldDao = new LunchDiaryDAO();
-		//ランチ日記のDAO
-		ListDAO liDao new ListDAO();
-		//行きたい場所リストのDAO
-		HandmadeDiaryDAO HdDao new HandmadeDiaryDAO();
-		//手作り日記のDAO
-
-
-			//ファイルの名前を取得してくる
-			private String getFileName(Part part) {
-		        String name = null;
-		        for (String dispotion : part.getHeader("Content-Disposition").split(";")) {
-		            if (dispotion.trim().startsWith("filename")) {
-		                name = dispotion.substring(dispotion.indexOf("=") + 1).replace("\"", "").trim();
-		                name = name.substring(name.lastIndexOf("\\") + 1);
-		                break;}
-		           }
+		//ユーザー情報のdao
+//		UsersDAO uDao = new UsersDAO();
+//		//ユーザーのデータを取得するメソッドを使用する(仮）
+//		ArrayList<AllColumnBeans> uList =uDao.selectUser();
+//		request.setAttribute("uList", uList);
+//
+//		//ランチ日記のDAO(仮）
+//		LunchDiaryDAO ldDao = new LunchDiaryDAO();
+//		ArrayList<AllColumnBeans> lList =ldDao.selectUser();
+//		request.setAttribute("lList", lList);
+//
+//		//行きたい場所リストのDAO(仮）
+//		ListDAO liDao =  new ListDAO();
+//		ArrayList<AllColumnBeans> liList =liDao.selectUser();
+//		request.setAttribute("liList", liList);
+//
+//		//手作り日記のDAO(仮）
+//		HandmadeDiaryDAO HdDao =  new HandmadeDiaryDAO();
+//		ArrayList<AllColumnBeans> hList =HdDao.selectUser();
+//		request.setAttribute("hList", hList);
+//
+//
+//
+//			//ファイルの名前を取得してくる
+//			private String getFileName(Part part) {
+//		        String name = null;
+//		        for (String dispotion : part.getHeader("Content-Disposition").split(";")) {
+//		            if (dispotion.trim().startsWith("filename")) {
+//		                name = dispotion.substring(dispotion.indexOf("=") + 1).replace("\"", "").trim();
+//		                name = name.substring(name.lastIndexOf("\\") + 1);
+//		                break;}
+//		           }
 			}
-*/
+
 
 		}
 
