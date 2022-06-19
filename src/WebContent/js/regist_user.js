@@ -25,9 +25,47 @@
 	}
 
 
+	//メールアドレスが確認ボックスと違った時の処理
+	function checkEmail(emailCheck){
+
+		var input1 = emailAddress.value;
+		var input2 = emailCheck.value;
+
+		if(input1 != input2){
+			emailCheck.setCustomValidity("入力値が一致しません。");
+		}else{
+			emailCheck.setCustomValidity('');
+		}
+	}
 
 
 
+	//パスワードが確認ボックスと違った時の処理
+	function checkPassword(pwCheck){
 
+		var input1 = pw.value;
+		var input2 = pwCheck.value;
 
+		if(input1 != input2){
+			pwCheck.setCustomValidity("入力値が一致しません。");
+		}else{
+			pwCheck.setCustomValidity('');
+		}
+	}
+/*
+	//パスワードが8文字以上20字以内ではなかった時の処理
+	function checkValue(){
+		 var ipt_form = document.getElementById('form');
+		  var ipt_value = ipt_form.value;
+		  document.getElementById('opt_value').innerHTML = ipt_value;
+
+		  if( ipt_value.length < 5 ) {
+		  	document.getElementById('less').style.display = 'block';
+		    ipt_form.value = '';
+		  } else {
+		   	document.getElementById('less').style.display = 'none';
+  			}
+  	}
+
+*/
 
