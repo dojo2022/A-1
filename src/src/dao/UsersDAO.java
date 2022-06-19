@@ -141,7 +141,8 @@ public class UsersDAO {
 			String pw,
 			String accountName,
 			String depName,
-			String icon) {
+			String icon,
+			int range) {
 
 			boolean result = false;
 
@@ -153,7 +154,7 @@ public class UsersDAO {
 				conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
 				// SQL文を準備する
-				String sql = "update user_master set pw=?, account_name=?, dep_name=?, icon=? where email_address=?";
+				String sql = "update user_master set pw=?, account_name=?, dep_name=?, icon=?, range=? where email_address=?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる
@@ -161,7 +162,8 @@ public class UsersDAO {
 				pStmt.setString(2, accountName);
 				pStmt.setString(3, depName);
 				pStmt.setString(4, icon);
-				pStmt.setString(5, emailAddress);
+				pStmt.setInt(5, range);
+				pStmt.setString(6, emailAddress);
 
 
 				// SQL文を実行する
