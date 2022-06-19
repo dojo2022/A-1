@@ -73,7 +73,8 @@ public class SettingsServlet extends HttpServlet {
 		String pw = request.getParameter("pw");
 		String depName = request.getParameter("depName");
 		String emailAddress = request.getParameter("emailAddress");
-		String range = request.getParameter("range");
+		//int range = request.getParameter("range");
+		int range = Integer.parseInt(request.getParameter("range"));
 
 		request.setAttribute("image", icon);
 		request.setAttribute("accountName", accountName);
