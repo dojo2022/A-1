@@ -35,7 +35,9 @@
 			            </select>
 			            <h3>&nbsp;メモ</h3>
 			            <textarea name="TOGO_MEMO" cols="55" rows="5" placeholder="Add Text" class="form_unit"></textarea><br>
+			            <div class="list_button">
 			            <input type="submit" name="toGoRegist" value="登録する" >
+			            </div>
 			        </form>
 		        </div>
 	        </div>
