@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
 		//uDaoにユーザーの情報を取ってきてもらう
 		ArrayList<UserMasterBeans> user = uDao.selectUser(emailAddress, pw);
 
-		if(user != null) {
+		if(user.size() != 0) {
 			//ちゃんとidとpwが合っていて、データを取得できた場合
 			 //sessionを使うための準備をする
 			HttpSession session = request.getSession();
