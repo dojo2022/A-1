@@ -4,12 +4,45 @@ body{
 	width: 70%;
     margin: auto;
 }
+h2{
+	margin-top: 15%;
+	text-align: center;
+}
 form{
-	margin-top: 10%;
 	margin-right: auto;
 	margin-left: auto;
-	background-color: white;
-
+	width: 70%;
+	padding: 0.5em 1em;
+    background: white;
+    border-top: solid 5px #FF8D29;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+#radioBtn{
+	text-align: center;
+}
+.dt{
+	display: inline-block;
+    text-align: right;
+    width: 270px;
+    padding: 15px 30px 15px 0px;
+}
+.required{
+	color: red;
+}
+form input[type ="text"]{
+	width: 20em;
+	font-size: 15px;
+}
+form select{
+	width: 20em;
+	font-size: 15px;
+}
+textarea{
+	width: 25em;
+	height: 10em;
+}
+.submitBtn{
+	justify-content: center;
 }
 
 #displayBox .cm_box {
@@ -19,7 +52,3 @@ form{
   display: block;
 }
 
-.searchBox{
-	position: absolute;
-	top: 10%;
-}
