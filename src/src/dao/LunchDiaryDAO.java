@@ -109,7 +109,7 @@ public class LunchDiaryDAO {
 
 			//SQL文
 //			String sql = "SELECT lunch_id, email_address, food_type, res_name, food_photo, category, style, date, food_name, cost, time, distance, star, feeling FROM lunch_diary WHERE lunch_flag = 1 ORDER BY ld_regist_time DESC";
-			String sql = "SELECT lunch_id, email_address, food_type, res_name, food_photo, category, style, date, food_name, cost, time, distance, star, feeling, account_name FROM lunch_diary left join user_master on lunch_diary.email_address = user_master.email_address WHERE lunch_flag = 1 ORDER BY ld_regist_time DESC";
+			String sql = "SELECT lunch_id, user_master.email_address, food_type, res_name, food_photo, category, style, date, food_name, cost, time, distance, star, feeling, account_name FROM lunch_diary left join user_master on lunch_diary.email_address = user_master.email_address WHERE lunch_flag = 1 ORDER BY ld_regist_time DESC";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			//SQL文を実行
@@ -120,8 +120,7 @@ public class LunchDiaryDAO {
 
 					AllColumnBeans ld = new AllColumnBeans();
 					ld.setLunchId(rs.getInt("lunch_id"));
-					ld.setEmailAddress(rs.getString("email_address"));
-					ld.setLdFoodType(rs.getString("food_type"));
+					ld.setEmailAddress(rs.getString("user_master.email_address"));
 					ld.setLdResName(rs.getString("res_name"));
 					ld.setLdFoodPhoto(rs.getString("food_photo"));
 					ld.setLdCategory(rs.getString("category"));
