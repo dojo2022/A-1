@@ -78,6 +78,13 @@ public class AllColumnBeans implements Serializable{
 	//HandMadeComment
 	private int hdCommentId;
 	private String hdComment;
+
+	//join用のbeans
+	private int countLdToGo;
+	private int countLdToTell;
+	private int countLdToUse;
+
+
 	public String getEmailAddress() {
 		return emailAddress;
 	}
@@ -419,6 +426,24 @@ public class AllColumnBeans implements Serializable{
 	}
 	public void setHdComment(String hdComment) {
 		this.hdComment = hdComment;
+	}
+	public int getCountLdToGo() {
+		return countLdToGo;
+	}
+	public void setCountLdToGo(int countLdToGo) {
+		this.countLdToGo = countLdToGo;
+	}
+	public int getCountLdToTell() {
+		return countLdToTell;
+	}
+	public void setCountLdToTell(int countLdToTell) {
+		this.countLdToTell = countLdToTell;
+	}
+	public int getCountLdToUse() {
+		return countLdToUse;
+	}
+	public void setCountLdToUse(int countLdToUse) {
+		this.countLdToUse = countLdToUse;
 	}
 
 
