@@ -133,7 +133,7 @@ public class LunchDiaryDAO {
 					ld.setDistance(rs.getString("distance"));
 					ld.setLdStar(rs.getInt("star"));
 					ld.setLdFeeling(rs.getString("feeling"));
-					ld.setLdFeeling(rs.getString("account_name"));
+					ld.setAccountName(rs.getString("account_name"));
 
 					allLunch.add(ld);
 				}
