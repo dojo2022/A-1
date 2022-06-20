@@ -1,5 +1,44 @@
 @charset "UTF-8";
 
 div.display {
-	border-radius: 1px;
+    width: 600px;
+    height: 300px;
+    padding-top: 150px;
+	margin: auto;
+}
+
+.list_title {
+    margin: auto;
+}
+.form_box {
+    border: 2px solid;
+    border-color: black;
+    margin-top: 25px;
+}
+.form_con {
+	width: 400px;
+	margin: 0 auto 0 auto;
+}
+h1 {
+	margin: auto;
+    text-align: center;
+}
+h3 {
+	margin-bottom: -3px;
+}
+input.form_unit {
+    margin-top: -5px;
+    margin-bottom: 10px;
+}
+input[name="RES_NAME"] {
+    width: 400px;
+}
+input[name="TOGO_MEMO"] {
+    width: 400px;
+    height: 50px;
+
+}
+input[name="toGoRegist"] {
+    margin: auto auto 15px auto;
+    text-align: center;
 }
