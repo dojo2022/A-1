@@ -12,6 +12,7 @@ import model.AllColumnBeans;
 public class LdJoin2DAO {
 	Connection conn = null;
 	ArrayList<AllColumnBeans> ldReactionList = new ArrayList<AllColumnBeans>();
+	ArrayList<AllColumnBeans> ldCommentList = new ArrayList<AllColumnBeans>();
 
 	//リアクションボタンの人数を数えるメソッド
 	public ArrayList<AllColumnBeans> countReactionUser(){
@@ -60,12 +61,61 @@ public class LdJoin2DAO {
 					ldReactionList = null;
 				}
 			}
-
 		}
 
 		return ldReactionList;
 	}
 
+	//誰がどのランチ日記にコメントしたかとその内容を検索するメソッド
+	public ArrayList<AllColumnBeans> selectComment(){
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
+
+			// SQL文を準備する<<ここに改造を施す>>
+			String sql = "SELECT ld_comment_id, lunch_comment.email_address, lunch_comment.lunch_id, ld_comment user_master.account_name LEFT JOIN lunch_diary ON lunch_diary.lunch_id = lunch_comment.lunch_id LEFT JOIN user_master ON user_master.email_address = lunch_comment.email_address";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			//SQL文を実行
+			ResultSet rs = pStmt.executeQuery();
+
+			while(rs.next()) {
+				AllColumnBeans comLd = new AllColumnBeans();
+				comLd.setLdCommentId(rs.getInt("ld_comment_id"));
+				comLd.setEmailAddress("lunch_comment.email_address");
+				comLd.setLunchId(rs.getInt("lunch_comment.lunch_id"));
+				comLd.setLdComment(rs.getString("ld_comment"));
+
+				ldCommentList.add(comLd);
+			}
+
+
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			ldCommentList = null;
+		}
+		catch(ClassNotFoundException e) {
+			e.printStackTrace();
+			ldCommentList = null;
+		}
+		finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					ldCommentList = null;
+				}
+			}
+
+		}
+		return ldCommentList;
+	}
 
 
 

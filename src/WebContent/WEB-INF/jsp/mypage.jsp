@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,8 +15,7 @@
 <body>
 
 
-
-
+  <c:forEach var="uList" items="${uList}" >
 <form action="/lunchBox/MyPageServlet" method="post" enctype="multipart/form-data">
 <table class="tableTotalMypage" >
 
@@ -29,22 +29,101 @@
 		</tr>
 		<tr>
 			<td class="tableMypage">
-				${e.accountName}
+				${uList.accountName}
 				<%-- <br><input type="hidden"  name="accountName" value="${e.accountName}" readOnly> --%>
 			</td>
 	 	</tr>
 	 	<tr>
 			<td class="tableMypage">
-				${e.depname}
+				${uList.depname}
 				<%-- <br><input type="text" name="depName" value="${e.depname}"readOnly> --%>
 			</td>
 		</tr>
 	 	<tr>
 	 		<td class="tableMypage">
-	 			<a href="#">${e.emailAddress}</a>
+	 			<a href="#">${uList.emailAddress}</a>
 	 			<br><input type="email" name="emailAddress" value="${e.emailAddress}" readOnly>
 	 		</td>
 		</tr>
+		<!-- メールアドレスはリンクで飛んでメールができるようにする -->
+
+
+
+
+<!-- ランチ日記のデータベース(LunchDiaryDAO)から取得 -->
+		<tr>
+	 		<td class="tableMypage">
+	 			${lList.lunch_id}
+	 		</td>
+		</tr>
+
+		<tr>
+			<td class="tableMypage">
+				${lList.res_name}
+			</td>
+		</tr>
+		<tr>
+			<td class="tableMypage">
+				${lList.foodtype}
+			</td>
+		</tr>
+		<tr>
+			<td class="tableMypage">
+				${lList.category}
+			</td>
+		</tr>
+		<tr>
+			<td class="tableMypage">
+				${lList.style}
+			</td>
+		</tr>
+		<tr>
+			<td class="tableMypage">
+				${lList.date}
+			</td>
+		</tr>
+		<tr>
+			<td class="tableMypage">
+				${lList.foodName}
+			</td>
+		</tr>
+		<tr>
+			<td class="tableMypage">
+				${lList.cost}
+			</td>
+		</tr><tr>
+			<td class="tableMypage">
+				${lList.time}
+			</td>
+		</tr>
+		<tr>
+			<td class="tableMypage">
+				${lList.distance}
+			</td>
+		</tr><tr>
+			<td class="tableMypage">
+				${lList.star}
+			</td>
+		</tr>
+		<tr>
+			<td class="tableMypage">
+				${lList.feeling}
+			</td>
+		</tr><tr>
+			<td class="tableMypage">
+				${lList.foodPhoto}
+			</td>
+		</tr>
+
+
+
+
+
+
+
+
+
+
 	</table>
 
 <h1>結果出力欄</h1>
@@ -60,13 +139,30 @@
 <div class="panel-group">
   <div class="panel">
 		ここにデータベースの情報を貼り付ける！？！？
+ 		<c:forEach var="uList" items="${uList}" >
+			${uList.name}
+
+		</c:forEach>
 
   </div>
   <div class="panel is-show">
   		ここにデータベースの情報を貼り付ける！？！？
+  		<c:forEach var="lList" items="${lList}" >
+
+  		</c:forEach>
+
   </div>
   <div class="panel">
   		行きたい場所リストhogehoge
+  		<c:forEach var="liList" items="${liList}" >
+			${liList.list_id}
+			${liList.email_address}
+			${liList.res_name}
+			${liList.category}
+			${liList.togo_memo}
+			${liList.range}
+			${liList.list_flag}
+  		</c:forEach>
   </div>
 </div>
 
@@ -75,6 +171,6 @@
 <a href="/lunchBox/EditLunchServlet" class="editLunch"><button type="button">編集</button></a>
 
 </form>
-
+</c:forEach>
 </body>
 </html>
