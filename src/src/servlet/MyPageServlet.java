@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-//import java.util*;
+//import java.util.*;
+//import model.*;
+//import dao.*;
 
 /**
  * Servlet implementation class MyPageServlet
@@ -67,7 +69,7 @@ public class MyPageServlet extends HttpServlet {
 //		下記の４つのDAOを使い分ける！？！？
 //		もっと見るボタンを押すとしまわれている部分が見えるようになる仕組み
 
-		//ユーザー情報のdao
+//		//ユーザー情報のdao
 //		UsersDAO uDao = new UsersDAO();
 //		//ユーザーのデータを取得するメソッドを使用する(仮）
 //		ArrayList<AllColumnBeans> uList =uDao.selectUser();
@@ -86,6 +88,8 @@ public class MyPageServlet extends HttpServlet {
 //		//手作り日記のDAO(仮）
 //		HandmadeDiaryDAO HdDao =  new HandmadeDiaryDAO();
 //		ArrayList<AllColumnBeans> hList =HdDao.selectUser();
+//		//HandmadeDiaryDAOをHdDaoと言い換えて、HdDaoのデータベースのbeansがhListという箱の中に入っている。
+//		//箱の名前を同じhListにしただけ
 //		request.setAttribute("hList", hList);
 //
 //
@@ -99,7 +103,7 @@ public class MyPageServlet extends HttpServlet {
 //		                name = name.substring(name.lastIndexOf("\\") + 1);
 //		                break;}
 //		           }
-			}
+		}
 
 
 		}

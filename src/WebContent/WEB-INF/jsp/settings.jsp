@@ -36,7 +36,7 @@
 			</td>
 			<td>
 				パスワード<br><input type="password" name="pw" value="${user.pw}">
-			</td>
+			</td>                   		 <!-- セッション領域からとってきたuserという箱-->
 	 	</tr>
 	 	<tr>
 			<td class="tableLeft">
