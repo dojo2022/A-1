@@ -95,7 +95,8 @@
 <!--タブを切り替えて表示するコンテンツ-->
 <div class="panel-group">
   <div class="panel is-show">
-	<c:forEach var="e" items="${lunchDiary}" >
+	<c:forEach var="e" items="${allLunch}" >
+	${e.accountName}<br>
 	${e.ldFoodType}<br>
 	${e.ldResName}<br>
 	${e.ldFoodPhoto}<br>
@@ -108,6 +109,11 @@
 	${e.distance}<br>
 	${e.ldStar}<br>
 	${e.ldFeeling}<br>
+	${e.ldToGo}
+	${e.ldToTell}
+	${e.ldToUse}<br>
+	${e.emailAddress}
+	${ldComment}<br>
 
 	<input type="button" name="ToGo" value="行きたい">
 	<input type="button" name="ToTellMe" value="教えて">

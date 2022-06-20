@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.LunchDiaryDAO;
-import model.LunchDiaryBeans;
+import model.AllColumnBeans;
 
 /**
  * Servlet implementation class TimelineServlet
@@ -34,9 +34,9 @@ public class TimelineServlet extends HttpServlet {
 
 		//日記情報をゲットしてくる
 		LunchDiaryDAO LdDao = new LunchDiaryDAO();
-		ArrayList<LunchDiaryBeans> lunchDiary = LdDao.select();
+		ArrayList<AllColumnBeans> allLunch = LdDao.select();
 		// 検索結果をリクエストスコープに格納する
-		request.setAttribute("lunchDiary", lunchDiary);
+		request.setAttribute("allLunch", allLunch);
 
 		/*		//ランチ日記リアクション情報をゲットしてくる
 				LdReactionDAO LdRDao = new LdReactionDAO();
