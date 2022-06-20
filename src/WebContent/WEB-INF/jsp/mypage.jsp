@@ -15,8 +15,8 @@
 <body>
 
 
-  <c:forEach var="uList" items="${uList}" >
-<form action="/lunchBox/MyPageServlet" method="post" enctype="multipart/form-data">
+
+<%-- <form action="/lunchBox/MyPageServlet" method="post" enctype="multipart/form-data">
 <table class="tableTotalMypage" >
 
 		<tr>
@@ -30,13 +30,13 @@
 		<tr>
 			<td class="tableMypage">
 				${uList.accountName}
-				<%-- <br><input type="hidden"  name="accountName" value="${e.accountName}" readOnly> --%>
+				<br><input type="hidden"  name="accountName" value="${e.accountName}" readOnly>
 			</td>
 	 	</tr>
 	 	<tr>
 			<td class="tableMypage">
 				${uList.depname}
-				<%-- <br><input type="text" name="depName" value="${e.depname}"readOnly> --%>
+				<br><input type="text" name="depName" value="${e.depname}"readOnly>
 			</td>
 		</tr>
 	 	<tr>
@@ -114,6 +114,7 @@
 				${lList.foodPhoto}
 			</td>
 		</tr>
+ --%>
 
 
 
@@ -123,8 +124,7 @@
 
 
 
-
-	</table>
+	<!-- </table> -->
 
 <h1>結果出力欄</h1>
 
@@ -155,13 +155,18 @@
   <div class="panel">
   		行きたい場所リストhogehoge
   		<c:forEach var="liList" items="${liList}" >
+  		<!--liListがbeansであり、 青いliListはその＄liListの情報が入っている。
+  		また、青いliListはbeansLiListみたいにした方がbeansから１つ１つのデータを取るというイメージがわかりやすい。 -->
 			${liList.list_id}
 			${liList.email_address}
 			${liList.res_name}
 			${liList.category}
+			<%-- <c:forEach var="" items=""> --%>
 			${liList.togo_memo}
 			${liList.range}
 			${liList.list_flag}
+			<!--.はGETの代わり。つまり、JSPで画面にこれを表示してくれという意味。  -->
+			<%-- </c:forEach> --%>
   		</c:forEach>
   </div>
 </div>
@@ -171,6 +176,6 @@
 <a href="/lunchBox/EditLunchServlet" class="editLunch"><button type="button">編集</button></a>
 
 </form>
-</c:forEach>
+
 </body>
 </html>
