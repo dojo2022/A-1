@@ -13,7 +13,7 @@ import model.LunchDiaryBeans;
 public class LunchDiaryDAO {
 	Connection conn = null;
 	ArrayList<LunchDiaryBeans> lunchDiary = new ArrayList<LunchDiaryBeans>();
-	ArrayList<AllColumnBeans> AllLunch = new ArrayList<AllColumnBeans>();
+	ArrayList<AllColumnBeans> allLunch = new ArrayList<AllColumnBeans>();
 	//ランチ日記表示に必要なデータを取得するメソッド
 
 	// タイムラインから検索ボックスで指定された引数を元に該当するランチ日記を検索するメソッド
@@ -97,9 +97,10 @@ public class LunchDiaryDAO {
 		// 結果を返す
 			return lunchDiary;
 }
-	// すべてのランチ日記の検索を行うメソッド
+
+	// すべてのランチ日記の検索を行うメソッド-----------------------------------------------
 	//名前取得のためにjoinが必要説
-	public ArrayList<LunchDiaryBeans> select(){
+	public ArrayList<AllColumnBeans> select(){
 		try {
 			//ドライバを読み込む
 			Class.forName("org.h2.Driver");
@@ -107,7 +108,8 @@ public class LunchDiaryDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
 			//SQL文
-			String sql = "SELECT lunch_id, email_address, food_type, res_name, food_photo, category, style, date, food_name, cost, time, distance, star, feeling FROM lunch_diary WHERE lunch_flag = 1 ORDER BY ld_regist_time DESC";
+//			String sql = "SELECT lunch_id, email_address, food_type, res_name, food_photo, category, style, date, food_name, cost, time, distance, star, feeling FROM lunch_diary WHERE lunch_flag = 1 ORDER BY ld_regist_time DESC";
+			String sql = "SELECT lunch_id, email_address, food_type, res_name, food_photo, category, style, date, food_name, cost, time, distance, star, feeling, account_name FROM lunch_diary left join user_master on lunch_diary.email_address = user_master.email_address WHERE lunch_flag = 1 ORDER BY ld_regist_time DESC";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			//SQL文を実行
@@ -115,7 +117,8 @@ public class LunchDiaryDAO {
 
 			//検索結果をコピーする
 				while(rs.next()) {
-					LunchDiaryBeans ld = new LunchDiaryBeans();
+
+					AllColumnBeans ld = new AllColumnBeans();
 					ld.setLunchId(rs.getInt("lunch_id"));
 					ld.setEmailAddress(rs.getString("email_address"));
 					ld.setLdFoodType(rs.getString("food_type"));
@@ -130,19 +133,20 @@ public class LunchDiaryDAO {
 					ld.setDistance(rs.getString("distance"));
 					ld.setLdStar(rs.getInt("star"));
 					ld.setLdFeeling(rs.getString("feeling"));
+					ld.setLdFeeling(rs.getString("account_name"));
 
-					lunchDiary.add(ld);
+					allLunch.add(ld);
 				}
 
 		}
 		//例外処理
 		catch (SQLException e){
 			e.printStackTrace();
-			lunchDiary = null;
+			allLunch = null;
 		}
 		catch(ClassNotFoundException e) {
 			e.printStackTrace();
-			lunchDiary = null;
+			allLunch = null;
 		}
 		finally {
 			if (conn != null) {
@@ -151,15 +155,15 @@ public class LunchDiaryDAO {
 				}
 				catch (SQLException e) {
 					e.printStackTrace();
-					lunchDiary = null;
+					allLunch = null;
 				}
 			}
 		}
-		return lunchDiary;
+		return allLunch;
 	}
 
 
-	//ランチ日記の更新を行うメソッド
+	//ランチ日記の更新を行うメソッド-----------------------------------------------
 	public boolean updateLd(
 		int lunchId,
 		String ldFoodType,
