@@ -69,7 +69,7 @@ public class MyPageServlet extends HttpServlet {
 //		下記の４つのDAOを使い分ける！？！？
 //		もっと見るボタンを押すとしまわれている部分が見えるようになる仕組み
 
-//		//ユーザー情報のdao
+		//ユーザー情報のdao
 //		UsersDAO uDao = new UsersDAO();
 //		//ユーザーのデータを取得するメソッドを使用する(仮）
 //		ArrayList<AllColumnBeans> uList =uDao.selectUser();

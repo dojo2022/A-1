@@ -51,7 +51,7 @@
 	 			メールアドレス<br><input type="email" name="emailAddress" value="${user.emailAddress}" readOnly>
 	 		</td>
 			<td>
-				公開設定${user.range}<br>
+				公開設定<!--  ${user.range}--><br>
 				<c:if test="${user.range == 1 }">
 					<input class="koukai" type="radio" name="range" value="1" id="one" checked >
 					<label for="one">公開</label>
@@ -85,7 +85,7 @@
 
 
 <div class="kousin">
-<input type = button onclick= "history.back()" value="戻る">
+<!-- <input  type = button onclick= "history.back()" value="戻る">-->
 <input type="submit" name="SUBMIT" value="更新する">
 </div>
 <div >
@@ -102,7 +102,7 @@
 	</form>
 <script>
 function previewImage(obj){
-	alert("aaa");
+	//alert("aaa");
 	var fileReader = new FileReader();
 
 	// 読み込み後に実行する処理

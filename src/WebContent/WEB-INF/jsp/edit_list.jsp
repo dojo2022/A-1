@@ -11,6 +11,9 @@
 
 </head>
 <body>
+
+<jsp:include page="header.jsp" />
+
     <header>
     </header>
     <main>
@@ -20,7 +23,7 @@
 		        <div class="form_con">
 			        <form method="post" action="/lunchBox/RegistListServlet">
 			            <h3>&nbsp;店名 ※必須</h3>
-			            <input type="text" name="RES_NAME" placeholder="店舗名(例:鳥貴族 新宿店)まで入力してください" class="form_unit" value="${session.resName}">
+			            <input type="text" name="RES_NAME" placeholder="店舗名(例:鳥貴族 新宿店)まで入力してください" class="form_unit" value="${session.resName}" required="required">
 			            <h3>&nbsp;ジャンル</h3>
 			            <select name="CATEGORY" id="" class="form_unit" value="${session.category}">
 			                <option value="">選択してください</option>
@@ -35,7 +38,7 @@
 			            <h3>&nbsp;メモ</h3>
 			            <textarea name="TOGO_MEMO" cols="55" rows="5" placeholder="Add Text" class="form_unit" value="${session.togoMemo}"></textarea><br>
 			            <div class="list_button">
-			            <input type="submit" name="toGoEdit" value="編集する" ><br>
+			            <input type="submit" name="toGoEdit" value="編集する" >
 			            <input type="submit" name="toGoDelete" value="削除する" >
 			            </div>
 			        </form>
