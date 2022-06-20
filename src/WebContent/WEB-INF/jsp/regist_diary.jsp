@@ -10,7 +10,7 @@
 <link href="css/diary_form.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-
+<jsp:include page="header.jsp" />
 
 
 <p>登録内容</p>

@@ -1,5 +1,17 @@
 @charset "UTF-8";
 
+body{
+	width: 70%;
+    margin: auto;
+}
+form{
+	margin-top: 10%;
+	margin-right: auto;
+	margin-left: auto;
+	background-color: white;
+
+}
+
 #displayBox .cm_box {
   display: none;
 }

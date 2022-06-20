@@ -99,7 +99,6 @@ public class LunchDiaryDAO {
 }
 
 	// すべてのランチ日記の検索を行うメソッド-----------------------------------------------
-	//名前取得のためにjoinが必要説
 	public ArrayList<AllColumnBeans> select(){
 		try {
 			//ドライバを読み込む
