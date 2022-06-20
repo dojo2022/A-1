@@ -13,8 +13,13 @@ table{
 	margin-right: auto;
 }
 
-
 .center{
 	text-align: center;
+}
+
+.logo{
+	margin-left: auto;
+	margin-right: auto;
+	width: 8em
 }
 
