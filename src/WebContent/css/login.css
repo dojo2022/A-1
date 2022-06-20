@@ -1,12 +1,17 @@
 @charset "UTF-8";
 h1 {
-	text-align: center
+	text-align: center;
 }
 form {
 	border: solid;
+	color: #8b4513;
 	text-align: center;
-	margin-right: 500px;
-	margin-left: 500px;
+	margin-right: 450px;
+	margin-left: 450px;
 	padding-top: 40px;
-	padding-bottom: 40px
+	padding-bottom: 40px;
+	background-color: #fef9a7;
+}
+body {
+	background-color: #FFEE63;
 }

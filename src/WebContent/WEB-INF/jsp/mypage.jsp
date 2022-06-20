@@ -157,14 +157,14 @@
   		<c:forEach var="liList" items="${liList}" >
   		<!--liListがbeansであり、 青いliListはその＄liListの情報が入っている。
   		また、青いliListはbeansLiListみたいにした方がbeansから１つ１つのデータを取るというイメージがわかりやすい。 -->
-			${liList.list_id}
-			${liList.email_address}
-			${liList.res_name}
-			${liList.category}
+			${liList.list_id}<br>
+			${liList.email_address}<br>
+			${liList.res_name}<br>
+			${liList.category}<br>
 			<%-- <c:forEach var="" items=""> --%>
-			${liList.togo_memo}
-			${liList.range}
-			${liList.list_flag}
+			${liList.togo_memo}<br>
+			${liList.range}<br>
+			${liList.list_flag}<br>
 			<!--.はGETの代わり。つまり、JSPで画面にこれを表示してくれという意味。  -->
 			<%-- </c:forEach> --%>
   		</c:forEach>
@@ -175,7 +175,8 @@
 
 <a href="/lunchBox/EditLunchServlet" class="editLunch"><button type="button">編集</button></a>
 
-</form>
+<!-- </form> -->
+<!-- コントロールシフト/でコメントアウト -->
 
 </body>
 </html>
