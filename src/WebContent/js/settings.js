@@ -1,4 +1,4 @@
-alert("aa");
+
 $(document).ready(function(){
 
 function previewImage(obj){
