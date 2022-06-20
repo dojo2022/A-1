@@ -125,7 +125,7 @@ ul{
 	margin-top: 100px;
 	padding-left: 0;
 }
-li {
+.sp-nav li {
 	display: block;
 	height: 10%;
 	line-height: 80px;
@@ -138,14 +138,14 @@ li {
 
 }
 /*メニューにかざすと色が反転*/
-li:hover {
+.sp-nav li:hover {
 	color: #FF8D29;
 	background-color: white;
 	opacity: 0.8;
 	transition: background-color 0.5s, color 0.5s;
 }
 /*一つ当たりのメニューのcss*/
-a{
+.sp-nav a{
 	display: block;
 	height: 10%;
 	line-height: 80px;
@@ -156,7 +156,7 @@ a{
 	color: white;
 
 }
-a:hover{
+.sp-nav a:hover{
 	color: #FF8D29;
 	background-color: white;
 	opacity: 0.8;
