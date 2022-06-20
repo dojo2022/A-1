@@ -21,7 +21,7 @@
 		        <div class="form_con">
 			        <form method="post" action="/lunchBox/RegistListServlet">
 			            <h3>&nbsp;店名 ※必須</h3>
-			            <input type="text" name="RES_NAME" placeholder="店舗名(例:鳥貴族 新宿店)まで入力してください" class="form_unit">
+			            <input type="text" name="RES_NAME" placeholder="店舗名(例:鳥貴族 新宿店)まで入力してください" class="form_unit" required="required">
 			            <h3>&nbsp;ジャンル</h3>
 			            <select name="CATEGORY" id="" class="form_unit">
 			                <option value="">選択してください</option>
