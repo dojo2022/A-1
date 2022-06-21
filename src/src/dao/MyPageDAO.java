@@ -425,7 +425,7 @@ public class MyPageDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
 			// SQL文を準備する<<ここに改造を施す>>
-			String sql = "SELECT togo_list.list_id, SUM(list_to_go), SUM(list_to_tell), SUM(list_to_use) FROM togo_list LEFT JOIN user_master ON togo_list.email_address = user_master.email_address LEFT JOIN list_reaction ON togo_list.list_id = list_reaction.list_id WHERE togo_list.list_flag = 1 AND user_master.email_address = ? ORDER BY list_reaction.list_reaction_id DESC";
+			String sql = "SELECT togo_list.list_id, SUM(list_to_go), SUM(list_to_tell), SUM(list_to_use) FROM togo_list LEFT JOIN user_master ON togo_list.email_address = user_master.email_address LEFT JOIN list_reaction ON togo_list.list_id = list_reaction.list_id WHERE togo_list.list_flag = 1 AND user_master.email_address = ? GROUP BY togo_list.list_id";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			//sqlの？部分を埋める
 			pStmt.setString(1, "%" + emailAddress + "%");
@@ -436,7 +436,7 @@ public class MyPageDAO {
 
 			while(rs.next()) {
 				AllColumnBeans reacToGo = new AllColumnBeans();
-				reacToGo.setListId(rs.getInt("list_id"));
+				reacToGo.setListId(rs.getInt("togo_list.list_id"));
 				reacToGo.setCountListToGo(rs.getInt("SUM(list_to_go)"));
 				reacToGo.setCountListToTell(rs.getInt("SUM(list_to_tell)"));
 				reacToGo.setCountListToUse(rs.getInt("SUM(list_to_use)"));
