@@ -150,6 +150,7 @@ public class LdJoin2DAO {
 				comLd.setEmailAddress("lunch_comment.email_address");
 				comLd.setLunchId(rs.getInt("lunch_comment.lunch_id"));
 				comLd.setLdComment(rs.getString("ld_comment"));
+				comLd.setAccountName(rs.getString("user_master.account_name"));
 
 				ldCommentList.add(comLd);
 			}
