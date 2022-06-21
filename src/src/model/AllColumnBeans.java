@@ -86,6 +86,9 @@ public class AllColumnBeans implements Serializable{
 	private int countHdToEat;
 	private int countHdToTell;
 	private int countHdToUse;
+	private int countListToGo;
+	private int countListToTell;
+	private int countListToUse;
 
 
 	public String getEmailAddress() {
@@ -465,6 +468,24 @@ public class AllColumnBeans implements Serializable{
 	}
 	public void setCountHdToUse(int countHdToUse) {
 		this.countHdToUse = countHdToUse;
+	}
+	public int getCountListToGo() {
+		return countListToGo;
+	}
+	public void setCountListToGo(int countListToGo) {
+		this.countListToGo = countListToGo;
+	}
+	public int getCountListToTell() {
+		return countListToTell;
+	}
+	public void setCountListToTell(int countListToTell) {
+		this.countListToTell = countListToTell;
+	}
+	public int getCountListToUse() {
+		return countListToUse;
+	}
+	public void setCountListToUse(int countListToUse) {
+		this.countListToUse = countListToUse;
 	}
 
 
