@@ -23,7 +23,7 @@
 	  <nav class="sp-nav">
 	    <ul>
 	      <li><a href="/lunchBox/TimelineServlet">タイムライン</a></li>
-	      <li><a href= "/lunchBox/MypageServlet">マイページ</a></li>
+	      <li><a href= "/lunchBox/MyPageServlet">マイページ</a></li>
 	      <li id="regist">登録</li>
 	      <div class = "hidden" id = "hidden">
 		      <li><a href= "/lunchBox/RegistLunchServlet">ランチ日記登録</a></li>
