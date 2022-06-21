@@ -43,10 +43,10 @@ public class TimelineServlet extends HttpServlet {
 		request.setAttribute("allLunch", allLunch);
 
 	//ランチ日記リアクション情報をゲットしてくる
-		LdJoin2DAO LdRDao = new LdJoin2DAO();
-		ArrayList<AllColumnBeans> ldReactionList = LdRDao.countReactionUser();
-		// 検索結果をリクエストスコープに格納する
-		request.setAttribute("ldReactionList", ldReactionList);
+//		LdJoin2DAO LdRDao = new LdJoin2DAO();
+//		ArrayList<AllColumnBeans> ldReactionList = LdRDao.countReactionUser();
+//		// 検索結果をリクエストスコープに格納する
+//		request.setAttribute("ldReactionList", ldReactionList);
 
 		//ランチ日記コメント情報をゲットしてくる
 		LdJoin2DAO LdCDao = new LdJoin2DAO();

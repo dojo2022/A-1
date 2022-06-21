@@ -92,7 +92,7 @@
 <!--タブを切り替えて表示するコンテンツ-->
 <div class="panel-group">
   <div class="panel is-show">
-<
+
 <c:forEach var="e" items="${allLunch}" >
 <form method="POST" action="TimelineServlet">
 	${e.accountName}<br>
@@ -109,21 +109,22 @@
 	${e.ldStar}<br>
 	${e.ldFeeling}<br>
 	<input type="hidden" name="lunch_id" value="${e.lunchId}">
+	<c:forEach var="lc" items="${LdComment}">
+	<c:if test="${lc.lunchId == e.lunchId}">
+		${lc.accountName}：
+		${lc.ldComment}<br>
+	</c:if>
+	</c:forEach>
+		<input type="text" name="ld_comment" placeholder="コメントを入力してください">
+		<input type="submit" name="" value="送信する"><br>
 	<c:forEach var="lr" items="${ldReactionList}">
-		<input type="button" name="ToGo" value="行きたい">
-		<input type="button" name="ToTellMe" value="教えて">
-		<input type="button" name="ToUseidea" value="参考にします">
 		${lr.ldToGo}
 		${lr.ldToTell}
 		${lr.ldToUse}<br>
 	</c:forEach>
-	<c:forEach var="lc" items="${LdComment}">
-		${lc.accountName}：
-		${lc.ldComment}<br>
-	</c:forEach>
-
-<input type="text" name="ld_comment" placeholder="コメントを入力してください">
-<input type="submit" name="" value="送信する"><br>
+		<input type="button" name="ToGo" value="行きたい">
+		<input type="button" name="ToTellMe" value="教えて">
+		<input type="button" name="ToUseidea" value="参考にします"><br>
 </form>
 </c:forEach>
 	</div>
