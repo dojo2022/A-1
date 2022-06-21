@@ -46,6 +46,7 @@ public class UsersDAO {
 					us.setUserFlag(rs.getInt("user_flag"));
 					us.setIcon(rs.getString("icon"));
 					us.setReason(rs.getString("reason"));
+					us.setRange(rs.getInt("range"));
 
 					user.add(us);
 				}
@@ -84,7 +85,7 @@ public class UsersDAO {
 			String pw,
 			String accountName,
 			String depName,
-			String icon) {
+			String image) {
 
 			boolean result = false;
 
@@ -104,7 +105,7 @@ public class UsersDAO {
 				pStmt.setString(2, pw);
 				pStmt.setString(3, accountName);
 				pStmt.setString(4, depName);
-				pStmt.setString(5, icon);
+				pStmt.setString(5, image);
 
 				// SQL文を実行する
 				if (pStmt.executeUpdate() == 1) {
@@ -277,6 +278,7 @@ public class UsersDAO {
 					us.setDepName(rs.getString("dep_name"));
 					us.setUserFlag(rs.getInt("user_flag"));
 					us.setIcon(rs.getString("icon"));
+					us.setRange(rs.getInt("range"));
 				//us.setReason(rs.getString("reason"));
 
 					user.add(us);
