@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.HandmadeDiaryDAO;
 import dao.LunchDiaryDAO;
+import model.AllColumnBeans;
 import model.HandmadeDiaryBeans;
-import model.LunchDiaryBeans;
 /**
  * Servlet implementation class SearchServlet
  */
@@ -55,7 +55,7 @@ public class SearchServlet extends HttpServlet {
 			String res_name = request.getParameter("res_name");
 			//検索処理を行う
 			LunchDiaryDAO LdDao = new LunchDiaryDAO();
-			ArrayList<LunchDiaryBeans> lunchDiary =LdDao.selectLunch(distance,time,category,cost,res_name);
+			ArrayList<AllColumnBeans> lunchDiary =LdDao.selectLunch(distance,time,category,cost,res_name);
 
 			request.setAttribute("lunchDiary", lunchDiary);
 			// 結果ページにフォワードする

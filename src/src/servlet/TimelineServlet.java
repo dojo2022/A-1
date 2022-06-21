@@ -9,9 +9,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import dao.LdCommentDAO;
+import dao.LdJoin2DAO;
 import dao.LunchDiaryDAO;
 import model.AllColumnBeans;
+import model.UserMasterBeans;
 
 /**
  * Servlet implementation class TimelineServlet
@@ -38,18 +42,18 @@ public class TimelineServlet extends HttpServlet {
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("allLunch", allLunch);
 
-		/*		//ランチ日記リアクション情報をゲットしてくる
-				LdReactionDAO LdRDao = new LdReactionDAO();
-				ArrayList<LunchReactionBeans> LdReaction = LdRDao.selectLdReaction();
-				// 検索結果をリクエストスコープに格納する
-				request.setAttribute("LdReaction", LdReaction);
+	//ランチ日記リアクション情報をゲットしてくる
+		LdJoin2DAO LdRDao = new LdJoin2DAO();
+		ArrayList<AllColumnBeans> ldReactionList = LdRDao.countReactionUser();
+		// 検索結果をリクエストスコープに格納する
+		request.setAttribute("ldReactionList", ldReactionList);
 
-				//ランチ日記コメント情報をゲットしてくる
-				LdCommentDAO LdCDao = new LdCommentDAO();
-				ArrayList<LunchCommentBeans> LdComment = LdCDao.select(new LunchCommentBeans());
-				// 検索結果をリクエストスコープに格納する
-				request.setAttribute("LdComment", LdComment);
-
+		//ランチ日記コメント情報をゲットしてくる
+		LdJoin2DAO LdCDao = new LdJoin2DAO();
+		ArrayList<AllColumnBeans> LdComment = LdCDao.selectComment();
+		// 検索結果をリクエストスコープに格納する
+		request.setAttribute("LdComment", LdComment);
+				/*
 		//		手作り日記の情報
 		//		手作り日記の情報を貰ってくる
 				HandmadeDiaryDAO HdDao = new HandmadeDiaryDAO();
@@ -82,10 +86,68 @@ public class TimelineServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		//もしもログインしてなかったらログインサーブレットにリダイレクトする
+		/*		HttpSession session = request.getSession();
+				if (session.getAttribute("id") == null) {
+					response.sendRedirect("/lunchBox/LoginServlet");
+					return;
+		}
+		*/
+		//リクエストパラメータを取得する
+//		request.setCharacterEncoding("UTF-8");
+//		Integer to_go = Integer.parseInt(request.getParameter("to_go"));
+//		Integer to_tell_me = Integer.parseInt(request.getParameter("to_tell_me"));
+//		Integer to_use = Integer.parseInt(request.getParameter("to_use"));
+//
+////		LdReactionDAO ldRDao = new LdReactionDAO();
+////		if(LdRDao.insert(new LunchReactionBeans(to_go, to_tell_me, to_use))) {
+////			request.setAttribute("ldRDao", ldRDao);
+////		}else {
+////			request.setAttribute("ldRDao", "失敗！");
+////		}
 
-		//検索ボタンが押されたら検索結果ページにフォワードする
+		request.setCharacterEncoding("UTF-8");
+//		Integer ld_comment_id = Integer.parseInt(request.getParameter("ld_comment_id"));
+		HttpSession session = request.getSession();
+		UserMasterBeans user = (UserMasterBeans)session.getAttribute("user");
+		String email_address = user.getEmailAddress();
+		Integer lunch_id = Integer.parseInt(request.getParameter("lunch_id"));
+		String ld_comment =request.getParameter("ld_comment");
+
+
+		LdCommentDAO ldcDao = new LdCommentDAO();
+//		ArrayList<AllColumnBeans> ldCommentList = ldcDao.selectComment(new AllColumnBeans(ld_comment_id,email_address,lunch_id,ld_comment));
+		ldcDao.insertLdComment(0, lunch_id, email_address, ld_comment);
+
+		//日記情報をゲットしてくる
+		LunchDiaryDAO LdDao = new LunchDiaryDAO();
+		ArrayList<AllColumnBeans> allLunch = LdDao.select();
+		// 検索結果をリクエストスコープに格納する
+		request.setAttribute("allLunch", allLunch);
+
+	//ランチ日記リアクション情報をゲットしてくる
+//		LdReactionDAO LdRDao = new LdReactionDAO();
+//		ArrayList<LunchReactionBeans> LdReaction = LdRDao.selectLdReaction();
+//		// 検索結果をリクエストスコープに格納する
+//		request.setAttribute("LdReaction", LdReaction);
+
+		//ランチ日記コメント情報をゲットしてくる
+		LdJoin2DAO LdCDao = new LdJoin2DAO();
+		ArrayList<AllColumnBeans> LdComment = LdCDao.selectComment();
+		// 検索結果をリクエストスコープに格納する
+		request.setAttribute("LdComment", LdComment);
+
+		//タイムラインページにフォワードする
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/timeline.jsp");
+		dispatcher.forward(request, response);
+//		AllColumnBeans acb = new AllColumnBeans();
+////		acb.setLdCommentId(ld_comment_id);
+//		acb.setEmailAddress(email_address);
+//		acb.setLunchId(lunch_id);
+//		acb.setLdComment(ld_comment);
+//		LdJoin2DAO ldCommentList = ldcDao;
+
+//		request.setAttribute("ldCommentList", ldCommentList);
 	}
 
 }
