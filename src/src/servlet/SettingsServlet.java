@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import dao.UsersDAO;
+import model.UserMasterBeans;
 
 /**
  * Servlet implementation class RegistListServlet
@@ -62,12 +63,13 @@ public class SettingsServlet extends HttpServlet {
         //場所はクラス名↑の上に指定してある
 
 		//アイコンを変更しなかった場合の挙動
+		UserMasterBeans user =(UserMasterBeans) session.getAttribute("user");
 		try {
 			part.write(icon);
 		}catch(FileNotFoundException e) {
-			icon = (String)session.getAttribute("icon");
+			icon = (String)user.getIcon();
 		}catch(IOException e) {
-			icon = (String)session.getAttribute("icon");
+			icon = (String)user.getIcon();
 		}
 		String accountName = request.getParameter("accountName");
 		String pw = request.getParameter("pw");

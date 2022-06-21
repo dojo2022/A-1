@@ -8,10 +8,16 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	<!-- <script type="text/javascript" src="js/settings.js"></script> -->
 	<link href="css/settings.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="js/header.js"></script>
+<link href="css/header.css" rel="stylesheet" type="text/css" />
 
 </head>
 <jsp:include page="header.jsp" />
-<body>
+<!-- ヘッダーロゴ -->
+
+
+
+
 <h1>設定</h1>
 
 
@@ -35,7 +41,7 @@
 				名前<br><input type="text" name="accountName" value="${user.accountName}">
 			</td>
 			<td>
-				パスワード<br><input type="password" name="pw" value="${user.pw}">
+				パスワード<br><input type="password" name="pw" value="${user.pw}"                      id="pw"/>
 			</td>                   		 <!-- セッション領域からとってきたuserという箱-->
 	 	</tr>
 	 	<tr>
@@ -43,7 +49,7 @@
 				部署名<br><input type="text" name="depName" value="${user.depName}">
 			</td>
 			<td>
-				パスワード確認用<br><input type="password" name="pwCheck" value="">
+				パスワード確認用<br><input type="password" name="pwCheck" value=""        id="pwCheck"onchange="pass_check(this)"/>
 			</td>
 		</tr>
 	 	<tr>
@@ -73,6 +79,7 @@
 		</tr>
 	</table>
 
+	<div class="eroor" id="pass"></div>
 
 <%--
 		<input type="radio" name="range" value="${user.range}"id="one">
@@ -128,7 +135,7 @@ function previewImage(obj){
 }
 
 //読み込まれた時に行う処理
-window.onload = function(){
+
 
 	var fileReader = new FileReader();
 
@@ -138,6 +145,7 @@ window.onload = function(){
 		var canvas = document.getElementById('preview');
 		var ctx = canvas.getContext('2d');
 		var image = new Image();
+		alert(document.getElementById("image_file").value);
 		image.src = document.getElementById("image_file").value;
 
 		/* console.log(fileReader.result) */ // ← (確認用)
@@ -152,8 +160,79 @@ window.onload = function(){
 	/* fileReader.readAsDataURL(obj.files[0]); */
 
 	/* console.log(fileReader.result)  */// ← (確認用)null
-}
+
+
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+function pass_check(str) {
+
+var pw=document.getElementById('pw').value;
+if(str.length>-1){
+var check=pw==str;
+
+if(check==true){
+document.getElementById('pass').innerHTML='';
+kakunin3=0;
+}else{
+document.getElementById('pass').innerHTML='<small>パスワードとパスワード確認用の内容が異なります！</small>';
+
+kakunin3=1;
+
+}
+}
+}
+
+function passc() {
+var str = document.getElementById('pwCheck').value;
+if(str == pretext1) //前のテキストと比べる
+pass_check(str);
+pretext1 = str;
+setTimeout("passc()", 100); //100+αmsごとに比べる
+}
+var pretext1 = "";
+setTimeout("passc()", 250);
+
+function check(){
+
+if(kakunin3>0){
+var pw=document.getElementById('pw').value;
+var pwCheck=document.getElementById('pwCheck').value;
+var check=pass1==pass2;
+
+
+}
+}
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

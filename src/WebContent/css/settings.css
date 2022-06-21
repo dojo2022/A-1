@@ -38,7 +38,15 @@ table.tableForm{
 .leave {
 	text-align:center;
 	border-color: none;
-	color: orengered;
+	color: orengere
+
+}
+
+
+.eroor{
+	width:800px;
+	margin:auto;
+	text-align:center;
 }
 
 
