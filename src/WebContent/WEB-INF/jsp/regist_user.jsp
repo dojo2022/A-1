@@ -50,16 +50,45 @@
 			${pwMsg }
 
 			<tr>
-			<div class="center">
-			<th colspan="4"><input type="submit" name="registNewAccount" value="登録する"><br></th>
+				<div class="center">
+				<th colspan="4"><input type="submit" name="registNewAccount" value="登録する"><br></th>
 			</div>
 			</tr>
 
 	</table>
-	${errMsg }
+
 
 	</div>
 </form>
+<script>
+	//メールアドレスが確認ボックスと違った時の処理
+	function checkEmail(emailCheck){
+
+		var email1 = emailAddress.value;
+		var email2 = emailCheck.value;
+
+		if(email1 != email2){
+			emailCheck.setCustomValidity("入力内容が一致しません。");
+		}else{
+			emailCheck.setCustomValidity('');
+		}
+	}
+
+
+
+	//パスワードが確認ボックスと違った時の処理
+	function checkPassword(pwCheck){
+
+		var pw1 = pw.value;
+		var pw2 = pwCheck.value;
+
+		if(pw1 != pw2){
+			pwCheck.setCustomValidity("入力内容が一致しません。");
+		}else{
+			pwCheck.setCustomValidity('');
+		}
+	}
+</script>
 
 </body>
 </html>

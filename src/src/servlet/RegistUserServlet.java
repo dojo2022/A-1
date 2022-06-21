@@ -56,46 +56,44 @@ public class RegistUserServlet extends HttpServlet {
         //場所はクラス名↑の上に指定してある
 
 
-		// パスワードチェック
+
+		// 未完成 パスワードチェック※飛ぶところ見直し
 		if(pw.length()<8 || pw.length()>=20) {
 			request.setAttribute("pwMsg","パスワードを８文字以上２０文字以下で入力してください");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/settings.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
 			dispatcher.forward(request, response);
 			return;
 		}
 
 	//	UsersDAOを呼び出す
 		UsersDAO uDao = new UsersDAO();
-		/*
-		boolean ans = uDao.insertUser(emailAddress, pw, accountName, depName, icon);
 
+		boolean ans = uDao.insertUser(emailAddress, pw, accountName, depName, image);
+
+		//メールアドレスが重複してないか確かめる処理
 		//成功の時
 		if(ans ==true) {
-
+			request.setAttribute("emailAddress",emailAddress);
+			System.out.println("成功したよ");
+			request.setAttribute("result","アカウントを登録しました。");
 		//失敗の時
 		}else {
-			request.setAttribute("errMsg", "メールアドレスがすでに使われています");
+			System.out.println("成功したよ");
+			request.setAttribute("errMsg", "メールアドレスがすでに使われています。");
 		}
 
-	// 登録成功した時の処理
-	/*	if(uDao.insert(icon, accountName, depName, emailAddress, pw)) {
-			request.setAttribute("result","登録成功！アカウントをを登録しました。");
-		}
-		else {												// 登録失敗
-			request.setAttribute("result","登録失敗！アカウントを登録できませんでした。");
-		}
-*/
 
 		//ログイン画面に遷移
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
 		dispatcher.forward(request, response);
+		return;
 
 	}
 
 		//ファイルの名前を取得してくる
-		private String getFileName(Part part) {
+		private String getFileName(Part icon) {
 		    String name = null;
-		    for (String dispotion : part.getHeader("Content-Disposition").split(";")) {
+		    for (String dispotion : icon.getHeader("Content-Disposition").split(";")) {
 		        if (dispotion.trim().startsWith("filename")) {
 		            name = dispotion.substring(dispotion.indexOf("=") + 1).replace("\"", "").trim();
 		            name = name.substring(name.lastIndexOf("\\") + 1);
