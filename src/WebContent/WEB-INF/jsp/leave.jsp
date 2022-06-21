@@ -20,7 +20,7 @@
 		</p>
 
 		<input type="submit" name="leaveButton" value="設定に戻る">
-		<input type="submit" name="leaveButton" onclick ="return confirm('本当に退会してよろしいですか？')" value="退会する" >
+		<input type="submit" name="leaveButton" onclick ="return confirm('本当に退会しますか？')" value="退会する" >
 		${errMsg }
 		<!-- <input type="submit" name="backSettings" value="設定に戻る"> -->
 		<!-- <input type="submit" name="leaveButton" value="退会する"> -->
