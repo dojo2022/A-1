@@ -34,7 +34,7 @@ public class MyPageDAO {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			//sqlの？部分を埋める
-			pStmt.setString(1, "%" + emailAddress + "%");
+			pStmt.setString(1, emailAddress);
 			//SQL文を実行
 			ResultSet rs = pStmt.executeQuery();
 
