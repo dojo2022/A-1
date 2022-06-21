@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.ListDAO;
+
 /**
  * Servlet implementation class RegistListServlet
  */
@@ -44,23 +46,75 @@ public class EditListServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-		/* protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-		HttpSession session = request.getSession();
+		/* HttpSession session = request.getSession();
+
 		if (session.getAttribute("id") == null) {
 			response.sendRedirect("/simpleBC/LoginServlet");
 			return;
-		}
+		} */
 
 		// リクエストパラメータを取得
-		// request.setCharacterEncoding("UTF-8");
-		// 途中です
+		request.setCharacterEncoding("UTF-8");
+		String listResName = request.getParameter("RES_NAME");
+		String listCategory = request.getParameter("CATEGORY");
+		String togoMemo = request.getParameter("TOGO_MEMO");
+		int listId = Integer.parseInt(request.getParameter("LIST_ID"));
 
-		// マイページにフォワードする
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/myPage.jsp");
-			dispatcher.forward(request, response);
-			*/
 
+		/* if(togoMemo.length() > 200) {
+		request.setAttribute("msg","メモは200字以内で入力してください");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/regist_list.jsp");
+		dispatcher.forward(request, response);
+		return;
+	} */
+
+		//DAOを呼んでくる
+		ListDAO lDao = new ListDAO();
+		if (request.getParameter("toGoEdit").equals("更新する")) {
+			//DAOに変更してねって依頼をする
+			boolean ans = lDao.updateList(listResName,listCategory,togoMemo);
+
+			//編集成功時
+			if(ans == true) {
+				request.setAttribute("msg","編集が完了しました");
+				System.out.println("成功");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp");
+				dispatcher.forward(request, response);
+
+			//編集失敗時
+			}else {
+				request.setAttribute("msg","編集に失敗しました");
+				System.out.println("失敗");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/edit_list.jsp");
+				dispatcher.forward(request, response);
+				return;
+			}
+		}
+		else {
+			//DAOに削除してねって依頼をする
+			boolean ans = lDao.updateListFlag(listId);
+
+			//登録成功時
+			if(ans == true) {
+				request.setAttribute("msg","削除が完了しました");
+				System.out.println("成功");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp");
+				dispatcher.forward(request, response);
+
+			//登録失敗時
+			}else {
+				request.setAttribute("msg","削除に失敗しました");
+				System.out.println("失敗");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/edit_list.jsp");
+				dispatcher.forward(request, response);
+				return;
+			}
+		}
+
+		//途中です
 	}
+}
 
 

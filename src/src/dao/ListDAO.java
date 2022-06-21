@@ -15,7 +15,7 @@ public class ListDAO {
 	//行きたい場所リストに必要なデータを取得するメソッド
 
 	//行きたい場所リストの登録を行うメソッド
-	public boolean insertList(String listResName, String listCategory, String togoMemo) {
+	public boolean insertList(String emailAddress, String listResName, String listCategory, String togoMemo) {
 
 		boolean result = false;
 
@@ -27,13 +27,14 @@ public class ListDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
 			// SQL文を用意
-			String sql = "insert into togo_list (res_name,category,togo_memo) values (? ,? ,? )";
+			String sql = "insert into togo_list (email_address,res_name,category,togo_memo) values (? ,? ,? ,? )";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
-			pStmt.setString(1, listResName);
-			pStmt.setString(2, listCategory);
-			pStmt.setString(3, togoMemo);
+			pStmt.setString(1, emailAddress);
+			pStmt.setString(2, listResName);
+			pStmt.setString(3, listCategory);
+			pStmt.setString(4, togoMemo);
 
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {
@@ -62,7 +63,7 @@ public class ListDAO {
 	}
 
 	//行きたい場所リストの更新を行うメソッド
-	public boolean updateList(int listId , String listResName, String listCategory, String togoMemo) {
+	public boolean updateList(String listResName, String listCategory, String togoMemo) {
 
 		boolean result = false;
 
@@ -81,7 +82,6 @@ public class ListDAO {
 			pStmt.setString(1, listResName);
 			pStmt.setString(2, listCategory);
 			pStmt.setString(3, togoMemo);
-			pStmt.setInt(4, listId);
 
 
 			// SQL文を実行する
@@ -94,6 +94,9 @@ public class ListDAO {
 			e.printStackTrace();
 		}
 		catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		catch (NullPointerException e) {
 			e.printStackTrace();
 		}
 		finally {
@@ -138,6 +141,9 @@ public class ListDAO {
 		catch(ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		catch (NullPointerException e) {
+			e.printStackTrace();
+		}
 		finally {
 			if (conn != null) {
 				try {
@@ -151,7 +157,12 @@ public class ListDAO {
 		return result;
 
 	}
-
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		return super.equals(obj);
+	}
+/*
 	//行きたい場所リストの公開範囲を変更するメソッド
 	public boolean updateRange(int listId) {
 		boolean result = false;
@@ -163,9 +174,6 @@ public class ListDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
 			//SQL文を準備する
-
-			//もしや該当するリストの設定替えるということは繰り返し処理が必要なのでは…
-			//while()
 
 			//非公開にする場合
 			//if () {
@@ -179,7 +187,7 @@ public class ListDAO {
 				}
 			//}
 
-			/* 公開する場合
+			// 公開する場合
 			if () {
 				String sql = "UPDATE togo_list SET range = 1 WHERE listId = ?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -190,7 +198,7 @@ public class ListDAO {
 					result = true;
 				}
 			}
-			 */
+
 
 		}
 		catch(SQLException e) {
@@ -211,5 +219,6 @@ public class ListDAO {
 		}
 		return result;
 	}
+	*/
 
 }
