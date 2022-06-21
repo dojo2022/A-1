@@ -6,7 +6,6 @@ public class LunchDiaryBeans implements Serializable{
 	//メンバ変数
 	private int lunchId;
 	private String emailAddress;
-	private String ldFoodType;
 	private String ldResName;
 	private String ldFoodPhoto;
 	private String ldCategory;
@@ -34,12 +33,6 @@ public class LunchDiaryBeans implements Serializable{
 	}
 	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
-	}
-	public String getLdFoodType() {
-		return ldFoodType;
-	}
-	public void setLdFoodType(String ldFoodType) {
-		this.ldFoodType = ldFoodType;
 	}
 	public String getLdResName() {
 		return ldResName;
