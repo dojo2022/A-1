@@ -96,6 +96,16 @@ public class SettingsServlet extends HttpServlet {
 			return;
 		}
 
+		//パスワードとパスワード確認の内容が正しくなければ更新失敗になる
+		/*if(pw.("") == pwCheck.("")) {
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/settings.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}*/
+
+
+
 
 		//DAOを呼んでくる
 		UsersDAO uDao = new UsersDAO();

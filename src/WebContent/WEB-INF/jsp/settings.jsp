@@ -18,7 +18,7 @@
 
 
 
-<h1>設定</h1>
+<h2>設定</h2>
 
 
 
@@ -41,7 +41,7 @@
 				名前<br><input type="text" name="accountName" value="${user.accountName}">
 			</td>
 			<td>
-				パスワード<br><input type="password" name="pw" value="${user.pw}"                      id="pw"/>
+				パスワード<br><input type="password" name="pw" value="${user.pw}"    id="pw"/>
 			</td>                   		 <!-- セッション領域からとってきたuserという箱-->
 	 	</tr>
 	 	<tr>
@@ -49,7 +49,7 @@
 				部署名<br><input type="text" name="depName" value="${user.depName}">
 			</td>
 			<td>
-				パスワード確認用<br><input type="password" name="pwCheck" value=""        id="pwCheck"onchange="pass_check(this)"/>
+				パスワード確認用<br><input type="password" name="pwCheck" value="" id="pwCheck"onchange="pass_check(this)"/>
 			</td>
 		</tr>
 	 	<tr>
@@ -79,23 +79,14 @@
 		</tr>
 	</table>
 
+<!--パスワードとパスワード確認用の内容が一致していませんの文  -->
 	<div class="eroor" id="pass"></div>
-
-<%--
-		<input type="radio" name="range" value="${user.range}"id="one">
-		<label for="one">公開</label>
-		<input type="radio" name="range" value="${user.range}"id="two">
-		<label for="two">非公開</label> --%>
-
-
-
-
 
 <div class="kousin">
 <!-- <input  type = button onclick= "history.back()" value="戻る">-->
 <input type="submit" name="SUBMIT" value="更新する">
 </div>
-<div >
+<div class="leave">
 <p><a href="/lunchBox/LeaveServlet" class="leave">退会する方はこちら</a></p>
 </div>
 
@@ -178,24 +169,22 @@ function previewImage(obj){
 
 
 
-
+<!--パスワードとパスワード確認用の内容が一致しているかのjavascript  -->
 <script>
 function pass_check(str) {
 
 var pw=document.getElementById('pw').value;
 if(str.length>-1){
-var check=pw==str;
+	var check=pw==str;
 
 if(check==true){
-document.getElementById('pass').innerHTML='';
-kakunin3=0;
-}else{
-document.getElementById('pass').innerHTML='<small>パスワードとパスワード確認用の内容が異なります！</small>';
-
-kakunin3=1;
-
-}
-}
+	document.getElementById('pass').innerHTML='';
+	kakunin3=0;}
+else{
+	document.getElementById('pass').innerHTML='<small>パスワードとパスワード確認用の内容が異なります！</small>'
+	kakunin3=1;
+				}
+	}
 }
 
 function passc() {
@@ -211,12 +200,12 @@ setTimeout("passc()", 250);
 function check(){
 
 if(kakunin3>0){
-var pw=document.getElementById('pw').value;
-var pwCheck=document.getElementById('pwCheck').value;
-var check=pass1==pass2;
+	var pw=document.getElementById('pw').value;
+	var pwCheck=document.getElementById('pwCheck').value;
 
+//var check=pw==pwCheck;
 
-}
+	}
 }
 
 
