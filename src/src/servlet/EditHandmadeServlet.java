@@ -26,7 +26,7 @@ public class EditHandmadeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//手作り日記編集画面ににフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/edit_diary.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/edit_handmade_diary.jsp");
 		dispatcher.forward(request, response);
 	}
 
