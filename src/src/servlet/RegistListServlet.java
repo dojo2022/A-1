@@ -90,7 +90,7 @@ public class RegistListServlet extends HttpServlet {
 		else {
 			request.setAttribute("msg","登録に失敗しました");
 			System.out.println("失敗");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/regist.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/regist_list.jsp");
 			dispatcher.forward(request, response);
 			return;
 		}

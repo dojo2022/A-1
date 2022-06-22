@@ -72,9 +72,10 @@ public class EditListServlet extends HttpServlet {
 
 		//DAOを呼んでくる
 		ListDAO lDao = new ListDAO();
+		//DAOに変更してねって依頼をする
 		if (request.getParameter("toGoEdit").equals("更新する")) {
-			//DAOに変更してねって依頼をする
-			boolean ans = lDao.updateList(listResName,listCategory,togoMemo);
+
+			boolean ans = lDao.updateList(listResName,listCategory,togoMemo,listId);
 
 			//編集成功時
 			if(ans == true) {
