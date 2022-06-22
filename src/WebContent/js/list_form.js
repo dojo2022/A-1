@@ -1,3 +1,2 @@
-/**
- * たぶんいらないけど念のため
- */
+var age = document.getElementById("editcategory");
+editcategory.value = "和食";
