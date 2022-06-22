@@ -29,12 +29,12 @@ public class TimelineServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//もしもログインしてなかったらログインサーブレットにリダイレクトする
-		/*		HttpSession session = request.getSession();
-				if (session.getAttribute("id") == null) {
-					response.sendRedirect("/lunchBox/LoginServlet");
-					return;
-		}
-		*/
+//		HttpSession session = request.getSession();
+//		if (session.getAttribute("emailAddress") == null) {
+//			response.sendRedirect("/lunchBox/LoginServlet");
+//			return;
+//	}
+
 
 		//日記情報をゲットしてくる
 		LunchDiaryDAO LdDao = new LunchDiaryDAO();
@@ -43,10 +43,10 @@ public class TimelineServlet extends HttpServlet {
 		request.setAttribute("allLunch", allLunch);
 
 	//ランチ日記リアクション情報をゲットしてくる
-//		LdJoin2DAO LdRDao = new LdJoin2DAO();
-//		ArrayList<AllColumnBeans> ldReactionList = LdRDao.countReactionUser();
-//		// 検索結果をリクエストスコープに格納する
-//		request.setAttribute("ldReactionList", ldReactionList);
+		LdJoin2DAO LdRDao = new LdJoin2DAO();
+		ArrayList<AllColumnBeans> ldReactionList = LdRDao.countReactionUser();
+		// 検索結果をリクエストスコープに格納する
+		request.setAttribute("ldReactionList", ldReactionList);
 
 		//ランチ日記コメント情報をゲットしてくる
 		LdJoin2DAO LdCDao = new LdJoin2DAO();
@@ -87,12 +87,12 @@ public class TimelineServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//もしもログインしてなかったらログインサーブレットにリダイレクトする
-		/*		HttpSession session = request.getSession();
-				if (session.getAttribute("id") == null) {
-					response.sendRedirect("/lunchBox/LoginServlet");
-					return;
-		}
-		*/
+//		HttpSession session = request.getSession();
+//		if (session.getAttribute("emailAddress") == null) {
+//			response.sendRedirect("/lunchBox/LoginServlet");
+//			return;
+//	}
+
 		//リクエストパラメータを取得する
 //		request.setCharacterEncoding("UTF-8");
 //		Integer to_go = Integer.parseInt(request.getParameter("to_go"));

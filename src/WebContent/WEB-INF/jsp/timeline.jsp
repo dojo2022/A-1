@@ -116,15 +116,17 @@
 	</c:if>
 	</c:forEach>
 		<input type="text" name="ld_comment" placeholder="コメントを入力してください">
-		<input type="submit" name="" value="送信する"><br>
+		<input type="submit" name="submit" value="送信する"><br>
 	<c:forEach var="lr" items="${ldReactionList}">
-		${lr.ldToGo}
-		${lr.ldToTell}
-		${lr.ldToUse}<br>
+	<c:if test="${lr.lunchId == e.lunchId}">
+		${lr.countLdToGo}|
+		${lr.countLdToTell}|
+		${lr.countLdToUse}|
+	</c:if>
 	</c:forEach>
 		<input type="button" name="ToGo" value="行きたい">
-		<input type="button" name="ToTellMe" value="教えて">
-		<input type="button" name="ToUseidea" value="参考にします"><br>
+		<input type="button" name="ToTell" value="教えて">
+		<input type="button" name="ToUse" value="参考にします"><br>
 </form>
 </c:forEach>
 	</div>
