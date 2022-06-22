@@ -182,7 +182,7 @@
   <div class="panel is-show">
   <c:if test="${myLunch == null }">
 			登録はありません。
- </c:if>
+  </c:if>
  		<c:forEach var="e" items="${myLunch}" >
 		<form method="POST" action="MyPageServlet">
 			${e.lunchId}<br>
@@ -199,8 +199,7 @@
 			${e.ldStar}<br>
 			${e.ldFeeling}<br>
 		<!-- 外食ランチ日記更新削除 -->
-		<a href="/lunchBox/EditLunchServlet" class="editLunch"><button type="button">編集</button></a><br>
-
+		<a href="/lunchBox/EditLunchServlet" class="editLunch"><button type="button">編集</button></a>
 		<input type="hidden" name="lunch_id" value="${e.lunchId}">
 
 		<c:forEach var="lc" items="${LdComment}">
