@@ -57,7 +57,7 @@ public class RegistUserServlet extends HttpServlet {
 
 
 
-		// 未完成 パスワードチェック※飛ぶところ見直し
+		// 未完成 パスワードチェック※飛ぶところ見直し 文字出ない
 		if(pw.length()<8 || pw.length()>=20) {
 			request.setAttribute("pwMsg","パスワードを８文字以上２０文字以下で入力してください");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
@@ -70,7 +70,7 @@ public class RegistUserServlet extends HttpServlet {
 
 		boolean ans = uDao.insertUser(emailAddress, pw, accountName, depName, image);
 
-		//メールアドレスが重複してないか確かめる処理
+		//登録とメールアドレスが重複してないか確かめる処理
 		//成功の時
 		if(ans ==true) {
 			request.setAttribute("emailAddress",emailAddress);
