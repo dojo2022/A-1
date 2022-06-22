@@ -160,8 +160,7 @@
 			${e.hdStar}<br>
 			${e.hdFeeling}<br>
 			${e.cooktime}<br>
-			${e.handmadeFlag}<br>
-			${e.hdRegistTime}<br>
+			${e.ldRegistTime}<br>
 
 		<input type="hidden" name="handmadeId" value="${e.handmadeId}">
 	</form>

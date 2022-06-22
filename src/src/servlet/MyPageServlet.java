@@ -60,7 +60,8 @@ public class MyPageServlet extends HttpServlet {
 		//メールアドレスを引数にして手作り日記の情報を取ってくる-------------------------------------
 
 	     ArrayList<AllColumnBeans> myHandmade = mDao.selectMyHd(emailAddress);
-		 if(myHandmade.size()==0) {
+		 System.out.print(myHandmade);
+	     if(myHandmade.size()==0) {
    			   request.setAttribute("myHandmade", null);
 		   }
 	     else {

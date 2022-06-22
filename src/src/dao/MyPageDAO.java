@@ -219,9 +219,9 @@ public class MyPageDAO {
 					myhd.setHdFoodPhoto(rs.getString("food_photo"));
 					myhd.setHdDate(rs.getString("hd_date"));
 					myhd.setHdFoodName(rs.getString("food_name"));
-					myhd.setHdCost(rs.getString("cost"));
-					myhd.setHdStar(rs.getInt("star"));
-					myhd.setHdFeeling(rs.getString("feeling"));
+					myhd.setHdCost(rs.getString("hd_cost"));
+					myhd.setHdStar(rs.getInt("hd_star"));
+					myhd.setHdFeeling(rs.getString("hd_feeling"));
 					myhd.setCooktime(rs.getString("cooktime"));
 					myhd.setAccountName(rs.getString("account_name"));
 
