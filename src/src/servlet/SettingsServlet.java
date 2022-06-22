@@ -49,7 +49,7 @@ public class SettingsServlet extends HttpServlet {
 			*/
 
 
-
+		//写真を射影！？
 		request.setCharacterEncoding("UTF-8");
 
 //		String icon = request.getParameter("icon");
@@ -62,6 +62,7 @@ public class SettingsServlet extends HttpServlet {
 		// サーバの指定のファイルパスへファイルを保存
         //場所はクラス名↑の上に指定してある
 
+
 		//アイコンを変更しなかった場合の挙動
 		UserMasterBeans user =(UserMasterBeans) session.getAttribute("user");
 		try {
@@ -71,41 +72,48 @@ public class SettingsServlet extends HttpServlet {
 		}catch(IOException e) {
 			icon = (String)user.getIcon();
 		}
+		//getParameterはJSPでフォームに入力した情報を取得する
 		String accountName = request.getParameter("accountName");
 		String pw = request.getParameter("pw");
 		String depName = request.getParameter("depName");
 		String emailAddress = request.getParameter("emailAddress");
 		//int range = request.getParameter("range");
 		int range = Integer.parseInt(request.getParameter("range"));
+		String pwCheck = request.getParameter("pwCheck");
 
+		//DAOから得た情報をJSPにセットする
+		//getAttributeはセッションにセットされている情報を取得する構文(サーブレットに書く！？）
+		//setAttributeはJSPでフォームに入力した情報をセッションにセットする(JSPに書く！？）
+		//JSP内で何らかの値をセッション（session）に保持（session.setArribute）し、
+		//それをボタン押下等で起動するServletで取得（session.getArribute）する
 		request.setAttribute("image", icon);
 		request.setAttribute("accountName", accountName);
 		request.setAttribute("depName", depName);
 		request.setAttribute("emailAddress", emailAddress);
 		request.setAttribute("range", range);
 
+		//パスワード確認はプログラムに入っているもの(データベース等）ではないため、Attributeは必要ない？
+		/*request.setAttribute("pwCheck", pwCheck);*/
 
 		//ここで確認する
 		//System.out.println(image+","+accountName+","+pw+","+depName+","+emailAddress+","+range);
 
 		//パスワードの入力チェック
 		if(pw.length()<8 || pw.length()>=20) {
-			request.setAttribute("msg","パスワードを８文字以上２０文字以下で入力してください");
+			request.setAttribute("msg","パスワードを８文字以上２０文字以下で入力してください!");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/settings.jsp");
 			dispatcher.forward(request, response);
 			return;
 		}
 
 		//パスワードとパスワード確認の内容が正しくなければ更新失敗になる
-		/*if(pw.("") == pwCheck.("")) {
-
+		//文字列と文字列を比較するときはequals
+		if(!pw. equals (pwCheck)) {
+			request.setAttribute("msg","パスワードとパスワード確認用の内容が異なります！");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/settings.jsp");
 			dispatcher.forward(request, response);
 			return;
-		}*/
-
-
-
+		}
 
 		//DAOを呼んでくる
 		UsersDAO uDao = new UsersDAO();
@@ -123,20 +131,13 @@ public class SettingsServlet extends HttpServlet {
 
 		//アップデートが失敗したら
 		}else {
-			request.setAttribute("msg","更新失敗しました");
+			request.setAttribute("msg","パスワードとパスワード確認用の内容が異なります！");
 			System.out.println("失敗");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/settings.jsp");
 			dispatcher.forward(request, response);
 		}
 
-
-		//↓押されたボタンの値を取得(更新を押されたら、request.getParameter("SUBMIT")が更新という文字列に代わる。
-
-						//登録されているユーザの情報を持ってくる
-			             //更新に成功したらマイページ画面に移動する
-	}			//編集をした際にパスワードの基準8文字以上20文字以内、メールには＠マークつけるなどを満たしているかをチェック
-						//更新に失敗したらエラーメッセージを表示し、非同期処理にて設定画面の入力された状態に戻る
-
+	}
 
 //セットアトリビュート：結果をリクエストスコープに格納するカードりリストに格納してデータを取ってこれるようにする
 //リクエストスコープ：JSPとサーブレットの間にあるデータを格納する場所
@@ -153,7 +154,6 @@ public class SettingsServlet extends HttpServlet {
 	            }
 	        }		// TODO 自動生成されたメソッド・スタブ
 			return name;
-
 
 		}
 
