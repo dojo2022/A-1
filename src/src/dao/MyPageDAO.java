@@ -202,7 +202,7 @@ public class MyPageDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
 			//SQL文
-			String sql = "SELECT handmade_id, handmade_diary.email_address, food_photo, hd_date, food_name, hd_cost, hd_star, hd_feeling, cooktime, account_name FROM handmade_diary left join user_master on handmade_diary.email_address = user_master.email_address WHERE handmade_flag = 1 AND handmade_diary.email_address = ? ORDER BY hd_regist_time DESC";
+			String sql = "SELECT handmade_id, handmade_diary.email_address, food_photo, hd_date, food_name, hd_cost, hd_star, hd_feeling, cooktime, account_name FROM handmade_diary left join user_master on handmade_diary.email_address = user_master.email_address WHERE handmade_flag = 1 AND handmade_diary.email_address = ? ORDER BY ld_regist_time DESC";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			//sqlの？部分を埋める
@@ -217,7 +217,7 @@ public class MyPageDAO {
 					myhd.setHandmadeId(rs.getInt("handmade_id"));
 					myhd.setEmailAddress(rs.getString("handmade_diary.email_address"));
 					myhd.setHdFoodPhoto(rs.getString("food_photo"));
-					myhd.setHdDate(rs.getString("date"));
+					myhd.setHdDate(rs.getString("hd_date"));
 					myhd.setHdFoodName(rs.getString("food_name"));
 					myhd.setHdCost(rs.getString("cost"));
 					myhd.setHdStar(rs.getInt("star"));

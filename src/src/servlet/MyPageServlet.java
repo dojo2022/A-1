@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.LdJoin2DAO;
 import dao.MyPageDAO;
 import model.AllColumnBeans;
 import model.UserMasterBeans;
@@ -40,12 +41,11 @@ public class MyPageServlet extends HttpServlet {
 		// 検索結果をリクエストスコープに格納する
 				request.setAttribute("myLunch", myLunch);
 			}
-	   //メールアドレスを引数にしてランチ日記のコメント情報を取ってくる-------------------------------------
-
-	     ArrayList<AllColumnBeans> myLdComment = mDao.selectLdComment(emailAddress);
-
-		// 検索結果をリクエストスコープに格納する
-				request.setAttribute("myLdComment",myLdComment);
+    	//ランチ日記コメント情報をゲットしてくる
+			LdJoin2DAO LdCDao = new LdJoin2DAO();
+			ArrayList<AllColumnBeans> LdComment = LdCDao.selectComment();
+			// 検索結果をリクエストスコープに格納する
+			request.setAttribute("LdComment", LdComment);
 
 	    //メールアドレスを引数にしてランチ日記のリアクション情報を取ってくる-------------------------------------
 
@@ -60,15 +60,23 @@ public class MyPageServlet extends HttpServlet {
 		//メールアドレスを引数にして手作り日記の情報を取ってくる-------------------------------------
 
 	     ArrayList<AllColumnBeans> myHandmade = mDao.selectMyHd(emailAddress);
-
-		 if(myLunch.size()==0) {
-   			   request.setAttribute("myLunch", null);
+		 if(myHandmade.size()==0) {
+   			   request.setAttribute("myHandmade", null);
 		   }
 	     else {
 	    // 検索結果をリクエストスコープに格納する
 		       request.setAttribute("myHandmade", myHandmade);
-				}
-		//JSP表示
+		   }
+
+//		//手作り日記のコメント情報をゲットしてくる
+//		LdJoin2DAO HdCDao = new LdJoin2DAO();
+//		ArrayList<AllColumnBeans> LdComment = LdCDao.selectComment();
+//		// 検索結果をリクエストスコープに格納する
+//				request.setAttribute("LdComment", LdComment);
+//
+
+
+		 //JSP表示
 		RequestDispatcher dispatcher =  request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp");
 		   dispatcher.forward(request, response);
 	 }
