@@ -20,9 +20,24 @@ table{
 .logo{
 	margin-left: auto;
 	margin-right: auto;
-	width: 8em
+	width: 600px;
+	text-align: center;
 }
 
+.center{
+	width: 800px;
+	margin: auto;
+	background-color: #fef9a7;
+
+}
 body {
 	background-color: #FFEE63;
+}
+
+form{
+	color: #8b4513
+}
+
+h2{
+	color: #8b4513
 }

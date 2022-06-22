@@ -26,6 +26,7 @@
 	        <label><input type="checkbox" name="ch" >パスワードの表示</label>
 	      </p>
 	      <p>
+	      	${pwMsg}
  			${errMsg }
 			${result}
 	      </p>

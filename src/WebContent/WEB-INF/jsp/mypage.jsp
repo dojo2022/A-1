@@ -146,13 +146,6 @@
   <div class="panel">
        <c:if test="${myHandmade == null }">
 			登録はありません。
-
-
-			<!-- 手作りランチ日記更新削除 -->
-			<a href="/lunchBox/EditHandmadeServlet" class="editLunch"><button type="button">編集</button></a>
-
-
-
 		</c:if>
  		<c:forEach var="e" items="${myHandmade}" >
  		<form method="POST" action="MyPageServlet">
@@ -169,8 +162,10 @@
 			${e.hdFeeling}<br>
 			${e.cooktime}<br>
 			${e.ldRegistTime}<br>
+		<!-- 手作りランチ日記更新削除 -->
+		<a href="/lunchBox/EditHandmadeServlet" class="editLunch"><button type="button">編集</button></a><br>
 
-		<input type="hidden" name="handmadeId" value="${e.handmadeId}">
+		<input type="hidden" name="handmade_id" value="${e.handmadeId}">
 		<c:forEach var="hc" items="${HdComment}">
 		<c:if test="${hc.handmadeId == e.handmadeId}">
 			${hc.accountName}：
@@ -187,14 +182,7 @@
   <div class="panel is-show">
   <c:if test="${myLunch == null }">
 			登録はありません。
-
-
-			<!-- 外食ランチ日記更新削除 -->
-		<a href="/lunchBox/EditLunchServlet" class="editLunch"><button type="button">編集</button></a>
-
-
-
-</c:if>
+  </c:if>
  		<c:forEach var="e" items="${myLunch}" >
 		<form method="POST" action="MyPageServlet">
 			${e.lunchId}<br>
@@ -210,6 +198,8 @@
 			${e.distance}<br>
 			${e.ldStar}<br>
 			${e.ldFeeling}<br>
+		<!-- 外食ランチ日記更新削除 -->
+		<a href="/lunchBox/EditLunchServlet" class="editLunch"><button type="button">編集</button></a>
 		<input type="hidden" name="lunch_id" value="${e.lunchId}">
 
 		<c:forEach var="lc" items="${LdComment}">

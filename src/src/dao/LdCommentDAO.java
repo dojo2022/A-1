@@ -22,6 +22,7 @@ public class LdCommentDAO {
 
 		try {
 			// JDBCドライバを読み込む
+
 			Class.forName("org.h2.Driver");
 
 			// データベースに接続する

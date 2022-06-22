@@ -97,9 +97,15 @@ public class MyPageServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		UserMasterBeans user = (UserMasterBeans)session.getAttribute("user");
 		String email_address = user.getEmailAddress();
-		Integer lunch_id = Integer.parseInt(request.getParameter("lunch_id"));
+		Integer lunch_id =0;
+		if(request.getParameter("lunch_id") != null) {
+			lunch_id = Integer.parseInt(request.getParameter("lunch_id"));
+		}
 		String ld_comment =request.getParameter("ld_comment");
-		Integer handmade_id = Integer.parseInt(request.getParameter("handmade_id"));
+		Integer	handmade_id=0;
+		if(request.getParameter("handmade_id") != null) {
+			handmade_id = Integer.parseInt(request.getParameter("handmade_id"));
+		}
 		String hd_comment =request.getParameter("hd_comment");
 
 		//ランチ日記コメントの「送信する」ボタンを押した後の処理-------------------------------
@@ -128,7 +134,7 @@ public class MyPageServlet extends HttpServlet {
 		hcDao.insertHdComment(0, handmade_id, email_address, hd_comment);
 
 		//手作り日記情報をゲットしてくる
-		 ArrayList<AllColumnBeans> myHandmade = mDao.selectLd(email_address);
+		 ArrayList<AllColumnBeans> myHandmade = mDao.selectMyHd(email_address);
 		// 検索結果をリクエストスコープに格納する
 		 if(myHandmade.size()==0) {
 				request.setAttribute("myHandmade", null);

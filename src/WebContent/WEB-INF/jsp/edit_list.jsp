@@ -24,9 +24,9 @@
 			        <form method="post" action="/lunchBox/RegistListServlet">
 						<input type="hidden" name="EMAIL_ADDRESS" value="${user.emailAddress}">
 			            <h3>&nbsp;店名 ※必須</h3>
-			            <input type="text" name="RES_NAME" placeholder="店舗名(例:鳥貴族 新宿店)まで入力してください" class="form_unit" value="${sessionlist.resName}" required="required">
+			            <input type="text" name="RES_NAME" placeholder="店舗名(例:鳥貴族 新宿店)まで入力してください" class="form_unit" value="とりきぞく" required="required">
 			            <h3>&nbsp;ジャンル</h3>
-			            <select name="CATEGORY" id="editcategory" class="form_unit" value="${sessionlist.category}">
+			            <select name="CATEGORY" id="editcategory" class="form_unit">
 			                <option value="">選択してください</option>
 			                <option value="和食">和食</option>
 			                <option value="中華">中華</option>
@@ -37,7 +37,8 @@
 			                <option value="その他">その他</option>
 			            </select>
 			            <h3>&nbsp;メモ</h3>
-			            <textarea name="TOGO_MEMO" cols="55" rows="5" placeholder="Add Text" class="form_unit" value="${sessionlist.togoMemo}"></textarea><br>
+			            <textarea name="TOGO_MEMO" cols="55" rows="5" placeholder="Add Text" class="form_unit" id="editToGoMemo"></textarea><br>
+			            <input type="text" name="LIST_ID"  value="2">
 			            <div class="list_button">
 			            <input type="submit" name="toGoEdit" value="編集する" >
 			            <input type="submit" name="toGoDelete" value="削除する" >
