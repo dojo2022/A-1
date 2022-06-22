@@ -145,6 +145,13 @@
   <div class="panel">
        <c:if test="${myHandmade == null }">
 			登録はありません。
+
+
+			<!-- 手作りランチ日記更新削除 -->
+			<a href="/lunchBox/EditHandmadeServlet" class="editLunch"><button type="button">編集</button></a>
+
+
+
 		</c:if>
  		<c:forEach var="e" items="${myHandmade}" >
 		<form>
@@ -172,6 +179,13 @@
 
         <c:if test="${myLunch == null }">
 			登録はありません。
+
+
+			<!-- 外食ランチ日記更新削除 -->
+		<a href="/lunchBox/EditLunchServlet" class="editLunch"><button type="button">編集</button></a>
+
+
+
 		</c:if>
  		<c:forEach var="e" items="${myLunch}" >
 		<form>
@@ -219,6 +233,14 @@
   </div>
   <div class="panel">
   		行きたい場所リストhogehoge
+
+
+
+  		<!-- 行きたい場所リスト更新編集 -->
+		<a href="/lunchBox/EditListServlet" class="editLunch"><button type="button">編集</button></a>
+
+
+
   		<c:forEach var="liList" items="${liList}" >
   		<!--liListがbeansであり、 青いliListはその＄liListの情報が入っている。
   		また、青いliListはbeansLiListみたいにした方がbeansから１つ１つのデータを取るというイメージがわかりやすい。 -->
@@ -237,8 +259,13 @@
 </div>
 
 
+<!-- 外食ランチ日記更新削除
+ <a href="/lunchBox/EditLunchServlet" class="editLunch"><button type="button">編集</button></a>
+行きたい場所リスト更新編集
+<a href="/lunchBox/EditListServlet" class="editLunch"><button type="button">編集</button></a>
+手作りランチ日記更新削除
+<a href="/lunchBox/EditHandmadeServlet" class="editLunch"><button type="button">編集</button></a> -->
 
-<a href="/lunchBox/EditLunchServlet" class="editLunch"><button type="button">編集</button></a>
 
 <!-- </form> -->
 <!-- コントロールシフト/でコメントアウト -->
