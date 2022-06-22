@@ -97,7 +97,7 @@ public class MyPageDAO {
 			String sql = "SELECT lunch_diary.lunch_id, SUM(ld_to_go), SUM(ld_to_tell), SUM(ld_to_use) FROM lunch_diary LEFT JOIN user_master ON lunch_diary.email_address = user_master.email_address LEFT JOIN lunch_reaction ON lunch_diary.lunch_id = lunch_reaction.lunch_id WHERE lunch_diary.lunch_flag = 1 AND user_master.email_address = ? ORDER BY lunch_diary.ld_regist_time DESC ";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			//sqlの？部分を埋める
-			pStmt.setString(1, "%" + emailAddress + "%");
+			pStmt.setString(1, emailAddress);
 
 
 			//SQL文を実行
@@ -152,7 +152,7 @@ public class MyPageDAO {
 			String sql = "SELECT ld_comment_id, lunch_comment.email_address, lunch_comment.lunch_id, ld_comment user_master.account_name FROM lunch_reaction LEFT JOIN lunch_diary ON lunch_diary.lunch_id = lunch_comment.lunch_id LEFT JOIN user_master ON user_master.email_address = lunch_comment.email_address where lunch_diary.email_address = ? ORDER BY comment_id DESC";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			//sqlの？部分を埋める
-			pStmt.setString(1, "%" + emailAddress + "%");
+			pStmt.setString(1, emailAddress);
 
 			//SQL文を実行
 			ResultSet rs = pStmt.executeQuery();
@@ -206,7 +206,7 @@ public class MyPageDAO {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			//sqlの？部分を埋める
-			pStmt.setString(1, "%" + emailAddress + "%");
+			pStmt.setString(1, emailAddress);
 			//SQL文を実行
 			ResultSet rs = pStmt.executeQuery();
 
@@ -265,7 +265,7 @@ public class MyPageDAO {
 			String sql = "SELECT handmade_diary.handmade_id, SUM(hd_to_eat), SUM(hd_to_tell), SUM(hd_to_use) FROM handmade_diary LEFT JOIN user_master ON handmade_diary.email_address = user_master.email_address LEFT JOIN handmade_reaction ON handemade_diary.handmade_id = handmade_reaction.handmade_id WHERE handmade_diary.handmade_flag = 1 AND user_master.email_address = ? ORDER BY handmade_diary.hd_regist_time DESC ";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			//sqlの？部分を埋める
-			pStmt.setString(1, "%" + emailAddress + "%");
+			pStmt.setString(1, emailAddress);
 
 
 			//SQL文を実行
@@ -320,7 +320,7 @@ public class MyPageDAO {
 			String sql = "SELECT hd_comment_id, handmade_comment.email_address, handamade_comment.handmade_id, hd_comment, user_master.account_name FROM handmade_comment LEFT JOIN handmade_diary ON handmade_diary.handmade_id = handmade_comment.handmade_id LEFT JOIN user_master ON user_master.email_address = handmade_comment.email_address where handmade_diary.email_address = ? ORDER BY hd_comment_id DESC";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			//sqlの？部分を埋める
-			pStmt.setString(1, "%" + emailAddress + "%");
+			pStmt.setString(1, emailAddress);
 
 			//SQL文を実行
 			ResultSet rs = pStmt.executeQuery();
@@ -375,7 +375,7 @@ public class MyPageDAO {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			//sqlの？部分を埋める
-			pStmt.setString(1, "%" + emailAddress + "%");
+			pStmt.setString(1, emailAddress);
 			//SQL文を実行
 			ResultSet rs = pStmt.executeQuery();
 
@@ -428,7 +428,7 @@ public class MyPageDAO {
 			String sql = "SELECT togo_list.list_id, SUM(list_to_go), SUM(list_to_tell), SUM(list_to_use) FROM togo_list LEFT JOIN user_master ON togo_list.email_address = user_master.email_address LEFT JOIN list_reaction ON togo_list.list_id = list_reaction.list_id WHERE togo_list.list_flag = 1 AND user_master.email_address = ? GROUP BY togo_list.list_id";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			//sqlの？部分を埋める
-			pStmt.setString(1, "%" + emailAddress + "%");
+			pStmt.setString(1, emailAddress);
 
 
 			//SQL文を実行
