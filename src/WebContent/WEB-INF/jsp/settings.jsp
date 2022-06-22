@@ -76,7 +76,7 @@
 	</table>
 
 <!--パスワードとパスワード確認用の内容が一致していませんの文  -->
-	<div class="eroor" id="pass"></div>
+	<div class="eroor" id="pass"><p>${msg}</p></div>
 
 <div class="kousin">
 <!-- <input  type = button onclick= "history.back()" value="戻る">-->
@@ -89,6 +89,8 @@
 
 
 	</form>
+
+	<!--登録されている写真を射影！？  -->
 <script>
 function previewImage(obj){
 	//alert("aaa");
@@ -127,7 +129,7 @@ function previewImage(obj){
 		var canvas = document.getElementById('preview');
 		var ctx = canvas.getContext('2d');
 		var image = new Image();
-		alert(document.getElementById("image_file").value);
+		/* alert(document.getElementById("image_file").value); */
 		image.src = document.getElementById("image_file").value;
 
 		/* console.log(fileReader.result) */ // ← (確認用)
@@ -148,7 +150,7 @@ function previewImage(obj){
 
 
 <!--パスワードとパスワード確認用の内容が一致しているかのjavascript  -->
-<script>
+<!--   <script>
 function pass_check(str) {
 
 var pw=document.getElementById('pw').value;
@@ -188,7 +190,6 @@ if(kakunin3>0){
 
 
 </script>
-
-
+ -->
 </body>
 </html>
