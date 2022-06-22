@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,9 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-//import java.util.*;
-//import model.*;
-//import dao.*;
+import javax.servlet.http.HttpSession;
+
+import dao.MyPageDAO;
+import model.AllColumnBeans;
+import model.UserMasterBeans;
 
 /**
  * Servlet implementation class MyPageServlet
@@ -19,34 +22,75 @@ import javax.servlet.http.HttpServletResponse;
 public class MyPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public MyPageServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-
-
-
+		//マイページ画面を表示
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		//sessionからメールアドレスの情報を取ってくる
+		 HttpSession session = request.getSession();
+		 UserMasterBeans user = (UserMasterBeans) session.getAttribute("user");
+		 String emailAddress = user.getEmailAddress();
+
+		//メールアドレスを引数にしてランチ日記の情報を取ってくる-------------------------------------
+	     MyPageDAO mDao = new MyPageDAO();
+	     ArrayList<AllColumnBeans> myLunch = mDao.selectLd(emailAddress);
+	     if(myLunch.size()==0) {
+				request.setAttribute("myLunch", null);
+			}
+			else {
+		// 検索結果をリクエストスコープに格納する
+				request.setAttribute("myLunch", myLunch);
+			}
+	   //メールアドレスを引数にしてランチ日記のコメント情報を取ってくる-------------------------------------
+
+	     ArrayList<AllColumnBeans> myLdComment = mDao.selectLdComment(emailAddress);
+
+		// 検索結果をリクエストスコープに格納する
+				request.setAttribute("myLdComment",myLdComment);
+
+	    //メールアドレスを引数にしてランチ日記のリアクション情報を取ってくる-------------------------------------
+
+	     ArrayList<AllColumnBeans>myLdReaction = mDao.countMyLdReaction(emailAddress);
+
+	    // 検索結果をリクエストスコープに格納する
+		        request.setAttribute("myLdReaction",myLdReaction);
+
+
+
+
+		//メールアドレスを引数にして手作り日記の情報を取ってくる-------------------------------------
+
+	     ArrayList<AllColumnBeans> myHandmade = mDao.selectMyHd(emailAddress);
+
+		 if(myLunch.size()==0) {
+   			   request.setAttribute("myLunch", null);
+		   }
+	     else {
+	    // 検索結果をリクエストスコープに格納する
+		       request.setAttribute("myHandmade", myHandmade);
+				}
 		//JSP表示
 		RequestDispatcher dispatcher =  request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp");
-		        dispatcher.forward(request, response);
-		    }
+		   dispatcher.forward(request, response);
+	 }
+
+
+
+
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
  	*/
 
+//	ArrayList<AllColumnBeans> lList =ldDao.selectUser();
+//	request.setAttribute("lList", lList);
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	// TODO Auto-generated method stub
 
-		request.setCharacterEncoding("UTF-8");
+			// 結果ページにフォワードする
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp");
+			dispatcher.forward(request, response);
+		}
+	}
 
 
 //		Part part = request.getPart("icon"); // getPartで取得
@@ -103,8 +147,5 @@ public class MyPageServlet extends HttpServlet {
 //		                name = name.substring(name.lastIndexOf("\\") + 1);
 //		                break;}
 //		           }
-		}
 
-
-		}
 

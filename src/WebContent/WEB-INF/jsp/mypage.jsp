@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -127,8 +128,12 @@
 	<!-- </table> -->
 
 <h1>結果出力欄</h1>
+<!--プロフィール-->
+<c:out value="${user.accountName}"/><br>
+<c:out value="${user.depName}"/><br>
+<c:out value="${user.emailAddress}"/><br>
 
-<!--タブ-->
+
 <ul class="tab-group">
   <li class="tab">手作り記録</li>
   <li class="tab is-active">ランチ日記</li>
@@ -138,18 +143,56 @@
 <!--タブを切り替えて表示するコンテンツ-->
 <div class="panel-group">
   <div class="panel">
-		ここにデータベースの情報を貼り付ける！？！？
- 		<c:forEach var="uList" items="${uList}" >
-			${uList.name}
-
-		</c:forEach>
+		ここに手作り日記データベースの情報を貼り付ける！？！？
 
   </div>
   <div class="panel is-show">
-  		ここにデータベースの情報を貼り付ける！？！？
-  		<c:forEach var="lList" items="${lList}" >
 
-  		</c:forEach>
+        <c:if test="${myLunch == null }">
+			登録はありません。
+		</c:if>
+ 		<c:forEach var="e" items="${myLunch}" >
+		<form>
+			${e.lunchId}
+			${e.emailAddress}
+			${e.ldResName}
+			${e.ldFoodPhoto}
+			${e.ldCategory}
+			${e.style}
+			${e.ldDate}
+			${e.ldFoodName}
+			${e.ldCost}
+			${e.time}
+			${e.distance}
+			${e.ldStar}
+			${e.ldFeeling}
+			${e.accountName}
+		<input type="hidden" name="lunch_id" value="${e.lunchId}">
+
+		<c:forEach var="lc" items="${LdComment}">
+		<c:if test="${lc.lunchId == e.lunchId}">
+			${lc.accountName}：
+			${lc.ldComment}<br>
+		</c:if>
+		</c:forEach>
+			<input type="text" name="ld_comment" placeholder="コメントを入力してください">
+			<input type="submit" name="" value="送信する"><br>
+		<c:forEach var="lr" items="${ldReactionList}">
+			${lr.ldToGo}
+			${lr.ldToTell}
+			${lr.ldToUse}<br>
+		</c:forEach>
+			<input type="button" name="ToGo" value="行きたい">
+			<input type="button" name="ToTellMe" value="教えて">
+			<input type="button" name="ToUseidea" value="参考にします"><br>
+	</form>
+		</c:forEach>
+
+
+
+
+
+
 
   </div>
   <div class="panel">
