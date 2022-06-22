@@ -83,7 +83,7 @@ public class SettingsServlet extends HttpServlet {
 
 		//DAOから得た情報をJSPにセットする
 		//getAttributeはセッションにセットされている情報を取得する構文（このアプリでいうとユーザ情報など(arrayList））
-		//setAttributeはJSPでフォームに入力した情報をセッションにセットする(新規登録画面で入力された情報）
+		//setAttributeはJSPでフォームに入力した情報をセッションにセットする(ユーザがJSPで入力した情報））
 		//JSP内で何らかの値をセッション（session）に保持（session.setArribute）し、
 		//それをボタン押下等で起動するServletで取得（session.getArribute）する
 		request.setAttribute("image", icon);
