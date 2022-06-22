@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+
+
 #displayBox .cm_box {
   display: none;
 }
@@ -17,6 +19,8 @@
 .tab-group{
   display: flex;
   justify-content: center;
+  margin-top: 58px;
+
 }
 
 .tab{
@@ -31,8 +35,6 @@
 }
 
 ul{
-	margin-top: 40px;
-    padding-left: 0;
     line-height: 40px;
 }
 /* .panel-group{
@@ -54,14 +56,14 @@ ul{
 
 
 header{
-	background-color: gray;
+background: rgba(254,249,167,0.8);
 }
 
 body{
 	padding-top: 9%;
 }
 main{
-	padding-top: 18%;
+	padding-top: 10%;
 	width:70%;
 	margin:auto;
 }
