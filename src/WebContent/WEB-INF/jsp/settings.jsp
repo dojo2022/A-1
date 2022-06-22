@@ -15,11 +15,7 @@
 <jsp:include page="header.jsp" />
 <!-- ヘッダーロゴ -->
 
-
-
-
 <h2>設定</h2>
-
 
 
 <!--< var="e" items="${cardList}" -->
@@ -92,11 +88,6 @@
 
 
 
-
-
-
-
-
 	</form>
 <script>
 function previewImage(obj){
@@ -156,19 +147,6 @@ function previewImage(obj){
 </script>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!--パスワードとパスワード確認用の内容が一致しているかのjavascript  -->
 <script>
 function pass_check(str) {
@@ -183,19 +161,19 @@ if(check==true){
 else{
 	document.getElementById('pass').innerHTML='<small>パスワードとパスワード確認用の内容が異なります！</small>'
 	kakunin3=1;
-				}
+		}
 	}
 }
 
 function passc() {
 var str = document.getElementById('pwCheck').value;
 if(str == pretext1) //前のテキストと比べる
-pass_check(str);
-pretext1 = str;
-setTimeout("passc()", 100); //100+αmsごとに比べる
+	pass_check(str);
+	pretext1 = str;
+	setTimeout("passc()", 100); //100+αmsごとに比べる
 }
 var pretext1 = "";
-setTimeout("passc()", 250);
+	setTimeout("passc()", 250);
 
 function check(){
 
@@ -210,21 +188,6 @@ if(kakunin3>0){
 
 
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </body>
