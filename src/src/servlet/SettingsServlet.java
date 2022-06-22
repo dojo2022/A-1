@@ -72,7 +72,7 @@ public class SettingsServlet extends HttpServlet {
 		}catch(IOException e) {
 			icon = (String)user.getIcon();
 		}
-		//getParameterはJSPでフォームに入力した情報を取得する
+		//getParameterはそのサーブレットのjsp（setting.jsp）でJSPでフォームに入力した情報を取得する
 		String accountName = request.getParameter("accountName");
 		String pw = request.getParameter("pw");
 		String depName = request.getParameter("depName");
@@ -82,8 +82,8 @@ public class SettingsServlet extends HttpServlet {
 		String pwCheck = request.getParameter("pwCheck");
 
 		//DAOから得た情報をJSPにセットする
-		//getAttributeはセッションにセットされている情報を取得する構文(サーブレットに書く！？）
-		//setAttributeはJSPでフォームに入力した情報をセッションにセットする(JSPに書く！？）
+		//getAttributeはセッションにセットされている情報を取得する構文（このアプリでいうとユーザ情報など(arrayList））
+		//setAttributeはJSPでフォームに入力した情報をセッションにセットする(新規登録画面で入力された情報）
 		//JSP内で何らかの値をセッション（session）に保持（session.setArribute）し、
 		//それをボタン押下等で起動するServletで取得（session.getArribute）する
 		request.setAttribute("image", icon);
