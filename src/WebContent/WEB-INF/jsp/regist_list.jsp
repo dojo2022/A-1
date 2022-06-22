@@ -26,15 +26,15 @@
 			            <h3>&nbsp;ジャンル</h3>
 			            <select name="CATEGORY" id="" class="form_unit">
 			                <option value="">選択してください</option>
-			                <option value="japan">和食</option>
-			                <option value="china">中華</option>
-			                <option value="western">洋食</option>
-			                <option value="italy">イタリアン</option>
-			                <option value="bread">パン</option>
-			                <option value="ra-men">ラーメン</option>
-			                <option value="other">その他</option>
+			                <option value="和食">和食</option>
+			                <option value="中華">中華</option>
+			                <option value="洋食">洋食</option>
+			                <option value="イタリアン">イタリアン</option>
+			                <option value="パン">パン</option>
+			                <option value="ラーメン">ラーメン</option>
+			                <option value="その他">その他</option>
 			            </select>
-			            <h3>&nbsp;メモ</h3>
+			            <h3>&nbsp;メモ ※200字以内</h3>
 			            <textarea name="TOGO_MEMO" cols="55" rows="5" placeholder="Add Text" class="form_unit"></textarea><br>
 			            <div class="list_button">
 			            <input type="submit" name="toGoRegist" value="登録する" >
