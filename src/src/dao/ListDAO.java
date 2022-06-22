@@ -63,7 +63,7 @@ public class ListDAO {
 	}
 
 	//行きたい場所リストの更新を行うメソッド
-	public boolean updateList(String listResName, String listCategory, String togoMemo) {
+	public boolean updateList(String listResName, String listCategory, String togoMemo, int listId) {
 
 		boolean result = false;
 
@@ -82,6 +82,7 @@ public class ListDAO {
 			pStmt.setString(1, listResName);
 			pStmt.setString(2, listCategory);
 			pStmt.setString(3, togoMemo);
+			pStmt.setInt(4, listId);
 
 
 			// SQL文を実行する

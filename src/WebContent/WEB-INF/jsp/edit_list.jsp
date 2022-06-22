@@ -24,20 +24,20 @@
 			        <form method="post" action="/lunchBox/RegistListServlet">
 						<input type="hidden" name="EMAIL_ADDRESS" value="${user.emailAddress}">
 			            <h3>&nbsp;店名 ※必須</h3>
-			            <input type="text" name="RES_NAME" placeholder="店舗名(例:鳥貴族 新宿店)まで入力してください" class="form_unit" value="${session.resName}" required="required">
+			            <input type="text" name="RES_NAME" placeholder="店舗名(例:鳥貴族 新宿店)まで入力してください" class="form_unit" value="${sessionlist.resName}" required="required">
 			            <h3>&nbsp;ジャンル</h3>
-			            <select name="CATEGORY" id="" class="form_unit" value="${session.category}">
+			            <select name="CATEGORY" id="editcategory" class="form_unit" value="${sessionlist.category}">
 			                <option value="">選択してください</option>
-			                <option value="japan">和食</option>
-			                <option value="china">中華</option>
-			                <option value="western">洋食</option>
-			                <option value="italy">イタリアン</option>
-			                <option value="bread">パン</option>
-			                <option value="ra-men">ラーメン</option>
-			                <option value="other">その他</option>
+			                <option value="和食">和食</option>
+			                <option value="中華">中華</option>
+			                <option value="洋食">洋食</option>
+			                <option value="イタリアン">イタリアン</option>
+			                <option value="パン">パン</option>
+			                <option value="ラーメン">ラーメン</option>
+			                <option value="その他">その他</option>
 			            </select>
 			            <h3>&nbsp;メモ</h3>
-			            <textarea name="TOGO_MEMO" cols="55" rows="5" placeholder="Add Text" class="form_unit" value="${session.togoMemo}"></textarea><br>
+			            <textarea name="TOGO_MEMO" cols="55" rows="5" placeholder="Add Text" class="form_unit" value="${sessionlist.togoMemo}"></textarea><br>
 			            <div class="list_button">
 			            <input type="submit" name="toGoEdit" value="編集する" >
 			            <input type="submit" name="toGoDelete" value="削除する" >

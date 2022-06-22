@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.LdCommentDAO;
 import dao.LdJoin2DAO;
+import dao.LdReactionDAO;
 import dao.LunchDiaryDAO;
 import model.AllColumnBeans;
 import model.UserMasterBeans;
@@ -93,6 +94,36 @@ public class TimelineServlet extends HttpServlet {
 //			return;
 //	}
 
+		HttpSession session = request.getSession();
+		UserMasterBeans user = (UserMasterBeans)session.getAttribute("user");
+//		リアクションの登録（インサート）を行うやつ
+		request.setCharacterEncoding("UTF-8");
+		Integer ldr_lunch_id = Integer.parseInt(request.getParameter("lunch_id"));
+		String ldr_email_address = user.getEmailAddress();
+		Integer to_go = 0;
+		Integer to_tell = 0;
+		Integer to_use = 0;
+//		ボタン押したか押していないかを取得
+		String button =request.getParameter("to");
+		if(button.equals("行きたい")) {
+			to_go = 1;
+		}else if (button.equals("教えて")) {
+			to_tell= 1;
+		}else if(button.equals("参考にします")){
+			to_use = 1;
+		}else {
+			System.out.println("失敗");
+		}
+//		Integer to_go = Integer.parseInt(request.getParameter("to_go"));
+//		Integer to_tell = Integer.parseInt(request.getParameter("to_tell"));
+//		Integer to_use = Integer.parseInt(request.getParameter("to_use"));
+
+		LdReactionDAO ldrDao = new LdReactionDAO();
+		ldrDao.insertLdReaction(ldr_lunch_id, ldr_email_address, to_go, to_tell, to_use);
+
+
+
+
 		//リクエストパラメータを取得する
 //		request.setCharacterEncoding("UTF-8");
 //		Integer to_go = Integer.parseInt(request.getParameter("to_go"));
@@ -106,30 +137,29 @@ public class TimelineServlet extends HttpServlet {
 ////			request.setAttribute("ldRDao", "失敗！");
 ////		}
 
-		request.setCharacterEncoding("UTF-8");
-//		Integer ld_comment_id = Integer.parseInt(request.getParameter("ld_comment_id"));
-		HttpSession session = request.getSession();
-		UserMasterBeans user = (UserMasterBeans)session.getAttribute("user");
-		String email_address = user.getEmailAddress();
-		Integer lunch_id = Integer.parseInt(request.getParameter("lunch_id"));
-		String ld_comment =request.getParameter("ld_comment");
 
+
+//		入力されたコメントを取得して登録するやつ
+		request.setCharacterEncoding("UTF-8");
+		String ldc_email_address = user.getEmailAddress();
+			Integer ldc_lunch_id = Integer.parseInt(request.getParameter("lunch_id"));
+			String ld_comment =request.getParameter("ld_comment");
 
 		LdCommentDAO ldcDao = new LdCommentDAO();
-//		ArrayList<AllColumnBeans> ldCommentList = ldcDao.selectComment(new AllColumnBeans(ld_comment_id,email_address,lunch_id,ld_comment));
-		ldcDao.insertLdComment(0, lunch_id, email_address, ld_comment);
+		ldcDao.insertLdComment(0, ldc_lunch_id, ldc_email_address, ld_comment);
 
+//		コメント、リアクションのインサート（登録）が行われたら、その情報をフォワードした際に表示できるようにする-------------
 		//日記情報をゲットしてくる
 		LunchDiaryDAO LdDao = new LunchDiaryDAO();
 		ArrayList<AllColumnBeans> allLunch = LdDao.select();
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("allLunch", allLunch);
 
-	//ランチ日記リアクション情報をゲットしてくる
-//		LdReactionDAO LdRDao = new LdReactionDAO();
-//		ArrayList<LunchReactionBeans> LdReaction = LdRDao.selectLdReaction();
-//		// 検索結果をリクエストスコープに格納する
-//		request.setAttribute("LdReaction", LdReaction);
+		//ランチ日記リアクション情報をゲットしてくる
+		LdJoin2DAO LdRDao = new LdJoin2DAO();
+		ArrayList<AllColumnBeans> ldReactionList = LdRDao.countReactionUser();
+		// 検索結果をリクエストスコープに格納する
+		request.setAttribute("ldReactionList", ldReactionList);
 
 		//ランチ日記コメント情報をゲットしてくる
 		LdJoin2DAO LdCDao = new LdJoin2DAO();
@@ -140,14 +170,6 @@ public class TimelineServlet extends HttpServlet {
 		//タイムラインページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/timeline.jsp");
 		dispatcher.forward(request, response);
-//		AllColumnBeans acb = new AllColumnBeans();
-////		acb.setLdCommentId(ld_comment_id);
-//		acb.setEmailAddress(email_address);
-//		acb.setLunchId(lunch_id);
-//		acb.setLdComment(ld_comment);
-//		LdJoin2DAO ldCommentList = ldcDao;
-
-//		request.setAttribute("ldCommentList", ldCommentList);
 	}
 
 }

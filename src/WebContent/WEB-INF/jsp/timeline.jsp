@@ -124,9 +124,9 @@
 		${lr.countLdToUse}|
 	</c:if>
 	</c:forEach>
-		<input type="button" name="ToGo" value="行きたい">
-		<input type="button" name="ToTell" value="教えて">
-		<input type="button" name="ToUse" value="参考にします"><br>
+		<input type="submit" name="to" value="行きたい">
+		<input type="submit" name="to" value="教えて">
+		<input type="submit" name="to" value="参考にします"><br>
 </form>
 </c:forEach>
 	</div>

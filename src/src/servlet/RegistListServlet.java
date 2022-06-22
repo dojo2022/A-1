@@ -33,7 +33,7 @@ public class RegistListServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		/* HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
+		if (session.getAttribute("user") == null) {
 			response.sendRedirect("/lunchBox/LoginServlet");
 			return;
 		} */
