@@ -128,7 +128,7 @@ public class MyPageServlet extends HttpServlet {
 		hcDao.insertHdComment(0, handmade_id, email_address, hd_comment);
 
 		//手作り日記情報をゲットしてくる
-		 ArrayList<AllColumnBeans> myHandmade = mDao.selectLd(email_address);
+		 ArrayList<AllColumnBeans> myHandmade = mDao.selectMyHd(email_address);
 		// 検索結果をリクエストスコープに格納する
 		 if(myHandmade.size()==0) {
 				request.setAttribute("myHandmade", null);
