@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,8 +14,15 @@
 <body>
 <!-- ヘッダーロゴ -->
 	<header>
-		<h1 class = "headerLogo"><img src = "/lunchBox/img/headerLogo.png" alt="LunchBox"></h1>
+		<h1 class = "headerLogo"><a href = "/lunchBox/TimelineServlet"><img src = "/lunchBox/img/headerLogo.png" alt="LunchBox"></a></h1>
 	</header>
+	<div class = "loginInfo">
+<%-- 		${user.image}<br>
+		${user.accountName}<br>
+		${user.depName}<br>
+		${user.emailAddress}
+ --%>	</div>
+
 	<div id="nav-wrapper" class="nav-wrapper">
 	  <div class="hamburger" id="js-hamburger">
 	    <span class="hamburger__line hamburger__line--1"></span>

@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import dao.LdJoin2DAO;
 import dao.LunchDiaryDAO;
+import model.AllColumnBeans;
 import model.UserMasterBeans;
 
 /**
@@ -65,6 +68,7 @@ public class RegistLunchServlet extends HttpServlet {
 
 		//画像の保存
 		String foodPhoto = this.getFileName(image);
+		request.setAttribute("foodPhoto", foodPhoto);
 
 		//LunchDiaryDAOを呼び出す
 		LunchDiaryDAO ldDao = new LunchDiaryDAO();
@@ -76,10 +80,26 @@ public class RegistLunchServlet extends HttpServlet {
 		}else {
 			System.out.println("登録失敗");
 		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/timeline.jsp");
-		dispatcher.forward(request, response);
-		return;
+		//日記情報をゲットしてくる
+				LunchDiaryDAO LdDao = new LunchDiaryDAO();
+				ArrayList<AllColumnBeans> allLunch = LdDao.select();
+				// 検索結果をリクエストスコープに格納する
+				request.setAttribute("allLunch", allLunch);
 
+				//ランチ日記リアクション情報をゲットしてくる
+				LdJoin2DAO LdRDao = new LdJoin2DAO();
+				ArrayList<AllColumnBeans> ldReactionList = LdRDao.countReactionUser();
+				// 検索結果をリクエストスコープに格納する
+				request.setAttribute("ldReactionList", ldReactionList);
+
+				//ランチ日記コメント情報をゲットしてくる
+				LdJoin2DAO LdCDao = new LdJoin2DAO();
+				ArrayList<AllColumnBeans> LdComment = LdCDao.selectComment();
+				// 検索結果をリクエストスコープに格納する
+				request.setAttribute("LdComment", LdComment);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/timeline.jsp");
+				dispatcher.forward(request, response);
+				return;
 	}
 
 	//ファイル名の取得
