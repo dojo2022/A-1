@@ -13,12 +13,14 @@
 <jsp:include page="header.jsp" />
 
 <h2>ランチ日記新規登録</h2>
-<form method="POST" action="/lunchBox/RegistLunchServlet"enctype="multipart/form-data">
-<div id="radioBtn">
+
+<!-- <div id="radioBtn">
 	<label><input type="radio" name="lunch" value="lunch_regist" checked="checked">外食</label>
 	<label><input type="radio" name="lunch" value="handmade_regist">手作り</label>
 </div>
-
+ -->
+<!-------------------- ランチ日記登録フォーム -------------------------->
+<form method="POST" action="/lunchBox/RegistLunchServlet"enctype="multipart/form-data">
 <div id="displayBox">
 	<div class="cm_box active">
 		<div class = "dt">お店の名前<span class =required>※必須</span></div>
@@ -29,13 +31,13 @@
 		<div class = "dt">ジャンル</div>
 			<select name=category>
 			<option value="">選択してください</option>
-				<option value="japan">和食</option>
-				<option value="china">中華</option>
-				<option value="western">洋食</option>
-				<option value="italy">イタリアン</option>
-				<option value="bread">パン</option>
-				<option value="ra-men">ラーメン</option>
-				<option value="other">その他</option>
+				<option value="和食">和食</option>
+				<option value="中華">中華</option>
+				<option value="洋食">洋食</option>
+				<option value="イタリアン">イタリアン</option>
+				<option value="パン">パン</option>
+				<option value="ラーメン">ラーメン</option>
+				<option value="その他">その他</option>
 			</select><br>
 		<div class = "dt">店内利用</div>
 			<select name="style">
@@ -74,7 +76,6 @@
 				<option value="７～１０分">７～１０分</option>
 				<option value="１０分以上">１０分以上</option>
 			</select><br>
-
 		<div class = "dt">評価</div>
 			<input id="star5" type="radio" name="star" value="5" />
     		<label for="star5">★</label>
@@ -86,15 +87,16 @@
     		<label for="star2">★</label>
     		<input id="star1" type="radio" name="star" value="1" />
     		<label for="star1">★</label><br>
-
 		<div class = "dt">感想</div>
 			<textarea name="feeling"  placeholder="ここに記入してください"></textarea><br>
-
+		<!-- 登録ボタン -->
 		<input type="submit" name="registNewAccount" value="登録する" class = "submitBtn"><br>
 	</div>
+</div>
+</form>
 
-
-
+<!------------------------ 手作り日記登録 ---------------------->
+<form method="POST" action="/lunchBox/RegistHandmadeServlet"enctype="multipart/form-data">
 	<div class="cm_box">
 		<p>料理名<br>
 			<input type="text" name="foodName" value="" placeholder="例：オムライス"><br></p>
@@ -128,6 +130,7 @@
 			</select></p>
 
 
+
 		<p>評価<br>
 			<input id="star5" type="radio" name="star" value="5" />
     		<label for="star5">★</label>
@@ -147,7 +150,6 @@
 		</p>
 
 		<input type="submit" name="registNewAccount" value="登録する" class = "submitBtn"><br>
-	</div>
 </div>
 </form>
 </body>
