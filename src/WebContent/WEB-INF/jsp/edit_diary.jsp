@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ランチ日記更新削除</title>
 <script type="text/javascript" src="js/diary_form.js"></script>
 <link href="css/diary_form.css" rel="stylesheet" type="text/css" />
 </head>
@@ -13,8 +13,8 @@
 <form>
 
 <p>登録内容</p>
-<input type="radio" id="disp" name="contentsRadio" onclick="buttonClick()">外食
-<input type="radio" id="hide" name="contentsRadio" onclick="buttonClick()">手作り
+<!-- <input type="radio" id="disp" name="contentsRadio" onclick="buttonClick()">外食
+<input type="radio" id="hide" name="contentsRadio" onclick="buttonClick()">手作り -->
 
 <div id="gaisyoku">
 	<form method="POST" action="/lunchBox/RegistLunchServlet"enctype="multipart/form-data">

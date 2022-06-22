@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.HdCommentDAO;
+import dao.LdCommentDAO;
 import dao.LdJoin2DAO;
 import dao.MyPageDAO;
 import model.AllColumnBeans;
@@ -42,10 +44,9 @@ public class MyPageServlet extends HttpServlet {
 				request.setAttribute("myLunch", myLunch);
 			}
     	//ランチ日記コメント情報をゲットしてくる
-			LdJoin2DAO LdCDao = new LdJoin2DAO();
-			ArrayList<AllColumnBeans> LdComment = LdCDao.selectComment();
-			// 検索結果をリクエストスコープに格納する
-			request.setAttribute("LdComment", LdComment);
+		 LdJoin2DAO LdCDao = new LdJoin2DAO();
+		 ArrayList<AllColumnBeans> LdComment = LdCDao.selectComment();
+		 request.setAttribute("LdComment", LdComment);
 
 	    //メールアドレスを引数にしてランチ日記のリアクション情報を取ってくる-------------------------------------
 
@@ -68,13 +69,12 @@ public class MyPageServlet extends HttpServlet {
 	    // 検索結果をリクエストスコープに格納する
 		       request.setAttribute("myHandmade", myHandmade);
 		   }
+	    //手作り日記コメント情報をゲットしてくる
+	 	HdCommentDAO HCDao = new HdCommentDAO();
+	 	 ArrayList<AllColumnBeans> HdComment = HCDao.selectHdComment();
+	 	// 検索結果をリクエストスコープに格納する
+	 			request.setAttribute("HdComment", HdComment);
 
-//		//手作り日記のコメント情報をゲットしてくる
-//		LdJoin2DAO HdCDao = new LdJoin2DAO();
-//		ArrayList<AllColumnBeans> LdComment = LdCDao.selectComment();
-//		// 検索結果をリクエストスコープに格納する
-//				request.setAttribute("LdComment", LdComment);
-//
 
 
 		 //JSP表示
@@ -93,11 +93,64 @@ public class MyPageServlet extends HttpServlet {
 //	ArrayList<AllColumnBeans> lList =ldDao.selectUser();
 //	request.setAttribute("lList", lList);
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+		UserMasterBeans user = (UserMasterBeans)session.getAttribute("user");
+		String email_address = user.getEmailAddress();
+		Integer lunch_id =0;
+		if(request.getParameter("lunch_id") != null) {
+			lunch_id = Integer.parseInt(request.getParameter("lunch_id"));
+		}
+		String ld_comment =request.getParameter("ld_comment");
+		Integer	handmade_id=0;
+		if(request.getParameter("handmade_id") != null) {
+			handmade_id = Integer.parseInt(request.getParameter("handmade_id"));
+		}
+		String hd_comment =request.getParameter("hd_comment");
 
-			// 結果ページにフォワードする
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp");
-			dispatcher.forward(request, response);
+		//ランチ日記コメントの「送信する」ボタンを押した後の処理-------------------------------
+		LdCommentDAO ldcDao = new LdCommentDAO();
+		ldcDao.insertLdComment(0, lunch_id, email_address, ld_comment);
+
+		//ランチ日記情報をゲットしてくる
+		MyPageDAO mDao = new MyPageDAO();
+		 ArrayList<AllColumnBeans> myLunch = mDao.selectLd(email_address);
+		// 検索結果をリクエストスコープに格納する
+		 if(myLunch.size()==0) {
+				request.setAttribute("myLunch", null);
+		}
+		else {
+				request.setAttribute("myLunch", myLunch);
+			}
+		//ランチ日記コメント情報をゲットしてくる
+		LdJoin2DAO LdCDao = new LdJoin2DAO();
+		ArrayList<AllColumnBeans> LdComment = LdCDao.selectComment();
+		// 検索結果をリクエストスコープに格納する
+		request.setAttribute("LdComment", LdComment);
+
+		//手作り日記コメントの「送信する」ボタンを押した後の処理-------------------------------
+		//コメントをデータベースに登録する
+		HdCommentDAO hcDao = new HdCommentDAO();
+		hcDao.insertHdComment(0, handmade_id, email_address, hd_comment);
+
+		//手作り日記情報をゲットしてくる
+		 ArrayList<AllColumnBeans> myHandmade = mDao.selectMyHd(email_address);
+		// 検索結果をリクエストスコープに格納する
+		 if(myHandmade.size()==0) {
+				request.setAttribute("myHandmade", null);
+		}
+		else {
+				request.setAttribute("myHandmade", myHandmade);
+			}
+		//手作り日記コメント情報をゲットしてくる
+		 HdCommentDAO HCDao = new HdCommentDAO();
+		ArrayList<AllColumnBeans> HdComment = HCDao.selectHdComment();
+		// 検索結果をリクエストスコープに格納する
+		request.setAttribute("HdComment", HdComment);
+
+		// 結果ページにフォワードする
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp");
+		dispatcher.forward(request, response);
 		}
 	}
 

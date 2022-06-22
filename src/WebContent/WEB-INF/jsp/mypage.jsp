@@ -141,20 +141,14 @@
 </ul>
 
 <!--タブを切り替えて表示するコンテンツ-->
+ <!-- 手作り日記タブ  ----------------------------------------------------->
 <div class="panel-group">
   <div class="panel">
        <c:if test="${myHandmade == null }">
 			登録はありません。
-
-
-			<!-- 手作りランチ日記更新削除 -->
-			<a href="/lunchBox/EditHandmadeServlet" class="editLunch"><button type="button">編集</button></a>
-
-
-
 		</c:if>
  		<c:forEach var="e" items="${myHandmade}" >
-		<form>
+ 		<form method="POST" action="MyPageServlet">
 			${e.handmadeId}<br>
 			${e.accountName}<br>
 			${e.emailAddress}<br>
@@ -168,29 +162,31 @@
 			${e.hdFeeling}<br>
 			${e.cooktime}<br>
 			${e.ldRegistTime}<br>
+		<!-- 手作りランチ日記更新削除 -->
+		<a href="/lunchBox/EditHandmadeServlet" class="editLunch"><button type="button">編集</button></a><br>
 
-		<input type="hidden" name="handmadeId" value="${e.handmadeId}">
+		<input type="hidden" name="handmade_id" value="${e.handmadeId}">
+		<c:forEach var="hc" items="${HdComment}">
+		<c:if test="${hc.handmadeId == e.handmadeId}">
+			${hc.accountName}：
+			${hc.hdComment}<br>
+		</c:if>
+		</c:forEach>
+			<input type="text" name="hd_comment" placeholder="コメントを入力してください">
+			<input type="submit" name="" value="送信する"><br>
 	</form>
 		</c:forEach>
   </div>
 
  <!-- ランチ日記タブ  ----------------------------------------------------->
   <div class="panel is-show">
-
-        <c:if test="${myLunch == null }">
+  <c:if test="${myLunch == null }">
 			登録はありません。
-
-
-			<!-- 外食ランチ日記更新削除 -->
-		<a href="/lunchBox/EditLunchServlet" class="editLunch"><button type="button">編集</button></a>
-
-
-
-		</c:if>
+  </c:if>
  		<c:forEach var="e" items="${myLunch}" >
-		<form>
+		<form method="POST" action="MyPageServlet">
 			${e.lunchId}<br>
-			${e.emailAddress}<br>
+			${e.accountName}<br>
 			${e.ldResName}<br>
 			${e.ldFoodPhoto}<br>
 			${e.ldCategory}<br>
@@ -202,7 +198,8 @@
 			${e.distance}<br>
 			${e.ldStar}<br>
 			${e.ldFeeling}<br>
-			${e.accountName}<br>
+		<!-- 外食ランチ日記更新削除 -->
+		<a href="/lunchBox/EditLunchServlet" class="editLunch"><button type="button">編集</button></a>
 		<input type="hidden" name="lunch_id" value="${e.lunchId}">
 
 		<c:forEach var="lc" items="${LdComment}">
@@ -223,14 +220,11 @@
 			<input type="button" name="ToUseidea" value="参考にします"><br>
 	</form>
 		</c:forEach>
-
-
-
-
-
-
-
   </div>
+
+
+
+   <!-- 行きたい場所リストタブ  ----------------------------------------------------->
   <div class="panel">
   		行きたい場所リストhogehoge
 

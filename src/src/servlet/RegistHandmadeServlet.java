@@ -38,7 +38,7 @@ public class RegistHandmadeServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+//		doGet(request, response);
 
 		//insertに必要なメールアドレスを取得
 		HttpSession session = request.getSession();
