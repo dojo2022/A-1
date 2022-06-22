@@ -49,8 +49,7 @@ public class RegistLunchServlet extends HttpServlet {
 		String emailAddress = user.getEmailAddress();
 
 
-
-		//登録フォームに入力された内容を保持する
+		//登録フォームに入力された内容を取ってくる
 		request.setCharacterEncoding("UTF-8");
 		String resName = request.getParameter("resName");
 		Part image = request.getPart("foodPhoto");
