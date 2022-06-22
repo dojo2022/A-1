@@ -11,7 +11,9 @@ public class TestLdJoin2DAO {
 		ArrayList<AllColumnBeans> bean = dao.selectComment();
 		System.out.println(bean.size());
 
-
+//		LdJoin2DAO LdRDao = new LdJoin2DAO();
+//		ArrayList<AllColumnBeans> ldReactionList = LdRDao.countReactionUser();
+//		System.out.println(ldReactionList.size());
 	}
 
 }
