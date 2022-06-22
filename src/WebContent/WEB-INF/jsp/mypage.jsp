@@ -131,7 +131,7 @@
 <!--プロフィール-->
 <c:out value="${user.accountName}"/><br>
 <c:out value="${user.depName}"/><br>
-<c:out value="${user.emailAddress}"/><br>
+<a href="mailto:${user.emailAddress}">${user.emailAddress}</a>
 
 
 <ul class="tab-group">
@@ -143,9 +143,32 @@
 <!--タブを切り替えて表示するコンテンツ-->
 <div class="panel-group">
   <div class="panel">
-		ここに手作り日記データベースの情報を貼り付ける！？！？
+       <c:if test="${myHandmade == null }">
+			登録はありません。
+		</c:if>
+ 		<c:forEach var="e" items="${myHandmade}" >
+		<form>
+			${e.handmadeId}<br>
+			${e.accountName}<br>
+			${e.emailAddress}<br>
+			${e.hdFoodType}<br>
+			${e.hdFoodPhoto}<br>
+			${e.hdCategory}<br>
+			${e.hdDate}<br>
+			${e.hdFoodName}<br>
+			${e.hdCost}<br>
+			${e.hdStar}<br>
+			${e.hdFeeling}<br>
+			${e.cooktime}<br>
+			${e.handmadeFlag}<br>
+			${e.hdRegistTime}<br>
 
+		<input type="hidden" name="handmadeId" value="${e.handmadeId}">
+	</form>
+		</c:forEach>
   </div>
+
+ <!-- ランチ日記タブ  ----------------------------------------------------->
   <div class="panel is-show">
 
         <c:if test="${myLunch == null }">
@@ -153,20 +176,20 @@
 		</c:if>
  		<c:forEach var="e" items="${myLunch}" >
 		<form>
-			${e.lunchId}
-			${e.emailAddress}
-			${e.ldResName}
-			${e.ldFoodPhoto}
-			${e.ldCategory}
-			${e.style}
-			${e.ldDate}
-			${e.ldFoodName}
-			${e.ldCost}
-			${e.time}
-			${e.distance}
-			${e.ldStar}
-			${e.ldFeeling}
-			${e.accountName}
+			${e.lunchId}<br>
+			${e.emailAddress}<br>
+			${e.ldResName}<br>
+			${e.ldFoodPhoto}<br>
+			${e.ldCategory}<br>
+			${e.style}<br>
+			${e.ldDate}<br>
+			${e.ldFoodName}<br>
+			${e.ldCost}<br>
+			${e.time}<br>
+			${e.distance}<br>
+			${e.ldStar}<br>
+			${e.ldFeeling}<br>
+			${e.accountName}<br>
 		<input type="hidden" name="lunch_id" value="${e.lunchId}">
 
 		<c:forEach var="lc" items="${LdComment}">
