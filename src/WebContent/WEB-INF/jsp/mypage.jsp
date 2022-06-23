@@ -202,7 +202,7 @@
 			${e.ldStar}<br>
 			${e.ldFeeling}<br>
 		<!-- 外食ランチ日記更新削除 -->
-		<a href="/lunchBox/EditLunchServlet" class="editLunch"><button type="button">編集</button></a>
+		<a href="/lunchBox/EditLunchServlet" class="editLunch"><button type="button">編集</button></a><br>
 		<input type="hidden" name="lunch_id" value="${e.lunchId}">
 
 		<c:forEach var="lc" items="${LdComment}">
@@ -214,13 +214,15 @@
 			<input type="text" name="ld_comment" placeholder="コメントを入力してください">
 			<input type="submit" name="" value="送信する"><br>
 		<c:forEach var="lr" items="${ldReactionList}">
-			${lr.ldToGo}
-			${lr.ldToTell}
-			${lr.ldToUse}<br>
+		<c:if test="${lr.lunchId == e.lunchId}">
+			${lr.countLdToGo}|
+			${lr.countLdToTell}|
+			${lr.countLdToUse}|
+		</c:if>
 		</c:forEach>
-			<input type="button" name="ToGo" value="行きたい">
-			<input type="button" name="ToTellMe" value="教えて">
-			<input type="button" name="ToUseidea" value="参考にします"><br>
+		<input type="button" name="ToGo" value="行きたい">
+		<input type="button" name="ToTellMe" value="教えて">
+		<input type="button" name="ToUseidea" value="参考にします"><br>
 	</form>
 		</c:forEach>
   </div>
