@@ -35,16 +35,54 @@
 	</c:if>
 	</c:forEach>
 		<input type="text" name="ld_comment" placeholder="コメントを入力してください">
-		<input type="submit" name="" value="送信する"><br>
+		<input type="submit" name="submit" value="送信する"><br>
 	<c:forEach var="lr" items="${ldReactionList}">
-		${lr.ldToGo}
-		${lr.ldToTell}
-		${lr.ldToUse}<br>
+	<c:if test="${lr.lunchId == e.lunchId}">
+		${lr.countLdToGo}|
+		${lr.countLdToTell}|
+		${lr.countLdToUse}|
+	</c:if>
 	</c:forEach>
-		<input type="button" name="ToGo" value="行きたい">
-		<input type="button" name="ToTellMe" value="教えて">
-		<input type="button" name="ToUseidea" value="参考にします"><br>
+		<input type="submit" name="to" value="行きたい">
+		<input type="submit" name="to" value="教えて">
+		<input type="submit" name="to" value="参考にします"><br>
 </form>
+</c:forEach>
+<c:forEach var="e" items="${myHandmade}" >
+<form method="POST" action="TimelineServlet">
+		${e.handmadeId}<br>
+		${e.accountName}<br>
+		${e.emailAddress}<br>
+		${e.hdFoodType}<br>
+		${e.hdFoodPhoto}<br>
+		${e.hdCategory}<br>
+		${e.hdDate}<br>
+		${e.hdFoodName}<br>
+		${e.hdCost}<br>
+		${e.hdStar}<br>
+		${e.hdFeeling}<br>
+		${e.cooktime}<br>
+		${e.ldRegistTime}<br>
+	<input type="hidden" name="handmade_id" value="${e.handmadeId}">
+	<c:forEach var="hc" items="${HdComment}">
+	<c:if test="${hc.handmadeId == e.handmadeId}">
+		${hc.accountName}：
+		${hc.hdComment}<br>
+	</c:if>
+	</c:forEach>
+	<input type="text" name="hd_comment" placeholder="コメントを入力してください">
+	<input type="submit" name="submit" value="送信する"><br>
+	<c:forEach var="hr" items="${hdReactionList}">
+	<c:if test="${hr.handmadeId == e.handmadeId}">
+		${hr.countHdToEat}|
+		${hr.countHdToTell}|
+		${hr.countHdToUse}|
+	</c:if>
+	</c:forEach>
+		<input type="submit" name="hdbtn" value="食べたい">
+		<input type="submit" name="hdbtn" value="教えて">
+		<input type="submit" name="hdbtn" value="参考にします"><br>
+	</form>
 </c:forEach>
 </main>
 </body>
