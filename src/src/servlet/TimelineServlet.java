@@ -65,8 +65,8 @@ public class TimelineServlet extends HttpServlet {
 	    // 検索結果をリクエストスコープに格納する
 	    request.setAttribute("myHandmade", myHandmade);
 //		手作り日記リアクション情報をゲットしてくる
-//		LdJoin2DAO LdRDao = new LdJoin2DAO();
-		ArrayList<AllColumnBeans> hdReactionList = LdRDao.countReactionUser();
+		LdJoin2DAO HdRDao = new LdJoin2DAO();
+		ArrayList<AllColumnBeans> hdReactionList = HdRDao.countReactionUser();
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("hdReactionList", hdReactionList);
 	    //手作り日記コメント情報をゲットしてくる
@@ -79,9 +79,6 @@ public class TimelineServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/timeline.jsp");
 		dispatcher.forward(request, response);
 	}
-
-
-
 
 
 	/**
@@ -122,21 +119,21 @@ public class TimelineServlet extends HttpServlet {
 		Integer hdr_lunch_id = Integer.parseInt(request.getParameter("handmade_id"));
 		String hdr_email_address = user.getEmailAddress();
 		Integer to_eat = 0;
-//		Integer to_tell = 0;
-//		Integer to_use = 0;
+		Integer hdr_to_tell = 0;
+		Integer hdr_to_use = 0;
 //		ボタン押したか押していないかを取得
-		String hd_button =request.getParameter("to");
+		String hd_button =request.getParameter("hdbtn");
 		if(hd_button.equals("食べたい")) {
 			to_eat = 1;
 		}else if (hd_button.equals("教えて")) {
-			to_tell= 1;
+			hdr_to_tell= 1;
 		}else if(hd_button.equals("参考にします")){
-			to_use = 1;
+			hdr_to_use = 1;
 		}else {
 			System.out.println("失敗");
 		}
 		HdReactionDAO hdrDao = new HdReactionDAO();
-		hdrDao.insertHdReaction(hdr_lunch_id, hdr_email_address, to_eat, to_tell, to_use);
+		hdrDao.insertHdReaction(hdr_lunch_id, hdr_email_address, to_eat, hdr_to_tell, hdr_to_use);
 
 //		入力されたコメントを取得して登録するやつ
 		request.setCharacterEncoding("UTF-8");
