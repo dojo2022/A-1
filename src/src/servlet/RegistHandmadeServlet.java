@@ -75,7 +75,8 @@ public class RegistHandmadeServlet extends HttpServlet {
 		}else {
 			request.setAttribute("hdresult","登録できませんでした");
 		}
-		//タイムラインに遷移
+
+		//日記情報をゲットしてくる
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/timeline.jsp");
 		dispatcher.forward(request, response);
 		return;

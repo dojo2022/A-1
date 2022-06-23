@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-body{
+main{
 	width: 70%;
     margin: auto;
 }
@@ -22,7 +22,7 @@ table{
 	text-align: center;
 }
 tr{
-	height: 50px;
+	height: 60px;
 }
 th {
     text-align: center;
@@ -34,6 +34,14 @@ th {
 	color: white;
 	font-weight: 10px;
 }
+#required1{
+	color: red;
+	font-size: 13px;
+}
+#required2{
+	color: red;
+	font-size: 13px;
+}
 .smallMessage{
 	font-weight: normal;
 	font-size: 13px;
@@ -42,11 +50,14 @@ td input[type ="text"]{
 	width: 20em;
 	font-size: 15px;
 }
+
 td select{
 	width: 20em;
 	font-size: 15px;
 }
 textarea{
+	font-family: sans-selif;
+	font-size: 15px;
 	width: 25em;
 	height: 10em;
 }
@@ -56,7 +67,9 @@ textarea{
 	justify-content: flex-end;
 }
 .rate-form input[type = radio]{
-	display: none;
+position: absolute;
+  opacity: 0;
+  z-index: -1;
 }
 .rate-form label {
  	position: relative;
@@ -75,8 +88,8 @@ textarea{
  	color: #ffcc00;
 }
 input.submitBtn{
-	margin-top: 5%;
-	margin-bottom: 5%;
+	margin-top: 20px;
+	margin-bottom: 20px;
 	margin-right: 15%;
 	margin-left: 42%;
 	border-radius : 5%;          /* 角丸       */

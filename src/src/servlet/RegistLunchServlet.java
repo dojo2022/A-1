@@ -63,7 +63,12 @@ public class RegistLunchServlet extends HttpServlet {
 		String cost = request.getParameter("cost");
 		String time = request.getParameter("time");
 		String distance = request.getParameter("distance");
-		int star = Integer.parseInt(request.getParameter("star"));
+		int star =0;
+		//nullのときにparseIntするせいでエラー？
+		if(request.getParameter("star") != null) {
+			 star = Integer.parseInt(request.getParameter("star"));
+		}
+//		int star = Integer.parseInt(request.getParameter("star"));
 		String feeling = request.getParameter("feeling");
 
 		//画像の保存

@@ -7,7 +7,6 @@ header {
 	text-align: center;
 	width: 100%;
 
-
 }
 h1.headerLogo{
 	margin-top: 0%;
@@ -121,8 +120,17 @@ black-bg(ハンバーガーメニュー解除用bg)
 }
 
 /*ハンバーガーメニューを開いたときのメニュー内css*/
-ul{
+.greeting{
 	margin-top: 100px;
+	text-align: center;
+	display: block;
+	font-size: 18px;
+	color: #8b4513;
+}
+.name{
+	color: #ffff33;
+}
+ul{
 	padding-left: 0;
 }
 .sp-nav li {
@@ -135,7 +143,7 @@ ul{
 	text-align: center;
 	text-decoration: none;
 	color: white;
-
+	font-weight: bolder;
 }
 /*メニューにかざすと色が反転*/
 .sp-nav li:hover {

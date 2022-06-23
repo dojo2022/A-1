@@ -13,15 +13,11 @@
 </head>
 <body>
 <!-- ヘッダーロゴ -->
+	<div class = topmenu>
 	<header>
 		<h1 class = "headerLogo"><a href = "/lunchBox/TimelineServlet"><img src = "/lunchBox/img/headerLogo.png" alt="LunchBox"></a></h1>
 	</header>
-	<div class = "loginInfo">
-<%-- 		${user.image}<br>
-		${user.accountName}<br>
-		${user.depName}<br>
-		${user.emailAddress}
- --%>	</div>
+	</div>
 
 	<div id="nav-wrapper" class="nav-wrapper">
 	  <div class="hamburger" id="js-hamburger">
@@ -30,13 +26,14 @@
 	    <span class="hamburger__line hamburger__line--3"></span>
 	  </div>
 	  <nav class="sp-nav">
+	  	<div class = "greeting"><b>ようこそ、<span class = "name">${user.accountName}</span>さん</b></div>
 	    <ul>
 	      <li><a href="/lunchBox/TimelineServlet">タイムライン</a></li>
 	      <li><a href= "/lunchBox/MyPageServlet">マイページ</a></li>
 	      <li id="regist">登録</li>
 	      <div class = "hidden" id = "hidden">
 		      <li><a href= "/lunchBox/RegistLunchServlet">ランチ日記登録</a></li>
-		      <li><a href = "/lunchBox/RegistHandmadeServlet">手作り日記</a></li>
+		      <li><a href = "/lunchBox/RegistHandmadeServlet">手作り日記登録</a></li>
 		      <li><a href = "/lunchBox/RegistListServlet">行きたい場所リスト登録</a></li>
 	      </div>
 	      <li><a href ="/lunchBox/SettingsServlet">設定</a></li>
