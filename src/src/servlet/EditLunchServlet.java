@@ -59,35 +59,54 @@ public class EditLunchServlet extends HttpServlet {
 
 
 
+
+
+	 	String ldResName = request.getParameter("ldResName");
+		String ldFoodPhoto = request.getParameter("ldFoodPhoto");
+		String ldCategory = request.getParameter("ldCategory");
+		String style = request.getParameter("style");
+		String ldDate = request.getParameter("ldDate");
+		String ldFoodName = request.getParameter("ldFoodName");
+		String ldCost = request.getParameter("ldCost");
+		String time = request.getParameter("time");
+		String distance = request.getParameter("distance");
+		String ldStar = request.getParameter("ldStar");
+		String ldFeeling = request.getParameter("ldFeeling");
+
+
+		request.setAttribute("ldResName", ldResName);
+		request.setAttribute("ldFoodPhoto", ldFoodPhoto);
+		request.setAttribute("ldCategory", ldCategory);
+		request.setAttribute("style", style);
+		request.setAttribute("ldDate", ldDate);
+		request.setAttribute("ldFoodName", ldFoodName);
+		request.setAttribute("ldCost", ldCost);
+		request.setAttribute("time", time);
+		request.setAttribute("distance", distance);
+		request.setAttribute("ldStar", ldStar);
+		request.setAttribute("ldFeeling", ldFeeling);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		//「飛ばしたいページ」にフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/edit_diary.jsp");
 		dispatcher.forward(request, response);
 	}
 
-	
-	
-	
-	
-	
-	
-	String restName = request.getParameter("resName");
-	String foodPhoto = request.getParameter("foodPhoto");
-	String depName = request.getParameter("depName");
-	String emailAddress = request.getParameter("emailAddress");
-	//int range = request.getParameter("range");
-	int range = Integer.parseInt(request.getParameter("range"));
-	String pwCheck = request.getParameter("pwCheck");
-	
-	
-	
-	request.setAttribute("image", icon);
-	request.setAttribute("accountName", accountName);
-	request.setAttribute("depName", depName);
-	request.setAttribute("emailAddress", emailAddress);
-	request.setAttribute("range", range);
-	
-	
-	
+
+
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
