@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,16 +16,16 @@
 <!-- <input type="radio" id="disp" name="contentsRadio" onclick="buttonClick()">外食
 <input type="radio" id="hide" name="contentsRadio" onclick="buttonClick()">手作り -->
 
-<div id="gaisyoku">
-	<form method="POST" action="/lunchBox/RegistLunchServlet"enctype="multipart/form-data">
+<var="allcolumbeans" items="${myLunch}" >
+	<form method="POST" action="EditLunchServlet"enctype="multipart/form-data">
 		<p>お店の名前※必須<br>
-		<input type="text" name="resName"></p>
+		<input type="text" name="resName"  value="${allcolumbeans.resName}"></p>
 
 		<p>写真<br>
-		<input type="file" name="foodPhoto" accept="image/*" onchange="previewImage(this);"></p>
+		<input type="file" name="foodPhoto" accept="image/*" value="${allcolumbeans.foodPhoto}" onchange="previewImage(this);"></p>
 
 		<p>ジャンル<br>
-			<select name=category>
+			<select name=category >
 				<option value="">選択してください</option>
 				<option value="japan">和食</option>
 				<option value="china">中華</option>
@@ -44,20 +44,20 @@
 			</select></p>
 
 		<p>日付※必須</p>
-			<input type="date" name="date">
+			<input type="date" name="date"  value="${allcolumbeans.date}">
 
 		<p>料理名<br>
-			<input type="text" name="foodName" value="" placeholder="例：オムライス"><br></p>
+			<input type="text" name="foodName" value="${allcolumbeans.foodName}" placeholder="例：オムライス"><br></p>
 
 		<p>費用<br>
-			<select name="cost">
+			<select name="cost" value="">
 				<option value="">選択してください</option>
-				<option value="～５００円">～５００円</option>
+				<option value="～５００円" <c:if test=${test=="500"}>selected</c:if>> ～５００円</option>
 				<option value="～８００円">～８００円</option>
 				<option value="～１０００円">～１０００円</option>
 				<option value="～１２００円">～１２００円</option>
 				<option value="～１５００円">～１５００円</option>
-				<option value="１５００円～">１５００円～</option>
+				<option value="１５００～円">１５００円～</option>
 			</select></p>
 
 		<p>提供時間<br>
@@ -103,6 +103,7 @@
 		<input type="submit" name="updateButton" value="更新する"><br>
 		<input type="submit" name="deleteButton" value="削除する"><br>
 	</form>
+	</var>
 </div>
 
 

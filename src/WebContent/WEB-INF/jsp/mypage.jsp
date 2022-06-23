@@ -190,6 +190,7 @@
 			${e.lunchId}<br>
 			${e.accountName}<br>
 			${e.ldResName}<br>
+			<input type="hidden" name="ld_res_name" value="${e.ldResName}">
 			${e.ldFoodPhoto}<br>
 			${e.ldCategory}<br>
 			${e.style}<br>
