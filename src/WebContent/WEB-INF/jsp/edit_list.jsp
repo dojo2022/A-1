@@ -38,7 +38,7 @@
 			            </select>
 			            <h3>&nbsp;メモ</h3>
 			            <textarea name="TOGO_MEMO" cols="55" rows="5" placeholder="Add Text" class="form_unit" id="editToGoMemo" >${ここにスコープを挿入}</textarea><br>
-			            <p class="errmsg">${msg}</p><br>
+			            <p class="errmsg" id="error_message"><br>${msg}</p>
 			            <input type="hidden" name="LIST_ID"  value="2">
 			            <div class="list_button">
 			            <input type="submit" name="toGoEdit" value="編集する" >
@@ -51,6 +51,9 @@
 		</div>
 	</main>
 <script>
+
+'use strict';
+
 
 <%-- let ctgr = window.sessionStorage.getItem(['']); --%>
 

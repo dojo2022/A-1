@@ -35,8 +35,8 @@
 			                <option value="その他">その他</option>
 			            </select>
 			            <h3>&nbsp;メモ ※200字以内</h3>
-			            <textarea name="TOGO_MEMO" cols="55" rows="5" placeholder="Add Text" class="form_unit"></textarea><br>
-			            <p class="errmsg">${msg}</p><br>
+			            <textarea name="TOGO_MEMO" cols="55" rows="5" placeholder="Add Text" class="form_unit" id="editToGoMemo"></textarea><br>
+			            <p class="errmsg" id="error_message"><br>${msg}</p>
 			            <div class="list_button">
 			            <input type="submit" name="toGoRegist" value="登録する" >
 			            </div>
@@ -46,5 +46,10 @@
 	        </div>
 		</div>
 	</main>
+
+<script type="text/javascript">
+
+</script>
+
 </body>
 </html>

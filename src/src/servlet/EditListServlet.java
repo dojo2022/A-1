@@ -63,12 +63,12 @@ public class EditListServlet extends HttpServlet {
 		int listId = Integer.parseInt(request.getParameter("LIST_ID"));
 
 
-		/* if(togoMemo.length() > 200) {
+		if(togoMemo.length() > 200) {
 		request.setAttribute("msg","メモは200字以内で入力してください");
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/regist_list.jsp");
 		dispatcher.forward(request, response);
 		return;
-	} */
+		}
 
 		//DAOを呼んでくる
 		ListDAO lDao = new ListDAO();
