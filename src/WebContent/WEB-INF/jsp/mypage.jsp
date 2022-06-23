@@ -146,6 +146,7 @@
   <div class="panel">
        <c:if test="${myHandmade == null }">
 			登録はありません。
+			<a href="/lunchBox/EditHandmadeServlet" class="editLunch"><button type="button">編集</button></a>
 		</c:if>
  		<c:forEach var="e" items="${myHandmade}" >
  		<form method="POST" action="MyPageServlet">
@@ -182,6 +183,7 @@
   <div class="panel is-show">
   <c:if test="${myLunch == null }">
 			登録はありません。
+			<a href="/lunchBox/EditLunchServlet" class="editLunch"><button type="button">編集</button></a>
   </c:if>
  		<c:forEach var="e" items="${myLunch}" >
 		<form method="POST" action="MyPageServlet">

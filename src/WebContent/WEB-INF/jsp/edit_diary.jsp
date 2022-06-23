@@ -106,7 +106,7 @@
 </div>
 
 
-<div id="cook">
+<!-- <div id="cook">
 	<form method="POST" action="/lunchBox/RegistHandmadeServlet"enctype="multipart/form-data">
 
 		<p>料理名<br>
@@ -163,7 +163,7 @@
 
 		<input type="submit" name="updateButton" value="更新する"><br>
 		<input type="submit" name="deleteButton" value="削除する"><br>
-	</form>
+	</form> -->
 </div>
 </form>
 
