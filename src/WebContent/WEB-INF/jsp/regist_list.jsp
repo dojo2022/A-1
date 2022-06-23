@@ -36,11 +36,12 @@
 			            </select>
 			            <h3>&nbsp;メモ ※200字以内</h3>
 			            <textarea name="TOGO_MEMO" cols="55" rows="5" placeholder="Add Text" class="form_unit"></textarea><br>
+			            <p class="errmsg">${msg}</p><br>
 			            <div class="list_button">
 			            <input type="submit" name="toGoRegist" value="登録する" >
 			            </div>
 			        </form>
-			        <p>${requestmsg}</p>
+
 		        </div>
 	        </div>
 		</div>

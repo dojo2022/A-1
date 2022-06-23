@@ -131,45 +131,48 @@
 </c:forEach>
 	</div>
   <div class="panel">
-
+<c:forEach var="e" items="${myHandmade}" >
+<form method="POST" action="TimelineServlet">
+		${e.handmadeId}<br>
+		${e.accountName}<br>
+		${e.emailAddress}<br>
+		${e.hdFoodType}<br>
+		${e.hdFoodPhoto}<br>
+		${e.hdCategory}<br>
+		${e.hdDate}<br>
+		${e.hdFoodName}<br>
+		${e.hdCost}<br>
+		${e.hdStar}<br>
+		${e.hdFeeling}<br>
+		${e.cooktime}<br>
+		${e.ldRegistTime}<br>
+	<input type="hidden" name="handmade_id" value="${e.handmadeId}">
+	<c:forEach var="hc" items="${HdComment}">
+	<c:if test="${hc.handmadeId == e.handmadeId}">
+		${hc.accountName}：
+		${hc.hdComment}<br>
+	</c:if>
+	</c:forEach>
+	<input type="text" name="hd_comment" placeholder="コメントを入力してください">
+	<input type="submit" name="submit" value="送信する"><br>
+	<c:forEach var="hr" items="${hdReactionList}">
+	<c:if test="${hr.handmadeId == e.handmadeId}">
+		${hr.countHdToEat}|
+		${hr.countHdToTell}|
+		${hr.countHdToUse}|
+	</c:if>
+	</c:forEach>
+		<input type="submit" name="hdbtn" value="食べたい">
+		<input type="submit" name="hdbtn" value="教えて">
+		<input type="submit" name="hdbtn" value="参考にします"><br>
+	</form>
+</c:forEach>
 	</div>
 </div>
 
 
 
 
- <!--
-<div class="hidden_box">
-	<label for="label1"></label>
-	<input type="checkbox" id="label1"/>
-<div class="hidden_show">
-<form method="POST" action="/lunchBox/SearchServlet">
-	<select name="example">
-		<option value="">会社からの所要時間</option>
-		<option value="選択肢2">選択肢2</option>
-		<option value="選択肢3">選択肢3</option>
-	</select>
-	<select name="example2">
-		<option value="">提供時間</option>
-		<option value="選択肢2">選択肢2</option>
-		<option value="選択肢3">選択肢3</option>
-	</select>
-	<select name="example3">
-		<option value="">ジャンル</option>
-		<option value="選択肢2">選択肢2</option>
-		<option value="選択肢3">選択肢3</option>
-	</select>
-	<select name="example4">
-		<option value="">費用</option>
-		<option value="選択肢2">選択肢2</option>
-		<option value="選択肢3">選択肢3</option>
-	</select>
-	<input type="text" name="" placeholder="店名">
-	<input type="submit" name="searchSubmit" value="検索">
-</form>
-</div>
-</div>
- -->
 
 </main>
 

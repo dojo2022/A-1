@@ -62,3 +62,7 @@ input[name="toGoDelete"] {
 	margin: auto auto 15px auto;
 	text-align: center;
 }
+p.errmsg {
+	margin: center;
+	text-align: center;
+}
