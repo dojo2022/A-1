@@ -14,7 +14,7 @@
 	<form method="POST" action="/lunchBox/LeaveServlet">
 		<h1>退会</h1>
 		<hr>
-		<p>退会理由を教えてください</p>
+		<p>退会理由を教えてください。<span>必須</span></p>
 		<p>
 			<textarea name="reason" cols="100" rows="5" placeholder="例：退社するため"></textarea >
 		</p>

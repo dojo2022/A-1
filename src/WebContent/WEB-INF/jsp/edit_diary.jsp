@@ -50,23 +50,23 @@
 			<input type="text" name="foodName" value="${allcolumbeans.foodName}" placeholder="例：オムライス"><br></p>
 
 		<p>費用<br>
-			<select name="cost" value="">
+			<select name="ldCost" >
 				<option value="">選択してください</option>
-				<option value="～５００円" <c:if test=${test=="500"}>selected</c:if>> ～５００円</option>
-				<option value="～８００円">～８００円</option>
-				<option value="～１０００円">～１０００円</option>
-				<option value="～１２００円">～１２００円</option>
-				<option value="～１５００円">～１５００円</option>
-				<option value="１５００～円">１５００円～</option>
+				<option value="～５００円" <c:if test=${test=="～５００円"}>selected</c:if>> ～５００円</option>
+				<option value="～８００円"<c:if ldCost=${ldCost=="～８００円"}>selected</c:if>> ～８００円</option>
+				<option value="～１０００円"<c:if ldCost=${ldCost=="～１０００円"}>selected</c:if>> ～１０００円</option>
+				<option value="～１２００円"<c:if ldCost=${ldCost=="～１２００円"}>selected</c:if>> ～１２００円</option>
+				<option value="～１５００円"<c:if ldCost=${ldCost=="～１５００円"}>selected</c:if>> ～１５００円</option>
+				<option value="１５００～円"<c:if ldCost=${ldCost=="１５００～円"}>selected</c:if>> １５００円～</option>
 			</select></p>
 
 		<p>提供時間<br>
 			<select name="time">
 				<option value="">選択してください</option>
-				<option value="５分未満">５分未満</option>
-				<option value="５～１０分">５～１０分</option>
-				<option value="１０分～１５分">１０分～１５分</option>
-				<option value="１５分以上">１５分以上</option>
+				<option value="５分未満"<c:if time=${time=="５分未満"}>selected</c:if>> ５分未満</option>
+				<option value="５～１０分"<c:if time=${time=="５～１０分"}>selected</c:if>> ５分～１０分</option>
+				<option value="１０分～１５分"<c:if time=${time=="１０分～１５分"}>selected</c:if>> １０分～１５分</option>
+				<option value="１５分以上"<c:if time=${time=="１５分以上"}>selected</c:if>> １５分以上</option>
 			</select>
 		</p>
 
@@ -97,8 +97,10 @@
 		</p>
 
 		<p>感想<br>
-			<textarea name="feeling" value="" placeholder="ここに記入してください"></textarea>
+			<textarea name="feeling"  placeholder="ここに記入してください"></textarea>
 		</p>
+
+
 
 		<input type="submit" name="updateButton" value="更新する"><br>
 		<input type="submit" name="deleteButton" value="削除する"><br>
