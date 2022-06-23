@@ -96,7 +96,7 @@ public class HandmadeDiaryDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data","sa","");
 
 			//SQL文を準備する ここ変える
-			String sql = "SELECT handmade_id, user_master.emaill_address, food_name, food_photo, cooktime, date, cost, star, feeling, account_name FROM handmade_diary left join user_master on handmade_diary.email_address = user_master.email_address WHERE handmade_flag = 1 ORDER BY ld_regist_time DESC";
+			String sql = "SELECT handmade_id, user_master.email_address, food_name, food_photo, cooktime, hd_date, hd_cost, hd_star, hd_feeling, account_name FROM handmade_diary left join user_master on handmade_diary.email_address = user_master.email_address WHERE handmade_flag = 1 ORDER BY ld_regist_time DESC";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 /*

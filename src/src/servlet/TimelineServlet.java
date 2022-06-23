@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.HandmadeDiaryDAO;
+import dao.HdCommentDAO;
+import dao.HdReactionDAO;
 import dao.LdCommentDAO;
 import dao.LdJoin2DAO;
 import dao.LdReactionDAO;
@@ -36,7 +39,7 @@ public class TimelineServlet extends HttpServlet {
 //			return;
 //	}
 
-
+//----------------------------ランチ日記の情報-------------------------------------
 		//日記情報をゲットしてくる
 		LunchDiaryDAO LdDao = new LunchDiaryDAO();
 		ArrayList<AllColumnBeans> allLunch = LdDao.select();
@@ -54,33 +57,28 @@ public class TimelineServlet extends HttpServlet {
 		ArrayList<AllColumnBeans> LdComment = LdCDao.selectComment();
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("LdComment", LdComment);
-				/*
-		//		手作り日記の情報
-		//		手作り日記の情報を貰ってくる
-				HandmadeDiaryDAO HdDao = new HandmadeDiaryDAO();
-				ArrayList<HandmadeDiaryBeans> handmadeDiary = HdDao.select(new HandmadeDiaryBeans());
-				// 検索結果をリクエストスコープに格納する
-				request.setAttribute("handmadeDiary", handmadeDiary);
 
-				//手作り日記リアクション情報をゲットしてくる
-				HdReactionDAO HdRDao = new HdReactionDAO();
-				ArrayList<HandmadeReactionBeans> HdReaction = HdRDao.select(new HandmadeReactionBeans());
-				// 検索結果をリクエストスコープに格納する
-				request.setAttribute("HdReaction", HdReaction);
-
-				//手作り日記コメント情報をゲットしてくる
-				HdCommentDAO HdCDao = new HdCommentDAO();
-				ArrayList<HandmadeCommentBeans> HdComment = HdCDao.select(new HandmadeCommentBeans());
-				// 検索結果をリクエストスコープに格納する
-				request.setAttribute("HdComment", HdComment);*/
+//----------------------------手作り日記の情報-------------------------------------
+//		手作り日記の情報を貰ってくる
+		HandmadeDiaryDAO hdDao = new HandmadeDiaryDAO();
+	    ArrayList<AllColumnBeans> myHandmade = hdDao.select();
+	    // 検索結果をリクエストスコープに格納する
+	    request.setAttribute("myHandmade", myHandmade);
+//		手作り日記リアクション情報をゲットしてくる
+		LdJoin2DAO HdRDao = new LdJoin2DAO();
+		ArrayList<AllColumnBeans> hdReactionList = HdRDao.countReactionUser();
+		// 検索結果をリクエストスコープに格納する
+		request.setAttribute("hdReactionList", hdReactionList);
+	    //手作り日記コメント情報をゲットしてくる
+	 	HdCommentDAO HCDao = new HdCommentDAO();
+	 	ArrayList<AllColumnBeans> HdComment = HCDao.selectHdComment();
+//		検索結果をリクエストスコープに格納する
+	 	request.setAttribute("HdComment", HdComment);
 
 		//タイムラインページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/timeline.jsp");
 		dispatcher.forward(request, response);
 	}
-
-//	ランチリアクション、ランチコメント、
-
 
 
 	/**
@@ -88,15 +86,15 @@ public class TimelineServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//もしもログインしてなかったらログインサーブレットにリダイレクトする
-//		HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
 //		if (session.getAttribute("emailAddress") == null) {
 //			response.sendRedirect("/lunchBox/LoginServlet");
 //			return;
 //	}
 
-		HttpSession session = request.getSession();
+//		セッションにあるuserの情報を取得
 		UserMasterBeans user = (UserMasterBeans)session.getAttribute("user");
-//		リアクションの登録（インサート）を行うやつ
+//-----------------------リアクションの登録（インサート）を行うやつ----------------------------------
 		request.setCharacterEncoding("UTF-8");
 		Integer ldr_lunch_id = Integer.parseInt(request.getParameter("lunch_id"));
 		String ldr_email_address = user.getEmailAddress();
@@ -114,36 +112,34 @@ public class TimelineServlet extends HttpServlet {
 		}else {
 			System.out.println("失敗");
 		}
-//		Integer to_go = Integer.parseInt(request.getParameter("to_go"));
-//		Integer to_tell = Integer.parseInt(request.getParameter("to_tell"));
-//		Integer to_use = Integer.parseInt(request.getParameter("to_use"));
-
 		LdReactionDAO ldrDao = new LdReactionDAO();
 		ldrDao.insertLdReaction(ldr_lunch_id, ldr_email_address, to_go, to_tell, to_use);
-
-
-
-
-		//リクエストパラメータを取得する
-//		request.setCharacterEncoding("UTF-8");
-//		Integer to_go = Integer.parseInt(request.getParameter("to_go"));
-//		Integer to_tell_me = Integer.parseInt(request.getParameter("to_tell_me"));
-//		Integer to_use = Integer.parseInt(request.getParameter("to_use"));
-//
-////		LdReactionDAO ldRDao = new LdReactionDAO();
-////		if(LdRDao.insert(new LunchReactionBeans(to_go, to_tell_me, to_use))) {
-////			request.setAttribute("ldRDao", ldRDao);
-////		}else {
-////			request.setAttribute("ldRDao", "失敗！");
-////		}
-
-
+//-----------------------リアクションの登録（インサート）を行うやつ手作り記録------------------------------
+		request.setCharacterEncoding("UTF-8");
+		Integer hdr_lunch_id = Integer.parseInt(request.getParameter("handmade_id"));
+		String hdr_email_address = user.getEmailAddress();
+		Integer to_eat = 0;
+		Integer hdr_to_tell = 0;
+		Integer hdr_to_use = 0;
+//		ボタン押したか押していないかを取得
+		String hd_button =request.getParameter("hdbtn");
+		if(hd_button.equals("食べたい")) {
+			to_eat = 1;
+		}else if (hd_button.equals("教えて")) {
+			hdr_to_tell= 1;
+		}else if(hd_button.equals("参考にします")){
+			hdr_to_use = 1;
+		}else {
+			System.out.println("失敗");
+		}
+		HdReactionDAO hdrDao = new HdReactionDAO();
+		hdrDao.insertHdReaction(hdr_lunch_id, hdr_email_address, to_eat, hdr_to_tell, hdr_to_use);
 
 //		入力されたコメントを取得して登録するやつ
 		request.setCharacterEncoding("UTF-8");
 		String ldc_email_address = user.getEmailAddress();
-			Integer ldc_lunch_id = Integer.parseInt(request.getParameter("lunch_id"));
-			String ld_comment =request.getParameter("ld_comment");
+		Integer ldc_lunch_id = Integer.parseInt(request.getParameter("lunch_id"));
+		String ld_comment =request.getParameter("ld_comment");
 
 		LdCommentDAO ldcDao = new LdCommentDAO();
 		ldcDao.insertLdComment(0, ldc_lunch_id, ldc_email_address, ld_comment);
@@ -166,6 +162,22 @@ public class TimelineServlet extends HttpServlet {
 		ArrayList<AllColumnBeans> LdComment = LdCDao.selectComment();
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("LdComment", LdComment);
+//----------------------------手作り日記の情報-------------------------------------
+//		手作り日記の情報を貰ってくる
+		HandmadeDiaryDAO hdDao = new HandmadeDiaryDAO();
+	    ArrayList<AllColumnBeans> myHandmade = hdDao.select();
+	    // 検索結果をリクエストスコープに格納する
+	    request.setAttribute("myHandmade", myHandmade);
+//		手作り日記リアクション情報をゲットしてくる
+//		LdJoin2DAO LdRDao = new LdJoin2DAO();
+		ArrayList<AllColumnBeans> hdReactionList = LdRDao.countReactionUser();
+		// 検索結果をリクエストスコープに格納する
+		request.setAttribute("hdReactionList", hdReactionList);
+	    //手作り日記コメント情報をゲットしてくる
+	 	HdCommentDAO HCDao = new HdCommentDAO();
+	 	ArrayList<AllColumnBeans> HdComment = HCDao.selectHdComment();
+//		検索結果をリクエストスコープに格納する
+	 	request.setAttribute("HdComment", HdComment);
 
 		//タイムラインページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/timeline.jsp");
