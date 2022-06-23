@@ -42,13 +42,22 @@ th {
 	color: red;
 	font-size: 13px;
 }
+#required3{
+	color: red;
+	font-size: 13px;
+}
+#required4{
+	color: red;
+	font-size: 13px;
+
+}
 .smallMessage{
 	font-weight: normal;
 	font-size: 13px;
 }
 td input[type ="text"]{
-	width: 20em;
-	font-size: 15px;
+	width: 15em;
+	font-size: 18px;
 }
 
 td select{

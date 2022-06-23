@@ -11,16 +11,17 @@
 </head>
 <!------------ 画面に表示される部分 -------------------->
 <body>
+<main>
 <jsp:include page="header.jsp" />
 
 <h2>手作り日記新規登録</h2>
 
 <!------------------------ 手作り日記登録 ---------------------->
 <table>
-<form method="POST" action="/lunchBox/RegistHandmadeServlet"enctype="multipart/form-data" id = "registHdForm">
+<form method="POST" action="/lunchBox/RegistHandmadeServlet"enctype="multipart/form-data" name = "registHdForm" id = "registHdForm">
 	<tr>
-		<th>料理名</th>
-			<td><input type="text" name="foodName" value="" placeholder="例：オムライス"></td>
+		<th>料理名　<span class =required>必須</span></th>
+			<td><input type="text" name="foodName" value="" placeholder="例：オムライス"><div id = "required3"></div></td>
 	</tr>
 	<tr>
 		<th>写真</th>
@@ -41,7 +42,7 @@
 	</tr>
 	<tr>
 		<th>日付　<span class =required>必須</span></th>
-			<td><input type="date" name="date" required></td>
+			<td><input type="date" name="date" value = "${param.date}"><div id = "required4"></div></td>
 	</tr>
 	<tr>
 		<th>費用</th>
@@ -73,13 +74,13 @@
 	</tr>
 	<tr>
 		<th>感想（自由記入）</th>
-			<td><textarea name="feeling" placeholder="ここに記入してください"></textarea></td>
+			<td><textarea name="feeling" placeholder="ここに記入してください" value = "${param.feeling}"></textarea></td>
 	</tr>
 </form>
 </table>
 		<!-- 登録ボタン -->
-		<input type="submit" name="registNewAccount" value="登録する" class = "submitBtn" form = registHdForm><br>
+		<input type="submit" name="registNewAccount" value="登録する" class = "submitBtn" form = registHdForm onclick = "return hdCheck()"><br>
 
-
+</main>
 </body>
 </html>

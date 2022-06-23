@@ -68,7 +68,6 @@ public class RegistLunchServlet extends HttpServlet {
 		if(request.getParameter("star") != null) {
 			 star = Integer.parseInt(request.getParameter("star"));
 		}
-//		int star = Integer.parseInt(request.getParameter("star"));
 		String feeling = request.getParameter("feeling");
 
 		//画像の保存

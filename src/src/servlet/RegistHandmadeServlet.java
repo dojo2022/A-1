@@ -52,7 +52,10 @@ public class RegistHandmadeServlet extends HttpServlet {
 		 String cookTime = request.getParameter("cookTime");
 		 String date = request.getParameter("date");
 		 String cost = request.getParameter("cost");
-		 int star = Integer.parseInt(request.getParameter("star"));
+		 int star = 0;
+		 if(request.getParameter("star") != null) {
+			 star = Integer.parseInt(request.getParameter("star"));
+		 }
 		 String feeling = request.getParameter("feeling");
 
 

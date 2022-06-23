@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,11 +20,11 @@
 <form method="POST" action="/lunchBox/RegistLunchServlet" enctype="multipart/form-data" name = registLdForm id = registLdForm>
 	<tr>
 		<th>お店の名前　<span class =required>必須</span></th>
-			<td><input type="text" name="resName" value = ${param.resName}><div id ="required1"></div></td>
+			<td><input type="text" name="resName" value = "${param.resName}"><div id ="required1"></div></td>
 	</tr>
 	<tr>
 		<th>写真</th>
-			<td><input type="file" name="foodPhoto" accept="image/*" onchange="previewImage(this);"></td>
+			<td><input type="file" name="foodPhoto" accept="image/*" onchange="previewImage(this);" value = "${param.foodPhoto}"></td>
 	</tr>
 	<tr>
 		<th>プレビュー<br><span class = "smallMessage">自動表示されます</span></th>
@@ -53,22 +54,22 @@
 	</tr>
 	<tr>
 		<th>日付　<span class ="required">必須</span> </th>
-			<td><input type="date" name="date" required><div id = "required2"></div></td>
+			<td><input type="date" name="date"><div id = "required2" value = "${param.date}"></div></td>
 	</tr>
 	<tr>
 		<th>料理名</th>
-			<td><input type="text" name="foodName" value="" placeholder="例：オムライス"></td>
+			<td><input type="text" name="foodName" value = "${param.foodName}" placeholder="例：オムライス"></td>
 	</tr>
 	<tr>
 		<th>費用</th>
 			<td><select name="cost">
 				<option value="">選択してください</option>
-				<option value="～５００円">～５００円</option>
-				<option value="～８００円">～８００円</option>
-				<option value="～１０００円">～１０００円</option>
-				<option value="～１２００円">～１２００円</option>
-				<option value="～１５００円">～１５００円</option>
-				<option value="１５００円～">１５００円～</option>
+				<option value="～５００円"<c:if test=${test=="～５００円"}>selected </c:if>>～５００円</option>
+				<option value="～８００円"><c:if test=${test=="～８００円"}selected</c:if>～８００円</option>
+				<option value="～１０００円"><c:if test=${test=="～１０００円"}selected</c:if>～１０００円</option>
+				<option value="～１２００円"><c:if test=${test=="～１２００円"}selected</c:if>～１２００円</option>
+				<option value="～１５００円"><c:if test=${test=="～１５００円"}selected</c:if>～１５００円</option>
+				<option value="１５００円～"><c:if test=${test=="～８００円"}selected</c:if>１５００円～</option>
 			</select></td>
 	</tr>
 	<tr>
@@ -78,7 +79,7 @@
 				<option value="５分未満">５分未満</option>
 				<option value="５～１０分">５～１０分</option>
 				<option value="１０分～１５分">１０分～１５分</option>
-				<option value="１５分以上">１５分以上</option>
+				<option value="５～１０分">１５分以上</option>
 			</select></td>
 	</tr>
 	<tr>
@@ -110,13 +111,13 @@
     </tr>
     <tr>
 		<th>感想</th>
-			<td><textarea name="feeling"  placeholder="ここに記入してください"></textarea></td>
+			<td><textarea name="feeling"  placeholder="ここに記入してください" value = "${param.feeling}"></textarea></td>
 	</tr>
 </form>
 </table>
 
 		<!-- 登録ボタン -->
-		<input type="submit" name="registNewAccount" value="登録する"  class = "submitBtn" id = "submitBtn" form = "registLdForm" onclick="return check()"><br>
+		<input type="submit" name="registNewAccount" value="登録する"  class = "submitBtn" id = "submitBtn" form = "registLdForm" onclick="return ldCheck()"><br>
 
 <script type="text/javascript" src="js/diary_form.js"></script>
 </main>
