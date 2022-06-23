@@ -18,8 +18,8 @@ public class HandmadeDiaryDAO {
 
 	//手作り日記の検索を行うメソッド（タイムラインの検索ボックス用）
 	public ArrayList<HandmadeDiaryBeans> selectHandmade(
-			String cooktime,
-			String hdFoodName
+			String hdFoodName,
+			String cooktime
 			) {
 
 		try {
@@ -34,8 +34,9 @@ public class HandmadeDiaryDAO {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			//SQL文を完成させる。
-			pStmt.setString(1, "%" + cooktime + "%");
-			pStmt.setString(2, "%" + hdFoodName +"%");
+			pStmt.setString(1, "%" + hdFoodName +"%");
+			pStmt.setString(2, "%" + cooktime + "%");
+
 
 			//SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
@@ -86,6 +87,7 @@ public class HandmadeDiaryDAO {
 	//手作り日記の全件検索を行うメソッド(タイムライン表示用)
 	public ArrayList<AllColumnBeans> select() {
 
+
 		try {
 			//JDBCドライバを読み込む
 			Class.forName("org.h2.Driver");
@@ -94,7 +96,7 @@ public class HandmadeDiaryDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data","sa","");
 
 			//SQL文を準備する ここ変える
-			String sql = "SELECT handmade_id, user_master.emaill_address, food_type, food_name, food_photo, cooktime, date, cost, star, feeling, account_name FROM handmade_diary left join user_master on handmade_diary.email_address = user_master.email_address WHERE handmade_flag = 1 ORDER BY ld_regist_time DESC";
+			String sql = "SELECT handmade_id, user_master.emaill_address, food_name, food_photo, cooktime, date, cost, star, feeling, account_name FROM handmade_diary left join user_master on handmade_diary.email_address = user_master.email_address WHERE handmade_flag = 1 ORDER BY ld_regist_time DESC";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 /*
@@ -161,19 +163,85 @@ public class HandmadeDiaryDAO {
 						return Allhandmade;
 					}
 
+	//手作り日記の登録を行うメソッド
+	public boolean insertHd(
+				String emailAddress,
+				String hdFoodName,
+				String image,
+				String cookTime,
+				String hdDate,
+				String hdCost,
+				int hdStar,
+				String hdFeeling) {
+
+			boolean result = false;
+
+			try {
+				//JDBCドライバを読み込む
+				Class.forName("org.h2.Driver");
+
+
+				//データベースに接続する
+				conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data","sa","");
+
+				//SQL文を準備する
+				String sql = "INSERT INTO handmade_diary (email_address, food_name, food_photo, cookTime, hd_date, hd_cost, hd_star, hd_feeling) VALUES(?,?,?,?,?,?,?,?)";
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+
+				//SQL文を完成させる
+				pStmt.setString(1, emailAddress);
+				pStmt.setString(2, hdFoodName);
+				pStmt.setString(3, image);
+				pStmt.setString(4, cookTime);
+				pStmt.setString(5, hdDate);
+				pStmt.setString(6, hdCost);
+				pStmt.setInt(7, hdStar);
+				pStmt.setString(8, hdFeeling);
+
+
+				if(pStmt.executeUpdate() == 1) {
+					result = true;
+				}
+			}
+
+				catch (SQLException e) {
+					e.printStackTrace();
+					Allhandmade = null;
+				}
+				catch (ClassNotFoundException e) {
+					e.printStackTrace();
+					Allhandmade = null;
+				}
+
+				finally {
+					// データベースを切断する
+					if (conn != null) {
+						try {
+							conn.close();
+						}
+						catch (SQLException e) {
+							e.printStackTrace();
+							Allhandmade = null;
+						}
+					}
+				}
+					// 結果を返す
+					return result;
+				}
+
+
 	//手作り日記の更新を行うメソッド
 	public boolean updateHd(
 			int handmadeId,
-			String hdFoodType,
 			String hdFoodName,
-			String hdFoodphoto,
-			String hdCategory,
+			String image,
+			String cooktime,
 			String hdDate,
 			String hdCost,
-			String cooktime,
 			int hdStar,
 			String hdFeeling){
-			boolean result = false;
+
+		boolean result = false;
 
 		try {
 		//JDBCドライバを読み込む
@@ -185,21 +253,19 @@ public class HandmadeDiaryDAO {
 
 
 		//SQL文を準備する
-		String sql = "UPDATE handmade_diary SET food_type=?, food_name=?, hd_food_photo=?, cookTime=?, date=?, cost=?, star=?, feeling=? WHERE handmade_id=?";
+		String sql = "UPDATE handmade_diary SET food_name=?, food_photo=?, cookTime=?, hd_date=?, hd_cost=?, hd_star=?, hd_feeling=? WHERE handmade_id=?";
 		PreparedStatement pStmt = conn.prepareStatement(sql);
 
 
 		//SQL文を完成させる。
-		pStmt.setString(1, hdFoodType);
-		pStmt.setString(2, hdFoodName);
-		pStmt.setString(3, hdFoodphoto);
-		pStmt.setString(4, cooktime);
+		pStmt.setString(1, hdFoodName);
+		pStmt.setString(2, image);
+		pStmt.setString(3, cooktime);
+		pStmt.setString(4, hdDate);
 		pStmt.setString(5, hdDate);
-		pStmt.setString(6, hdCategory);
-		pStmt.setString(7, hdDate);
-		pStmt.setString(8, hdCost);
-		pStmt.setInt(9, hdStar);
-		pStmt.setString(10, hdFeeling);
+		pStmt.setString(6, hdCost);
+		pStmt.setInt(7, hdStar);
+		pStmt.setString(8, hdFeeling);
 
 
 		//SQL文を実行させる。
@@ -232,7 +298,7 @@ public class HandmadeDiaryDAO {
 
 
 	//手作り日記の論理削除を行うメソッド
-	public boolean updateHdFlag(int handmadeFlag) {
+	public boolean updateHdFlag(int handmadeId) {
 		boolean result = false;
 
 		try {
@@ -250,7 +316,7 @@ public class HandmadeDiaryDAO {
 
 
 			//SQL文を実行する。
-			pStmt.setInt(0,handmadeFlag);
+			pStmt.setInt(0,handmadeId);
 			if (pStmt.executeUpdate() == 1) {
 				result = true;
 			}
@@ -278,4 +344,6 @@ public class HandmadeDiaryDAO {
 			return result;
 		}
 	}
+
+
 
