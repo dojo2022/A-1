@@ -61,7 +61,6 @@ public class MyPageServlet extends HttpServlet {
 		//メールアドレスを引数にして手作り日記の情報を取ってくる-------------------------------------
 
 	     ArrayList<AllColumnBeans> myHandmade = mDao.selectMyHd(emailAddress);
-		 System.out.print(myHandmade);
 	     if(myHandmade.size()==0) {
    			   request.setAttribute("myHandmade", null);
 		   }
@@ -75,12 +74,30 @@ public class MyPageServlet extends HttpServlet {
 	 	// 検索結果をリクエストスコープに格納する
 	 			request.setAttribute("HdComment", HdComment);
 
+	   //メールアドレスを引数にして行きたい場所リストの情報を取ってくる-------------------------------------
+
+	 	ArrayList<AllColumnBeans> myList = mDao.selectMyList(emailAddress);
+	 	if(myList.size()==0) {
+	 	   	   request.setAttribute("myList", null);
+	 			   }
+	    else {
+	   // 検索結果をリクエストスコープに格納する
+	 		  request.setAttribute("myList", myList);
+	 			   }
+					/*  //行きたい場所リストのリアクション情報をゲットしてくる
+					  HdCommentDAO HCDao = new HdCommentDAO();
+					  ArrayList<AllColumnBeans> HdComment = HCDao.selectHdComment();
+					   // 検索結果をリクエストスコープに格納する
+					 		  request.setAttribute("HdComment", HdComment);
+					*/
+
 
 
 		 //JSP表示
 		RequestDispatcher dispatcher =  request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp");
 		   dispatcher.forward(request, response);
 	 }
+
 
 
 

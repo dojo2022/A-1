@@ -228,9 +228,45 @@
 
    <!-- 行きたい場所リストタブ  ----------------------------------------------------->
   <div class="panel">
-  		行きたい場所リストhogehoge
+  		行きたい場所リスト
+ <c:if test="${myList == null }">
+			登録はありません。
+  </c:if>
+ 		<c:forEach var="e" items="${myList}" >
+		<form method="POST" action="RegistListServlet">
+		<table>
+				<tr>
+					<th>お店の名前</th>
+					<th>ジャンル</th>
+					<th>メモ</th>
+					<th>リアクション</th>
+					<th>編集</th>
+				</tr>
+				<c:forEach var="e" items="${list}" >
+
+					<tr class="list_item">
+						<td width ="140px">${e.listResName}</td>
+						<td width ="100px">${e.listCategory}</td>
+						<td width ="120px">${e.togoMemo}</td>
+						<%-- <td width ="260px">${e.}<br>${e.}<br>${e.}</td> --%>
+						<td >
+				<form method="POST" action="/simpleBC/DetailServlet">
+				<input type="hidden" name="list_id" value="${e.listId}">
+				<input type="hidden" name="list_category" value="${e.listCategory}">
+				<input type="hidden" name="togo_memo" value="${e.togoMemo}">
+						<input type="submit" name="SUBMIT" value="詳細">
+							</form>
+						</td>
+					</tr>
+
+				</c:forEach>
+			</table>
 
 
+
+		</form>
+		</c:forEach>
+  </div>
 
   		<!-- 行きたい場所リスト更新編集 -->
 		<a href="/lunchBox/EditListServlet" class="editLunch"><button type="button">編集</button></a>
