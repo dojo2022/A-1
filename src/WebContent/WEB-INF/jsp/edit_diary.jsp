@@ -163,8 +163,8 @@
 
 		<input type="submit" name="updateButton" value="更新する"><br>
 		<input type="submit" name="deleteButton" value="削除する"><br>
-	</form> -->
-</div>
+	</form>
+</div>-->
 </form>
 
 </body>
