@@ -123,14 +123,14 @@ public class HandmadeDiaryDAO {
 				AllColumnBeans hdd = new AllColumnBeans();
 
 				hdd.setHandmadeId(rs.getInt("handmade_id"));
-				hdd.setEmailAddress(rs.getString("user_master.emailAddress"));
+				hdd.setEmailAddress(rs.getString("user_master.email_address"));
 				hdd.setHdFoodName(rs.getString("food_name"));
 				hdd.setHdFoodPhoto(rs.getString("food_photo"));
 				hdd.setCooktime(rs.getString("cooktime"));
-				hdd.setHdDate(rs.getString("date"));
-				hdd.setHdCost(rs.getString("cost"));
-				hdd.setHdStar(rs.getInt("star"));
-				hdd.setHdFeeling(rs.getString("feeling"));
+				hdd.setHdDate(rs.getString("hd_date"));
+				hdd.setHdCost(rs.getString("hd_cost"));
+				hdd.setHdStar(rs.getInt("hd_star"));
+				hdd.setHdFeeling(rs.getString("hd_feeling"));
 				hdd.setAccountName(rs.getString("account_name"));;
 
 

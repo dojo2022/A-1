@@ -9,14 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import dao.HandmadeDiaryDAO;
-import dao.LdCommentDAO;
 import dao.LunchDiaryDAO;
 import model.AllColumnBeans;
-import model.HandmadeDiaryBeans;
-import model.UserMasterBeans;
 /**
  * Servlet implementation class SearchServlet
  */
@@ -62,51 +57,79 @@ public class SearchServlet extends HttpServlet {
 			ArrayList<AllColumnBeans> searchLunch =LdDao.selectLunch(distance,time,category,cost,res_name);
 
 			request.setAttribute("searchLunch", searchLunch);
+
 			// 結果ページにフォワードする
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/search_result.jsp");
 			dispatcher.forward(request, response);
-
-		}else {
-			//リクエストパラメータ（検索ボックスに入力された文字列の情報）を取得する
-			request.setCharacterEncoding("UTF-8");
-			String time = request.getParameter("time");
-			String food_name = request.getParameter("food_name");
-			//検索処理を行う
-			HandmadeDiaryDAO HdDao = new HandmadeDiaryDAO();
-			ArrayList<HandmadeDiaryBeans> handmadeDiary =HdDao.selectHandmade(time,food_name);
-
-			request.setAttribute("handmadeDiary", handmadeDiary);
-			// 結果ページにフォワードする
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/search_result.jsp");
-			dispatcher.forward(request, response);
+//			検索が行われたら、その情報をフォワードした際に表示できるようにする-------------
+//			//日記情報をゲットしてくる
+////			LunchDiaryDAO LdDao = new LunchDiaryDAO();
+//			ArrayList<AllColumnBeans> allLunch = LdDao.select();
+//			// 検索結果をリクエストスコープに格納する
+//			request.setAttribute("allLunch", allLunch);
+//
+//			//ランチ日記リアクション情報をゲットしてくる
+//			LdJoin2DAO LdRDao = new LdJoin2DAO();
+//			ArrayList<AllColumnBeans> ldReactionList = LdRDao.countReactionUser();
+//			// 検索結果をリクエストスコープに格納する
+//			request.setAttribute("ldReactionList", ldReactionList);
+//
+//			//ランチ日記コメント情報をゲットしてくる
+//			LdJoin2DAO LdCDao = new LdJoin2DAO();
+//			ArrayList<AllColumnBeans> LdComment = LdCDao.selectComment();
+//			// 検索結果をリクエストスコープに格納する
+//			request.setAttribute("LdComment", LdComment);
+//	//----------------------------手作り日記の情報-------------------------------------
+////			手作り日記の情報を貰ってくる
+//			HandmadeDiaryDAO hdDao = new HandmadeDiaryDAO();
+//		    ArrayList<AllColumnBeans> myHandmade = hdDao.select();
+//		    // 検索結果をリクエストスコープに格納する
+//		    request.setAttribute("myHandmade", myHandmade);
+////			手作り日記リアクション情報をゲットしてくる
+////			LdJoin2DAO LdRDao = new LdJoin2DAO();
+//			ArrayList<AllColumnBeans> hdReactionList = LdRDao.countReactionUser();
+//			// 検索結果をリクエストスコープに格納する
+//			request.setAttribute("hdReactionList", hdReactionList);
+//		    //手作り日記コメント情報をゲットしてくる
+//		 	HdCommentDAO HCDao = new HdCommentDAO();
+//		 	ArrayList<AllColumnBeans> HdComment = HCDao.selectHdComment();
+////			検索結果をリクエストスコープに格納する
+//		 	request.setAttribute("HdComment", HdComment);
+//
+//			// 結果ページにフォワードする
+//			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/search_result.jsp");
+//			dispatcher.forward(request, response);
+//
+//		}else {
+//			//リクエストパラメータ（検索ボックスに入力された文字列の情報）を取得する
+//			request.setCharacterEncoding("UTF-8");
+//			String time = request.getParameter("time");
+//			String food_name = request.getParameter("food_name");
+//			//検索処理を行う
+//			HandmadeDiaryDAO HdDao = new HandmadeDiaryDAO();
+//			ArrayList<HandmadeDiaryBeans> handmadeDiary =HdDao.selectHandmade(time,food_name);
+//
+//			request.setAttribute("handmadeDiary", handmadeDiary);
+//			// 結果ページにフォワードする
+//			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/search_result.jsp");
+//			dispatcher.forward(request, response);
 		}
 
 
-		//リクエストパラメータを取得する
+
+
 //		request.setCharacterEncoding("UTF-8");
-//		Integer to_go = Integer.parseInt(request.getParameter("to_go"));
-//		Integer to_tell_me = Integer.parseInt(request.getParameter("to_tell_me"));
-//		Integer to_use = Integer.parseInt(request.getParameter("to_use"));
+////		Integer ld_comment_id = Integer.parseInt(request.getParameter("ld_comment_id"));
+//		HttpSession session = request.getSession();
+//		UserMasterBeans user = (UserMasterBeans)session.getAttribute("user");
+//		String email_address = user.getEmailAddress();
+//		Integer lunch_id = Integer.parseInt(request.getParameter("lunch_id"));
+//		String ld_comment =request.getParameter("ld_comment");
 //
-////		LdReactionDAO ldRDao = new LdReactionDAO();
-////		if(LdRDao.insert(new LunchReactionBeans(to_go, to_tell_me, to_use))) {
-////			request.setAttribute("ldRDao", ldRDao);
-////		}else {
-////			request.setAttribute("ldRDao", "失敗！");
-////		}
-
-		request.setCharacterEncoding("UTF-8");
-//		Integer ld_comment_id = Integer.parseInt(request.getParameter("ld_comment_id"));
-		HttpSession session = request.getSession();
-		UserMasterBeans user = (UserMasterBeans)session.getAttribute("user");
-		String email_address = user.getEmailAddress();
-		Integer lunch_id = Integer.parseInt(request.getParameter("lunch_id"));
-		String ld_comment =request.getParameter("ld_comment");
-
-
-		LdCommentDAO ldcDao = new LdCommentDAO();
-//		ArrayList<AllColumnBeans> ldCommentList = ldcDao.selectComment(new AllColumnBeans(ld_comment_id,email_address,lunch_id,ld_comment));
-		ldcDao.insertLdComment(0, lunch_id, email_address, ld_comment);
+//
+//		LdCommentDAO ldcDao = new LdCommentDAO();
+////		ArrayList<AllColumnBeans> ldCommentList = ldcDao.selectComment(new AllColumnBeans(ld_comment_id,email_address,lunch_id,ld_comment));
+//		ldcDao.insertLdComment(0, lunch_id, email_address, ld_comment);
 
 
 	}

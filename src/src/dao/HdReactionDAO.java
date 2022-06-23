@@ -3,24 +3,75 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import model.HandmadeReactionBeans;
+import model.AllColumnBeans;
 
 public class HdReactionDAO {
 
 		Connection conn = null;
-		ArrayList<HandmadeReactionBeans> hdReaction = new
-		ArrayList<HandmadeReactionBeans>();
+//		ArrayList<HandmadeReactionBeans> hdReaction = new;
+		ArrayList<AllColumnBeans> hdReactionList = new ArrayList<AllColumnBeans>();
 
 	//ランチ日記のスタンプの件数とユーザーの検索を行うメソッド
-	public ArrayList<HandmadeReactionBeans> selectHdReaction(int hdReactionId, int handmadeId, String emailAddress, int hdToEat, int hdToTell, int hdToUse) {
+//	public ArrayList<HandmadeReactionBeans> selectHdReaction(int hdReactionId, int handmadeId, String emailAddress, int hdToEat, int hdToTell, int hdToUse) {
+//
+//		return null;
+//
+//	}
 
-		return null;
+	//リアクションボタンの人数を数えるメソッド
+	public ArrayList<AllColumnBeans> countReactionUser(){
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
 
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
+
+			// SQL文を準備する<<ここに改造を施す>>
+			String sql = "SELECT handmade_diary.handmade_id, SUM(hd_to_eat), SUM(hd_to_tell), SUM(hd_to_use) FROM HANDMADE_DIARY LEFT JOIN user_master ON handmade_diary.email_address = user_master.email_address LEFT JOIN handmade_reaction ON handmade_diary.handmade_id = handmade_reaction.handmade_id WHERE handmade_diary.handmade_flag = 1 group by handmade_diary.handmade_id ORDER BY handmade_diary.ld_regist_time DESC ";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			//SQL文を実行
+			ResultSet rs = pStmt.executeQuery();
+
+			while(rs.next()) {
+				AllColumnBeans reacHd = new AllColumnBeans();
+				reacHd.setHandmadeId(rs.getInt("handmade_id"));
+				reacHd.setCountLdToGo(rs.getInt("SUM(hd_to_eat)"));
+				reacHd.setCountLdToTell(rs.getInt("SUM(hd_to_tell)"));
+				reacHd.setCountLdToUse(rs.getInt("SUM(hd_to_use)"));
+
+				hdReactionList.add(reacHd);
+			}
+
+
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			hdReactionList = null;
+		}
+		catch(ClassNotFoundException e) {
+			e.printStackTrace();
+			hdReactionList = null;
+		}
+
+		finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					hdReactionList = null;
+				}
+			}
+		}
+
+		return hdReactionList;
 	}
-
 	//ランチ日記のスタンプを登録するメソッド
 	public boolean insertHdReaction(int handmadeId, String emailAddress, int hdToEat, int hdToTell, int hdToUse) {
 

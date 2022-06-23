@@ -65,7 +65,7 @@ public class TimelineServlet extends HttpServlet {
 	    // 検索結果をリクエストスコープに格納する
 	    request.setAttribute("myHandmade", myHandmade);
 //		手作り日記リアクション情報をゲットしてくる
-		LdJoin2DAO HdRDao = new LdJoin2DAO();
+	    HdReactionDAO HdRDao = new HdReactionDAO();
 		ArrayList<AllColumnBeans> hdReactionList = HdRDao.countReactionUser();
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("hdReactionList", hdReactionList);
@@ -169,8 +169,8 @@ public class TimelineServlet extends HttpServlet {
 	    // 検索結果をリクエストスコープに格納する
 	    request.setAttribute("myHandmade", myHandmade);
 //		手作り日記リアクション情報をゲットしてくる
-//		LdJoin2DAO LdRDao = new LdJoin2DAO();
-		ArrayList<AllColumnBeans> hdReactionList = LdRDao.countReactionUser();
+	    HdReactionDAO HdRDao = new HdReactionDAO();
+		ArrayList<AllColumnBeans> hdReactionList = HdRDao.countReactionUser();
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("hdReactionList", hdReactionList);
 	    //手作り日記コメント情報をゲットしてくる
