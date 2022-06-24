@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>検索結果|LunchBox</title>
 <link href="css/timeline.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -26,7 +26,7 @@
 	${e.distance}<br>
 	${e.ldStar}<br>
 	${e.ldFeeling}<br>
-<%--   	<input type="hidden" name="lunch_id" value="${e.lunchId}">
+  	<input type="hidden" name="lunch_id" value="${e.lunchId}">
 	<c:forEach var="lc" items="${LdComment}">
 	<c:if test="${lc.lunchId == e.lunchId}">
 		${lc.accountName}：
@@ -45,7 +45,7 @@
 		<input type="submit" name="to" value="行きたい">
 		<input type="submit" name="to" value="教えて">
 		<input type="submit" name="to" value="参考にします"><br>
- --%></form>
+</form>
 </c:forEach>
 <c:forEach var="e" items="${Handmade}" >
 <form method="POST" action="TimelineServlet">
