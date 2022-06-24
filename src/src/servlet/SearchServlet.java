@@ -67,12 +67,12 @@ public class SearchServlet extends HttpServlet {
 			return;
 		}else {
 			String time = request.getParameter("time");
-			String foodName = request.getParameter("food_name");
+			String foodName = request.getParameter("foodName");
 
 			HandmadeDiaryDAO hdDao = new HandmadeDiaryDAO();
-			ArrayList<AllColumnBeans> Handmade = hdDao.selectHandmade(time, foodName);
-			/*System.out.println(searchLunch.size());*/
-			request.setAttribute("Handmade", Handmade);
+			ArrayList<AllColumnBeans> handmade = hdDao.selectHandmade(time, foodName);
+			System.out.println(handmade.size());
+			request.setAttribute("handmade", handmade);
 
 			// 結果ページにフォワードする
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/search_result.jsp");

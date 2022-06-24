@@ -12,13 +12,13 @@ import model.AllColumnBeans;
 public class HandmadeDiaryDAO {
 
 	Connection conn = null;
-	ArrayList<AllColumnBeans> Handmade = new ArrayList<AllColumnBeans>();
+	ArrayList<AllColumnBeans> handmade = new ArrayList<AllColumnBeans>();
 	ArrayList<AllColumnBeans> Allhandmade = new ArrayList<AllColumnBeans>();
 
 	//手作り日記の検索を行うメソッド（タイムラインの検索ボックス用）
 	public ArrayList<AllColumnBeans> selectHandmade(
-			String hdFoodName,
-			String cooktime
+			String cooktime ,
+			String hdFoodName
 			) {
 
 		try {
@@ -30,11 +30,12 @@ public class HandmadeDiaryDAO {
 
 			//SQL文を準備する
 			String sql = "SELECT handmade_id, user_master.email_address,food_photo, hd_date, food_name, hd_cost, hd_star, hd_feeling, cooktime, user_master.account_name FROM handmade_diary LEFT JOIN user_master ON user_master.email_address = handmade_diary.email_address WHERE food_name LIKE ? AND cooktime LIKE ?  AND handmade_flag = 1 ORDER BY ld_regist_time DESC";
+			System.out.println(sql);
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			//SQL文を完成させる。
-			pStmt.setString(1, "%" + hdFoodName +"%");
-			pStmt.setString(2, "%" + cooktime + "%");
+			pStmt.setString(1, "%" + hdFoodName.trim() +"%");
+			pStmt.setString(2, "%" + cooktime.trim() + "%");
 
 
 			//SQL文を実行し、結果表を取得する
@@ -43,7 +44,6 @@ public class HandmadeDiaryDAO {
 			// 結果表をコレクションにコピーする
 			while(rs.next()) {
 				AllColumnBeans hdd = new AllColumnBeans();
-					System.out.println("はいってます");
 					hdd.setHandmadeId(rs.getInt("handmade_id"));
 					hdd.setEmailAddress(rs.getString("user_master.email_address"));
 					hdd.setHdFoodPhoto(rs.getString("food_photo"));
@@ -55,16 +55,16 @@ public class HandmadeDiaryDAO {
 					hdd.setCooktime(rs.getString("cooktime"));
 					hdd.setAccountName(rs.getString("user_master.account_name"));
 
-					Handmade.add(hdd);
+					handmade.add(hdd);
 			}
 		}
 			catch (SQLException e) {
 				e.printStackTrace();
-				Handmade = null;
+				handmade = null;
 			}
 			catch (ClassNotFoundException e) {
 				e.printStackTrace();
-				Handmade = null;
+				handmade = null;
 			}
 
 		finally {
@@ -75,12 +75,12 @@ public class HandmadeDiaryDAO {
 				}
 				catch (SQLException e) {
 					e.printStackTrace();
-					Handmade = null;
+					handmade = null;
 				}
 			}
 	    }
 		// 結果を返す
-				return Handmade;
+				return handmade;
 			}
 
 

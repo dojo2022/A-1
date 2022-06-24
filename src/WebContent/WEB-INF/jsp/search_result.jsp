@@ -47,7 +47,7 @@
 		<input type="submit" name="to" value="参考にします"><br>
 </form>
 </c:forEach>
-<c:forEach var="e" items="${Handmade}" >
+<c:forEach var="e" items="${handmade}" >
 <form method="POST" action="TimelineServlet">
 		${e.handmadeId}<br>
 		${e.accountName}<br>
