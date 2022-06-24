@@ -100,7 +100,7 @@ ${comment_result}
 	${e.accountName}<br>
 	${e.ldFoodType}<br>
 	${e.ldResName}<br>
-	${e.ldFoodPhoto}<br>
+	<img src= "${e.ldFoodPhoto}"><br>
 	${e.ldCategory}<br>
 	${e.style}<br>
 	${e.ldDate}<br>

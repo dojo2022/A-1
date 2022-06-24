@@ -11,7 +11,6 @@
 <body>
 <jsp:include page="header.jsp" />
 <main>
-テストだよおお
 <c:forEach var="e" items="${searchLunch}" >
 <form method="POST" action="TimelineServlet">
 	${e.accountName}<br>
@@ -60,7 +59,7 @@
 		${e.hdFeeling}<br>
 		${e.cooktime}<br>
 		${e.ldRegistTime}<br>
-<%-- 	<input type="hidden" name="handmade_id" value="${e.handmadeId}">
+<input type="hidden" name="handmade_id" value="${e.handmadeId}">
 	<c:forEach var="hc" items="${HdComment}">
 	<c:if test="${hc.handmadeId == e.handmadeId}">
 		${hc.accountName}：
@@ -79,7 +78,7 @@
 		<input type="submit" name="hdbtn" value="食べたい">
 		<input type="submit" name="hdbtn" value="教えて">
 		<input type="submit" name="hdbtn" value="参考にします"><br>
- --%>		</form>
+</form>
 </c:forEach>
 </main>
 </body>
