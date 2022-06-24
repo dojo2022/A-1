@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,9 +11,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import dao.HdCommentDAO;
+import dao.HdReactionDAO;
+import dao.LdJoin2DAO;
 import dao.LunchDiaryDAO;
+import dao.MyPageDAO;
+import model.AllColumnBeans;
+import model.UserMasterBeans;
 
 /**
  * Servlet implementation class EditLunchServlet
@@ -63,8 +71,8 @@ public class EditLunchServlet extends HttpServlet {
 		String distance = request.getParameter("distance");
 		int star =0;
 		//nullのときにparseIntするせいでエラー？
-		if(request.getParameter("star") != null) {
-			 star = Integer.parseInt(request.getParameter("star"));
+		if(request.getParameter("Star") != null) {
+			 star = Integer.parseInt(request.getParameter("Star"));
 			 }
 		String feeling = request.getParameter("feeling");
 
@@ -94,9 +102,9 @@ public class EditLunchServlet extends HttpServlet {
 				}
 
 			}
-
+//マイページJSPの<input type="hidden" name="lunch_id" value="${e.lunchId}">のname＝””中の文字がリクエストパラメータ取得の青い文字↓
 			request.setCharacterEncoding("UTF-8");
-			 int lunchId = Integer.parseInt(request.getParameter("lunchId"));
+			 int lunchId = Integer.parseInt(request.getParameter("lunch_id"));
 			    String ldFoodType = request.getParameter("ldFoodType");
 			 	String resName = request.getParameter("resName");
 				String foodPhoto = request.getParameter("foodPhoto");
@@ -109,8 +117,8 @@ public class EditLunchServlet extends HttpServlet {
 				String distance = request.getParameter("distance");
 				int star =0;
 				//nullのときにparseIntするせいでエラー？
-				if(request.getParameter("star") != null) {
-					 star = Integer.parseInt(request.getParameter("star"));
+				if(request.getParameter("Star") != null) {
+					 star = Integer.parseInt(request.getParameter("Star"));
 					 }
 				String feeling = request.getParameter("feeling");
 
@@ -134,14 +142,13 @@ public class EditLunchServlet extends HttpServlet {
 		 LunchDiaryDAO ldDao = new LunchDiaryDAO();
 
 
-		if (request.getParameter("updateButton").equals("更新する")) {
+		if (request.getParameter("updateButton") != null) {
 			boolean ans = ldDao.updateLd(lunchId,ldFoodType,resName, foodPhoto, category, style, date,foodName, cost,time,distance, star, feeling);
 
 		//更新成功したら
 		if(ans == true) {
 			request.setAttribute("msg","更新が完了しました");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp");
-			dispatcher.forward(request, response);
+
 		//更新が失敗したら
 		}else {
 			request.setAttribute("msg","更新失敗しました");
@@ -151,15 +158,16 @@ public class EditLunchServlet extends HttpServlet {
 			}
 		}
 
-		else {
+
+
+		else if (request.getParameter("deleteButton") != null){
 			//DAOに削除してねって依頼をする
 			boolean ans = ldDao.updateLdFlag(lunchId);
 
 			//論理削除成功時
 			if(ans == true) {
 				request.setAttribute("msg","削除が完了しました");
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp");
-				dispatcher.forward(request, response);
+
 
 			//論理削除失敗時
 			}else {
@@ -171,13 +179,122 @@ public class EditLunchServlet extends HttpServlet {
 			}
 
 
+		//sessionからメールアドレスの情報を取ってくる
+		 HttpSession session = request.getSession();
+		 UserMasterBeans user = (UserMasterBeans) session.getAttribute("user");
+		 String emailAddress = user.getEmailAddress();
+
+		//メールアドレスを引数にしてランチ日記の情報を取ってくる-------------------------------------
+	     MyPageDAO mDao = new MyPageDAO();
+	     ArrayList<AllColumnBeans> myLunch = mDao.selectLd(emailAddress);
+	     if(myLunch.size()==0) {
+				request.setAttribute("myLunch", null);
+			}
+			else {
+		// 検索結果をリクエストスコープに格納する
+				request.setAttribute("myLunch", myLunch);
+			}
+  	//ランチ日記コメント情報をゲットしてくる
+		 LdJoin2DAO LdCDao = new LdJoin2DAO();
+		 ArrayList<AllColumnBeans> LdComment = LdCDao.selectComment();
+		 request.setAttribute("LdComment", LdComment);
+
+		//メールアドレスを引数にしてランチ日記リアクション情報をゲットしてくる------------------------------------
+			LdJoin2DAO LdRDao = new LdJoin2DAO();
+			ArrayList<AllColumnBeans> ldReactionList = LdRDao.countReactionUser();
+		// 検索結果をリクエストスコープに格納する
+			request.setAttribute("ldReactionList", ldReactionList);
+
+
+			/*		ArrayList<AllColumnBeans>myLdReaction = mDao.countMyLdReaction(emailAddress);
+
+			// 検索結果をリクエストスコープに格納する
+				        request.setAttribute("myLdReaction",myLdReaction);
+			*/
+
+
+
+		//メールアドレスを引数にして手作り日記の情報を取ってくる-------------------------------------
+
+	     ArrayList<AllColumnBeans> myHandmade = mDao.selectMyHd(emailAddress);
+	     if(myHandmade.size()==0) {
+ 			   request.setAttribute("myHandmade", null);
+		   }
+	     else {
+	    // 検索結果をリクエストスコープに格納する
+		       request.setAttribute("myHandmade", myHandmade);
+		   }
+	    //手作り日記コメント情報をゲットしてくる
+	 	HdCommentDAO HCDao = new HdCommentDAO();
+	 	 ArrayList<AllColumnBeans> HdComment = HCDao.selectHdComment();
+	 	// 検索結果をリクエストスコープに格納する
+	 			request.setAttribute("HdComment", HdComment);
+//	 	手作り日記リアクション情報をゲットしてくる
+	 	 HdReactionDAO HdRDao = new HdReactionDAO();
+	 	 ArrayList<AllColumnBeans> hdReactionList = HdRDao.countReactionUser();
+	 	// 検索結果をリクエストスコープに格納する
+	 			request.setAttribute("hdReactionList", hdReactionList);
+
+	 			//メールアドレスを引数にして行きたい場所リストの情報を取ってくる-------------------------------------
+
+	 	ArrayList<AllColumnBeans> myList = mDao.selectMyList(emailAddress);
+	 	if(myList.size()==0) {
+	 	   	   request.setAttribute("myList", null);
+	 			   }
+	    else {
+	   // 検索結果をリクエストスコープに格納する
+	 		  request.setAttribute("myList", myList);
+	 			   }
+					/*  //行きたい場所リストのリアクション情報をゲットしてくる
+					  HdCommentDAO HCDao = new HdCommentDAO();
+					  ArrayList<AllColumnBeans> HdComment = HCDao.selectHdComment();
+					   // 検索結果をリクエストスコープに格納する
+					 		  request.setAttribute("HdComment", HdComment);
+					*/
+
 		//タイムラインに遷移
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp");
 			dispatcher.forward(request, response);
 			return;
+	}
+
+
+
+		//ファイルの名前を取得してくる
+		private String getFileName(Part foodPhoto) {
+		    String name = null;
+		    for (String dispotion : foodPhoto.getHeader("Content-Disposition").split(";")) {
+		        if (dispotion.trim().startsWith("filename")) {
+		            name = dispotion.substring(dispotion.indexOf("=") + 1).replace("\"", "").trim();
+		            name = name.substring(name.lastIndexOf("\\") + 1);
+		            break;
+		        }
+		    }
+			return name;
+			}
 		}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+		//タイムラインに遷移
+			/*RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
+
+*//*
 		//ファイルの名前を取得してくる
 				private String getFileName(Part foodPhoto) {
 				    String name = null;
@@ -193,7 +310,7 @@ return name;
 		}
 }
 
-
+*/
 
 
 

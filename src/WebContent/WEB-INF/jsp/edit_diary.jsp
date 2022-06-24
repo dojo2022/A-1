@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -22,77 +23,77 @@
 		<input type="text" name="resName"  value="${ldResName}"></p>
 
 		<p>写真<br>
-		<input type="file" name="foodPhoto" accept="image/*" value="${foodPhoto}" onchange="previewImage(this);"></p>
+		<input type="file" name="foodPhoto" accept="image/*" value="${ldFoodPhoto}" onchange="previewImage(this);"></p>
 
 		<p>ジャンル<br>
-			<select name=category >
+			<select name="ldCategory" >
 				<option value="">選択してください</option>
-				<option value="japan">和食</option>
-				<option value="china">中華</option>
-				<option value="western">洋食</option>
-				<option value="italy">イタリアン</option>
-				<option value="bread">パン</option>
-				<option value="ra-men">ラーメン</option>
-				<option value="other">その他</option>
+				<option value="japan"<c:if test="${category=='japan' }"> selected </c:if>>和食</option>
+				<option value="中華"<c:if test="${ldCategory=='中華' }"> selected </c:if>>中華</option>
+				<option value="洋食"<c:if test="${ldCategory=='洋食' }"> selected </c:if>>洋食</option>
+				<option value="イタリアン"<c:if test="${ldCategory=='イタリアン' }"> selected </c:if>>イタリアン</option>
+				<option value="パン"<c:if test="${ldCategory=='パン' }"> selected </c:if>>パン</option>
+				<option value="ラーメン"<c:if test="${ldCategory=='ラーメン' }"> selected </c:if>>ラーメン</option>
+				<option value="その他"<c:if test="${ldCategory=='その他' }"> selected </c:if>>その他</option>
 			</select></p>
 
 		<p>店内利用<br>
 			<select name="style">
 				<option value="">選択してください</option>
-				<option value="イートイン">イートイン</option>
-				<option value="テイクアウト">テイクアウト</option>
+				<option value="イートイン"<c:if test="${style=='イートイン' }"> selected </c:if>>イートイン</option>
+				<option value="テイクアウト"<c:if test="${style=='テイクアウト' }"> selected </c:if>>テイクアウト</option>
 			</select></p>
 
 		<p>日付※必須</p>
-			<input type="date" name="date" value="${LunchDiaryBeans.date}" >
+			<input type="date" name="date" value="${ldDate}" >
 
 		<p>料理名<br>
-			<input type="text" name="foodName" value="${LunchDiaryBeans.foodName}" placeholder="例：オムライス"><br></p>
+			<input type="text" name="foodName" value="${ldFoodName}" placeholder="例：オムライス"><br></p>
 
 		<p>費用<br>
 			<select name="ldCost" >
 				<option value="">選択してください</option>
-				<option value="～５００円"><c:if test=${test=="～５００円"}selected></c:if>～５００円</option>
-				<option value="～８００円"><c:if test=${test=="～８００円"}selected></c:if> ～８００円</option>
-				<option value="～１０００円"><c:if test=${test=="～１０００円"}selected></c:if> ～１０００円</option>
-				<option value="～１２００円"><c:if test=${test=="～１２００円"}selected></c:if> ～１２００円</option>
-				<option value="～１５００円"><c:if test=${test=="～１５００円"}selected></c:if> ～１５００円</option>
-				<option value="１５００～円"><c:if test=${test=="１５００～円"}selected></c:if>１５００円～</option>
+				<option value="～５００円"<c:if test="${ldCost=='～５００円' }"> selected </c:if>>～５００円</option>
+				<option value="～８００円"<c:if test="${ldCost=='～８００円' }"> selected </c:if>>～８００円</option>
+				<option value="～１０００円"<c:if test="${ldCost=='～１０００円' }"> selected </c:if>>～１０００円</option>
+				<option value="～１２００円"<c:if test="${ldCost=='～１２００円' }"> selected </c:if>>～１２００円</option>
+				<option value="～１５００円"<c:if test="${ldCost=='～１５００円' }"> selected </c:if>>～１５００円</option>
+				<option value="１５００円～"<c:if test="${ldCost=='１５００～円' }"> selected </c:if>>１５００円～</option>
 			</select></p>
 
 		<p>提供時間<br>
 			<select name="time">
 				<option value="">選択してください</option>
-				<option value="５分未満"><c:if test=${test=="５分未満"}selected></c:if>５分未満</option>
-				<option value="５～１０分"><c:if test=${test=="５～１０分"}selected></c:if>５～１０分</option>
-				<option value="１０分～１５分"><c:if test=${test=="１０分～１５分"}selected></c:if>１０～１５分</option>
-				<option value="１５分以上"><c:if test=${test=="１５分以上"}selected></c:if>１５分以上</option>
+				<option value="５分未満"<c:if test="${time=='５分未満' }"> selected </c:if>>５分未満</option>
+				<option value="５～１０分"<c:if test="${time=='５～１０分' }"> selected </c:if>>５～１０分</option>
+				<option value="１０～１５分"<c:if test="${time=='１０～１５分' }"> selected </c:if>>１０～１５分</option>
+				<option value="１５分以上"<c:if test="${time=='１５分以上' }"> selected </c:if>>１５分以上</option>
 			</select>
 		</p>
 
 		<p>会社からの所要時間<br>
 			<select name="distance">
 				<option value="">選択してください</option>
-				<option value="３分未満"><c:if test=${test=="３分未満"}selected></c:if>～５００円</option>
-				<option value="３～５分"><c:if test=${test=="３～５分"}selected></c:if>３～５分</option>
-				<option value="５～７分">><c:if test=${test=="５～７分"}selected></c:if>５～７分</option>
-				<option value="７～１０分">><c:if test=${test=="７～１０分"}selected></c:if>７～１０分</option>
-				<option value="１０分以上">><c:if test=${test=="１０分以上"}selected></c:if>１０分以上</option>
+				<option value="３分未満"<c:if test="${distance=='３分未満' }"> selected </c:if>>３分未満</option>
+				<option value="３～５分"<c:if test="${distance=='３～５分' }"> selected </c:if>>３～５分</option>
+				<option value="５～７分"<c:if test="${distance=='５～７分' }"> selected </c:if>>５～７分</option>
+				<option value="７～１０分"<c:if test="${distance=='７～１０分' }"> selected </c:if>>７～１０分</option>
+				<option value="１０分以上"<c:if test="${distance=='１０分以上' }"> selected </c:if>>１０分以上</option>
 			</select>
 		</p>
 
 		<p>評価<br>
 			<div class="rate-form">
-				  <input id="star1" type="radio" name="star" value="1"><c:if test=${star =="1"}checked></c:if>
-				  <label for="star1">★</label>
-				  <input id="star2" type="radio" name="star" value="2"><c:if test=${star =="2"}checked></c:if>
-				  <label for="star2">★</label>
-				  <input id="star3" type="radio" name="star" value="3"><c:if test=${star =="3"}checked></c:if>
-				  <label for="star3">★</label>
-				  <input id="star4" type="radio" name="star" value="4"><c:if test=${star =="4"}checked></c:if>
+				  <input id="star5" type="radio" name="ldStar" value="5"<c:if test="${ldStar =='5'}">checked</c:if>>
+				 <label for="star5">★</label>
+				  <input id="star4" type="radio" name="ldStar" value="4"<c:if test="${ldStar =='4'}">checked</c:if>>
 				  <label for="star4">★</label>
-				  <input id="star5" type="radio" name="star" value="5"><c:if test=${star =="5"}checked></c:if>
-				  <label for="star5">★</label>
+				  <input id="star3" type="radio" name="ldStar" value="3"<c:if test="${ldStar =='3'}">checked</c:if>>
+				  <label for="star3">★</label>
+				  <input id="star2" type="radio" name="ldStar" value="2"<c:if test="${ldStar =='2'}">checked</c:if>>
+				  <label for="star2">★</label>
+				  <input id="star1" type="radio" name="ldStar" value="1"<c:if test="${ldStar =='1'}">checked</c:if>>
+				  <label for="star1">★</label>
 			</div>
 		</p>
 
@@ -103,7 +104,7 @@
 
 
 		<p>感想<br>
-			<textarea name="feeling"  placeholder="ここに記入してください"></textarea>
+			<textarea name="feeling"  placeholder="ここに記入してください" value="${feeling}"></textarea>
 		</p>
 
 
