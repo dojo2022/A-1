@@ -55,6 +55,34 @@ public class EditListServlet extends HttpServlet {
 			return;
 		} */
 
+
+			request.setCharacterEncoding("UTF-8");
+			System.out.println(request.getParameter("SUBMIT")+"←ぼたんの名前");
+			//編集ボタンが押されたときの処理
+			if(request.getParameter("SUBMIT")!=null) {
+				if(request.getParameter("SUBMIT").equals("編集")) {
+					//値の取得
+
+					int listId = Integer.parseInt(request.getParameter("listId"));
+					String listResName = request.getParameter("listResName");
+					String category = request.getParameter("category");
+					String togoMemo = request.getParameter("togoMemo");
+
+
+					//上記データをリクエストスコープへセット
+					request.setAttribute("listId", listId);
+					request.setAttribute("listResName",listResName );
+					request.setAttribute("category",category );
+					request.setAttribute("togoMemo",togoMemo );
+
+					//編集画面へ画面遷移
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/edit_list.jsp");
+					dispatcher.forward(request, response);
+					return;
+				}
+			}
+
+
 		// リクエストパラメータを取得
 		request.setCharacterEncoding("UTF-8");
 		String listResName = request.getParameter("RES_NAME");
@@ -93,7 +121,7 @@ public class EditListServlet extends HttpServlet {
 				return;
 			}
 		}
-		else {
+		else if (request.getParameter("toGoDelete").equals("削除する")){
 			//DAOに削除してねって依頼をする
 			boolean ans = lDao.updateListFlag(listId);
 
