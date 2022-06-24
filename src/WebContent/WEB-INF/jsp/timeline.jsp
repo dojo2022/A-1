@@ -16,7 +16,7 @@
 <header>
 
 
-
+<form method="POST" action="/lunchBox/SearchServlet" target="_new">
 <div class="searchBox">
 <div id="radioBtn">
 	<label><input name="lunch" type="radio" value="lunch_diary" checked="checked" />ランチ日記</label>
@@ -25,7 +25,7 @@
 
 <div id="displayBox">
 	<div class="cm_box active">
-<form method="POST" action="/lunchBox/SearchServlet" target="_new">
+
 			<select name="distance">
 				<option value="">会社からの所要時間</option>
 				<option value="3分未満">3分未満</option>

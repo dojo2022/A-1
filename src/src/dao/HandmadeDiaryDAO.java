@@ -8,16 +8,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.AllColumnBeans;
-import model.HandmadeDiaryBeans;
 
 public class HandmadeDiaryDAO {
 
 	Connection conn = null;
-	ArrayList<HandmadeDiaryBeans> Handmade = new ArrayList<HandmadeDiaryBeans>();
+	ArrayList<AllColumnBeans> Handmade = new ArrayList<AllColumnBeans>();
 	ArrayList<AllColumnBeans> Allhandmade = new ArrayList<AllColumnBeans>();
 
 	//手作り日記の検索を行うメソッド（タイムラインの検索ボックス用）
-	public ArrayList<HandmadeDiaryBeans> selectHandmade(
+	public ArrayList<AllColumnBeans> selectHandmade(
 			String hdFoodName,
 			String cooktime
 			) {
@@ -30,7 +29,7 @@ public class HandmadeDiaryDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data","sa","");
 
 			//SQL文を準備する
-			String sql = "SELECT handmade_id, email_address, food_type, food_name, food_photo, cook_time, date,  cost, star, feeling FROM handmade_diary WHERE food_name LIKE ? AND cook_time LIKE ? AND  cost LIKE ? AND lunch_flag = 1 ORDER BY hd_regist_time DESC";
+			String sql = "SELECT handmade_id, user_master.email_address,food_photo, hd_date, food_name, hd_cost, hd_star, hd_feeling, cooktime, user_master.account_name FROM handmade_diary LEFT JOIN user_master ON user_master.email_address = handmade_diary.email_address WHERE food_name LIKE ? AND cooktime LIKE ?  AND handmade_flag = 1 ORDER BY ld_regist_time DESC";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			//SQL文を完成させる。
@@ -43,19 +42,20 @@ public class HandmadeDiaryDAO {
 
 			// 結果表をコレクションにコピーする
 			while(rs.next()) {
-				HandmadeDiaryBeans hdd = new HandmadeDiaryBeans();
+				AllColumnBeans hdd = new AllColumnBeans();
+					System.out.println("はいってます");
 					hdd.setHandmadeId(rs.getInt("handmade_id"));
-					hdd.setEmailAddress(rs.getString("email_address"));
-					hdd.setHdFoodType(rs.getString("food_type"));
-					hdd.setHdFoodName(rs.getString("food_name"));
+					hdd.setEmailAddress(rs.getString("user_master.email_address"));
 					hdd.setHdFoodPhoto(rs.getString("food_photo"));
-					hdd.setCooktime(rs.getString("cook_time"));
-					hdd.setHdDate(rs.getString("date"));
-					hdd.setHdCost(rs.getString("cost"));
-					hdd.setHdStar(rs.getInt("star"));
-					hdd.setHdFeeling(rs.getString("feeling"));
+					hdd.setHdDate(rs.getString("hd_date"));
+					hdd.setHdFoodName(rs.getString("food_name"));
+					hdd.setHdCost(rs.getString("hd_cost"));
+					hdd.setHdStar(rs.getInt("hd_star"));
+					hdd.setHdFeeling(rs.getString("hd_feeling"));
+					hdd.setCooktime(rs.getString("cooktime"));
+					hdd.setAccountName(rs.getString("user_master.account_name"));
 
-						Handmade.add(hdd);
+					Handmade.add(hdd);
 			}
 		}
 			catch (SQLException e) {
