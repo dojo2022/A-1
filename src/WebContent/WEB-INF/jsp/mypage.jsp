@@ -202,7 +202,7 @@
 		<c:if test="${myLunch == null }">
 			登録はありません。
 		</c:if>
-		<c:forEach var="e" items="${myLunch}" >
+		<c:forEach var="e" items="${myLunch}" varStatus="status">
 			<form method="POST" action="EditLunchServlet">
 				${e.lunchId}<br>
 				${e.accountName}<br>
@@ -218,7 +218,7 @@
 				${e.distance}<br>
 				${e.ldStar}<br>
 				${e.ldFeeling}<br>
-				<input type="hidden" name="lunch_id" value="${e.lunchId}">
+				<input type="hidden" name="lunch_id" value="${e.lunchId}" id="lunch_id${status.index} }">
 				<input type="hidden" name="resName" value="${e.ldResName}">
 				<input type="hidden" name="foodPhoto" value="${e.hdFoodPhoto}">
 				<input type="hidden" name="category" value="${e.ldCategory}">
@@ -251,9 +251,9 @@
 					${lr.countLdToUse}|
 				</c:if>
 			</c:forEach>
-			<input type="button" name="to" value="行きたい">
-			<input type="button" name="to" value="教えて">
-			<input type="button" name="to" value="参考にします"><br>
+			<input type="button" name="to" value="行きたい" onclick="goAjax1(${status.index})">
+			<input type="button" name="to" value="教えて" onclick="goAjax2(${status.index})">
+			<input type="button" name="to" value="参考にします" onclick="goAjax3(${status.index})"><br>
 			<hr>
 			</form>
 		</c:forEach>
