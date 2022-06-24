@@ -88,7 +88,7 @@
 </header>
 
 <main>
-
+${comment_result}
 <!--タブを切り替えて表示するコンテンツ-->
 <div class="panel-group">
   <div class="panel is-show">
@@ -116,7 +116,7 @@
 	</c:if>
 	</c:forEach>
 		<input type="text" name="ld_comment" placeholder="コメントを入力してください">
-		<input type="submit" name="lc_submit" value="送信する"><br>
+		<input type="submit" name="send_comment" value="ランチ日記コメントを送信する"><br>
 	<c:forEach var="lr" items="${ldReactionList}">
 	<c:if test="${lr.lunchId == e.lunchId}">
 		${lr.countLdToGo}|
@@ -154,7 +154,7 @@
 	</c:if>
 	</c:forEach>
 	<input type="text" name="hd_comment" placeholder="コメントを入力してください">
-	<input type="submit" name="hc_submit" value="送信する"><br>
+	<input type="submit" name="send_comment" value="手作り記録コメントを送信する"><br>
 	<c:forEach var="hr" items="${hdReactionList}">
 	<c:if test="${hr.handmadeId == e.handmadeId}">
 		${hr.countHdToEat}|
