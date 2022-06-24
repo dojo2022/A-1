@@ -82,8 +82,13 @@ public class MyPageServlet extends HttpServlet {
 	 	 ArrayList<AllColumnBeans> HdComment = HCDao.selectHdComment();
 	 	// 検索結果をリクエストスコープに格納する
 	 			request.setAttribute("HdComment", HdComment);
+//	 	手作り日記リアクション情報をゲットしてくる
+	 	 HdReactionDAO HdRDao = new HdReactionDAO();
+	 	 ArrayList<AllColumnBeans> hdReactionList = HdRDao.countReactionUser();
+	 	// 検索結果をリクエストスコープに格納する
+	 			request.setAttribute("hdReactionList", hdReactionList);
 
-	   //メールアドレスを引数にして行きたい場所リストの情報を取ってくる-------------------------------------
+	 			//メールアドレスを引数にして行きたい場所リストの情報を取ってくる-------------------------------------
 
 	 	ArrayList<AllColumnBeans> myList = mDao.selectMyList(emailAddress);
 	 	if(myList.size()==0) {
@@ -195,6 +200,7 @@ public class MyPageServlet extends HttpServlet {
 		}
 		LdReactionDAO ldrDao = new LdReactionDAO();
 		ldrDao.insertLdReaction(ldr_lunch_id, ldr_email_address, to_go, to_tell, to_use);
+
 		//-----------------------リアクションの登録（インサート）を行うやつ手作り記録------------------------------
 				request.setCharacterEncoding("UTF-8");
 				Integer hdr_lunch_id = Integer.parseInt(request.getParameter("handmade_id"));
@@ -240,10 +246,12 @@ public class MyPageServlet extends HttpServlet {
 		//----------------------------手作り日記の情報-------------------------------------
 //				手作り日記の情報を貰ってくる
 				HandmadeDiaryDAO hdDao = new HandmadeDiaryDAO();
+				ArrayList<AllColumnBeans> Allhandmade = hdDao.select();
+				  // 検索結果をリクエストスコープに格納する
+			    request.setAttribute("Allhandmade", Allhandmade);
 			    // 検索結果をリクエストスコープに格納する
 			    request.setAttribute("myHandmade", myHandmade);
 //				手作り日記リアクション情報をゲットしてくる
-//				LdJoin2DAO LdRDao = new LdJoin2DAO();
 				ArrayList<AllColumnBeans> hdReactionList = LdRDao.countReactionUser();
 				// 検索結果をリクエストスコープに格納する
 				request.setAttribute("hdReactionList", hdReactionList);
