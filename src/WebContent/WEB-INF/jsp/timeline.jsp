@@ -25,11 +25,9 @@
 
 <div id="displayBox">
 	<div class="cm_box active">
-<<<<<<< HEAD
 
-=======
 <form method="POST" action="SearchServlet" target="_new">
->>>>>>> bf929b38b61ee0f93f2d84304f4aac7a2e1e70f2
+
 			<select name="distance">
 				<option value="">会社からの所要時間</option>
 				<option value="3分未満">3分未満</option>
