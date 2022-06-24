@@ -45,7 +45,7 @@ public class SearchServlet extends HttpServlet {
 
 			//リクエストパラメータ（検索ボックスに入力された文字列の情報）を取得する
 			request.setCharacterEncoding("UTF-8");
-			String resName = request.getParameter("res_name");
+			String resName = request.getParameter("resName");
 			String category = request.getParameter("category");
 			String cost = request.getParameter("cost");
 			String time = request.getParameter("time");
@@ -55,7 +55,7 @@ public class SearchServlet extends HttpServlet {
 			//検索処理を行う
 			LunchDiaryDAO LdDao = new LunchDiaryDAO();
 			ArrayList<AllColumnBeans> searchLunch =LdDao.selectLunch(resName, category, cost, time, distance);
-
+			System.out.println(searchLunch.size());
 			request.setAttribute("searchLunch", searchLunch);
 
 			// 結果ページにフォワードする

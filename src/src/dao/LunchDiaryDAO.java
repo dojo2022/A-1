@@ -54,6 +54,7 @@ public class LunchDiaryDAO {
 
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
+				System.out.println("はいったよー");
 				AllColumnBeans ld = new AllColumnBeans();
 				ld.setLunchId(rs.getInt("lunchId"));
 				ld.setLunchId(rs.getInt("lunch_id"));
