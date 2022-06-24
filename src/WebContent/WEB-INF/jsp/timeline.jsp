@@ -26,7 +26,6 @@
 <div id="displayBox">
 	<div class="cm_box active">
 
-<form method="POST" action="SearchServlet" target="_new">
 
 			<select name="distance">
 				<option value="">会社からの所要時間</option>
@@ -64,10 +63,10 @@
 			</select>
 			<input type="text" name="resName" placeholder="店名">
 			<input type="submit" name="searchSubmit" value="検索">
-</form>
+
 	</div>
 	<div class="cm_box">
-<form method="POST" action="SearchServlet" target="_new">
+
 			<select name="time">
 				<option value="">所要時間</option>
 				<option value="3分未満">3分未満</option>
@@ -78,10 +77,11 @@
 			</select>
 			<input type="text" name="foodName" placeholder="料理名">
 			<input type="submit" name="searchSubmit" value="検索">
-</form>
+
 	</div>
 </div>
 </div>
+</form>
 <!--タブ-->
 <ul class="tab-group">
   <li class="tab is-active">ランチ日記</li>
