@@ -137,7 +137,7 @@ public class EditHandmadeServlet extends HttpServlet {
 				}
 			}
 
-			else {
+		else if (request.getParameter("deleteButton").equals("削除する")){
 				//DAOに削除してねって依頼をする
 				boolean ans = hDao.updateHdFlag(handmadeId);
 
