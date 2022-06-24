@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +14,11 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import dao.HandmadeDiaryDAO;
+import dao.HdCommentDAO;
+import dao.HdReactionDAO;
+import dao.LdJoin2DAO;
+import dao.LunchDiaryDAO;
+import model.AllColumnBeans;
 import model.UserMasterBeans;
 
 
@@ -79,7 +85,39 @@ public class RegistHandmadeServlet extends HttpServlet {
 			request.setAttribute("hdresult","登録できませんでした");
 		}
 
-		//日記情報をゲットしてくる
+		//タイムライン表示を実行する
+		LunchDiaryDAO LdDao = new LunchDiaryDAO();
+		ArrayList<AllColumnBeans> allLunch = LdDao.select();
+		// 検索結果をリクエストスコープに格納する
+		request.setAttribute("allLunch", allLunch);
+
+	//ランチ日記リアクション情報をゲットしてくる
+		LdJoin2DAO LdRDao = new LdJoin2DAO();
+		ArrayList<AllColumnBeans> ldReactionList = LdRDao.countReactionUser();
+		// 検索結果をリクエストスコープに格納する
+		request.setAttribute("ldReactionList", ldReactionList);
+
+		//ランチ日記コメント情報をゲットしてくる
+		LdJoin2DAO LdCDao = new LdJoin2DAO();
+		ArrayList<AllColumnBeans> LdComment = LdCDao.selectComment();
+		// 検索結果をリクエストスコープに格納する
+		request.setAttribute("LdComment", LdComment);
+
+		HandmadeDiaryDAO hdDao = new HandmadeDiaryDAO();
+	    ArrayList<AllColumnBeans> myHandmade = hdDao.select();
+	    // 検索結果をリクエストスコープに格納する
+	    request.setAttribute("myHandmade", myHandmade);
+//		手作り日記リアクション情報をゲットしてくる
+	    HdReactionDAO HdRDao = new HdReactionDAO();
+		ArrayList<AllColumnBeans> hdReactionList = HdRDao.countReactionUser();
+		// 検索結果をリクエストスコープに格納する
+		request.setAttribute("hdReactionList", hdReactionList);
+	    //手作り日記コメント情報をゲットしてくる
+	 	HdCommentDAO HCDao = new HdCommentDAO();
+	 	ArrayList<AllColumnBeans> HdComment = HCDao.selectHdComment();
+//		検索結果をリクエストスコープに格納する
+	 	request.setAttribute("HdComment", HdComment);
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/timeline.jsp");
 		dispatcher.forward(request, response);
 		return;
