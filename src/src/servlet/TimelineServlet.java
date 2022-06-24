@@ -16,6 +16,7 @@ import dao.HdCommentDAO;
 import dao.HdReactionDAO;
 import dao.LdCommentDAO;
 import dao.LdJoin2DAO;
+import dao.LdReactionDAO;
 import dao.LunchDiaryDAO;
 import model.AllColumnBeans;
 import model.UserMasterBeans;
@@ -96,7 +97,49 @@ public class TimelineServlet extends HttpServlet {
 //		}
 //		セッションにあるuserの情報を取得
 		UserMasterBeans user = (UserMasterBeans)session.getAttribute("user");
-////-----------------------リアクションの登録（インサート）を行うやつ----------------------------------
+//-----------------------リアクションの登録（インサート）を行うやつ----------------------------------
+		if(request.getParameter("to") != null) {
+			request.setCharacterEncoding("UTF-8");
+			Integer ldr_lunch_id = Integer.parseInt(request.getParameter("lunch_id"));
+			String ldr_email_address = user.getEmailAddress();
+			Integer to_go = 0;
+			Integer to_tell = 0;
+			Integer to_use = 0;
+//			ボタン押したか押していないかを取得
+			String button =request.getParameter("to");
+			if(button.equals("行きたい")) {
+				to_go = 1;
+			}else if (button.equals("教えて")) {
+				to_tell= 1;
+			}else if(button.equals("参考にします")){
+				to_use = 1;
+			}else {
+				System.out.println("失敗");
+			}
+			LdReactionDAO ldrDao = new LdReactionDAO();
+			ldrDao.insertLdReaction(ldr_lunch_id, ldr_email_address, to_go, to_tell, to_use);
+		}else if(request.getParameter("handmade_id") != null) {
+			request.setCharacterEncoding("UTF-8");
+			Integer hdr_lunch_id = Integer.parseInt(request.getParameter("handmade_id"));
+			String hdr_email_address = user.getEmailAddress();
+			Integer to_eat = 0;
+			Integer hdr_to_tell = 0;
+			Integer hdr_to_use = 0;
+//			ボタン押したか押していないかを取得
+			String hd_button =request.getParameter("hdbtn");
+			if(hd_button.equals("食べたい")) {
+				to_eat = 1;
+			}else if (hd_button.equals("教えて")) {
+				hdr_to_tell= 1;
+			}else if(hd_button.equals("参考にします")){
+				hdr_to_use = 1;
+			}else {
+				System.out.println("失敗");
+			}
+			HdReactionDAO hdrDao = new HdReactionDAO();
+			hdrDao.insertHdReaction(hdr_lunch_id, hdr_email_address, to_eat, hdr_to_tell, hdr_to_use);
+		}
+
 //		request.setCharacterEncoding("UTF-8");
 //		Integer ldr_lunch_id = Integer.parseInt(request.getParameter("lunch_id"));
 //		String ldr_email_address = user.getEmailAddress();
@@ -116,7 +159,7 @@ public class TimelineServlet extends HttpServlet {
 //		}
 //		LdReactionDAO ldrDao = new LdReactionDAO();
 //		ldrDao.insertLdReaction(ldr_lunch_id, ldr_email_address, to_go, to_tell, to_use);
-////-----------------------リアクションの登録（インサート）を行うやつ手作り記録------------------------------
+//-----------------------リアクションの登録（インサート）を行うやつ手作り記録------------------------------
 //		request.setCharacterEncoding("UTF-8");
 //		Integer hdr_lunch_id = Integer.parseInt(request.getParameter("handmade_id"));
 //		String hdr_email_address = user.getEmailAddress();
@@ -136,10 +179,11 @@ public class TimelineServlet extends HttpServlet {
 //		}
 //		HdReactionDAO hdrDao = new HdReactionDAO();
 //		hdrDao.insertHdReaction(hdr_lunch_id, hdr_email_address, to_eat, hdr_to_tell, hdr_to_use);
+
+//		コメントの入力をゲットしてインサートする処理
 		request.setCharacterEncoding("UTF-8");
 		String send_comment = request.getParameter("send_comment");
 		if(send_comment.equals("ランチ日記コメントを送信する")) {
-//			入力されたコメントを取得して登録するやつ
 			request.setCharacterEncoding("UTF-8");
 			String ldc_email_address = user.getEmailAddress();
 			Integer ldc_lunch_id = Integer.parseInt(request.getParameter("lunch_id"));
