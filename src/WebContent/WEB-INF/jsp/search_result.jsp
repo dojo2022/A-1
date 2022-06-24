@@ -27,7 +27,7 @@
 	${e.distance}<br>
 	${e.ldStar}<br>
 	${e.ldFeeling}<br>
-	<input type="hidden" name="lunch_id" value="${e.lunchId}">
+<%--  	<input type="hidden" name="lunch_id" value="${e.lunchId}">
 	<c:forEach var="lc" items="${LdComment}">
 	<c:if test="${lc.lunchId == e.lunchId}">
 		${lc.accountName}：
@@ -81,8 +81,8 @@
 	</c:forEach>
 		<input type="submit" name="hdbtn" value="食べたい">
 		<input type="submit" name="hdbtn" value="教えて">
-		<input type="submit" name="hdbtn" value="参考にします"><br>
-	</form>
+		<input type="submit" name="hdbtn" value="参考にします"><br>  --%>
+		</form>
 </c:forEach>
 </main>
 </body>

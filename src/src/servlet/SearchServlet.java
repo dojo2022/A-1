@@ -41,20 +41,20 @@ public class SearchServlet extends HttpServlet {
 				}*/
 		//リクエストパラメータ（ラジオボックスがどっちに押されているかで分岐する）
 		request.setCharacterEncoding("UTF-8");
-		String lunch = request.getParameter("lunch");
 
 
-		if (lunch.equals("lunch_diary")) {
 			//リクエストパラメータ（検索ボックスに入力された文字列の情報）を取得する
 			request.setCharacterEncoding("UTF-8");
-			String distance = request.getParameter("distance");
-			String time = request.getParameter("time");
+			String resName = request.getParameter("res_name");
 			String category = request.getParameter("category");
 			String cost = request.getParameter("cost");
-			String res_name = request.getParameter("res_name");
+			String time = request.getParameter("time");
+			String distance = request.getParameter("distance");
+
+
 			//検索処理を行う
 			LunchDiaryDAO LdDao = new LunchDiaryDAO();
-			ArrayList<AllColumnBeans> searchLunch =LdDao.selectLunch(distance,time,category,cost,res_name);
+			ArrayList<AllColumnBeans> searchLunch =LdDao.selectLunch(resName, category, cost, time, distance);
 
 			request.setAttribute("searchLunch", searchLunch);
 
@@ -134,4 +134,4 @@ public class SearchServlet extends HttpServlet {
 
 	}
 
-}
+
