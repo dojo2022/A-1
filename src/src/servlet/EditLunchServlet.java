@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import dao.LunchDiaryDAO;
 
@@ -32,8 +33,8 @@ public class EditLunchServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//ランチ日記更新削除画面にフォワードする
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/edit_diary.jsp");
-				dispatcher.forward(request, response);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/edit_diary.jsp");
+			dispatcher.forward(request, response);
 	}
 
 		/**
@@ -48,8 +49,8 @@ public class EditLunchServlet extends HttpServlet {
 				if(request.getParameter("SUBMIT").equals("編集")) {
 
 
-
-	    int lunchId = Integer.parseInt(request.getParameter("lunchId"));
+					/*System.out.println("aaaaaaaaaaaaaaaaaaaaaaa");*/
+	    int lunchId = Integer.parseInt(request.getParameter("lunch_id"));
 	    String ldFoodType = request.getParameter("ldFoodType");
 	 	String resName = request.getParameter("resName");
 		String foodPhoto = request.getParameter("foodPhoto");
@@ -68,7 +69,7 @@ public class EditLunchServlet extends HttpServlet {
 		String feeling = request.getParameter("feeling");
 
 
-
+		//上記データをリクエストスコープにセット
 		request.setAttribute("lunchId", lunchId);
 		request.setAttribute("ldFoodType", ldFoodType);
 		request.setAttribute("ldResName", resName);
@@ -90,9 +91,9 @@ public class EditLunchServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/edit_diary.jsp");
 		dispatcher.forward(request, response);
 		return;
-			}
+				}
 
-		}
+			}
 
 			request.setCharacterEncoding("UTF-8");
 			 int lunchId = Integer.parseInt(request.getParameter("lunchId"));
@@ -174,13 +175,23 @@ public class EditLunchServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp");
 			dispatcher.forward(request, response);
 			return;
+		}
+
+
+		//ファイルの名前を取得してくる
+				private String getFileName(Part foodPhoto) {
+				    String name = null;
+				    for (String dispotion : foodPhoto.getHeader("Content-Disposition").split(";")) {
+				        if (dispotion.trim().startsWith("filename")) {
+				            name = dispotion.substring(dispotion.indexOf("=") + 1).replace("\"", "").trim();
+				            name = name.substring(name.lastIndexOf("\\") + 1);
+				            break;
+				        }
 			}
 
-
-
-
-
+return name;
 		}
+}
 
 
 
