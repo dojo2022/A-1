@@ -45,28 +45,75 @@ public class EditHandmadeServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		UserMasterBeans user = (UserMasterBeans) session.getAttribute("user");
 		String emailAddress = user.getEmailAddress();
+
 */
-
-
-		//リクエストパラメーターを取得
 		request.setCharacterEncoding("UTF-8");
-		int handmadeId = Integer.parseInt(request.getParameter("handmadeId"));
-		String foodName = request.getParameter("foodName");
-		Part foodPhoto = request.getPart("foodPhoto");
-		String cookTime = request.getParameter("cookTime");
-		String date = request.getParameter("date");
-		String cost = request.getParameter("cost");
-		String feeling = request.getParameter("feeling");
-		int star =0;
-		//nullのときにparseIntするせいでエラー？
-		if(request.getParameter("star") != null) {
-			 star = Integer.parseInt(request.getParameter("star"));
+		System.out.println(request.getParameter("SUBMIT")+"←ぼたんの名前");
+		//編集ボタンが押されたときの処理
+		if(request.getParameter("SUBMIT")!=null) {
+			if(request.getParameter("SUBMIT").equals("編集")) {
+				//値の取得
+
+				int handmadeId = Integer.parseInt(request.getParameter("handmadeId"));
+				String foodName = request.getParameter("foodName");
+				String foodPhoto = request.getParameter("foodPhoto");
+				String cookTime = request.getParameter("cookTime");
+				String date = request.getParameter("date");
+				String cost = request.getParameter("cost");
+				String feeling = request.getParameter("feeling");
+				int star =0;
+				//nullのときにparseIntするせいでエラー？
+				if(request.getParameter("star") != null) {
+					 star = Integer.parseInt(request.getParameter("star"));
+				}
+
+				//上記データをリクエストスコープへセット
+				request.setAttribute("handmadeId", handmadeId);
+				request.setAttribute("foodName",foodName );
+				request.setAttribute("foodPhoto",foodPhoto );
+				request.setAttribute("cookTime",cookTime );
+				request.setAttribute("date", date);
+				request.setAttribute("cost", cost);
+				request.setAttribute("feeling", feeling);
+				request.setAttribute("star",star );
+
+				//編集画面へ画面遷移
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/edit_handmade_diary.jsp");
+				dispatcher.forward(request, response);
+				return;
+			}
 		}
 
-		String image = this.getFileName(foodPhoto);
-		request.setAttribute("image", image);
-		// サーバの指定のファイルパスへファイルを保存
-        //場所はクラス名↑の上に指定してある
+
+			//リクエストパラメーターを取得
+			request.setCharacterEncoding("UTF-8");
+			int handmadeId = Integer.parseInt(request.getParameter("handmadeId"));
+			String foodName = request.getParameter("foodName");
+			Part foodPhoto = request.getPart("foodPhoto");
+			String cookTime = request.getParameter("cookTime");
+			String date = request.getParameter("date");
+			String cost = request.getParameter("cost");
+			String feeling = request.getParameter("feeling");
+			int star =0;
+			//nullのときにparseIntするせいでエラー？
+			if(request.getParameter("star") != null) {
+				 star = Integer.parseInt(request.getParameter("star"));
+			}
+
+			String image = this.getFileName(foodPhoto);
+			request.setAttribute("image", image);
+			// サーバの指定のファイルパスへファイルを保存
+	        //場所はクラス名↑の上に指定してある
+
+			//上記データをリクエストスコープへセット
+			request.setAttribute("handmadeId", handmadeId);
+			request.setAttribute("foodName",foodName );
+			request.setAttribute("foodPhoto",foodPhoto );
+			request.setAttribute("cookTime",cookTime );
+			request.setAttribute("date", date);
+			request.setAttribute("cost", cost);
+			request.setAttribute("feeling", feeling);
+			request.setAttribute("star",star );
 
 
 		//DAOを呼び出す
