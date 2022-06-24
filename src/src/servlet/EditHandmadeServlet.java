@@ -125,13 +125,13 @@ public class EditHandmadeServlet extends HttpServlet {
 
 		//更新成功したら
 		if(ans == true) {
-			request.setAttribute("okMsg","更新が完了しました");
+			request.setAttribute("msg","更新が完了しました");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp");
 			dispatcher.forward(request, response);
 		//更新が失敗したら
 		}else {
-			request.setAttribute("ngMsg","更新失敗しました");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/edit_diary.jsp");
+			request.setAttribute("ngmsg","更新失敗しました");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/edit_handmade_diary.jsp");
 			dispatcher.forward(request, response);
 			return;
 			}
@@ -149,7 +149,7 @@ public class EditHandmadeServlet extends HttpServlet {
 
 			//論理削除失敗時
 			}else {
-				request.setAttribute("msg","削除に失敗しました");
+				request.setAttribute("ngmsg","削除に失敗しました");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/edit_diary.jsp");
 				dispatcher.forward(request, response);
 				return;
