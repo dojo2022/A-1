@@ -172,7 +172,6 @@
 			<input type="hidden" name="cookTime" value="${e.cooktime}">
 		<!-- 手作りランチ日記更新削除 -->
 		<a href="/lunchBox/EditHandmadeServlet" class="editLunch"><button type="button">編集</button></a><br>
-		</form>
 		<c:forEach var="hc" items="${HdComment}">
 		<c:if test="${hc.handmadeId == e.handmadeId}">
 			${hc.accountName}：
