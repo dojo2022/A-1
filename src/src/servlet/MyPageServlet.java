@@ -59,14 +59,6 @@ public class MyPageServlet extends HttpServlet {
 			request.setAttribute("ldReactionList", ldReactionList);
 
 
-			/*		ArrayList<AllColumnBeans>myLdReaction = mDao.countMyLdReaction(emailAddress);
-
-			// 検索結果をリクエストスコープに格納する
-				        request.setAttribute("myLdReaction",myLdReaction);
-			*/
-
-
-
 		//メールアドレスを引数にして手作り日記の情報を取ってくる-------------------------------------
 
 	     ArrayList<AllColumnBeans> myHandmade = mDao.selectMyHd(emailAddress);
@@ -98,11 +90,11 @@ public class MyPageServlet extends HttpServlet {
 	   // 検索結果をリクエストスコープに格納する
 	 		  request.setAttribute("myList", myList);
 	 			   }
-					/*  //行きたい場所リストのリアクション情報をゲットしてくる
-					  HdCommentDAO HCDao = new HdCommentDAO();
-					  ArrayList<AllColumnBeans> HdComment = HCDao.selectHdComment();
-					   // 検索結果をリクエストスコープに格納する
-					 		  request.setAttribute("HdComment", HdComment);
+					/* 	//行きたい場所リストのリアクション情報をゲットしてくる
+					 	 ListReactionDAO ListDao = new ListReactionDAO();
+					 	 ArrayList<AllColumnBeans> hdReactionList = ListDao.countReactionUser();
+					 	// 検索結果をリクエストスコープに格納する
+					 			request.setAttribute("hdReactionList", hdReactionList);
 					*/
 
 
@@ -182,46 +174,70 @@ public class MyPageServlet extends HttpServlet {
 
 		//ランチ日記リアクションボタンを押した後の処理-------------------------------
 		request.setCharacterEncoding("UTF-8");
-		Integer ldr_lunch_id = Integer.parseInt(request.getParameter("lunch_id"));
-		String ldr_email_address = user.getEmailAddress();
-		Integer to_go = 0;
-		Integer to_tell = 0;
-		Integer to_use = 0;
-		//ボタン押したか押していないかを取得
-		String button =request.getParameter("to");
-		if(button.equals("行きたい")) {
-			to_go = 1;
-		}else if (button.equals("教えて")) {
-			to_tell= 1;
-		}else if(button.equals("参考にします")){
-			to_use = 1;
-		}else {
-			System.out.println("失敗");
+		if(request.getParameter("to") != null) {
+			request.setCharacterEncoding("UTF-8");
+			Integer ldr_lunch_id = Integer.parseInt(request.getParameter("lunch_id"));
+			String ldr_email_address = user.getEmailAddress();
+			Integer to_go = 0;
+			Integer to_tell = 0;
+			Integer to_use = 0;
+//			ボタン押したか押していないかを取得
+			String button =request.getParameter("to");
+			if(button.equals("行きたい")) {
+				to_go = 1;
+			}else if (button.equals("教えて")) {
+				to_tell= 1;
+			}else if(button.equals("参考にします")){
+				to_use = 1;
+			}else {
+				System.out.println("失敗");
+			}
+			LdReactionDAO ldrDao = new LdReactionDAO();
+			ldrDao.insertLdReaction(ldr_lunch_id, ldr_email_address, to_go, to_tell, to_use);
+			}else if(request.getParameter("hdbtn") != null) {
+			//-----------------------リアクションの登録（インサート）を行うやつ手作り記録------------------------------
+			request.setCharacterEncoding("UTF-8");
+			Integer hdr_handmade_id = Integer.parseInt(request.getParameter("handmade_id"));
+			String hdr_email_address = user.getEmailAddress();
+			Integer to_eat = 0;
+			Integer hdr_to_tell = 0;
+			Integer hdr_to_use = 0;
+//			ボタン押したか押していないかを取得
+			String hd_button =request.getParameter("hdbtn");
+			if(hd_button.equals("食べたい")) {
+				to_eat = 1;
+			}else if (hd_button.equals("教えて")) {
+				hdr_to_tell= 1;
+			}else if(hd_button.equals("参考にします")){
+				hdr_to_use = 1;
+			}else {
+				System.out.println("失敗");
+			}
+			HdReactionDAO hdrDao = new HdReactionDAO();
+			hdrDao.insertHdReaction(hdr_handmade_id, hdr_email_address, to_eat, hdr_to_tell, hdr_to_use);
 		}
-		LdReactionDAO ldrDao = new LdReactionDAO();
-		ldrDao.insertLdReaction(ldr_lunch_id, ldr_email_address, to_go, to_tell, to_use);
 
 		//-----------------------リアクションの登録（インサート）を行うやつ手作り記録------------------------------
-				request.setCharacterEncoding("UTF-8");
-				Integer hdr_lunch_id = Integer.parseInt(request.getParameter("handmade_id"));
-				String hdr_email_address = user.getEmailAddress();
-				Integer to_eat = 0;
-				Integer hdr_to_tell = 0;
-				Integer hdr_to_use = 0;
-//				ボタン押したか押していないかを取得
-				String hd_button =request.getParameter("hdbtn");
-				if(hd_button.equals("食べたい")) {
-					to_eat = 1;
-				}else if (hd_button.equals("教えて")) {
-					hdr_to_tell= 1;
-				}else if(hd_button.equals("参考にします")){
-					hdr_to_use = 1;
-				}else {
-					System.out.println("失敗");
-				}
-				HdReactionDAO hdrDao = new HdReactionDAO();
-				hdrDao.insertHdReaction(hdr_lunch_id, hdr_email_address, to_eat, hdr_to_tell, hdr_to_use);
-
+		/*			request.setCharacterEncoding("UTF-8");
+					Integer hdr_lunch_id = Integer.parseInt(request.getParameter("handmade_id"));
+					String hdr_email_address = user.getEmailAddress();
+					Integer to_eat = 0;
+					Integer hdr_to_tell = 0;
+					Integer hdr_to_use = 0;
+		//				ボタン押したか押していないかを取得
+					String hd_button =request.getParameter("hdbtn");
+					if(hd_button.equals("食べたい")) {
+						to_eat = 1;
+					}else if (hd_button.equals("教えて")) {
+						hdr_to_tell= 1;
+					}else if(hd_button.equals("参考にします")){
+						hdr_to_use = 1;
+					}else {
+						System.out.println("失敗");
+					}
+					HdReactionDAO hdrDao = new HdReactionDAO();
+					hdrDao.insertHdReaction(hdr_lunch_id, hdr_email_address, to_eat, hdr_to_tell, hdr_to_use);
+		*/
 //				入力されたコメントを取得して登録するやつ
 				request.setCharacterEncoding("UTF-8");
 				String ldc_email_address = user.getEmailAddress();
@@ -235,7 +251,7 @@ public class MyPageServlet extends HttpServlet {
 				// 検索結果をリクエストスコープに格納する
 				request.setAttribute("allLunch", allLunch);
 
-				//ランチ日記リアクション情報をゲットしてくる
+				//ランチ日記コメント・リアクション情報をゲットしてくる
 				LdJoin2DAO LdRDao = new LdJoin2DAO();
 				ArrayList<AllColumnBeans> ldReactionList = LdRDao.countReactionUser();
 				// 検索結果をリクエストスコープに格納する

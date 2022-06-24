@@ -235,6 +235,7 @@
 			</form>
 		<!-- 手作りランチ日記コメント・リアクション表示 -->
 			<form method="POST" action="MyPageServlet">
+			<input type="hidden" name="lunch_id" value="${e.lunchId}">
 			<c:forEach var="lc" items="${LdComment}">
 				<c:if test="${lc.lunchId == e.lunchId}">
 					${lc.accountName}：
@@ -279,14 +280,20 @@
 					<td width ="240px">${e.listResName}</td>
 					<td width ="150px">${e.listCategory}</td>
 					<td width ="200px">${e.togoMemo}</td>
-					<%-- <td width ="260px">${e.}<br>${e.}<br>${e.}</td> --%>
+					<td width ="260px">
+						<input type="button" name="to" value="行きたい">
+						<input type="button" name="to" value="教えて">
+						<input type="button" name="to" value="参考にします"><br>
+					</td>
 					<td >
-				<form method="POST" action="EditListServlet">
-				<input type="hidden" name="list_id" value="${e.listId}">
-				<input type="hidden" name="list_category" value="${e.listCategory}">
-				<input type="hidden" name="togo_memo" value="${e.togoMemo}">
-				<input type="submit" name="SUBMIT" value="編集">
-				</form>
+						<form method="POST" action="EditListServlet">
+						<input type="hidden" name="list_res_name" value="${e.listResName}">
+						<input type="hidden" name="list_id" value="${e.listId}">
+						<input type="hidden" name="list_category" value="${e.listCategory}">
+						<input type="hidden" name="togo_memo" value="${e.togoMemo}">
+						<input type="submit" name="SUBMIT" value="編集">
+						</form>
+					</td>
 			</c:forEach>
 		</table>
  </div>
@@ -312,7 +319,7 @@
 			<%-- </c:forEach> --%>
   		</c:forEach>
   </div>
-</div>
+
 
 
 <!-- 外食ランチ日記更新削除
