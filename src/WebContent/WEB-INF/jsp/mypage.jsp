@@ -143,109 +143,120 @@
 <!--タブを切り替えて表示するコンテンツ-->
  <!-- 手作り日記タブ  ----------------------------------------------------->
 <div class="panel-group">
-  <div class="panel">
-       <c:if test="${myHandmade == null }">
+	<div class="panel">
+		<c:if test="${myHandmade == null }">
 			登録はありません。
 		</c:if>
- 		<c:forEach var="e" items="${myHandmade}" >
- 		<form method="POST" action="EditHandmadeServlet">
-			${e.handmadeId}<br>
-			${e.accountName}<br>
-			${e.emailAddress}<br>
-			${e.hdFoodType}<br>
-			<%-- ${e.hdFoodPhoto}<br> --%>
-			<img src = "/lunchBox/image/${e.hdFoodPhoto}">
-			${e.hdCategory}<br>
-			${e.hdDate}<br>
-			${e.hdFoodName}<br>
-			${e.hdCost}<br>
-			${e.hdStar}<br>
-			${e.hdFeeling}<br>
-			${e.cooktime}<br>
-			${e.ldRegistTime}<br>
-			<input type="hidden" name="handmadeId" value="${e.handmadeId}">
-			<input type="hidden" name="foodPhoto" value="${e.hdFoodPhoto}">
-			<input type="hidden" name="date" value="${e.hdDate}">
-			<input type="hidden" name="foodName" value="${e.hdFoodName}">
-			<input type="hidden" name="cost" value="${e.hdCost}">
-			<input type="hidden" name="star" value="${e.hdStar}">
-			<input type="hidden" name="feeling" value="${e.hdFeeling}">
-			<input type="hidden" name="cookTime" value="${e.cooktime}">
-		<input type="submit" name="SUBMIT" value="編集">
-		</form>
-		<!-- 手作りランチ日記コメント・リアクション表示 -->
-		<form method="POST" action="MyPageServlet">
-		<c:forEach var="hc" items="${HdComment}">
-		<c:if test="${hc.handmadeId == e.handmadeId}">
-			${hc.accountName}：
-			${hc.hdComment}<br>
-		</c:if>
-		</c:forEach>
+		<c:forEach var="e" items="${myHandmade}" >
+			<form method="POST" action="EditHandmadeServlet">
+				${e.handmadeId}<br>
+				${e.accountName}<br>
+				${e.emailAddress}<br>
+				${e.hdFoodType}<br>
+				<img src = "/lunchBox/image/${e.hdFoodPhoto}"><br>
+				${e.hdCategory}<br>
+				${e.hdDate}<br>
+				${e.hdFoodName}<br>
+				${e.hdCost}<br>
+				${e.hdStar}<br>
+				${e.hdFeeling}<br>
+				${e.cooktime}<br>
+				${e.ldRegistTime}<br>
+				<input type="hidden" name="handmadeId" value="${e.handmadeId}">
+				<input type="hidden" name="foodPhoto" value="${e.hdFoodPhoto}">
+				<input type="hidden" name="date" value="${e.hdDate}">
+				<input type="hidden" name="foodName" value="${e.hdFoodName}">
+				<input type="hidden" name="cost" value="${e.hdCost}">
+				<input type="hidden" name="star" value="${e.hdStar}">
+				<input type="hidden" name="feeling" value="${e.hdFeeling}">
+				<input type="hidden" name="cookTime" value="${e.cooktime}">
+			<input type="submit" name="SUBMIT" value="編集">
+			</form>
+		<!-- 手作り記録コメント・リアクション表示 -->
+			<form method="POST" action="MyPageServlet">
+			<c:forEach var="hc" items="${HdComment}">
+				<c:if test="${hc.handmadeId == e.handmadeId}">
+					${hc.accountName}：
+					${hc.hdComment}<br>
+				</c:if>
+			</c:forEach>
 			<input type="text" name="hd_comment" placeholder="コメントを入力してください">
 			<input type="submit" name="hc_submit" value="送信する"><br>
-			<hr>
-		</form>
+			<c:forEach var="lr" items="${hdReactionList}">
+				<c:if test="${lr.handmadeId == e.handmadeId}">
+					${lr.countHdToEat}|
+					${lr.countHdToTell}|
+					${lr.countHdToUse}|
+				</c:if>
+			</c:forEach>
+			<input type="button" name="hdbtn" value="食べたい">
+			<input type="button" name="hdbtn" value="教えて">
+			<input type="button" name="hdbtn" value="参考にします"><br>
+				<hr>
+			</form>
 		</c:forEach>
-  </div>
+	</div>
 
  <!-- ランチ日記タブ  ----------------------------------------------------->
-  <div class="panel is-show">
-  <c:if test="${myLunch == null }">
+	<div class="panel is-show">
+		<c:if test="${myLunch == null }">
 			登録はありません。
-  </c:if>
- 		<c:forEach var="e" items="${myLunch}" >
-		<form method="POST" action="MyPageServlet">
-			${e.lunchId}<br>
-			${e.accountName}<br>
-			${e.ldResName}<br>
-			<input type="hidden" name="ld_res_name" value="${e.ldResName}">
-			${e.ldFoodPhoto}<br>
-			${e.ldCategory}<br>
-			${e.style}<br>
-			${e.ldDate}<br>
-			${e.ldFoodName}<br>
-			${e.ldCost}<br>
-			${e.time}<br>
-			${e.distance}<br>
-			${e.ldStar}<br>
-			${e.ldFeeling}<br>
-			<input type="hidden" name="lunch_id" value="${e.lunchId}">
-			<input type="hidden" name="resName" value="${e.ldResName}">
-			<input type="hidden" name="foodPhoto" value="${e.hdFoodPhoto}">
-			<input type="hidden" name="category" value="${e.ldCategory}">
-			<input type="hidden" name="style" value="${e.style}">
-			<input type="hidden" name="date" value="${e.ldDate}">
-			<input type="hidden" name="foodName" value="${e.ldFoodName}">
-			<input type="hidden" name="cost" value="${e.ldCost}">
-			<input type="hidden" name="time" value="${e.time}">
-			<input type="hidden" name="distance" value="${e.distance}">
-			<input type="hidden" name="Star" value="${e.ldStar}">
-			<input type="hidden" name="feeling" value="${e.ldFeeling}">
-		<!-- 外食ランチ日記更新削除 -->
-		<a href="/lunchBox/EditLunchServlet" class="editLunch"><button type="button">編集</button></a><br>
-
-
-		<c:forEach var="lc" items="${LdComment}">
-		<c:if test="${lc.lunchId == e.lunchId}">
-			${lc.accountName}：
-			${lc.ldComment}<br>
 		</c:if>
-		</c:forEach>
+		<c:forEach var="e" items="${myLunch}" >
+			<form method="POST" action="EditLunchServlet">
+				${e.lunchId}<br>
+				${e.accountName}<br>
+				${e.ldResName}<br>
+				<input type="hidden" name="ld_res_name" value="${e.ldResName}">
+				${e.ldFoodPhoto}<br>
+				${e.ldCategory}<br>
+				${e.style}<br>
+				${e.ldDate}<br>
+				${e.ldFoodName}<br>
+				${e.ldCost}<br>
+				${e.time}<br>
+				${e.distance}<br>
+				${e.ldStar}<br>
+				${e.ldFeeling}<br>
+				<input type="hidden" name="lunch_id" value="${e.lunchId}">
+				<input type="hidden" name="resName" value="${e.ldResName}">
+				<input type="hidden" name="foodPhoto" value="${e.hdFoodPhoto}">
+				<input type="hidden" name="category" value="${e.ldCategory}">
+				<input type="hidden" name="style" value="${e.style}">
+				<input type="hidden" name="date" value="${e.ldDate}">
+				<input type="hidden" name="foodName" value="${e.ldFoodName}">
+				<input type="hidden" name="cost" value="${e.ldCost}">
+				<input type="hidden" name="time" value="${e.time}">
+				<input type="hidden" name="distance" value="${e.distance}">
+				<input type="hidden" name="Star" value="${e.ldStar}">
+				<input type="hidden" name="feeling" value="${e.ldFeeling}">
+				<!-- 外食ランチ日記更新削除 -->
+			<input type="submit" name="SUBMIT" value="編集">
+			</form>
+		<!-- 手作りランチ日記コメント・リアクション表示 -->
+			<form method="POST" action="MyPageServlet">
+			<c:forEach var="lc" items="${LdComment}">
+				<c:if test="${lc.lunchId == e.lunchId}">
+					${lc.accountName}：
+					${lc.ldComment}<br>
+				</c:if>
+			</c:forEach>
 			<input type="text" name="ld_comment" placeholder="コメントを入力してください">
 			<input type="submit" name="lc_submit" value="送信する"><br>
-		<c:forEach var="lr" items="${ldReactionList}">
-		<c:if test="${lr.lunchId == e.lunchId}">
-			${lr.countLdToGo}|
-			${lr.countLdToTell}|
-			${lr.countLdToUse}|
-		</c:if>
+			<c:forEach var="lr" items="${ldReactionList}">
+				<c:if test="${lr.lunchId == e.lunchId}">
+					${lr.countLdToGo}|
+					${lr.countLdToTell}|
+					${lr.countLdToUse}|
+				</c:if>
+			</c:forEach>
+			<input type="button" name="to" value="行きたい">
+			<input type="button" name="to" value="教えて">
+			<input type="button" name="to" value="参考にします"><br>
+			<hr>
+			</form>
 		</c:forEach>
-		<input type="button" name="ToGo" value="行きたい">
-		<input type="button" name="ToTellMe" value="教えて">
-		<input type="button" name="ToUseidea" value="参考にします"><br>
-	</form>
-		</c:forEach>
-  </div>
+	</div>
 
 
 
@@ -270,11 +281,11 @@
 					<td width ="200px">${e.togoMemo}</td>
 					<%-- <td width ="260px">${e.}<br>${e.}<br>${e.}</td> --%>
 					<td >
-				<form method="POST" action="RegistListServlet">
+				<form method="POST" action="EditListServle">
 				<input type="hidden" name="list_id" value="${e.listId}">
 				<input type="hidden" name="list_category" value="${e.listCategory}">
 				<input type="hidden" name="togo_memo" value="${e.togoMemo}">
-				<a href="/lunchBox/EditListServlet" class="editLunch"><button type="button">編集</button></a>
+				<input type="submit" name="SUBMIT" value="編集">
 				</form>
 			</c:forEach>
 		</table>
