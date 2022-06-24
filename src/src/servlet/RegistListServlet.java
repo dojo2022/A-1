@@ -75,21 +75,23 @@ public class RegistListServlet extends HttpServlet {
 		//DAOに変更してねって依頼をする
 		boolean ans = lDao.insertList(emailAddress,listResName,listCategory,togoMemo);
 
+		// コンソールに表示して確認するためのもの
 		System.out.println(emailAddress);
 		System.out.println(listResName);
 		System.out.println(listCategory);
 		System.out.println(togoMemo);
+
 		//登録成功時
 		if(ans == true) {
 			request.setAttribute("msg","登録が完了しました");
-			System.out.println("成功");
+			System.out.println("成功"); // コンソール
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp");
 			dispatcher.forward(request, response);
 		}
 		//登録失敗時
 		else {
 			request.setAttribute("msg","登録に失敗しました");
-			System.out.println("失敗");
+			System.out.println("失敗"); // コンソール
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/regist_list.jsp");
 			dispatcher.forward(request, response);
 			return;

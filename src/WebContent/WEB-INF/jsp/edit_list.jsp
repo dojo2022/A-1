@@ -28,18 +28,18 @@
 			            <h3>&nbsp;ジャンル</h3>
 			            <select name="CATEGORY" id="editCategory" class="form_unit">
 			                <option value="">選択してください</option>
-			                <option value="和食" <c:if test=${test=="和食"}>selected</c:if>>和食</option>
-			                <option value="中華" <c:if test=${test=="中華"}>selected</c:if>>中華</option>
-			                <option value="洋食" <c:if test=${test=="洋食"}>selected</c:if>>洋食</option>
-			                <option value="イタリアン" <c:if test=${test=="イタリアン"}>selected</c:if>>イタリアン</option>
-			                <option value="パン" <c:if test=${test=="パン"}>selected</c:if>>パン</option>
-			                <option value="ラーメン" <c:if test=${test=="ラーメン"}>selected</c:if>>ラーメン</option>
-			                <option value="その他" <c:if test=${test=="その他"}>selected</c:if>>その他</option>
+			                <option value="和食"> <c:if CATEGORY=${CATEGORY=="和食"}selected></c:if>和食</option>
+			                <option value="中華"> <c:if CATEGORY=${CATEGORY=="中華"}selected></c:if>中華</option>
+			                <option value="洋食"> <c:if CATEGORY=${CATEGORY=="洋食"}selected></c:if>洋食</option>
+			                <option value="イタリアン"> <c:if CATEGORY=${CATEGORY=="イタリアン"}selected></c:if>イタリアン</option>
+			                <option value="パン"> <c:if CATEGORY=${CATEGORY=="パン"}selected></c:if>パン</option>
+			                <option value="ラーメン"> <c:if CATEGORY=${CATEGORY=="ラーメン"}selected></c:if>ラーメン</option>
+			                <option value="その他"> <c:if CATEGORY=${CATEGORY=="その他"}selected></c:if>その他</option>
 			            </select>
 			            <h3>&nbsp;メモ</h3>
 			            <textarea name="TOGO_MEMO" cols="55" rows="5" placeholder="Add Text" class="form_unit" id="editToGoMemo" >${ここにスコープを挿入}</textarea><br>
 			            <p class="errmsg" id="error_message"><br>${msg}</p>
-			            <input type="hidden" name="LIST_ID"  value="2">
+			            <input type="hidden" name="LIST_ID"  value="16">
 			            <div class="list_button">
 			            <input type="submit" name="toGoEdit" value="編集する" >
 			            <input type="submit" name="toGoDelete" value="削除する" >
