@@ -40,9 +40,9 @@ public class HdReactionDAO {
 			while(rs.next()) {
 				AllColumnBeans reacHd = new AllColumnBeans();
 				reacHd.setHandmadeId(rs.getInt("handmade_id"));
-				reacHd.setCountLdToGo(rs.getInt("SUM(hd_to_eat)"));
-				reacHd.setCountLdToTell(rs.getInt("SUM(hd_to_tell)"));
-				reacHd.setCountLdToUse(rs.getInt("SUM(hd_to_use)"));
+				reacHd.setCountHdToEat(rs.getInt("SUM(hd_to_eat)"));
+				reacHd.setCountHdToTell(rs.getInt("SUM(hd_to_tell)"));
+				reacHd.setCountHdToUse(rs.getInt("SUM(hd_to_use)"));
 
 				hdReactionList.add(reacHd);
 			}
