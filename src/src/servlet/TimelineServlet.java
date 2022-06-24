@@ -136,9 +136,9 @@ public class TimelineServlet extends HttpServlet {
 //		}
 //		HdReactionDAO hdrDao = new HdReactionDAO();
 //		hdrDao.insertHdReaction(hdr_lunch_id, hdr_email_address, to_eat, hdr_to_tell, hdr_to_use);
-		String lc_submit = request.getParameter("lc_submit");
-		String hc_submit = request.getParameter("hc_submit");
-		if(lc_submit.equals("送信する")) {
+		request.setCharacterEncoding("UTF-8");
+		String send_comment = request.getParameter("send_comment");
+		if(send_comment.equals("ランチ日記コメントを送信する")) {
 //			入力されたコメントを取得して登録するやつ
 			request.setCharacterEncoding("UTF-8");
 			String ldc_email_address = user.getEmailAddress();
@@ -148,7 +148,7 @@ public class TimelineServlet extends HttpServlet {
 			LdCommentDAO ldcDao = new LdCommentDAO();
 			ldcDao.insertLdComment(0, ldc_lunch_id, ldc_email_address, ld_comment);
 
-		}else if(hc_submit.equals("送信する")) {
+		}else if(send_comment.equals("手作り記録コメントを送信する")) {
 			request.setCharacterEncoding("UTF-8");
 			String hdc_email_address = user.getEmailAddress();
 			Integer hdc_lunch_id = Integer.parseInt(request.getParameter("handmade_id"));
