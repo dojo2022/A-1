@@ -55,22 +55,22 @@
 
 		<p>評価<br>
 			<div class="rate-form">
-				  <input id="star1" type="radio" name="star" value="1"><c:if test=${star =="1"}checked></c:if>
-				  <label for="star1">★</label>
-				  <input id="star2" type="radio" name="star" value="2"><c:if test=${star =="2"}checked></c:if>
-				  <label for="star2">★</label>
-				  <input id="star3" type="radio" name="star" value="3"><c:if test=${star =="3"}checked></c:if>
-				  <label for="star3">★</label>
-				  <input id="star4" type="radio" name="star" value="4"><c:if test=${star =="4"}checked></c:if>
-				  <label for="star4">★</label>
 				  <input id="star5" type="radio" name="star" value="5"><c:if test=${star =="5"}checked></c:if>
 				  <label for="star5">★</label>
+				  <input id="star4" type="radio" name="star" value="4"><c:if test=${star =="4"}checked></c:if>
+				  <label for="star4">★</label>
+				  <input id="star3" type="radio" name="star" value="3"><c:if test=${star =="3"}checked></c:if>
+				  <label for="star3">★</label>
+				  <input id="star2" type="radio" name="star" value="2"><c:if test=${star =="2"}checked></c:if>
+				  <label for="star2">★</label>
+				  <input id="star1" type="radio" name="star" value="1"><c:if test=${star =="1"}checked></c:if>
+				  <label for="star1">★</label>
 			</div>
 		</p>
 
 
 		<p>感想（自由記入）<br>
-			<textarea name="feeling" value="" placeholder="ここに記入してください"></textarea>
+			<textarea name="feeling" value="" placeholder="ここに記入してください" ${feeling}></textarea>
 		</p>
 
 		<input type="submit" name="updateButton" value="更新する"><br>

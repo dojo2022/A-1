@@ -262,10 +262,10 @@ public class HandmadeDiaryDAO {
 		pStmt.setString(2, image);
 		pStmt.setString(3, cooktime);
 		pStmt.setString(4, hdDate);
-		pStmt.setString(5, hdDate);
-		pStmt.setString(6, hdCost);
-		pStmt.setInt(7, hdStar);
-		pStmt.setString(8, hdFeeling);
+		pStmt.setString(5, hdCost);
+		pStmt.setInt(6, hdStar);
+		pStmt.setString(7, hdFeeling);
+		pStmt.setInt(8, handmadeId);
 
 
 		//SQL文を実行させる。
@@ -316,29 +316,31 @@ public class HandmadeDiaryDAO {
 
 
 			//SQL文を実行する。
-			pStmt.setInt(0,handmadeId);
+			pStmt.setInt(1,handmadeId);
+
+
 			if (pStmt.executeUpdate() == 1) {
 				result = true;
 			}
 		}
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
-		catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		finally {
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+			catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			finally {
 
-			//データベースを切断。
-			if (conn != null) {
-				try {
-					conn.close();
-				}
-				catch (SQLException e) {
-					e.printStackTrace();
+				//データベースを切断。
+				if (conn != null) {
+					try {
+						conn.close();
+					}
+					catch (SQLException e) {
+						e.printStackTrace();
+					}
 				}
 			}
-		}
 
 			//結果を返す。
 			return result;
