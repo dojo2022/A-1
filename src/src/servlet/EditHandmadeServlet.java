@@ -11,16 +11,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import dao.HandmadeDiaryDAO;
-import model.UserMasterBeans;
 
 /**
  * Servlet implementation class EditHandmadeServlet
  */
-@MultipartConfig(location = "C:\\pleiades\\workspace\\lunchBox\\WebContent\\images") // アップロードファイルの一時的な保存先
+@MultipartConfig(location = "C://dojo6//src//WebContent//images") // アップロードファイルの一時的な保存先
 @WebServlet("/EditHandmadeServlet")
 public class EditHandmadeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -42,11 +40,13 @@ public class EditHandmadeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-
+/*
 		//insertに必要なメールアドレスを取得
 		HttpSession session = request.getSession();
 		UserMasterBeans user = (UserMasterBeans) session.getAttribute("user");
 		String emailAddress = user.getEmailAddress();
+*/
+
 
 		//リクエストパラメーターを取得
 		request.setCharacterEncoding("UTF-8");
@@ -56,11 +56,14 @@ public class EditHandmadeServlet extends HttpServlet {
 		String cookTime = request.getParameter("cookTime");
 		String date = request.getParameter("date");
 		String cost = request.getParameter("cost");
-		int star = Integer.parseInt(request.getParameter("star"));
 		String feeling = request.getParameter("feeling");
+		int star =0;
+		//nullのときにparseIntするせいでエラー？
+		if(request.getParameter("star") != null) {
+			 star = Integer.parseInt(request.getParameter("star"));
+		}
 
 		String image = this.getFileName(foodPhoto);
-
 		request.setAttribute("image", image);
 		// サーバの指定のファイルパスへファイルを保存
         //場所はクラス名↑の上に指定してある
@@ -75,12 +78,12 @@ public class EditHandmadeServlet extends HttpServlet {
 
 		//更新成功したら
 		if(ans == true) {
-			request.setAttribute("msg","更新が完了しました");
+			request.setAttribute("okMsg","更新が完了しました");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp");
 			dispatcher.forward(request, response);
 		//更新が失敗したら
 		}else {
-			request.setAttribute("msg","更新失敗しました");
+			request.setAttribute("ngMsg","更新失敗しました");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/edit_diary.jsp");
 			dispatcher.forward(request, response);
 			return;
