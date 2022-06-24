@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.HandmadeDiaryDAO;
 import dao.LunchDiaryDAO;
 import model.AllColumnBeans;
 /**
@@ -40,7 +41,9 @@ public class SearchServlet extends HttpServlet {
 					return;
 				}*/
 		//リクエストパラメータ（ラジオボックスがどっちに押されているかで分岐する）
+
 		request.setCharacterEncoding("UTF-8");
+		if(request.getParameter("lunch")!=null &&request.getParameter("lunch").equals("lunch_diary")) {
 
 
 			//リクエストパラメータ（検索ボックスに入力された文字列の情報）を取得する
@@ -55,12 +58,27 @@ public class SearchServlet extends HttpServlet {
 			//検索処理を行う
 			LunchDiaryDAO LdDao = new LunchDiaryDAO();
 			ArrayList<AllColumnBeans> searchLunch =LdDao.selectLunch(resName, category, cost, time, distance);
-			System.out.println(searchLunch.size());
+			/*System.out.println(searchLunch.size());*/
 			request.setAttribute("searchLunch", searchLunch);
 
 			// 結果ページにフォワードする
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/search_result.jsp");
 			dispatcher.forward(request, response);
+			return;
+		}else {
+			String time = request.getParameter("time");
+			String foodName = request.getParameter("food_name");
+
+			HandmadeDiaryDAO hdDao = new HandmadeDiaryDAO();
+			ArrayList<AllColumnBeans> Handmade = hdDao.selectHandmade(time, foodName);
+			/*System.out.println(searchLunch.size());*/
+			request.setAttribute("Handmade", Handmade);
+
+			// 結果ページにフォワードする
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/search_result.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
 //			検索が行われたら、その情報をフォワードした際に表示できるようにする-------------
 //			//日記情報をゲットしてくる
 ////			LunchDiaryDAO LdDao = new LunchDiaryDAO();

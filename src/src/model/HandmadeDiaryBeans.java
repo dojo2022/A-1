@@ -16,7 +16,7 @@ public class HandmadeDiaryBeans implements Serializable{
 	private String hdFeeling;
 	private String cooktime;
 	private String handmadeFlag;
-	private String hdRegistTime;
+	private String ldRegistTime;
 
 	//ゲッターとセッター
 	public int getHandmadeId() {
@@ -91,11 +91,11 @@ public class HandmadeDiaryBeans implements Serializable{
 	public void setHandmadeFlag(String handmadeFlag) {
 		this.handmadeFlag = handmadeFlag;
 	}
-	public String getHdRegistTime() {
-		return hdRegistTime;
+	public String getLdRegistTime() {
+		return ldRegistTime;
 	}
-	public void setHdRegistTime(String hdRegistTime) {
-		this.hdRegistTime = hdRegistTime;
+	public void setLdRegistTime(String ldRegistTime) {
+		this.ldRegistTime = ldRegistTime;
 	}
 
 

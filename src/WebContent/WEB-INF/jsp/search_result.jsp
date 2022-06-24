@@ -15,7 +15,6 @@
 <c:forEach var="e" items="${searchLunch}" >
 <form method="POST" action="TimelineServlet">
 	${e.accountName}<br>
-	${e.ldFoodType}<br>
 	${e.ldResName}<br>
 	${e.ldFoodPhoto}<br>
 	${e.ldCategory}<br>
@@ -27,7 +26,7 @@
 	${e.distance}<br>
 	${e.ldStar}<br>
 	${e.ldFeeling}<br>
-<%--  	<input type="hidden" name="lunch_id" value="${e.lunchId}">
+<%--   	<input type="hidden" name="lunch_id" value="${e.lunchId}">
 	<c:forEach var="lc" items="${LdComment}">
 	<c:if test="${lc.lunchId == e.lunchId}">
 		${lc.accountName}：
@@ -46,16 +45,14 @@
 		<input type="submit" name="to" value="行きたい">
 		<input type="submit" name="to" value="教えて">
 		<input type="submit" name="to" value="参考にします"><br>
-</form>
+ --%></form>
 </c:forEach>
-<c:forEach var="e" items="${myHandmade}" >
+<c:forEach var="e" items="${Handmade}" >
 <form method="POST" action="TimelineServlet">
 		${e.handmadeId}<br>
 		${e.accountName}<br>
 		${e.emailAddress}<br>
-		${e.hdFoodType}<br>
 		${e.hdFoodPhoto}<br>
-		${e.hdCategory}<br>
 		${e.hdDate}<br>
 		${e.hdFoodName}<br>
 		${e.hdCost}<br>
@@ -63,7 +60,7 @@
 		${e.hdFeeling}<br>
 		${e.cooktime}<br>
 		${e.ldRegistTime}<br>
-	<input type="hidden" name="handmade_id" value="${e.handmadeId}">
+<%-- 	<input type="hidden" name="handmade_id" value="${e.handmadeId}">
 	<c:forEach var="hc" items="${HdComment}">
 	<c:if test="${hc.handmadeId == e.handmadeId}">
 		${hc.accountName}：
@@ -81,8 +78,8 @@
 	</c:forEach>
 		<input type="submit" name="hdbtn" value="食べたい">
 		<input type="submit" name="hdbtn" value="教えて">
-		<input type="submit" name="hdbtn" value="参考にします"><br>  --%>
-		</form>
+		<input type="submit" name="hdbtn" value="参考にします"><br>
+ --%>		</form>
 </c:forEach>
 </main>
 </body>
