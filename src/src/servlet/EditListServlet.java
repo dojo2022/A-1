@@ -63,11 +63,10 @@ public class EditListServlet extends HttpServlet {
 				if(request.getParameter("SUBMIT").equals("編集")) {
 					//値の取得
 
-					int listId = Integer.parseInt(request.getParameter("listId"));
-					String listResName = request.getParameter("listResName");
-					String category = request.getParameter("category");
-					String togoMemo = request.getParameter("togoMemo");
-
+					String listResName = request.getParameter("list_res_name");
+					String category = request.getParameter("list_category");
+					String togoMemo = request.getParameter("togo_memo");
+					int listId = Integer.parseInt(request.getParameter("list_id"));
 
 					//上記データをリクエストスコープへセット
 					request.setAttribute("listId", listId);
@@ -86,7 +85,7 @@ public class EditListServlet extends HttpServlet {
 		// リクエストパラメータを取得
 		request.setCharacterEncoding("UTF-8");
 		String listResName = request.getParameter("RES_NAME");
-		String listCategory = request.getParameter("CATEGORY");
+		String listCategory = request.getParameter("category");
 		String togoMemo = request.getParameter("TOGO_MEMO");
 		int listId = Integer.parseInt(request.getParameter("LIST_ID"));
 
@@ -98,10 +97,15 @@ public class EditListServlet extends HttpServlet {
 		return;
 		}
 
+		request.setAttribute("listResName", listResName);
+		request.setAttribute("listCategory", listCategory);
+		request.setAttribute("togoMemo", togoMemo);
+		request.setAttribute("listId", listId);
+
 		//DAOを呼んでくる
 		ListDAO lDao = new ListDAO();
 		//DAOに変更してねって依頼をする
-		if (request.getParameter("toGoEdit").equals("編集する")) {
+		if (request.getParameter("toGoEdit") != null) {
 
 			boolean ans = lDao.updateList(listResName,listCategory,togoMemo,listId);
 

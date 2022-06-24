@@ -126,7 +126,7 @@ public class ListDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
 			//SQL文を準備する
-			String sql = "UPDATE togo_list SET list_flag = 0 WHERE listId = ?";
+			String sql = "UPDATE togo_list SET list_flag = 0 WHERE list_Id = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			//SQL文の？部分に変数を入れる
