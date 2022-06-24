@@ -85,35 +85,35 @@ public class EditHandmadeServlet extends HttpServlet {
 		}
 
 
-			//リクエストパラメーターを取得
-			request.setCharacterEncoding("UTF-8");
-			int handmadeId = Integer.parseInt(request.getParameter("handmadeId"));
-			String foodName = request.getParameter("foodName");
-			Part foodPhoto = request.getPart("foodPhoto");
-			String cookTime = request.getParameter("cookTime");
-			String date = request.getParameter("date");
-			String cost = request.getParameter("cost");
-			String feeling = request.getParameter("feeling");
-			int star =0;
-			//nullのときにparseIntするせいでエラー？
-			if(request.getParameter("star") != null) {
-				 star = Integer.parseInt(request.getParameter("star"));
-			}
+				//リクエストパラメーターを取得
+				request.setCharacterEncoding("UTF-8");
+				int handmadeId = Integer.parseInt(request.getParameter("handmadeId"));
+				String foodName = request.getParameter("foodName");
+				Part foodPhoto = request.getPart("foodPhoto");
+				String cookTime = request.getParameter("cookTime");
+				String date = request.getParameter("date");
+				String cost = request.getParameter("cost");
+				String feeling = request.getParameter("feeling");
+				int star =0;
+				//nullのときにparseIntするせいでエラー？
+				if(request.getParameter("star") != null) {
+					 star = Integer.parseInt(request.getParameter("star"));
+				}
 
-			String image = this.getFileName(foodPhoto);
-			request.setAttribute("image", image);
-			// サーバの指定のファイルパスへファイルを保存
-	        //場所はクラス名↑の上に指定してある
+				String image = this.getFileName(foodPhoto);
+				request.setAttribute("image", image);
+				// サーバの指定のファイルパスへファイルを保存
+		        //場所はクラス名↑の上に指定してある
 
-			//上記データをリクエストスコープへセット
-			request.setAttribute("handmadeId", handmadeId);
-			request.setAttribute("foodName",foodName );
-			request.setAttribute("foodPhoto",foodPhoto );
-			request.setAttribute("cookTime",cookTime );
-			request.setAttribute("date", date);
-			request.setAttribute("cost", cost);
-			request.setAttribute("feeling", feeling);
-			request.setAttribute("star",star );
+				//上記データをリクエストスコープへセット
+				request.setAttribute("handmadeId", handmadeId);
+				request.setAttribute("foodName",foodName );
+				request.setAttribute("foodPhoto",foodPhoto );
+				request.setAttribute("cookTime",cookTime );
+				request.setAttribute("date", date);
+				request.setAttribute("cost", cost);
+				request.setAttribute("feeling", feeling);
+				request.setAttribute("star",star );
 
 
 		//DAOを呼び出す
@@ -123,38 +123,38 @@ public class EditHandmadeServlet extends HttpServlet {
 		if (request.getParameter("updateButton").equals("更新する")) {
 			boolean ans = hDao.updateHd(handmadeId, foodName, image, cookTime, date, cost, star, feeling);
 
-		//更新成功したら
-		if(ans == true) {
-			request.setAttribute("msg","更新が完了しました");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp");
-			dispatcher.forward(request, response);
-		//更新が失敗したら
-		}else {
-			request.setAttribute("ngmsg","更新失敗しました");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/edit_handmade_diary.jsp");
-			dispatcher.forward(request, response);
-			return;
-			}
-		}
-
-		else {
-			//DAOに削除してねって依頼をする
-			boolean ans = hDao.updateHdFlag(handmadeId);
-
-			//論理削除成功時
+			//更新成功したら
 			if(ans == true) {
-				request.setAttribute("msg","削除が完了しました");
+				request.setAttribute("msg","更新が完了しました");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp");
 				dispatcher.forward(request, response);
-
-			//論理削除失敗時
+			//更新が失敗したら
 			}else {
-				request.setAttribute("ngmsg","削除に失敗しました");
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/edit_diary.jsp");
+				request.setAttribute("ngmsg","更新失敗しました");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/edit_handmade_diary.jsp");
 				dispatcher.forward(request, response);
 				return;
 				}
 			}
+
+			else {
+				//DAOに削除してねって依頼をする
+				boolean ans = hDao.updateHdFlag(handmadeId);
+
+				//論理削除成功時
+				if(ans == true) {
+					request.setAttribute("msg","削除が完了しました");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp");
+					dispatcher.forward(request, response);
+
+				//論理削除失敗時
+				}else {
+					request.setAttribute("ngmsg","削除に失敗しました");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/edit_diary.jsp");
+					dispatcher.forward(request, response);
+					return;
+					}
+				}
 
 
 		//タイムラインに遷移
