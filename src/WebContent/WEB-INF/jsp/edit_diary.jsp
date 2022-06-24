@@ -19,7 +19,7 @@
 
 	<form method="POST" action="RegistLunchServlet"enctype="multipart/form-data">
 		<p>お店の名前※必須<br>
-		<input type="text" name="resName"  value="${resName}"></p>
+		<input type="text" name="resName"  value="${ldResName}"></p>
 
 		<p>写真<br>
 		<input type="file" name="foodPhoto" accept="image/*" value="${foodPhoto}" onchange="previewImage(this);"></p>
@@ -44,7 +44,7 @@
 			</select></p>
 
 		<p>日付※必須</p>
-			<input type="date" name="date"  value="${LunchDiaryBeans.date}">
+			<input type="date" name="date" value="${LunchDiaryBeans.date}" >
 
 		<p>料理名<br>
 			<input type="text" name="foodName" value="${LunchDiaryBeans.foodName}" placeholder="例：オムライス"><br></p>
