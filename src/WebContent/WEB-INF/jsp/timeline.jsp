@@ -18,7 +18,6 @@
 
 
 <div class="searchBox">
-<form method="POST" action="/lunchBox/SearchServlet" target="_new">
 <div id="radioBtn">
 	<label><input name="lunch" type="radio" value="lunch_diary" checked="checked" />ランチ日記</label>
 	<label><input name="lunch" type="radio" value="handmade_diary" />手作り日記</label>
@@ -26,7 +25,7 @@
 
 <div id="displayBox">
 	<div class="cm_box active">
-
+<form method="POST" action="/lunchBox/SearchServlet" target="_new">
 			<select name="distance">
 				<option value="">会社からの所要時間</option>
 				<option value="3分未満">3分未満</option>
@@ -63,8 +62,10 @@
 			</select>
 			<input type="text" name="resName" placeholder="店名">
 			<input type="submit" name="searchSubmit" value="検索">
+</form>
 	</div>
 	<div class="cm_box">
+<form method="POST" action="/lunchBox/SearchServlet" target="_new">
 			<select name="time">
 				<option value="">所要時間</option>
 				<option value="3分未満">3分未満</option>
@@ -75,10 +76,9 @@
 			</select>
 			<input type="text" name="foodName" placeholder="料理名">
 			<input type="submit" name="searchSubmit" value="検索">
-
+</form>
 	</div>
 </div>
-</form>
 </div>
 <!--タブ-->
 <ul class="tab-group">
