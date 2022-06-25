@@ -3,20 +3,75 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import model.LunchReactionBeans;
+import model.AllColumnBeans;
 
 public class LdReactionDAO {
 
 		Connection conn = null;
-		ArrayList<LunchReactionBeans> ldReaction = new 		ArrayList<LunchReactionBeans>();
-
+//		ArrayList<LunchReactionBeans> ldReaction = new ArrayList<LunchReactionBeans>();
+		ArrayList<AllColumnBeans> ldReaction = new ArrayList<AllColumnBeans>();
+//		int ldReactionId, int lunchId, String emailAddress, int ldToGo, int ldToTell, int ldToUse
 	//ランチ日記のスタンプの件数とユーザーの検索を行うメソッド
-	public ArrayList<LunchReactionBeans> selectLdReaction(int ldReactionId, int lunchId, String emailAddress, int ldToGo, int ldToTell, int ldToUse) {
+	public ArrayList<AllColumnBeans> selectLdReaction(String email_address,Integer lunch_id) {
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
 
-		return null;
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
+
+			// SQL文を準備する、リアクションの全件検索
+//			String sql = "select ld_reaction_id ,lunch_reaction.email_address, lunch_reaction.lunch_id, ld_to_go,ld_to_tell,ld_to_use from lunch_reaction left join lunch_diary on lunch_diary.lunch_id = lunch_reaction.lunch_id left join user_master on user_master.email_address = lunch_reaction.email_address where lunch_diary.lunch_flag = 1 ORDER BY lunch_reaction.ld_reaction_id DESC";
+			String sql = "select ld_reaction_id ,lunch_reaction.email_address, lunch_reaction.lunch_id, ld_to_go,ld_to_tell,ld_to_use from lunch_reaction left join lunch_diary on lunch_diary.lunch_id = lunch_reaction.lunch_id left join user_master on user_master.email_address = lunch_reaction.email_address where lunch_diary.lunch_flag = 1 and lunch_reaction.email_address = ? and lunch_reaction.lunch_id = ? ORDER BY lunch_reaction.ld_reaction_id DESC";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+				pStmt.setString(1, email_address);
+				pStmt.setInt(2, lunch_id);
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				AllColumnBeans acbeans = new AllColumnBeans();
+				acbeans.setLdReactionId(rs.getInt("ldReactionId"));
+				acbeans.setLunchId(rs.getInt("lunch_id"));
+				acbeans.setEmailAddress(rs.getString("email_address"));
+				acbeans.setLdToGo(rs.getInt("ld_to_go"));
+				acbeans.setLdToTell(rs.getInt("ld_to_tell"));
+				acbeans.setLdToUse(rs.getInt("ld_to_use"));
+
+
+				ldReaction.add(acbeans);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			ldReaction = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			ldReaction = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					ldReaction = null;
+				}
+			}
+		}
+	// 結果を返す
+	return ldReaction;
 
 	}
 

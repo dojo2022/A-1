@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 import dao.HandmadeDiaryDAO;
 import dao.HdCommentDAO;
 import dao.HdReactionDAO;
-import dao.LdCommentDAO;
 import dao.LdJoin2DAO;
 import dao.LdReactionDAO;
 import dao.LunchDiaryDAO;
@@ -38,6 +37,7 @@ public class TimelineServlet extends HttpServlet {
 //			response.sendRedirect("/lunchBox/LoginServlet");
 //			return;
 //	}
+
 
 //----------------------------ランチ日記の情報-------------------------------------
 		//日記情報をゲットしてくる
@@ -91,34 +91,62 @@ public class TimelineServlet extends HttpServlet {
 //			response.sendRedirect("/lunchBox/LoginServlet");
 //			return;
 //	}
+		request.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json");
+		response.setHeader("Cache-Control", "nocache");
+		response.setCharacterEncoding("utf-8");
 
-//		if() {
-//
-//		}
 //		セッションにあるuserの情報を取得
 		UserMasterBeans user = (UserMasterBeans)session.getAttribute("user");
-//-----------------------リアクションの登録（インサート）を行うやつ----------------------------------
+//-----------------------リアクションの登録、削除を行うやつ----------------------------------
 		request.setCharacterEncoding("UTF-8");
-		if(request.getParameter("to") != null) {
+//		ランチ日記のリアクションボタンが押されたら(変えた方がいいかも？)
+		if(request.getParameter("data2") != null) {
 			request.setCharacterEncoding("UTF-8");
-			Integer ldr_lunch_id = Integer.parseInt(request.getParameter("lunch_id"));
-			String ldr_email_address = user.getEmailAddress();
-			Integer to_go = 0;
-			Integer to_tell = 0;
-			Integer to_use = 0;
+//		ajaxの方からデータ持ってくるやつ。誰がどのランチIDに対してどのリアクションボタンを押したかを取得する
+		Integer lunch_id = Integer.parseInt(request.getParameter("data1"));
+//		Integer reaction = Integer.parseInt(request.getParameter("data2"));
+		String email_address = request.getParameter("data3");
+//		LdReactionDAOのselectLdReactionメソッドを呼び出す
+//		今まで誰がどのランチIDに対してどんなリアクションをしたかが分かる（？）
+		LdReactionDAO ldrDao = new LdReactionDAO();
+		ArrayList<AllColumnBeans> ldr = ldrDao.selectLdReaction(email_address,lunch_id);
+		Integer to_go = Integer.parseInt(request.getParameter("to_go"));
+		Integer reaction_id = Integer.parseInt(request.getParameter("ldReactionId"));
+		Integer to_tell = 0;
+		Integer to_use = 0;
+//		ここまできたら、そのランチIDに対してボタンを押したユーザーはどんな情報を持っているか分かるんじゃないか！！
+//		もし既に持っていたto_goが0ならinsertしなさい！1ならdelteしろ！の条件分岐
+		if(to_go.equals(0)) {
+			to_go = 1;
+			ldrDao.insertLdReaction(lunch_id, email_address, to_go, to_tell, to_use);
+		}else if(to_go.equals(1)) {
+			to_go = 0;
+			ldrDao.deleteLdReaction(reaction_id);
+		}
+
+//		ここで今までのリアクションデータを取得してこないとinsertかdeleteするかを判断できないのでは？
+//		どうやって書けばいいんや...
+//		SQL文で条件絞る検索をするべきなのか？
+//		Integer lunch_id = Integer.parseInt(request.getParameter("data1"));
+//		Integer reaction = Integer.parseInt(request.getParameter("data2"));
+//		String email_address = request.getParameter("data3");
+//		Integer to_go = 0;
+//		Integer to_tell = 0;
+//		Integer to_use = 0;
 //			ボタン押したか押していないかを取得
-			String button =request.getParameter("to");
-			if(button.equals("行きたい")) {
-				to_go = 1;
-			}else if (button.equals("教えて")) {
-				to_tell= 1;
-			}else if(button.equals("参考にします")){
-				to_use = 1;
-			}else {
-				System.out.println("失敗");
-			}
-			LdReactionDAO ldrDao = new LdReactionDAO();
-			ldrDao.insertLdReaction(ldr_lunch_id, ldr_email_address, to_go, to_tell, to_use);
+		String button =request.getParameter("to");
+		if(button.equals("行きたい")) {
+			to_go = 1;
+		}else if (button.equals("教えて")) {
+			to_tell= 1;
+		}else if(button.equals("参考にします")){
+			to_use = 1;
+		}else {
+			System.out.println("失敗");
+		}
+//		LdReactionDAO ldrDao = new LdReactionDAO();
+		ldrDao.insertLdReaction(lunch_id, email_address, to_go, to_tell, to_use);
 		}else if(request.getParameter("hdbtn") != null) {
 			request.setCharacterEncoding("UTF-8");
 			Integer hdr_handmade_id = Integer.parseInt(request.getParameter("handmade_id"));
@@ -142,27 +170,27 @@ public class TimelineServlet extends HttpServlet {
 		}
 
 
-//		コメントの入力をゲットしてインサートする処理
-		request.setCharacterEncoding("UTF-8");
-		String send_comment = request.getParameter("send_comment");
-		if(request.getParameter("send_comment") != null && send_comment.equals("ランチ日記コメントを送信する")) {
-			request.setCharacterEncoding("UTF-8");
-			String ldc_email_address = user.getEmailAddress();
-			Integer ldc_lunch_id = Integer.parseInt(request.getParameter("lunch_id"));
-			String ld_comment =request.getParameter("ld_comment");
-
-			LdCommentDAO ldcDao = new LdCommentDAO();
-			ldcDao.insertLdComment(0, ldc_lunch_id, ldc_email_address, ld_comment);
-
-		}else if(request.getParameter("send_comment") != null && send_comment.equals("手作り記録コメントを送信する")) {
-			request.setCharacterEncoding("UTF-8");
-			String hdc_email_address = user.getEmailAddress();
-			Integer hdc_lunch_id = Integer.parseInt(request.getParameter("handmade_id"));
-			String hd_comment =request.getParameter("hd_comment");
-
-			HdCommentDAO hdcDao = new HdCommentDAO();
-			hdcDao.insertHdComment(0, hdc_lunch_id, hdc_email_address, hd_comment);
-		}
+////		コメントの入力をゲットしてインサートする処理
+//		request.setCharacterEncoding("UTF-8");
+//		String send_comment = request.getParameter("send_comment");
+//		if(request.getParameter("send_comment") != null && send_comment.equals("ランチ日記コメントを送信する")) {
+//			request.setCharacterEncoding("UTF-8");
+//			String ldc_email_address = user.getEmailAddress();
+//			Integer ldc_lunch_id = Integer.parseInt(request.getParameter("lunch_id"));
+//			String ld_comment =request.getParameter("ld_comment");
+//
+//			LdCommentDAO ldcDao = new LdCommentDAO();
+//			ldcDao.insertLdComment(0, ldc_lunch_id, ldc_email_address, ld_comment);
+//
+//		}else if(request.getParameter("send_comment") != null && send_comment.equals("手作り記録コメントを送信する")) {
+//			request.setCharacterEncoding("UTF-8");
+//			String hdc_email_address = user.getEmailAddress();
+//			Integer hdc_lunch_id = Integer.parseInt(request.getParameter("handmade_id"));
+//			String hd_comment =request.getParameter("hd_comment");
+//
+//			HdCommentDAO hdcDao = new HdCommentDAO();
+//			hdcDao.insertHdComment(0, hdc_lunch_id, hdc_email_address, hd_comment);
+//		}
 //		コメント、リアクションのインサート（登録）が行われたら、その情報をフォワードした際に表示できるようにする-------------
 		//日記情報をゲットしてくる
 		LunchDiaryDAO LdDao = new LunchDiaryDAO();

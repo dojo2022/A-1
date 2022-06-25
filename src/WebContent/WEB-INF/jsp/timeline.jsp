@@ -94,9 +94,10 @@ ${comment_result}
 <!--タブを切り替えて表示するコンテンツ-->
 <div class="panel-group">
   <div class="panel is-show">
-
-<c:forEach var="e" items="${allLunch}" >
+<input type="text" name="mailAddress" id="emailAddress" value="${user.emailAddress}">
+<c:forEach var="e" items="${allLunch}" varStatus="status">
 <form method="POST" action="TimelineServlet">
+
 	${e.accountName}<br>
 	${e.ldFoodType}<br>
 	${e.ldResName}<br>
@@ -110,7 +111,7 @@ ${comment_result}
 	${e.distance}<br>
 	${e.ldStar}<br>
 	${e.ldFeeling}<br>
-	<input type="hidden" name="lunch_id" value="${e.lunchId}">
+	<input type="hidden" name="lunch_id" value="${e.lunchId}" id="lunch_id${status.index}">
 	<c:forEach var="lc" items="${LdComment}">
 	<c:if test="${lc.lunchId == e.lunchId}">
 		${lc.accountName}：
@@ -126,9 +127,12 @@ ${comment_result}
 		${lr.countLdToUse}|
 	</c:if>
 	</c:forEach>
-		<input type="submit" name="to" value="行きたい">
-		<input type="submit" name="to" value="教えて">
-		<input type="submit" name="to" value="参考にします"><br>
+		<input type="submit" name="to" value="行きたい" onclick="goAjax1(${status.index})">
+		<input type = "text" name="iki" id="iki${status.index}" value="??????">
+		<input type="submit" name="to" value="教えて" onclick="goAjax2(${status.index})">
+		<input type = "text" name="oshi" id="oshi${status.index}" value="??????">
+		<input type="submit" name="to" value="参考にします" onclick="goAjax3(${status.index})"><br>
+		<input type = "text" name="san" id="san${status.index}" value="??????">
 </form>
 </c:forEach>
 	</div>
@@ -179,34 +183,46 @@ ${comment_result}
 </main>
 
 <script>
-jQuery(function($){
-  $('.tab').click(function(){
-    $('.is-active').removeClass('is-active');
-    $(this).addClass('is-active');
-    $('.is-show').removeClass('is-show');
-    // クリックしたタブからインデックス番号を取得
-    const index = $(this).index();
-    // クリックしたタブと同じインデックス番号をもつコンテンツを表
-    $('.panel').eq(index).addClass('is-show');
-  });
-});
-/*
-<a href="#" id="link">
-$(function() {
+function goAjax1(let num}){
+	alart('function突入');
+	let lunch_id = document.getElementById('lunch_id'+num).value;
+	//行きたいボタンを押したかおしてないかの情報を持ってくる
+	let iki = document.getElementById('iki'+num).value;
+	//0ならinsert、1ならdelete,サーブレットでかけよ
+	//誰が押したか
+	let email_address = document.getElementById('emailAddress').value;
+	//{変数名：中に入れるもの}みたいに書いて、複数の値をpostData変数に格納
+	let postData = {data1:lunch_id,data2:iki,data3:email_address}
 
-	// テキストフォームを監視して入力があるたびに実行
-	$('#link').change(function() {
-
-		// テキストを取得
-		var param = $(this).val();
-
-		// リンクを書き換え
-		$('#link').attr('href', 'http://maps.google.co.jp/maps?q=' + param);
-
-	});
-
-});
- */
+	//非同期通信始めるよ
+	$.ajaxSetup({scriptCharset:'utf-8'});
+	$.ajax({
+		//どのサーブレットに送るか
+		//ajaxSampleのところは自分のプロジェクト名に変更する必要あり。
+		url: '/lunchBox/TimelineServlet',
+		//どのメソッドを使用するか
+		type:"POST",
+		//受け取るデータのタイプ
+		dataType:"json",
+		//何をサーブレットに飛ばすか（変数を記述）
+		data: postData,
+		//この下の２行はとりあえず書いてる（書かなくても大丈夫？）
+		processDate:false,
+		timeStamp: new Date().getTime()
+	   //非同期通信が成功したときの処理
+	}).done(function(data) {
+		alert("成功1");
+		// 今回は上の<div id="test"></div>の中に返ってきた文字列を入れる
+		document.getElementById("test").innerText=data[0].name;
+	  })
+	   //非同期通信が失敗したときの処理
+	  .fail(function() {
+		//失敗とアラートを出す
+		alert("失敗！");
+	  });
+}
 </script>
+
+
 </body>
 </html>
