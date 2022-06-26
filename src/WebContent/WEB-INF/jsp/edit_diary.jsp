@@ -11,19 +11,22 @@
 </head>
 <body>
 
-<form>
+
 
 <p>登録内容</p>
 <!-- <input type="radio" id="disp" name="contentsRadio" onclick="buttonClick()">外食
 <input type="radio" id="hide" name="contentsRadio" onclick="buttonClick()">手作り -->
+<div>
+<form method="POST" action="/lunchBox/EditLunchServlet" enctype="multipart/form-data">
 
 
-	<form method="POST" action="RegistLunchServlet"enctype="multipart/form-data">
 		<p>お店の名前※必須<br>
-		<input type="text" name="resName"  value="${ldResName}"></p>
+		<input type="text" name="resName"  value="${ldResName}">
+		</p>
 
 		<p>写真<br>
-		<input type="file" name="foodPhoto" accept="image/*" value="${ldFoodPhoto}" onchange="previewImage(this);"></p>
+			<input type="file" name="foodPhoto" accept="image/*" value="${ldFoodPhoto}" onchange="previewImage(this);">
+		</p>
 
 		<p>ジャンル<br>
 			<select name="ldCategory" >
@@ -35,20 +38,23 @@
 				<option value="パン"<c:if test="${ldCategory=='パン' }"> selected </c:if>>パン</option>
 				<option value="ラーメン"<c:if test="${ldCategory=='ラーメン' }"> selected </c:if>>ラーメン</option>
 				<option value="その他"<c:if test="${ldCategory=='その他' }"> selected </c:if>>その他</option>
-			</select></p>
+			</select>
+		</p>
 
 		<p>店内利用<br>
 			<select name="style">
 				<option value="">選択してください</option>
 				<option value="イートイン"<c:if test="${style=='イートイン' }"> selected </c:if>>イートイン</option>
 				<option value="テイクアウト"<c:if test="${style=='テイクアウト' }"> selected </c:if>>テイクアウト</option>
-			</select></p>
+			</select>
+		</p>
 
 		<p>日付※必須</p>
 			<input type="date" name="date" value="${ldDate}" >
 
 		<p>料理名<br>
-			<input type="text" name="foodName" value="${ldFoodName}" placeholder="例：オムライス"><br></p>
+			<input type="text" name="foodName" value="${ldFoodName}" placeholder="例：オムライス"><br>
+		</p>
 
 		<p>費用<br>
 			<select name="ldCost" >
@@ -59,7 +65,8 @@
 				<option value="～１２００円"<c:if test="${ldCost=='～１２００円' }"> selected </c:if>>～１２００円</option>
 				<option value="～１５００円"<c:if test="${ldCost=='～１５００円' }"> selected </c:if>>～１５００円</option>
 				<option value="１５００円～"<c:if test="${ldCost=='１５００～円' }"> selected </c:if>>１５００円～</option>
-			</select></p>
+			</select>
+		</p>
 
 		<p>提供時間<br>
 			<select name="time">
@@ -82,7 +89,7 @@
 			</select>
 		</p>
 
-		<p>評価<br>
+		<p>評価<br></p>
 			<div class="rate-form">
 				  <input id="star5" type="radio" name="ldStar" value="5"<c:if test="${ldStar =='5'}">checked</c:if>>
 				 <label for="star5">★</label>
@@ -95,7 +102,7 @@
 				  <input id="star1" type="radio" name="ldStar" value="1"<c:if test="${ldStar =='1'}">checked</c:if>>
 				  <label for="star1">★</label>
 			</div>
-		</p>
+
 
 
 
@@ -104,15 +111,20 @@
 
 
 		<p>感想<br>
-			<textarea name="feeling"  placeholder="ここに記入してください" value="${feeling}"></textarea>
+			<textarea  name="feeling"  placeholder="ここに記入してください">${ldFeeling} </textarea>
 		</p>
 
 
-
+		<input type="hidden" name="lunchId" value="${lunchId }">
 		<input type="submit" name="updateButton" value="更新する"><br>
+
+
+
 		<input type="submit" name="deleteButton" value="削除する"><br>
 	</form>
-	</var>
+
+	</div>
+
 
 
 
