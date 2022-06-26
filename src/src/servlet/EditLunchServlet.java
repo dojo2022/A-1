@@ -5,8 +5,7 @@ import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,11 +24,11 @@ import model.UserMasterBeans;
 /**
  * Servlet implementation class EditLunchServlet
  */
+@MultipartConfig(location = "C://dojo6//src//WebContent//images") // アップロードファイルの一時的な保存先
 @WebServlet("/EditLunchServlet")
 public class EditLunchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ServletRequest request;
-	private ServletResponse response;
+
 
 
 
@@ -51,10 +50,10 @@ public class EditLunchServlet extends HttpServlet {
 		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			// TODO Auto-generated method stub
 			//doGet(request, response);
-
-			 request.setCharacterEncoding("UTF-8");
-			if(request.getParameter("SUBMIT")!=null) {
-				if(request.getParameter("SUBMIT").equals("編集")) {
+			System.out.println("入ったよ");
+	 request.setCharacterEncoding("UTF-8");
+	if(request.getParameter("SUBMIT")!=null) {
+		if(request.getParameter("SUBMIT").equals("編集")) {
 
 
 					/*System.out.println("aaaaaaaaaaaaaaaaaaaaaaa");*/
@@ -99,12 +98,15 @@ public class EditLunchServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/edit_diary.jsp");
 		dispatcher.forward(request, response);
 		return;
-				}
 
-			}
+		}
+
+	}
 //マイページJSPの<input type="hidden" name="lunch_id" value="${e.lunchId}">のname＝””中の文字がリクエストパラメータ取得の青い文字↓
-			request.setCharacterEncoding("UTF-8");
-			 int lunchId = Integer.parseInt(request.getParameter("lunch_id"));
+
+	request.setCharacterEncoding("UTF-8");
+
+			 int lunchId = Integer.parseInt(request.getParameter("lunchId"));
 			    String ldFoodType = request.getParameter("ldFoodType");
 			 	String resName = request.getParameter("resName");
 				String foodPhoto = request.getParameter("foodPhoto");
@@ -117,8 +119,8 @@ public class EditLunchServlet extends HttpServlet {
 				String distance = request.getParameter("distance");
 				int star =0;
 				//nullのときにparseIntするせいでエラー？
-				if(request.getParameter("Star") != null) {
-					 star = Integer.parseInt(request.getParameter("Star"));
+				if(request.getParameter("ldStar") != null) {
+					 star = Integer.parseInt(request.getParameter("ldStar"));
 					 }
 				String feeling = request.getParameter("feeling");
 
@@ -149,9 +151,10 @@ public class EditLunchServlet extends HttpServlet {
 		if(ans == true) {
 			request.setAttribute("msg","更新が完了しました");
 
+
 		//更新が失敗したら
 		}else {
-			request.setAttribute("msg","更新失敗しました");
+			request.setAttribute("ngmsg","更新失敗しました");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/edit_diary.jsp");
 			dispatcher.forward(request, response);
 			return;
@@ -260,16 +263,16 @@ public class EditLunchServlet extends HttpServlet {
 
 
 
-		//ファイルの名前を取得してくる
-		private String getFileName(Part foodPhoto) {
-		    String name = null;
-		    for (String dispotion : foodPhoto.getHeader("Content-Disposition").split(";")) {
-		        if (dispotion.trim().startsWith("filename")) {
-		            name = dispotion.substring(dispotion.indexOf("=") + 1).replace("\"", "").trim();
-		            name = name.substring(name.lastIndexOf("\\") + 1);
-		            break;
+			//ファイルの名前を取得してくる
+			private String getFileName(Part foodPhoto) {
+			    String name = null;
+			    for (String dispotion : foodPhoto.getHeader("Content-Disposition").split(";")) {
+			        if (dispotion.trim().startsWith("filename")) {
+			            name = dispotion.substring(dispotion.indexOf("=") + 1).replace("\"", "").trim();
+			            name = name.substring(name.lastIndexOf("\\") + 1);
+			            break;
 		        }
-		    }
+}
 			return name;
 			}
 		}
