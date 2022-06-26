@@ -1,19 +1,59 @@
 @charset "UTF-8";
 h1 {
+	padding-top: 12%;
 	text-align: center;
 }
 form {
-	border: solid;
-	color: #8b4513;
+	border-style: solid;
+	border-width: 1px;
+	background-color: rgba(255, 255, 102, 0.76);
 	text-align: center;
 	width: 380px;
     margin: 30px auto;
     padding: 20px;
+	box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+form input[type='text'],input[type = 'password']{
+	font:  15px/24px selif;
+	font-size:14px;
+	box-sizing: border-box;
+	width: 70%;
+	padding: 0.3em;
+	transition: 0.3s;
+	letter-spacing: 1px;
+	border: none;
+	border-bottom: 2px solid black;
+}
 
+form input[type='text']:focus{
+	border-bottom: 2px solid #da3c41;
+	outline: none;
+	background-color: white;
+}
+input[type = 'password']:focus{
+	border-bottom: 2px solid #da3c41;
+	outline: none;
+	background-color: white;
+}
 
-	background-color: #fef9a7;
+input[type = 'submit']{
+	border-radius : 5%;          /* 角丸       */
+	font-size     : 14px;        /* 文字サイズ */
+	cursor        : pointer;     /* カーソル   */
+	padding       : 15px 15px;   /* 余白       */
+	background    : #da3c41;     /* 背景色     */
+	color         : #ffffff;     /* 文字色     */
+	line-height   : 0.5em;         /* 1行の高さ  */
+	transition    : .3s;         /* なめらか変化 */
+	box-shadow    : 2px 2px 3px #666666;  /* 影の設定 */
+	border        : 2px solid #da3c41;    /* 枠の指定 */
+}
+input[type = 'submit']:hover{
+	color: #da3c41;
+	background: white;
 }
 body {
-	background-color: #FFEE63;
+	background-image:url(/lunchBox/img/login.jpg);
+	background-size: cover;
 }
 

@@ -17,10 +17,10 @@
 	</h1>
 	<form method="POST" action="/lunchBox/LoginServlet">
 		  <p>
-	        <input type="text" name="emailAddress" placeholder="メールアドレス" value= "${emailAddress}" required>
+	        <input type="text" name="emailAddress" placeholder="Email Address" value= "${emailAddress}" required>
 	      </p>
 	      <p>
-	        <input type="password" name="pw" placeholder="パスワード" id="pw" required>
+	        <input type="password" name="pw" placeholder="Password" id="pw" required>
 	      </p>
 	      <p>
 	        <label><input type="checkbox" name="ch" >パスワードの表示</label>
