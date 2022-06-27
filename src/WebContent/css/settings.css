@@ -4,8 +4,9 @@
 h2{
 	margin-bottom: 0;
 	text-align: center;
-	padding-top: 5px;
-    margin-top: 13%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+    margin-top: 15%;
 	height: 10%;
 }
 
@@ -18,13 +19,14 @@ body{
 
 
 }
-h2, form{
+h2,form{
 	 background-color: rgba(254, 249, 167, 0.85);
 	 color:#8b4513;
 	}
 
 form{
 	padding-bottom: 25px;
+	height: 100%;
 
 }
 
