@@ -52,7 +52,7 @@
 	<tr>
 		<th>ジャンル</th>
 			<td>
-				<select name="ldCategory" >
+				<select name="ldCategory">
 				<option value="">選択してください</option>
 				<option value="japan"<c:if test="${category=='japan' }"> selected </c:if>>和食</option>
 				<option value="中華"<c:if test="${ldCategory=='中華' }"> selected </c:if>>中華</option>
@@ -78,7 +78,7 @@
 
 	<tr>
 		<th>日付 <span class =required>必須</span></th>
-			<td><input type="date" name="date" value="${ldDate}" ></td>
+			<td><input type="date" name="date" value="${ldDate}"></td>
 	</tr>
 
 	<tr>
@@ -87,7 +87,7 @@
 	</tr>
 
 	<tr>
-		<th>費用</th>>
+		<th>費用</th>
 			<td>
 				<select name="ldCost" >
 					<option value="">選択してください</option>
