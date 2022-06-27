@@ -130,7 +130,7 @@ public class ListDAO {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			//SQL文の？部分に変数を入れる
-			pStmt.setInt(0,listId);
+			pStmt.setInt(1,listId);
 			if(pStmt.executeUpdate() == 1) {
 				result = true;
 			}

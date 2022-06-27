@@ -1,4 +1,73 @@
 @charset "UTF-8";
+body{
+	background-image: url(/lunchBox/img/leave.jpg);
+	background-size: cover;
+
+}
 h1 {
 	margin-top: 130px;
+	color: white;
+}
+form{
+	text-align: center;
+	color: white;
+}
+textarea{
+	width: 60%;
+	font: 15px/24px sans-serif;
+	padding: 0.3em;
+	transition: 0.3s;
+	letter-spacing: 1px;
+	border: 1px solid #1B2538;
+	border-radius: 4px;
+	background-color: rgba(255, 255, 255, 0.9)
+}
+textarea:focus{
+	border: 1px solid #DA3C41;
+	outline: none;
+	box-shadow: 0 0 5px 1px rgba(218,60,65, .5);
+}
+
+.required{
+	background-color: red;
+	color: white;
+	font-weight: 10px;
+}
+.back{
+	margin-right: 10%;
+	margin-bottom: 17px;
+	border-radius : 5%;          /* 角丸       */
+	font-size     : 18px;        /* 文字サイズ */
+	cursor        : pointer;     /* カーソル   */
+	padding       : 15px 30px;   /* 余白       */
+	background    : gray;     /* 背景色     */
+	color         : #FFFFFF;     /* 文字色     */
+	line-height   : 0.5em;         /* 1行の高さ  */
+	transition    : .3s;         /* なめらか変化 */
+	box-shadow    : 2px 2px 3px #666666;  /* 影の設定 */
+	border        : 2px solid gray;    /* 枠の指定 */
+}
+.back:hover{
+	color: gray;
+	background: white;
+
+}
+.continue{
+	border-radius : 5%;          /* 角丸       */
+	font-size     : 18px;        /* 文字サイズ */
+	cursor        : pointer;     /* カーソル   */
+	padding       : 15px 35px;   /* 余白       */
+	background    : #DA3C41;     /* 背景色     */
+	color         : #FFFFFF;     /* 文字色     */
+	line-height   : 0.5em;         /* 1行の高さ  */
+	transition    : .3s;         /* なめらか変化 */
+	box-shadow    : 2px 2px 3px #666666;  /* 影の設定 */
+	border        : 2px solid #DA3C41;    /* 枠の指定 */
+}
+.continue:hover{
+	color: #DA3C41;
+	background: white;
+}
+.errMsg{
+	background-color: red;
 }
