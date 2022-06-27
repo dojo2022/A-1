@@ -24,12 +24,18 @@
 		<input type="text" name="resName"  value="${ldResName}">
 		</p>
 
+
+
+
+
+
+
+
+
 		<p>写真<br>
-		<input type="hidden" name = "image_file" id="image_file" value="images/${ldFoodPhoto}">
-			<input type="file" name="foodPhoto" accept="image/*"  onchange="previewImage(this);"value="${ldFoodPhoto}">
+		< <input type="hidden" name = "image_file" id="image_file" value="images/${user.ldFoodPhoto}">
+			 <input type="file" name="foodPhoto" accept="image/*"  onchange="previewImage(this);"value="${user.ldFoodPhoto}">
 		</p>
-
-
 
 
 		<p>ジャンル<br>
@@ -128,6 +134,72 @@
 	</form>
 
 	</div>
+
+
+
+
+
+
+
+	<!--登録されている写真を射影！？  -->
+<script>
+function previewImage(obj){
+	//alert("aaa");
+	var fileReader = new FileReader();
+
+	// 読み込み後に実行する処理
+	fileReader.onload = (function() {
+
+		// canvas にプレビュー画像を表示
+		var canvas = document.getElementById('preview');
+		var ctx = canvas.getContext('2d');
+		var image = new Image();
+		image.src = fileReader.result;
+
+		console.log(fileReader.result) // ← (確認用)
+
+		images.onload = (function () {
+			canvas.width = image.width;
+			canvas.height = image.height;
+			ctx.drawImage(image, 0, 0);
+		});
+	});
+	// 画像読み込み
+	fileReader.readAsDataURL(obj.files[0]);
+	console.log(fileReader.result) // ← (確認用)null
+}
+
+//読み込まれた時に行う処理
+
+
+	var fileReader = new FileReader();
+
+	// 読み込み後に実行する処理
+	/* fileReader.onload = (function() { */
+		// canvas にプレビュー画像を表示
+		var canvas = document.getElementById('preview');
+		var ctx = canvas.getContext('2d');
+		var image = new Image();
+		/* alert(document.getElementById("image_file").value); */
+		image.src = document.getElementById("image_file").value;
+
+		/* console.log(fileReader.result) */ // ← (確認用)
+
+		image.onload = (function () {
+			canvas.width = image.width;
+			canvas.height = image.height;
+			ctx.drawImage(image, 0, 0);
+		});
+	/* }); */
+	// 画像読み込み
+	/* fileReader.readAsDataURL(obj.files[0]); */
+
+	/* console.log(fileReader.result)  */// ← (確認用)null
+
+
+</script>
+
+
 
 
 

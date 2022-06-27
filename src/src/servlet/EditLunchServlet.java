@@ -1,5 +1,6 @@
 package servlet;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -19,6 +20,7 @@ import dao.LdJoin2DAO;
 import dao.LunchDiaryDAO;
 import dao.MyPageDAO;
 import model.AllColumnBeans;
+import model.LunchDiaryBeans;
 import model.UserMasterBeans;
 
 /**
@@ -56,11 +58,76 @@ public class EditLunchServlet extends HttpServlet {
 		if(request.getParameter("SUBMIT").equals("編集")) {
 
 
-					/*System.out.println("aaaaaaaaaaaaaaaaaaaaaaa");*/
+
 	    int lunchId = Integer.parseInt(request.getParameter("lunch_id"));
 	    String ldFoodType = request.getParameter("ldFoodType");
 	 	String resName = request.getParameter("resName");
-		String foodPhoto = request.getParameter("foodPhoto");
+		//String foodPhoto = request.getParameter("foodPhoto");
+
+
+
+				//String part = request.getParameter("foodPhoto"); // getPartで取得
+
+				Part part = request.getPart("foodPhoto"); // getPartで取得
+
+				String ldFoodPhoto = this.getFileName(part);
+
+				HttpSession session = request.getSession();
+				request.setAttribute("image", ldFoodPhoto);
+				// サーバの指定のファイルパスへファイルを保存
+		        //場所はクラス名↑の上に指定してある
+
+				//☆☆☆大事：アイコンを変更しなかった場合の挙動------------------------------------------------------------
+				//sessionからユーザーの情報を取得してくる
+				LunchDiaryBeans user =(LunchDiaryBeans) session.getAttribute("user");
+				//選択されてなければ、FileNotFoundExceptionとIOException例外が出るので下記のように書く
+				try {
+					part.write(ldFoodPhoto);
+				}catch(FileNotFoundException e) {
+					//icon（ファイルの名前）に元々DBに格納されている名前を入れる
+					ldFoodPhoto = (String)user.getLdFoodPhoto();
+				}catch(IOException e) {
+					//こっちも同様
+					ldFoodPhoto = (String)user.getLdFoodPhoto();
+				}
+
+
+				//String foodPhoto = this.getFileName(part);
+
+				/*HttpSession session = request.getSession();
+				request.setAttribute("images", foodPhoto);
+				// サーバの指定のファイルパスへファイルを保存
+				//場所はクラス名↑の上に指定してある
+
+
+				//アイコンを変更しなかった場合の挙動
+				LunchDiaryBeans result =(LunchDiaryBeans) session.getAttribute("result");
+				try {
+					part.write(foodPhoto);
+				}catch(FileNotFoundException e) {
+					foodPhoto = (String)result.getLdFoodPhoto();
+				}catch(IOException e) {
+					foodPhoto = (String)result.getLdFoodPhoto();
+				}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		String category = request.getParameter("category");
 		String style = request.getParameter("style");
 		String date = request.getParameter("date");
@@ -80,7 +147,7 @@ public class EditLunchServlet extends HttpServlet {
 		request.setAttribute("lunchId", lunchId);
 		request.setAttribute("ldFoodType", ldFoodType);
 		request.setAttribute("ldResName", resName);
-		request.setAttribute("ldFoodPhoto", foodPhoto);
+		request.setAttribute("ldFoodPhoto", ldFoodPhoto);
 		request.setAttribute("ldCategory", category);
 		request.setAttribute("style", style);
 		request.setAttribute("ldDate", date);
@@ -263,16 +330,16 @@ public class EditLunchServlet extends HttpServlet {
 
 
 
-			//ファイルの名前を取得してくる
-			private String getFileName(Part foodPhoto) {
-			    String name = null;
-			    for (String dispotion : foodPhoto.getHeader("Content-Disposition").split(";")) {
-			        if (dispotion.trim().startsWith("filename")) {
-			            name = dispotion.substring(dispotion.indexOf("=") + 1).replace("\"", "").trim();
-			            name = name.substring(name.lastIndexOf("\\") + 1);
-			            break;
-		        }
-}
+		//ファイルの名前を取得してくる
+				private String getFileName(Part part) {
+			        String name = null;
+			        for (String dispotion : part.getHeader("Content-Disposition").split(";")) {
+			            if (dispotion.trim().startsWith("filename")) {
+			                name = dispotion.substring(dispotion.indexOf("=") + 1).replace("\"", "").trim();
+			                name = name.substring(name.lastIndexOf("\\") + 1);
+			                break;
+			            }
+			        }
 			return name;
 			}
 		}
