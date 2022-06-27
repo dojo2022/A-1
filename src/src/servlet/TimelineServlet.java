@@ -1,10 +1,12 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +25,8 @@ import model.UserMasterBeans;
 /**
  * Servlet implementation class TimelineServlet
  */
+@MultipartConfig(location = "C:\\dojo6\\src\\WebContent\\images")
+//アップロードファイルの一時的な保存先
 @WebServlet("/TimelineServlet")
 public class TimelineServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -32,17 +36,24 @@ public class TimelineServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//もしもログインしてなかったらログインサーブレットにリダイレクトする
-//		HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
 //		if (session.getAttribute("emailAddress") == null) {
 //			response.sendRedirect("/lunchBox/LoginServlet");
 //			return;
 //	}
 
+		request.setCharacterEncoding("UTF-8");
 
+//		String icon = request.getParameter("icon");
+//		Part part = request.getPart("food_photo"); // getPartで取得
+//		String food_photo = this.getFileName(part);
+//		HttpSession session = request.getSession();
+//		request.setAttribute("food_photo", food_photo);
 //----------------------------ランチ日記の情報-------------------------------------
 		//日記情報をゲットしてくる
 		LunchDiaryDAO LdDao = new LunchDiaryDAO();
 		ArrayList<AllColumnBeans> allLunch = LdDao.select();
+//		request.setAttribute("food_photo", food_photo);
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("allLunch", allLunch);
 
@@ -51,6 +62,17 @@ public class TimelineServlet extends HttpServlet {
 		ArrayList<AllColumnBeans> ldReactionList = LdRDao.countReactionUser();
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("ldReactionList", ldReactionList);
+
+//		Integer lunch_id = Integer.parseInt(request.getParameter("data1"));
+////		Integer reaction = Integer.parseInt(request.getParameter("data2"));
+		UserMasterBeans user = (UserMasterBeans)session.getAttribute("user");
+		String email_address=user.getEmailAddress();
+		System.out.println(email_address+"aaaaaaaaaaaaaaaaaaaaaaaaaa");
+
+		LdReactionDAO ldrDao = new LdReactionDAO();
+		ArrayList<AllColumnBeans> ldr = ldrDao.selectLdReaction(email_address);
+		System.out.println(ldr.size()+"サイズだよｘｘｘｘｘｘｘｘｘｘｘｘｘｘｘｘｘｘｘｘｘｘｘｘ");
+		request.setAttribute("ldr", ldr);
 
 		//ランチ日記コメント情報をゲットしてくる
 		LdJoin2DAO LdCDao = new LdJoin2DAO();
@@ -85,90 +107,94 @@ public class TimelineServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//もしもログインしてなかったらログインサーブレットにリダイレクトする
-		HttpSession session = request.getSession();
-//		if (session.getAttribute("emailAddress") == null) {
-//			response.sendRedirect("/lunchBox/LoginServlet");
-//			return;
-//	}
-		request.setCharacterEncoding("UTF-8");
-        response.setContentType("application/json");
-		response.setHeader("Cache-Control", "nocache");
-		response.setCharacterEncoding("utf-8");
-
-//		セッションにあるuserの情報を取得
-		UserMasterBeans user = (UserMasterBeans)session.getAttribute("user");
-//-----------------------リアクションの登録、削除を行うやつ----------------------------------
-		request.setCharacterEncoding("UTF-8");
-//		ランチ日記のリアクションボタンが押されたら(変えた方がいいかも？)
-		if(request.getParameter("data2") != null) {
+		System.out.println("doPost入ったよ");
+		//		data4で取ってきたボタンの種類がto(行きたい)だったらこの処理をする
+		if(request.getParameter("data4").equals("to_go")) {
+			HttpSession session = request.getSession();
 			request.setCharacterEncoding("UTF-8");
-//		ajaxの方からデータ持ってくるやつ。誰がどのランチIDに対してどのリアクションボタンを押したかを取得する
-		Integer lunch_id = Integer.parseInt(request.getParameter("data1"));
-//		Integer reaction = Integer.parseInt(request.getParameter("data2"));
-		String email_address = request.getParameter("data3");
-//		LdReactionDAOのselectLdReactionメソッドを呼び出す
-//		今まで誰がどのランチIDに対してどんなリアクションをしたかが分かる（？）
-		LdReactionDAO ldrDao = new LdReactionDAO();
-		ArrayList<AllColumnBeans> ldr = ldrDao.selectLdReaction(email_address,lunch_id);
-		Integer to_go = Integer.parseInt(request.getParameter("to_go"));
-		Integer reaction_id = Integer.parseInt(request.getParameter("ldReactionId"));
-		Integer to_tell = 0;
-		Integer to_use = 0;
-//		ここまできたら、そのランチIDに対してボタンを押したユーザーはどんな情報を持っているか分かるんじゃないか！！
-//		もし既に持っていたto_goが0ならinsertしなさい！1ならdelteしろ！の条件分岐
-		if(to_go.equals(0)) {
-			to_go = 1;
-			ldrDao.insertLdReaction(lunch_id, email_address, to_go, to_tell, to_use);
-		}else if(to_go.equals(1)) {
-			to_go = 0;
-			ldrDao.deleteLdReaction(reaction_id);
-		}
+	        response.setContentType("application/json");
+			response.setHeader("Cache-Control", "nocache");
+			response.setCharacterEncoding("utf-8");
 
-//		ここで今までのリアクションデータを取得してこないとinsertかdeleteするかを判断できないのでは？
-//		どうやって書けばいいんや...
-//		SQL文で条件絞る検索をするべきなのか？
-//		Integer lunch_id = Integer.parseInt(request.getParameter("data1"));
-//		Integer reaction = Integer.parseInt(request.getParameter("data2"));
-//		String email_address = request.getParameter("data3");
-//		Integer to_go = 0;
-//		Integer to_tell = 0;
-//		Integer to_use = 0;
-//			ボタン押したか押していないかを取得
-		String button =request.getParameter("to");
-		if(button.equals("行きたい")) {
-			to_go = 1;
-		}else if (button.equals("教えて")) {
-			to_tell= 1;
-		}else if(button.equals("参考にします")){
-			to_use = 1;
+	//		セッションにあるuserの情報を取得
+			UserMasterBeans user = (UserMasterBeans)session.getAttribute("user");
+	//-----------------------リアクションの登録、削除を行うやつ----------------------------------
+			request.setCharacterEncoding("UTF-8");
+	//		ランチ日記のリアクションボタンが押されたら(変えた方がいいかも？)(nullなのか""なのか）)
+			if(request.getParameter("data2") != null) {
+				request.setCharacterEncoding("UTF-8");
+		//		ajaxの方からデータ持ってくるやつ。誰がどのランチIDに対してどのリアクションボタンを押したかを取得する
+				Integer lunch_id = Integer.parseInt(request.getParameter("data1"));
+				String iki = request.getParameter("data2");
+				System.out.println(iki+"←いきだよ");
+				String email_address = request.getParameter("data3");
+		//		LdReactionDAOのselectLdReactionメソッドを呼び出す
+		//		今まで誰がどのランチIDに対してどんなリアクションをしたかが分かる（？）
+				LdReactionDAO ldrDao = new LdReactionDAO();
+				ArrayList<AllColumnBeans> ldr = ldrDao.selectLdReaction(email_address);
+				request.setAttribute("ldr", ldr);
+
+//				Integer reaction_id = Integer.parseInt(request.getParameter("ldReactionId"));
+
+		//		ここまできたら、そのランチIDに対してボタンを押したユーザーはどんな情報を持っているか分かるんじゃないか！！
+		//		もし既に持っていたto_goが0ならinsertしなさい！1ならdelteしろ！の条件分岐
+				if(iki.length()==0) {
+					boolean ans = ldrDao.insertLdReaction(lunch_id, email_address, 1, 0, 0);
+					System.out.println(ans);
+				}else {
+
+					ldrDao.deleteLdReaction(lunch_id, email_address);
+				}
+				PrintWriter out = response.getWriter();
+				out.print("戻り値");}
+	//		ここで今までのリアクションデータを取得してこないとinsertかdeleteするかを判断できないのでは？
+	//		どうやって書けばいいんや...
+	//		SQL文で条件絞る検索をするべきなのか？
+	//		Integer lunch_id = Integer.parseInt(request.getParameter("data1"));
+	//		Integer reaction = Integer.parseInt(request.getParameter("data2"));
+	//		String email_address = request.getParameter("data3");
+	//		Integer to_go = 0;
+	//		Integer to_tell = 0;
+	//		Integer to_use = 0;
+	//			ボタン押したか押していないかを取得
+//			String button =request.getParameter("to");
+//			if(button.equals("行きたい")) {
+//				to_go = 1;
+//			}else if (button.equals("教えて")) {
+//				to_tell= 1;
+//			}else if(button.equals("参考にします")){
+//				to_use = 1;
+//			}else {
+//				System.out.println("失敗");
+//			}
+//	//		LdReactionDAO ldrDao = new LdReactionDAO();
+//			ldrDao.insertLdReaction(lunch_id, email_address, to_go, to_tell, to_use);
+//			}else if(request.getParameter("hdbtn") != null) {
+//				request.setCharacterEncoding("UTF-8");
+//				Integer hdr_handmade_id = Integer.parseInt(request.getParameter("handmade_id"));
+//				String hdr_email_address = user.getEmailAddress();
+//				Integer to_eat = 0;
+//				Integer hdr_to_tell = 0;
+//				Integer hdr_to_use = 0;
+//	//			ボタン押したか押していないかを取得
+//				String hd_button =request.getParameter("hdbtn");
+//				if(hd_button.equals("食べたい")) {
+//					to_eat = 1;
+//				}else if (hd_button.equals("教えて")) {
+//					hdr_to_tell= 1;
+//				}else if(hd_button.equals("参考にします")){
+//					hdr_to_use = 1;
+//				}else {
+//					System.out.println("失敗");
+//				}
+//				HdReactionDAO hdrDao = new HdReactionDAO();
+//				hdrDao.insertHdReaction(hdr_handmade_id, hdr_email_address, to_eat, hdr_to_tell, hdr_to_use);
+//			}
+		}else if(request.getParameter("data4").equals("tell")) {
+
 		}else {
-			System.out.println("失敗");
-		}
-//		LdReactionDAO ldrDao = new LdReactionDAO();
-		ldrDao.insertLdReaction(lunch_id, email_address, to_go, to_tell, to_use);
-		}else if(request.getParameter("hdbtn") != null) {
-			request.setCharacterEncoding("UTF-8");
-			Integer hdr_handmade_id = Integer.parseInt(request.getParameter("handmade_id"));
-			String hdr_email_address = user.getEmailAddress();
-			Integer to_eat = 0;
-			Integer hdr_to_tell = 0;
-			Integer hdr_to_use = 0;
-//			ボタン押したか押していないかを取得
-			String hd_button =request.getParameter("hdbtn");
-			if(hd_button.equals("食べたい")) {
-				to_eat = 1;
-			}else if (hd_button.equals("教えて")) {
-				hdr_to_tell= 1;
-			}else if(hd_button.equals("参考にします")){
-				hdr_to_use = 1;
-			}else {
-				System.out.println("失敗");
-			}
-			HdReactionDAO hdrDao = new HdReactionDAO();
-			hdrDao.insertHdReaction(hdr_handmade_id, hdr_email_address, to_eat, hdr_to_tell, hdr_to_use);
-		}
 
+		}
 
 ////		コメントの入力をゲットしてインサートする処理
 //		request.setCharacterEncoding("UTF-8");
@@ -231,4 +257,17 @@ public class TimelineServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
+	//ファイルの名前を取得してくる
+//	private String getFileName(Part part) {
+//        String name = null;
+//        for (String dispotion : part.getHeader("Content-Disposition").split(";")) {
+//            if (dispotion.trim().startsWith("filename")) {
+//                name = dispotion.substring(dispotion.indexOf("=") + 1).replace("\"", "").trim();
+//                name = name.substring(name.lastIndexOf("\\") + 1);
+//                break;
+//            }
+//        }		// TODO 自動生成されたメソッド・スタブ
+//		return name;
+//
+//	}
 }
