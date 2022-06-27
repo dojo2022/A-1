@@ -20,13 +20,12 @@ import dao.LdJoin2DAO;
 import dao.LunchDiaryDAO;
 import dao.MyPageDAO;
 import model.AllColumnBeans;
-import model.LunchDiaryBeans;
 import model.UserMasterBeans;
 
 /**
  * Servlet implementation class EditLunchServlet
  */
-@MultipartConfig(location = "C://dojo6//src//WebContent//images") // アップロードファイルの一時的な保存先
+@MultipartConfig(location = "C:\\dojo6\\src\\WebContent\\images") // アップロードファイルの一時的な保存先
 @WebServlet("/EditLunchServlet")
 public class EditLunchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -52,131 +51,19 @@ public class EditLunchServlet extends HttpServlet {
 		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			// TODO Auto-generated method stub
 			//doGet(request, response);
-			System.out.println("入ったよ");
-	 request.setCharacterEncoding("UTF-8");
-	if(request.getParameter("SUBMIT")!=null) {
-		if(request.getParameter("SUBMIT").equals("編集")) {
+				System.out.println("入ったよ");
+		 request.setCharacterEncoding("UTF-8");
+		if(request.getParameter("SUBMIT")!=null) {
+			if(request.getParameter("SUBMIT").equals("編集")) {
 
-
-
-	    int lunchId = Integer.parseInt(request.getParameter("lunch_id"));
-	    String ldFoodType = request.getParameter("ldFoodType");
-	 	String resName = request.getParameter("resName");
-		//String foodPhoto = request.getParameter("foodPhoto");
-
-
-
-				//String part = request.getParameter("foodPhoto"); // getPartで取得
-
-				Part part = request.getPart("foodPhoto"); // getPartで取得
-
-				String ldFoodPhoto = this.getFileName(part);
-
-				HttpSession session = request.getSession();
-				request.setAttribute("image", ldFoodPhoto);
-				// サーバの指定のファイルパスへファイルを保存
-		        //場所はクラス名↑の上に指定してある
-
-				//☆☆☆大事：アイコンを変更しなかった場合の挙動------------------------------------------------------------
-				//sessionからユーザーの情報を取得してくる
-				LunchDiaryBeans user =(LunchDiaryBeans) session.getAttribute("user");
-				//選択されてなければ、FileNotFoundExceptionとIOException例外が出るので下記のように書く
-				try {
-					part.write(ldFoodPhoto);
-				}catch(FileNotFoundException e) {
-					//icon（ファイルの名前）に元々DBに格納されている名前を入れる
-					ldFoodPhoto = (String)user.getLdFoodPhoto();
-				}catch(IOException e) {
-					//こっちも同様
-					ldFoodPhoto = (String)user.getLdFoodPhoto();
-				}
-
-
-				//String foodPhoto = this.getFileName(part);
-
-				/*HttpSession session = request.getSession();
-				request.setAttribute("images", foodPhoto);
-				// サーバの指定のファイルパスへファイルを保存
-				//場所はクラス名↑の上に指定してある
-
-
-				//アイコンを変更しなかった場合の挙動
-				LunchDiaryBeans result =(LunchDiaryBeans) session.getAttribute("result");
-				try {
-					part.write(foodPhoto);
-				}catch(FileNotFoundException e) {
-					foodPhoto = (String)result.getLdFoodPhoto();
-				}catch(IOException e) {
-					foodPhoto = (String)result.getLdFoodPhoto();
-				}*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		String category = request.getParameter("category");
-		String style = request.getParameter("style");
-		String date = request.getParameter("date");
-		String foodName = request.getParameter("foodName");
-		String cost = request.getParameter("cost");
-		String time = request.getParameter("time");
-		String distance = request.getParameter("distance");
-		int star =0;
-		//nullのときにparseIntするせいでエラー？
-		if(request.getParameter("Star") != null) {
-			 star = Integer.parseInt(request.getParameter("Star"));
-			 }
-		String feeling = request.getParameter("feeling");
-
-
-		//上記データをリクエストスコープにセット
-		request.setAttribute("lunchId", lunchId);
-		request.setAttribute("ldFoodType", ldFoodType);
-		request.setAttribute("ldResName", resName);
-		request.setAttribute("ldFoodPhoto", ldFoodPhoto);
-		request.setAttribute("ldCategory", category);
-		request.setAttribute("style", style);
-		request.setAttribute("ldDate", date);
-		request.setAttribute("ldFoodName", foodName);
-		request.setAttribute("ldCost", cost);
-		request.setAttribute("time", time);
-		request.setAttribute("distance", distance);
-		request.setAttribute("ldStar", star);
-		request.setAttribute("ldFeeling", feeling);
-
-
-
-
-		//ランチ日記更新削除画面にフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/edit_diary.jsp");
-		dispatcher.forward(request, response);
-		return;
-
-		}
-
-	}
-//マイページJSPの<input type="hidden" name="lunch_id" value="${e.lunchId}">のname＝””中の文字がリクエストパラメータ取得の青い文字↓
-
-	request.setCharacterEncoding("UTF-8");
-
-			 int lunchId = Integer.parseInt(request.getParameter("lunchId"));
+				System.out.println( request.getParameter("foodPhoto")+"←写真の名前");
+				String foodPhoto = request.getParameter("foodPhoto");
+			    int lunchId = Integer.parseInt(request.getParameter("lunch_id"));
 			    String ldFoodType = request.getParameter("ldFoodType");
 			 	String resName = request.getParameter("resName");
-				String foodPhoto = request.getParameter("foodPhoto");
+				//String foodPhoto = request.getParameter("foodPhoto");
+
+
 				String category = request.getParameter("category");
 				String style = request.getParameter("style");
 				String date = request.getParameter("date");
@@ -186,11 +73,13 @@ public class EditLunchServlet extends HttpServlet {
 				String distance = request.getParameter("distance");
 				int star =0;
 				//nullのときにparseIntするせいでエラー？
-				if(request.getParameter("ldStar") != null) {
-					 star = Integer.parseInt(request.getParameter("ldStar"));
+				if(request.getParameter("Star") != null) {
+					 star = Integer.parseInt(request.getParameter("Star"));
 					 }
 				String feeling = request.getParameter("feeling");
 
+
+				//上記データをリクエストスコープにセット
 				request.setAttribute("lunchId", lunchId);
 				request.setAttribute("ldFoodType", ldFoodType);
 				request.setAttribute("ldResName", resName);
@@ -208,11 +97,70 @@ public class EditLunchServlet extends HttpServlet {
 
 
 
+				//ランチ日記更新削除画面にフォワードする
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/edit_diary.jsp");
+				dispatcher.forward(request, response);
+				return;
+
+			}
+
+		}
+//マイページJSPの<input type="hidden" name="lunch_id" value="${e.lunchId}">のname＝””中の文字がリクエストパラメータ取得の青い文字↓
+
+	request.setCharacterEncoding("UTF-8");
+
+			 int lunchId = Integer.parseInt(request.getParameter("lunchId"));
+			    String ldFoodType = request.getParameter("ldFoodType");
+			 	String resName = request.getParameter("resName");
+//				String foodPhoto = request.getParameter("foodPhoto");
+			 	//画像の取得
+			 	Part part = request.getPart("icon");
+			 	//画像の名前だけを取得
+			 	String icon = this.getFileName(part);
+				String category = request.getParameter("category");
+				String style = request.getParameter("style");
+				String date = request.getParameter("date");
+				String foodName = request.getParameter("foodName");
+				String cost = request.getParameter("cost");
+				String time = request.getParameter("time");
+				String distance = request.getParameter("distance");
+				int star =0;
+				//nullのときにparseIntするせいでエラー？
+				if(request.getParameter("ldStar") != null) {
+					 star = Integer.parseInt(request.getParameter("ldStar"));
+					 }
+				String feeling = request.getParameter("feeling");
+
+				request.setAttribute("lunchId", lunchId);
+				request.setAttribute("ldFoodType", ldFoodType);
+				request.setAttribute("ldResName", resName);
+//				request.setAttribute("ldFoodPhoto", foodPhoto);
+				request.setAttribute("ldCategory", category);
+				request.setAttribute("style", style);
+				request.setAttribute("ldDate", date);
+				request.setAttribute("ldFoodName", foodName);
+				request.setAttribute("ldCost", cost);
+				request.setAttribute("time", time);
+				request.setAttribute("distance", distance);
+				request.setAttribute("ldStar", star);
+				request.setAttribute("ldFeeling", feeling);
+
+		//画像を変更しなかった場合の処理
+		try {
+			part.write(icon);
+		}catch(FileNotFoundException e) {
+			icon = request.getParameter("image_file");
+		}catch(IOException e) {
+			icon = request.getParameter("image_file");
+		}
+
+
+
 		 LunchDiaryDAO ldDao = new LunchDiaryDAO();
 
 
 		if (request.getParameter("updateButton") != null) {
-			boolean ans = ldDao.updateLd(lunchId,ldFoodType,resName, foodPhoto, category, style, date,foodName, cost,time,distance, star, feeling);
+			boolean ans = ldDao.updateLd(lunchId,ldFoodType,resName, icon, category, style, date,foodName, cost,time,distance, star, feeling);
 
 		//更新成功したら
 		if(ans == true) {

@@ -221,7 +221,7 @@
 				${e.ldFeeling}<br>
 				<input type="hidden" name="lunch_id" value="${e.lunchId}" id="lunch_id${status.index} }">
 				<input type="hidden" name="resName" value="${e.ldResName}">
-				<input type="hidden" name="foodPhoto" value="${e.hdFoodPhoto}">
+				<input type="hidden" name="foodPhoto" value="${e.ldFoodPhoto}">
 				<input type="hidden" name="category" value="${e.ldCategory}">
 				<input type="hidden" name="style" value="${e.style}">
 				<input type="hidden" name="date" value="${e.ldDate}">

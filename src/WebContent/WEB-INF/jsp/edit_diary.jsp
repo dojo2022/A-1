@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <meta charset="UTF-8">
 <title>ランチ日記更新削除</title>
 <script type="text/javascript" src="js/diary_form.js"></script>
@@ -33,11 +35,12 @@
 
 
 		<p>写真<br>
-		< <input type="hidden" name = "image_file" id="image_file" value="images/${user.ldFoodPhoto}">
-			 <input type="file" name="foodPhoto" accept="image/*"  onchange="previewImage(this);"value="${user.ldFoodPhoto}">
+		<input type="text" name = "image_file" id="image_file" value="${ldFoodPhoto}">
+			<%--  <input type="file" name="foodPhoto" accept="image/*"  onchange="previewImage(this);"value="${user.icon}"> --%>
+			<input type="file" name="icon" accept="image/*" onchange="previewImage(this);" value="${user.icon }" ><br>
+			 <canvas id="preview" style="max-width:200px;" ></canvas>
 		</p>
-
-
+	<%-- 	${image} --%>
 		<p>ジャンル<br>
 			<select name="ldCategory" >
 				<option value="">選択してください</option>
@@ -158,7 +161,7 @@ function previewImage(obj){
 
 		console.log(fileReader.result) // ← (確認用)
 
-		images.onload = (function () {
+		image.onload = (function () {
 			canvas.width = image.width;
 			canvas.height = image.height;
 			ctx.drawImage(image, 0, 0);
@@ -167,11 +170,10 @@ function previewImage(obj){
 	// 画像読み込み
 	fileReader.readAsDataURL(obj.files[0]);
 	console.log(fileReader.result) // ← (確認用)null
-}
-
-//読み込まれた時に行う処理
+  }
 
 
+//②読み込まれた時に行う処理(画面表示時に画像を表示するために使う）---------------------------------------------
 	var fileReader = new FileReader();
 
 	// 読み込み後に実行する処理
@@ -180,7 +182,8 @@ function previewImage(obj){
 		var canvas = document.getElementById('preview');
 		var ctx = canvas.getContext('2d');
 		var image = new Image();
-		/* alert(document.getElementById("image_file").value); */
+
+		/*③ここ大事！34行目のvalue値のデータを取得してimage.srcに入れる！ ------------------------------*/
 		image.src = document.getElementById("image_file").value;
 
 		/* console.log(fileReader.result) */ // ← (確認用)
@@ -195,7 +198,6 @@ function previewImage(obj){
 	/* fileReader.readAsDataURL(obj.files[0]); */
 
 	/* console.log(fileReader.result)  */// ← (確認用)null
-
 
 </script>
 
