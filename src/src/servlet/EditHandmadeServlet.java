@@ -1,5 +1,6 @@
 package servlet;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -26,7 +27,7 @@ import model.UserMasterBeans;
 /**
  * Servlet implementation class EditHandmadeServlet
  */
-@MultipartConfig(location = "C://dojo6//src//WebContent//images") // アップロードファイルの一時的な保存先
+@MultipartConfig(location = "C:\\dojo6\\src\\WebContent\\images") // アップロードファイルの一時的な保存先
 @WebServlet("/EditHandmadeServlet")
 public class EditHandmadeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -48,13 +49,7 @@ public class EditHandmadeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-/*
-		//insertに必要なメールアドレスを取得
-		HttpSession session = request.getSession();
-		UserMasterBeans user = (UserMasterBeans) session.getAttribute("user");
-		String emailAddress = user.getEmailAddress();
 
-*/
 		request.setCharacterEncoding("UTF-8");
 		System.out.println(request.getParameter("SUBMIT")+"←ぼたんの名前");
 		//編集ボタンが押されたときの処理
@@ -97,7 +92,7 @@ public class EditHandmadeServlet extends HttpServlet {
 				request.setCharacterEncoding("UTF-8");
 				int handmadeId = Integer.parseInt(request.getParameter("handmadeId"));
 				String foodName = request.getParameter("foodName");
-				Part foodPhoto = request.getPart("foodPhoto");
+				//Part foodPhoto = request.getPart("foodPhoto");
 				String cookTime = request.getParameter("cookTime");
 				String date = request.getParameter("date");
 				String cost = request.getParameter("cost");
@@ -107,29 +102,39 @@ public class EditHandmadeServlet extends HttpServlet {
 				if(request.getParameter("star") != null) {
 					 star = Integer.parseInt(request.getParameter("star"));
 				}
-
+/*
 				String image = this.getFileName(foodPhoto);
 				request.setAttribute("image", image);
 				// サーバの指定のファイルパスへファイルを保存
 		        //場所はクラス名↑の上に指定してある
-
+*/
 				//上記データをリクエストスコープへセット
 				request.setAttribute("handmadeId", handmadeId);
 				request.setAttribute("foodName",foodName );
-				request.setAttribute("foodPhoto",foodPhoto );
+				//request.setAttribute("foodPhoto",foodPhoto );
+				Part part = request.getPart("icon");
+				String icon = this.getFileName(part);
 				request.setAttribute("cookTime",cookTime );
 				request.setAttribute("date", date);
 				request.setAttribute("cost", cost);
 				request.setAttribute("feeling", feeling);
 				request.setAttribute("star",star );
 
+				//画像を変更しなかった場合の処理
+				try {
+					part.write(icon);
+				}catch(FileNotFoundException e) {
+					icon = request.getParameter("image_file");
+				}catch(IOException e) {
+					icon = request.getParameter("image_file");
+				}
 
 		//DAOを呼び出す
 		HandmadeDiaryDAO hDao = new HandmadeDiaryDAO();
 
 
 		if (request.getParameter("updateButton") != null) {
-			boolean ans = hDao.updateHd(handmadeId, foodName, image, cookTime, date, cost, star, feeling);
+			boolean ans = hDao.updateHd(handmadeId, foodName, icon, cookTime, date, cost, star, feeling);
 
 			//更新成功したら
 			if(ans == true) {
