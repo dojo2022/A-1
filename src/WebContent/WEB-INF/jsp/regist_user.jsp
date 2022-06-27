@@ -13,7 +13,7 @@
 <h1 class="logo">
 	<img src="/lunchBox/img/headerLogo.png" alt="LuchBox">
 </h1>
-
+<div class="registArea">
 <h2 align="center">新規会員登録</h2>
 <!-- -<h1 align="center"><img src="img/headerLogo.png"></h1>--->
 
@@ -36,9 +36,9 @@
 
 			<tr>
 			<th>メールアドレス</th>
-				<td><input type="email" name="emailAddress" value="" placeholder="例：luncBox@example.com" id="emailAddress" required><br></td>
+				<td><input type="email" name="emailAddress" value="" placeholder="例：lunchBox@example.com" id="emailAddress" required><br></td>
 			<th>メールアドレス（確認用)</th>
-				<td><input type="email" name="emailCheck" value="" placeholder="例：luncBox@example.com" id="emailCheck" oninput="checkEmail" required><br></td>
+				<td><input type="email" name="emailCheck" value="" placeholder="例：lunchBox@example.com" id="emailCheck" oninput="checkEmail" required><br></td>
 			</tr>
 
 			<tr>
@@ -48,18 +48,19 @@
 				<td><input type="password" name="pwCheck" value="" placeholder="8文字以上20字以内" id="check" oninput="checkPassword"required><br></td>
 			</tr>
 			${pwMsg }
-
+</div>
 			<tr>
 				<div class="center">
-				<th colspan="4"><input type="submit" name="registNewAccount" value="登録する"><br></th>
+				<th colspan="4"><input type="submit" name="registNewAccount" value="登録する" class="registBtn"><br></th>
 			</div>
 			</tr>
 
 	</table>
 
 
-	</div>
+
 </form>
+</div>
 <script>
 	//メールアドレスが確認ボックスと違った時の処理
 	function checkEmail(emailCheck){
