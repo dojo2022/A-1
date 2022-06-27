@@ -1,27 +1,81 @@
 @charset "UTF-8";
 
-h2{
-width:400px;
-	text-align: center;
-	padding-top: 130px;
-	margin: auto;
 
+h2{
+	margin-bottom: 0;
+	text-align: center;
+	padding-top: 5px;
+    margin-top: 13%;
+	height: 10%;
 }
 
 body{
     width: 800px;
+    height: 100%;
     margin: auto;
+    background-image:url(/lunchBox/img/settings.jpg);
+	background-size: cover;
+
+
+}
+h2, form{
+	 background-color: rgba(254, 249, 167, 0.85);
+	 color:#8b4513;
+	}
+
+form{
+	padding-bottom: 25px;
 
 }
 
+form input[type='text'], input[type='email'], input[type='password']{
+	font: 15px/24px sans-serif;
+	width: 80%;
+	padding: 0.3em;
+	transition: 0.3s;
+	letter-spacing: 1px;
+	border: 1px solid #1B2538;
+	border-radius: 4px;
+}
+form input[type='text']:focus{
+	border: 1px solid #DA3C41;
+	outline: none;
+	box-shadow: 0 0 5px 1px rgba(218,60,65, .5);
+}
+ input[type='email']:focus{
+ 	border: 1px solid #DA3C41;
+	outline: none;
+	box-shadow: 0 0 5px 1px rgba(218,60,65, .5);
+ }
+ input[type='password']:focus{
+ 	border: 1px solid #DA3C41;
+	outline: none;
+	box-shadow: 0 0 5px 1px rgba(218,60,65, .5);
+ }
+ input[type = 'submit']{
+	border-radius : 5%;          /* 角丸       */
+	font-size     : 14px;        /* 文字サイズ */
+	cursor        : pointer;     /* カーソル   */
+	padding       : 10px 30px;   /* 余白       */
+	background    : #FF8D29;     /* 背景色     */
+	color         : #FFFFFF;     /* 文字色     */
+	line-height   : 0.5em;         /* 1行の高さ  */
+	transition    : .3s;         /* なめらか変化 */
+	box-shadow    : 2px 2px 3px #666666;  /* 影の設定 */
+	border        : 2px solid #FF8D29;    /* 枠の指定 */
+}
+input[type = 'submit']:hover{
+	color: #FF8D29;
+	background: white;
+}
 div{
 	width:200px;
     margin:auto;
 }
-
-table.tableForm{
+.tableForm{
 	margin: auto;
 }
+
 .tableLeft {
 	width: 230px;
 }
