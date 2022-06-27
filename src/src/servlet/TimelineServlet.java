@@ -108,7 +108,7 @@ public class TimelineServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doPost入ったよ");
-		//		data4で取ってきたボタンの種類がto(行きたい)だったらこの処理をする
+		//		data4で取ってきたボタンの種類がto_go(行きたい)だったらこの処理をする
 		if(request.getParameter("data4").equals("to_go")) {
 			HttpSession session = request.getSession();
 			request.setCharacterEncoding("UTF-8");
@@ -143,57 +143,92 @@ public class TimelineServlet extends HttpServlet {
 					System.out.println(ans);
 				}else {
 
-					ldrDao.deleteLdReaction(lunch_id, email_address);
+					ldrDao.deleteLdToGoReaction(lunch_id, email_address);
 				}
 				PrintWriter out = response.getWriter();
 				out.print("戻り値");}
-	//		ここで今までのリアクションデータを取得してこないとinsertかdeleteするかを判断できないのでは？
-	//		どうやって書けばいいんや...
-	//		SQL文で条件絞る検索をするべきなのか？
-	//		Integer lunch_id = Integer.parseInt(request.getParameter("data1"));
-	//		Integer reaction = Integer.parseInt(request.getParameter("data2"));
-	//		String email_address = request.getParameter("data3");
-	//		Integer to_go = 0;
-	//		Integer to_tell = 0;
-	//		Integer to_use = 0;
-	//			ボタン押したか押していないかを取得
-//			String button =request.getParameter("to");
-//			if(button.equals("行きたい")) {
-//				to_go = 1;
-//			}else if (button.equals("教えて")) {
-//				to_tell= 1;
-//			}else if(button.equals("参考にします")){
-//				to_use = 1;
-//			}else {
-//				System.out.println("失敗");
-//			}
-//	//		LdReactionDAO ldrDao = new LdReactionDAO();
-//			ldrDao.insertLdReaction(lunch_id, email_address, to_go, to_tell, to_use);
-//			}else if(request.getParameter("hdbtn") != null) {
-//				request.setCharacterEncoding("UTF-8");
-//				Integer hdr_handmade_id = Integer.parseInt(request.getParameter("handmade_id"));
-//				String hdr_email_address = user.getEmailAddress();
-//				Integer to_eat = 0;
-//				Integer hdr_to_tell = 0;
-//				Integer hdr_to_use = 0;
-//	//			ボタン押したか押していないかを取得
-//				String hd_button =request.getParameter("hdbtn");
-//				if(hd_button.equals("食べたい")) {
-//					to_eat = 1;
-//				}else if (hd_button.equals("教えて")) {
-//					hdr_to_tell= 1;
-//				}else if(hd_button.equals("参考にします")){
-//					hdr_to_use = 1;
-//				}else {
-//					System.out.println("失敗");
-//				}
-//				HdReactionDAO hdrDao = new HdReactionDAO();
-//				hdrDao.insertHdReaction(hdr_handmade_id, hdr_email_address, to_eat, hdr_to_tell, hdr_to_use);
-//			}
-		}else if(request.getParameter("data4").equals("tell")) {
+		}
 
-		}else {
+		//		data4で取ってきたボタンの種類がto_tell(教えて)だったらこの処理をする
+		if(request.getParameter("data4").equals("to_tell")) {
+			HttpSession session = request.getSession();
+			request.setCharacterEncoding("UTF-8");
+	        response.setContentType("application/json");
+			response.setHeader("Cache-Control", "nocache");
+			response.setCharacterEncoding("utf-8");
 
+	//		セッションにあるuserの情報を取得
+			UserMasterBeans user = (UserMasterBeans)session.getAttribute("user");
+	//-----------------------リアクションの登録、削除を行うやつ----------------------------------
+			request.setCharacterEncoding("UTF-8");
+	//		ランチ日記のリアクションボタンが押されたら(変えた方がいいかも？)(nullなのか""なのか）)
+			if(request.getParameter("data2") != null) {
+				request.setCharacterEncoding("UTF-8");
+		//		ajaxの方からデータ持ってくるやつ。誰がどのランチIDに対してどのリアクションボタンを押したかを取得する
+				Integer lunch_id = Integer.parseInt(request.getParameter("data1"));
+				String oshi = request.getParameter("data2");
+				System.out.println(oshi+"←おしだよ");
+				String email_address = request.getParameter("data3");
+		//		LdReactionDAOのselectLdReactionメソッドを呼び出す
+		//		今まで誰がどのランチIDに対してどんなリアクションをしたかが分かる（？）
+				LdReactionDAO ldrDao = new LdReactionDAO();
+				ArrayList<AllColumnBeans> ldr = ldrDao.selectLdReaction(email_address);
+				request.setAttribute("ldr", ldr);
+
+//				Integer reaction_id = Integer.parseInt(request.getParameter("ldReactionId"));
+
+		//		ここまできたら、そのランチIDに対してボタンを押したユーザーはどんな情報を持っているか分かるんじゃないか！！
+		//		もし既に持っていたto_goが0ならinsertしなさい！1ならdelteしろ！の条件分岐
+				if(oshi.length()==0) {
+					boolean ans = ldrDao.insertLdReaction(lunch_id, email_address, 0, 1, 0);
+					System.out.println(ans);
+				}else {
+
+					ldrDao.deleteLdToTellReaction(lunch_id, email_address);
+				}
+				PrintWriter out = response.getWriter();
+				out.print("戻り値");}
+		}
+
+		//		data4で取ってきたボタンの種類がto_use(参考にします)だったらこの処理をする
+		if(request.getParameter("data4").equals("to_use")) {
+			HttpSession session = request.getSession();
+			request.setCharacterEncoding("UTF-8");
+	        response.setContentType("application/json");
+			response.setHeader("Cache-Control", "nocache");
+			response.setCharacterEncoding("utf-8");
+
+	//		セッションにあるuserの情報を取得
+			UserMasterBeans user = (UserMasterBeans)session.getAttribute("user");
+	//-----------------------リアクションの登録、削除を行うやつ----------------------------------
+			request.setCharacterEncoding("UTF-8");
+	//		ランチ日記のリアクションボタンが押されたら(変えた方がいいかも？)(nullなのか""なのか）)
+			if(request.getParameter("data2") != null) {
+				request.setCharacterEncoding("UTF-8");
+		//		ajaxの方からデータ持ってくるやつ。誰がどのランチIDに対してどのリアクションボタンを押したかを取得する
+				Integer lunch_id = Integer.parseInt(request.getParameter("data1"));
+				String san = request.getParameter("data2");
+				System.out.println(san+"←いきだよ");
+				String email_address = request.getParameter("data3");
+		//		LdReactionDAOのselectLdReactionメソッドを呼び出す
+		//		今まで誰がどのランチIDに対してどんなリアクションをしたかが分かる（？）
+				LdReactionDAO ldrDao = new LdReactionDAO();
+				ArrayList<AllColumnBeans> ldr = ldrDao.selectLdReaction(email_address);
+				request.setAttribute("ldr", ldr);
+
+//				Integer reaction_id = Integer.parseInt(request.getParameter("ldReactionId"));
+
+		//		ここまできたら、そのランチIDに対してボタンを押したユーザーはどんな情報を持っているか分かるんじゃないか！！
+		//		もし既に持っていたto_goが0ならinsertしなさい！1ならdelteしろ！の条件分岐
+				if(san.length()==0) {
+					boolean ans = ldrDao.insertLdReaction(lunch_id, email_address, 0, 0, 1);
+					System.out.println(ans);
+				}else {
+
+					ldrDao.deleteLdToUseReaction(lunch_id, email_address);
+				}
+				PrintWriter out = response.getWriter();
+				out.print("戻り値");}
 		}
 
 ////		コメントの入力をゲットしてインサートする処理
