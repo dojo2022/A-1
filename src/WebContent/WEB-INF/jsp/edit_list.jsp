@@ -23,6 +23,7 @@
 	        <div class="form_box">
 	        	<div class="form_con">
 			        <table>
+			        <div class="form_table">
 				        <form method="post" action="/lunchBox/EditListServlet">
 							<tr>
 								<input type="hidden" name="EMAIL_ADDRESS" value="${user.emailAddress}">
@@ -47,7 +48,7 @@
 							<tr>
 								<th><h3>&nbsp;メモ</h3>※200字以内</th>
 
-					            <td><textarea name="TOGO_MEMO" cols="40" rows="7" placeholder="Add Text" class="form_unit" id="editToGoMemo" >${togoMemo}</textarea><br>
+					            <td><textarea name="TOGO_MEMO" cols="62" rows="4" placeholder="Add Text" class="form_unit" id="editToGoMemo" >${togoMemo}</textarea><br>
 					            </td>
 				            </tr>
 				            <tr class="hidden">
@@ -59,12 +60,14 @@
 					            <input type="hidden" name="LIST_ID"  value="${listId}">
 					            </td>
 				            </tr>
-				            </form>
+
+				            </div>
 			            </table>
 		            <div class="list_button">
 			            <input type="submit" name="toGoEdit" value="編集する" >
 			            <input type="submit" name="toGoDelete" value="削除する" >
-		            </div>
+						</div>
+		            </form>
 			    </div>
 	        </div>
 		</div>
