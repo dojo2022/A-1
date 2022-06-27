@@ -35,7 +35,7 @@
 			            <h3>&nbsp;ジャンル</h3>
 			            </th>
 			            <td>
-			            <select name="CATEGORY" id="" class="form_unit">
+			            <select name="category" id="" class="form_unit">
 			                <option value="">選択してください</option>
 			                <option value="和食">和食</option>
 			                <option value="中華">中華</option>
@@ -52,7 +52,7 @@
 			            <h3>&nbsp;メモ</h3>※200字以内
 			            </th>
 			            <td>
-			            <textarea name="TOGO_MEMO" cols="40" rows="7" placeholder="Add Text" class="form_unit" id="editToGoMemo"></textarea><br>
+			            <textarea name="TOGO_MEMO" cols="62" rows="4" placeholder="Add Text" class="form_unit" id="editToGoMemo"></textarea><br>
 			            </td>
 			            </tr>
 			            <tr class="hidden">
@@ -60,12 +60,12 @@
 			            <p class="errmsg" id="error_message"><br>${msg}</p>
 			            </td>
 			            </tr>
-			            </form>
+
 						</table>
 			            <div class="list_button">
 			            <input type="submit" name="toGoRegist" value="登録する" >
 			            </div>
-
+					</form>
 		        </div>
 	        </div>
 		</div>

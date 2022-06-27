@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 div.display {
-    width: 600px;
+
     height: 300px;
     padding-top: 150px;
 	margin: auto;
@@ -10,11 +10,19 @@ div.display {
 .list_title {
     margin: auto;
 }
-
-.form_con {
-	width: 500px;
-	margin: 0 auto 0 auto;
+.form_box {
+	width: 800px;
+	margin: auto;
 }
+.form_con {
+	margin: auto;
+	text-align: start;
+}
+.form_table{
+	margin: auto;
+	text-align: center;
+}
+
 h2 {
 	margin-top: 15%;
 	margin: auto;
@@ -23,15 +31,18 @@ h2 {
 	color: #8b4513;
 }
 table{
-	margin-right: auto;
-	margin-left: auto;
-	/* width: 70%; */
+	margin: 0 auto;
+	width: 100%;
 	padding: 0.5em 1em;
     background: white;
     border-top: solid 5px #FF8D29;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
 }
+form {
+	text-align: center;
+	margin: center;
 
+}
 tr.hidden {
 	margin: auto;
 }
@@ -52,7 +63,7 @@ td{
 h3 {
 	margin: 10px auto;
 }
-form input[type='text'],input[type='select'],input[textarea]{
+/* input[type='text']{
 	font: 15px/24px sans-serif;
 	width: 100%;
 	padding: 0.3em;
@@ -60,29 +71,70 @@ form input[type='text'],input[type='select'],input[textarea]{
 	letter-spacing: 1px;
 	border: 1px solid #1B2538;
 	border-radius: 4px;
-}
-form input[type='text'],input[type='select'],input[textarea]:focus{
+} */
+
+
+/* input[textarea]{
+	font: 15px/24px sans-serif;
+	width: 100%;
+	padding: 0.3em;
+	transition: 0.3s;
+	letter-spacing: 1px;
+	border: 1px solid #1B2538;
+	border-radius: 4px;
+} */
+input[type='text']:focus{
 	border: 1px solid #DA3C41;
 	outline: none;
 	box-shadow: 0 0 5px 1px rgba(218,60,65, .5);
 }
-input.form_unit {
-    margin-top: -5px;
-    margin-bottom: 10px;
+input[type='select']:focus{
+	border: 1px solid #DA3C41;
+	outline: none;
+	box-shadow: 0 0 5px 1px rgba(218,60,65, .5);
 }
+input[textarea]:focus{
+	border: 1px solid #DA3C41;
+	outline: none;
+	box-shadow: 0 0 5px 1px rgba(218,60,65, .5);
+}
+
 input[name="RES_NAME"] {
-    width: 300px;
+	font: 14px/24px sans-serif;
+	width: 450px;
+	padding: 0.3em;
+	transition: 0.3s;
+	letter-spacing: 1px;
+	border: 1px solid #1B2538;
+	border-radius: 4px;
 }
+input[name="category"]{
+	font: 15px/24px sans-serif;
+	width: 150%;
+	padding: 0.3em;
+	transition: 0.3s;
+	letter-spacing: 1px;
+	border: 1px solid #1B2538;
+	border-radius: 4px;
+}
+
 input[name="TOGO_MEMO"] {
-    width: 300px;
     height: 66px;
+	width: 450px;
+	margin: auto;
+    font: 12px/24px sans-serif;
+	padding: 0.3em;
+	transition: 0.3s;
+	letter-spacing: 1px;
+	border: 1px solid #1B2538;
+	border-radius: 5px;
 }
 input[name="toGoRegist"] {
     margin: auto auto 15px auto;
     text-align: center;
-    width: 80px;
-    height: 35px;
-    font-size: 16px;
+    width: 120px;
+    height: 40px;
+    font-size: 20px;
 	border-radius : 5%;          /* 角丸       */
 	cursor        : pointer;     /* カーソル   */
 	background    : #FF8D29;     /* 背景色     */
@@ -99,9 +151,9 @@ input[name="toGoRegist"]:hover {
 input[name="toGoEdit"] {
 	margin-right: 15px;
     text-align: center;
-    width: 80px;
-    height: 35px;
-    font-size: 16px;
+    width: 120px;
+    height: 40px;
+    font-size: 20px;
     border-radius : 5%;          /* 角丸       */
 	cursor        : pointer;     /* カーソル   */
 	background    : #FF8D29;     /* 背景色     */
@@ -117,9 +169,9 @@ input[name="toGoEdit"]:hover {
 }
 input[name="toGoDelete"] {
     text-align: center;
-    width: 80px;
-    height: 35px;
-    font-size: 16px;
+    width: 120px;
+    height: 40px;
+    font-size: 20px;
 	border-radius : 5%;          /* 角丸       */
 	cursor        : pointer;     /* カーソル   */
 	background    : #FF8D29;     /* 背景色     */
