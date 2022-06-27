@@ -1,5 +1,8 @@
 @charset "UTF-8";
-
+body {
+	background-image: url(/lunchBox/img/list_background.jpg);
+	background-size: cover;
+}
 div.display {
 
     height: 300px;
@@ -93,11 +96,11 @@ input[type='select']:focus{
 	outline: none;
 	box-shadow: 0 0 5px 1px rgba(218,60,65, .5);
 }
-input[textarea]:focus{
+/* textarea:focus{
 	border: 1px solid #DA3C41;
 	outline: none;
 	box-shadow: 0 0 5px 1px rgba(218,60,65, .5);
-}
+} */
 
 input[name="RES_NAME"] {
 	font: 14px/24px sans-serif;
@@ -118,7 +121,7 @@ input[name="category"]{
 	border-radius: 4px;
 }
 
-input[name="TOGO_MEMO"] {
+/* textarea {
     height: 66px;
 	width: 450px;
 	margin: auto;
@@ -128,6 +131,21 @@ input[name="TOGO_MEMO"] {
 	letter-spacing: 1px;
 	border: 1px solid #1B2538;
 	border-radius: 5px;
+} */
+textarea{
+	width: 80%;
+	font: 15px/24px sans-serif;
+	padding: 0.3em;
+	transition: 0.3s;
+	letter-spacing: 1px;
+	border: 1px solid #1B2538;
+	border-radius: 4px;
+	background-color: rgba(255, 255, 255, 0.9)
+}
+textarea:focus{
+	border: 1px solid #DA3C41;
+	outline: none;
+	box-shadow: 0 0 5px 1px rgba(218,60,65, .5);
 }
 input[name="toGoRegist"] {
     margin: auto auto 15px auto;
