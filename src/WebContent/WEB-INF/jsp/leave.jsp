@@ -14,14 +14,14 @@
 	<form method="POST" action="/lunchBox/LeaveServlet">
 		<h1>退会</h1>
 		<hr>
-		<p>退会理由を教えてください。<span>必須</span></p>
+		<p>退会理由を教えてください。<span class="required">必須</span></p>
 		<p>
-			<textarea name="reason" cols="100" rows="5" placeholder="例：退社するため"></textarea >
+			<textarea name="reason" cols="100" rows="7" placeholder="例：退社するため"></textarea >
 		</p>
 
-		<input type="submit" name="leaveButton" value="設定に戻る">
-		<input type="submit" name="leaveButton" onclick ="return confirm('本当に退会しますか？')" value="退会する" >
-		${errMsg }
+		<input type="submit" name="leaveButton" value="設定に戻る" class="back">
+		<input type="submit" name="leaveButton" onclick ="return confirm('本当に退会しますか？')" value="退会する" class="continue">
+		<br><span class="errMsg">${errMsg }</span>
 		<!-- <input type="submit" name="backSettings" value="設定に戻る"> -->
 		<!-- <input type="submit" name="leaveButton" value="退会する"> -->
 

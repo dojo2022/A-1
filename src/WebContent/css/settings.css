@@ -33,7 +33,6 @@ form input[type='text'], input[type='email'], input[type='password']{
 	width: 80%;
 	padding: 0.3em;
 	transition: 0.3s;
-	letter-spacing: 1px;
 	border: 1px solid #1B2538;
 	border-radius: 4px;
 }
