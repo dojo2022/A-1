@@ -138,7 +138,7 @@ public class LdJoin2DAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
 			// SQL文を準備する<<ここに改造を施す>>
-			String sql = "SELECT ld_comment_id, lunch_comment.email_address, lunch_comment.lunch_id, ld_comment, user_master.account_name FROM lunch_comment LEFT JOIN lunch_diary ON lunch_diary.lunch_id = lunch_comment.lunch_id LEFT JOIN user_master ON user_master.email_address = lunch_comment.email_address ORDER BY ld_comment_id DESC";
+			String sql = "SELECT ld_comment_id, lunch_comment.email_address, lunch_comment.lunch_id, ld_comment, user_master.account_name FROM lunch_comment LEFT JOIN lunch_diary ON lunch_diary.lunch_id = lunch_comment.lunch_id LEFT JOIN user_master ON user_master.email_address = lunch_comment.email_address ORDER BY ld_comment_id ASC";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			//SQL文を実行
