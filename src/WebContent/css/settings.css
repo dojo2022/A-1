@@ -1,16 +1,30 @@
 @charset "UTF-8";
 
-h2{
-width:400px;
-	text-align: center;
-	padding-top: 130px;
-	margin: auto;
 
+h2{
+	margin-bottom: 0;
+	text-align: center;
+	padding-top: 5px;
+    margin-top: 13%;
+	height: 10%;
 }
 
 body{
     width: 800px;
+    height: 100%;
     margin: auto;
+    background-image:url(/lunchBox/img/newsettings.jpg);
+	background-size: cover;
+
+
+}
+h2, form{
+	 background-color: rgba(254, 249, 167, 0.85);
+	 color:#8b4513;
+	}
+
+form{
+	padding-bottom: 25px;
 
 }
 
@@ -18,10 +32,10 @@ div{
 	width:200px;
     margin:auto;
 }
-
-table.tableForm{
+.tableForm{
 	margin: auto;
 }
+
 .tableLeft {
 	width: 230px;
 }
