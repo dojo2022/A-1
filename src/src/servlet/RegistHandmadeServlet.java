@@ -66,7 +66,7 @@ public class RegistHandmadeServlet extends HttpServlet {
 
 
 		 String image = this.getFileName(foodPhoto);
-
+		 foodPhoto.write(image);
 		 request.setAttribute("image", image);
 		//  サーバの指定のファイルパスへファイルを保存
 		//場所はクラス名↑の上に指定してある

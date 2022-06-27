@@ -75,6 +75,7 @@ public class RegistLunchServlet extends HttpServlet {
 
 		//画像の保存
 		String foodPhoto = this.getFileName(image);
+		image.write(foodPhoto);
 		request.setAttribute("foodPhoto", foodPhoto);
 
 		//LunchDiaryDAOを呼び出す
