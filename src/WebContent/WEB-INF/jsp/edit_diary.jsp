@@ -25,8 +25,12 @@
 		</p>
 
 		<p>写真<br>
-			<input type="file" name="foodPhoto" accept="image/*" value="${ldFoodPhoto}" onchange="previewImage(this);">
+		<input type="hidden" name = "image_file" id="image_file" value="images/${ldFoodPhoto}">
+			<input type="file" name="foodPhoto" accept="image/*"  onchange="previewImage(this);"value="${ldFoodPhoto}">
 		</p>
+
+
+
 
 		<p>ジャンル<br>
 			<select name="ldCategory" >
