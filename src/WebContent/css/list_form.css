@@ -10,32 +10,72 @@ div.display {
 .list_title {
     margin: auto;
 }
-.form_box {
-    border: 2px solid;
-    border-color: black;
-    margin-top: 25px;
-}
+
 .form_con {
-	width: 400px;
+	width: 500px;
 	margin: 0 auto 0 auto;
 }
-h1 {
+h2 {
+	margin-top: 15%;
 	margin: auto;
+	padding-bottom: 30px;
+	text-align: center;
+	color: #8b4513;
+}
+table{
+	margin-right: auto;
+	margin-left: auto;
+	/* width: 70%; */
+	padding: 0.5em 1em;
+    background: white;
+    border-top: solid 5px #FF8D29;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+
+tr.hidden {
+	margin: auto;
+}
+th {
     text-align: center;
+    width: 200px;
+    color: green;
+    margin: auto 60px;
+}
+.required{
+	background-color: red;
+	color: white;
+	font-weight: 10px;
+}
+td{
+	margin: auto;
 }
 h3 {
-	margin-bottom: -3px;
+	margin: 10px auto;
+}
+form input[type='text'],input[type='select'],input[textarea]{
+	font: 15px/24px sans-serif;
+	width: 100%;
+	padding: 0.3em;
+	transition: 0.3s;
+	letter-spacing: 1px;
+	border: 1px solid #1B2538;
+	border-radius: 4px;
+}
+form input[type='text'],input[type='select'],input[textarea]:focus{
+	border: 1px solid #DA3C41;
+	outline: none;
+	box-shadow: 0 0 5px 1px rgba(218,60,65, .5);
 }
 input.form_unit {
     margin-top: -5px;
     margin-bottom: 10px;
 }
 input[name="RES_NAME"] {
-    width: 400px;
+    width: 300px;
 }
 input[name="TOGO_MEMO"] {
-    width: 400px;
-    height: 50px;
+    width: 300px;
+    height: 66px;
 }
 input[name="toGoRegist"] {
     margin: auto auto 15px auto;
@@ -43,6 +83,18 @@ input[name="toGoRegist"] {
     width: 80px;
     height: 35px;
     font-size: 16px;
+	border-radius : 5%;          /* 角丸       */
+	cursor        : pointer;     /* カーソル   */
+	background    : #FF8D29;     /* 背景色     */
+	color         : #FFFFFF;     /* 文字色     */
+	line-height   : 0.5em;         /* 1行の高さ  */
+	transition    : .3s;         /* なめらか変化 */
+	box-shadow    : 2px 2px 3px #666666;  /* 影の設定 */
+	border        : 2px solid  #FF8D29;    /* 枠の指定 */
+}
+input[name="toGoRegist"]:hover {
+	color: #DA3C41;
+	background: white;
 }
 input[name="toGoEdit"] {
 	margin-right: 15px;
@@ -50,16 +102,39 @@ input[name="toGoEdit"] {
     width: 80px;
     height: 35px;
     font-size: 16px;
+    border-radius : 5%;          /* 角丸       */
+	cursor        : pointer;     /* カーソル   */
+	background    : #FF8D29;     /* 背景色     */
+	color         : #FFFFFF;     /* 文字色     */
+	line-height   : 0.5em;         /* 1行の高さ  */
+	transition    : .3s;         /* なめらか変化 */
+	box-shadow    : 2px 2px 3px #666666;  /* 影の設定 */
+	border        : 2px solid  #FF8D29;    /* 枠の指定 */
+}
+input[name="toGoEdit"]:hover {
+	color: #DA3C41;
+	background: white;
 }
 input[name="toGoDelete"] {
-
     text-align: center;
     width: 80px;
     height: 35px;
     font-size: 16px;
+	border-radius : 5%;          /* 角丸       */
+	cursor        : pointer;     /* カーソル   */
+	background    : #FF8D29;     /* 背景色     */
+	color         : #FFFFFF;     /* 文字色     */
+	line-height   : 0.5em;         /* 1行の高さ  */
+	transition    : .3s;         /* なめらか変化 */
+	box-shadow    : 2px 2px 3px #666666;  /* 影の設定 */
+	border        : 2px solid  #FF8D29;    /* 枠の指定 */
+}
+input[name="toGoDelete"]:hover {
+	color: #DA3C41;
+	background: white;
 }
 .list_button{
-	margin: auto auto 15px auto;
+	margin: 15px auto;
 	text-align: center;
 }
 p.errmsg {
