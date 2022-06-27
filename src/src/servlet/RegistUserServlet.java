@@ -46,21 +46,41 @@ public class RegistUserServlet extends HttpServlet {
 		String  accountName = request.getParameter("accountName");
 		String  depName = request.getParameter("depName");
 		String  emailAddress = request.getParameter("emailAddress");
+		String emailCheck = request.getParameter("emailCheck");
 		String  pw = request.getParameter("pw");
-
-		String image = this.getFileName(icon);
+		String  pwCheck = request.getParameter("pwCheck");
 
 		HttpSession session = request.getSession();
+
+		//画像の保存
+		String image = this.getFileName(icon);
+		icon.write(image);
 		request.setAttribute("image", image);
 		// サーバの指定のファイルパスへファイルを保存
         //場所はクラス名↑の上に指定してある
 
 
 
-		// 未完成 パスワードチェック※飛ぶところ見直し 文字出ない
+		// パスワードチェック
 		if(pw.length()<8 || pw.length()>=20) {
 			request.setAttribute("pwMsg","パスワードを８文字以上２０文字以下で入力してください");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/regist_user.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
+
+		// メールアドレス確認
+		if(!emailAddress. equals (emailCheck)) {
+			request.setAttribute("emailCheck","メールアドレスが一致しません");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/regist_user.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
+
+		// パスワード確認
+		if(!pw. equals (pwCheck)) {
+			request.setAttribute("pwCheck","パスワードが一致しません");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/regist_user.jsp");
 			dispatcher.forward(request, response);
 			return;
 		}
