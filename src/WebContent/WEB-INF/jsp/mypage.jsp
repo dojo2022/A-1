@@ -132,7 +132,7 @@
 <c:out value="${user.accountName}"/><br>
 <c:out value="${user.depName}"/><br>
 <a href="mailto:${user.emailAddress}">${user.emailAddress}</a><br>
-<img src = "/lunchBox/image/${user.icon}">
+<img src = "/lunchBox/images/${user.icon}"width="193px" height="130px">
 
 <ul class="tab-group">
   <li class="tab">手作り記録</li>
@@ -153,7 +153,8 @@
 				${e.accountName}<br>
 				${e.emailAddress}<br>
 				${e.hdFoodType}<br>
-				<img src = "/lunchBox/image/${e.hdFoodPhoto}"><br>
+
+				<img src = "/lunchBox/images/${e.hdFoodPhoto}" width="193px" height="130px"><br>
 				${e.hdCategory}<br>
 				${e.hdDate}<br>
 				${e.hdFoodName}<br>
