@@ -301,7 +301,7 @@ public class LunchDiaryDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
 			//SQL文を準備する
-			String sql = "UPDATE lunch_diary SET lunch_flag = 0 WHERE lunchId = ?";
+			String sql = "UPDATE lunch_diary SET lunch_flag = 0 WHERE lunch_id = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			//SQL文の？部分に変数を入れる
