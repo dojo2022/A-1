@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>新規会員登録｜LunchBox</title>
 <script type="text/javascript" src="js/regist_user.js"></script>
 <link href="css/regist_user.css" rel="stylesheet" type="text/css" />
 </head>
