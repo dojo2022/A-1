@@ -127,3 +127,13 @@ input.submitBtn:hover{
   display: block;
 }
 
+.hdbuttons{
+    text-align: center;
+}
+.hdbuttons input{
+    margin: 5px;
+}
+
+.hdedit{
+	margin-top: 15%;
+}

@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+
 h1{
 	margin-top: 10%;
     text-align: center;
@@ -10,7 +11,7 @@ h1{
 table{
 	margin-right: auto;
 	margin-left: auto;
-	width: 50%;
+	width: 45%;
 	padding: 0.5em 1em;
     background: white;
     border-top: solid 5px #FF8D29;
@@ -124,12 +125,27 @@ input.submitBtn:hover{
   display: block;
 }
 
-.hdbuttons{
+.buttons{
 	display: flex;
     justify-content: center;
 }
-.hdbuttons input{
+.buttons input{
     margin: 15px;
-    margin-left: 25px;
+    margin-left: 30px;
     margin-right: 25px;
+}
+textarea{
+	width: 60%;
+	font: 15px/24px sans-serif;
+	padding: 0.3em;
+	transition: 0.3s;
+	letter-spacing: 1px;
+	border: 1px solid #1B2538;
+	border-radius: 4px;
+	background-color: rgba(255, 255, 255, 0.9)
+}
+textarea:focus{
+	border: 1px solid #DA3C41;
+	outline: none;
+	box-shadow: 0 0 5px 1px rgba(218,60,65, .5);
 }
