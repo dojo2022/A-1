@@ -209,7 +209,7 @@
 				${e.accountName}<br>
 				${e.ldResName}<br>
 				<input type="hidden" name="ld_res_name" value="${e.ldResName}">
-				${e.ldFoodPhoto}<br>
+				<img src = "/lunchBox/images/${e.ldFoodPhoto}" width="193px" height="130px"><br>
 				${e.ldCategory}<br>
 				${e.style}<br>
 				${e.ldDate}<br>
