@@ -94,10 +94,9 @@ ${comment_result}
 <!--タブを切り替えて表示するコンテンツ-->
 <div class="panel-group">
   <div class="panel is-show">
-
+<input type="hidden" name="mailAddress" id="emailAddress" value="${user.emailAddress}">
 <c:forEach var="e" items="${allLunch}" varStatus="status">
 <form method="POST" action="TimelineServlet">
-<input type="text" name="mailAddress" id="emailAddress" value="${e.emailAddress}">
 	${e.accountName}<br>
 	${e.ldFoodType}<br>
 	${e.ldResName}<br>
@@ -123,32 +122,38 @@ ${comment_result}
 	<c:forEach var="lr" items="${ldReactionList}">
 	<c:if test="${lr.lunchId == e.lunchId}">
 		<span id="ikiiki" > ${lr.countLdToGo}|</span>
-		${lr.countLdToTell}|
+		<span id="ikiiki" > ${lr.countLdToTell}|</span>
 		${lr.countLdToUse}|
 	</c:if>
 	</c:forEach>
 		<input type="button" name="to" value="行きたい" onclick="goAjax1( ${status.index} )">
-		<input type="submit" name="to" value="教えて" onclick="goAjax2(${status.index},'tell')">
-		<input type="submit" name="to" value="参考にします" onclick="goAjax3(${status.index},'use')"><br>
+		<input type="button" name="to" value="教えて" onclick="goAjax2(${status.index})">
+		<input type="button" name="to" value="参考にします" onclick="goAjax3(${status.index})"><br>
+
 		<!--lunch_reactionのランチIDとallLunchのランチIDが一致するものの行きたいリアクションについて取得する（1or行がない）-->
 		<c:forEach var="a" items="${ldr}" varStatus="st">
 			<c:if test="${a.lunchId == e.lunchId}">
 				<input type = "hidden" name="iki" id="iki${st.index}${status.index}" value="${a.ldToGo}${st.index}">
 			</c:if>
-			<c:if test="${a.lunchId != e.lunchId}">
+			<c:if test="${a.lunchId!= e.lunchId}">
 				<input type = "hidden" name="iki" id="iki${st.index}${status.index}" value="">
 			</c:if>
-
-
-
-<%-- 			<c:if test="${a.lunchId == e.lunchId}">
-				<input type = "text" name="oshi" id="oshi${status.index}" value="${a.ldToTell}">
+			<c:if test="${a.lunchId == e.lunchId}">
+				<input type = "hidden" name="oshi" id="oshi${st.index}${status.index}" value="${a.ldToTell}${st.index}">
+			</c:if>
+			<c:if test="${a.lunchId!= e.lunchId}">
+				<input type = "hidden" name="oshi" id="oshi${st.index}${status.index}" value="">
 			</c:if>
 			<c:if test="${a.lunchId == e.lunchId}">
-				<input type = "text" name="san" id="san${status.index}" value="${a.ldToUse}">
-			</c:if> --%>
-
+				<input type = "hidden" name="san" id="san${st.index}${status.index}" value="${a.ldToUse}${st.index}">
+			</c:if>
+			<c:if test="${a.lunchId!= e.lunchId}">
+				<input type = "hidden" name="san" id="san${st.index}${status.index}" value="">
+			</c:if>
 		</c:forEach>
+ 		<input type = "hidden" name="iki" id="iki0${status.index}" value="">
+		<input type = "hidden" name="oshi" id="oshi0${status.index}" value="">
+ 		<input type = "hidden" name="san" id="san0${status.index}" value="">
 		<hr>
 </form>
 </c:forEach>
@@ -201,12 +206,12 @@ ${comment_result}
 
 <script>
 function goAjax1(num){
-	alert('function突入');
+	//alert('function突入');
 
 	let lunch_id = document.getElementById('lunch_id'+num).value;
 	//行きたいボタンを押したかおしてないかの情報を持ってくる
 	let iki = document.getElementById('iki0'+num).value;
-	alert(iki);
+	//alert(iki);
 	//数値の変化をさせるところ
 /* 	if(iki.length!=0){
 		let count = document.getElementById("ikiiki");
@@ -243,7 +248,7 @@ function goAjax1(num){
 
 	   //非同期通信が成功したときの処理
 	}).done(function(data) {
-		alert("成功1");
+		//alert("成功1");
 		// 今回は上の<div id="test"></div>の中に返ってきた文字列を入れる
 		location.reload();
 	  })
@@ -255,16 +260,29 @@ function goAjax1(num){
 }
 
 function goAjax2(num){
-	alert('function突入');
+	//alert('function突入');
+
 	let lunch_id = document.getElementById('lunch_id'+num).value;
 	//行きたいボタンを押したかおしてないかの情報を持ってくる
-	let oshi = document.getElementById('oshi'+num).value;
-	alert(iki);
+	let oshi = document.getElementById('oshi0'+num).value;
+	//alert(oshi);
+	//数値の変化をさせるところ
+/* 	if(iki.length!=0){
+		let count = document.getElementById("ikiiki");
+		count.innerText = "";
+		number = count.innerText-1; //int型に変換して
+		count.innerText = number;
+	}else{
+		let count = document.getElementById("ikiiki");
+		count.innerText = "";
+		number = count.innerText+1; //int型に変換して
+		count.innerText = number;
+	} */
 	//0ならinsert、1ならdelete,サーブレットでかけよ
 	//誰が押したか
 	let email_address = document.getElementById('emailAddress').value;
 	//{変数名：中に入れるもの}みたいに書いて、複数の値をpostData変数に格納
-	let postData = {data1:lunch_id,data2:oahi,data3:email_address,data4:'to_tell'}
+	let postData = {data1:lunch_id,data2:oshi,data3:email_address,data4:'to_tell'}
 
 	//非同期通信始めるよ
 	$.ajaxSetup({scriptCharset:'utf-8'});
@@ -275,17 +293,18 @@ function goAjax2(num){
 		//どのメソッドを使用するか
 		type:"POST",
 		//受け取るデータのタイプ
-		dataType:"json",
+		dataType:"text",
 		//何をサーブレットに飛ばすか（変数を記述）
 		data: postData,
 		//この下の２行はとりあえず書いてる（書かなくても大丈夫？）
 		processDate:false,
 		timeStamp: new Date().getTime()
+
 	   //非同期通信が成功したときの処理
 	}).done(function(data) {
-		alert("成功1");
+		//alert("成功1");
 		// 今回は上の<div id="test"></div>の中に返ってきた文字列を入れる
-		document.getElementById("test").innerText=data[0].name;
+		location.reload();
 	  })
 	   //非同期通信が失敗したときの処理
 	  .fail(function() {
@@ -295,11 +314,24 @@ function goAjax2(num){
 }
 
 function goAjax3(num){
-	alert('function突入');
+	//alert('function突入');
+
 	let lunch_id = document.getElementById('lunch_id'+num).value;
 	//行きたいボタンを押したかおしてないかの情報を持ってくる
-	let san = document.getElementById('san'+num).value;
-	alert(san);
+	let san = document.getElementById('san0'+num).value;
+	//alert(san);
+	//数値の変化をさせるところ
+/* 	if(iki.length!=0){
+		let count = document.getElementById("ikiiki");
+		count.innerText = "";
+		number = count.innerText-1; //int型に変換して
+		count.innerText = number;
+	}else{
+		let count = document.getElementById("ikiiki");
+		count.innerText = "";
+		number = count.innerText+1; //int型に変換して
+		count.innerText = number;
+	} */
 	//0ならinsert、1ならdelete,サーブレットでかけよ
 	//誰が押したか
 	let email_address = document.getElementById('emailAddress').value;
@@ -315,17 +347,18 @@ function goAjax3(num){
 		//どのメソッドを使用するか
 		type:"POST",
 		//受け取るデータのタイプ
-		dataType:"json",
+		dataType:"text",
 		//何をサーブレットに飛ばすか（変数を記述）
 		data: postData,
 		//この下の２行はとりあえず書いてる（書かなくても大丈夫？）
 		processDate:false,
 		timeStamp: new Date().getTime()
+
 	   //非同期通信が成功したときの処理
 	}).done(function(data) {
-		alert("成功1");
+		//alert("成功1");
 		// 今回は上の<div id="test"></div>の中に返ってきた文字列を入れる
-		document.getElementById("test").innerText=data[0].name;
+		location.reload();
 	  })
 	   //非同期通信が失敗したときの処理
 	  .fail(function() {
@@ -333,6 +366,7 @@ function goAjax3(num){
 		alert("失敗！");
 	  });
 }
+
 </script>
 
 

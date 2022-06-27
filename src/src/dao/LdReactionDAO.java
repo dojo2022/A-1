@@ -125,7 +125,7 @@ public class LdReactionDAO {
 	}
 
 	//ランチ日記のスタンプを削除するメソッド
-	public boolean deleteLdReaction(int lunchId,String emailAdress) {
+	public boolean deleteLdToGoReaction(int lunchId,String emailAdress) {
 		boolean result = false;
 		try {
 			// JDBCドライバを読み込む
@@ -167,5 +167,88 @@ public class LdReactionDAO {
 
 		return result;
 	}
+	public boolean deleteLdToTellReaction(int lunchId,String emailAdress) {
+		boolean result = false;
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
 
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
+
+			// SQL文を用意
+			String sql = "delete from lunch_reaction  where lunch_id = ? and email_address = ? and ld_to_tell = 1;";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+			pStmt.setInt(1, lunchId);
+			pStmt.setString(2, emailAdress);
+
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+		}
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+			catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					}
+					catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+
+		return result;
+	}
+	public boolean deleteLdToUseReaction(int lunchId,String emailAdress) {
+		boolean result = false;
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
+
+			// SQL文を用意
+			String sql = "delete from lunch_reaction  where lunch_id = ? and email_address = ? and ld_to_use = 1;";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+			pStmt.setInt(1, lunchId);
+			pStmt.setString(2, emailAdress);
+
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+		}
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+			catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					}
+					catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+
+		return result;
+	}
 }

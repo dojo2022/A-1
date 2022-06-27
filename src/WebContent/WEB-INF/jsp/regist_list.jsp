@@ -16,14 +16,25 @@
 
     <main>
 	    <div class="display">
-	        <h1 class="list_title">行きたい場所リスト登録</h1>
+	        <h2 class="list_title">行きたい場所リスト登録</h2>
 	        <div class="form_box">
 		        <div class="form_con">
+		        <table>
 			        <form method="post" action="/lunchBox/RegistListServlet">
 						<input type="hidden" name="EMAIL_ADDRESS" value="${user.emailAddress}">
-			            <h3>&nbsp;店名 ※必須</h3>
+						<tr>
+						<th>
+			            <h3>&nbsp;店名&nbsp;<span class="required">必須</h3>
+			            </th>
+			            <td>
 			            <input type="text" name="RES_NAME" placeholder="店舗名(例:鳥貴族 新宿店)まで入力してください" class="form_unit" required="required">
+			            </td>
+			            </tr>
+			            <tr>
+			            <th>
 			            <h3>&nbsp;ジャンル</h3>
+			            </th>
+			            <td>
 			            <select name="CATEGORY" id="" class="form_unit">
 			                <option value="">選択してください</option>
 			                <option value="和食">和食</option>
@@ -34,13 +45,26 @@
 			                <option value="ラーメン">ラーメン</option>
 			                <option value="その他">その他</option>
 			            </select>
-			            <h3>&nbsp;メモ ※200字以内</h3>
-			            <textarea name="TOGO_MEMO" cols="55" rows="5" placeholder="Add Text" class="form_unit" id="editToGoMemo"></textarea><br>
+			            </td>
+			            </tr>
+			            <tr>
+			            <th>
+			            <h3>&nbsp;メモ</h3>※200字以内
+			            </th>
+			            <td>
+			            <textarea name="TOGO_MEMO" cols="40" rows="7" placeholder="Add Text" class="form_unit" id="editToGoMemo"></textarea><br>
+			            </td>
+			            </tr>
+			            <tr class="hidden">
+			            <td colspan="2">
 			            <p class="errmsg" id="error_message"><br>${msg}</p>
+			            </td>
+			            </tr>
+			            </form>
+						</table>
 			            <div class="list_button">
 			            <input type="submit" name="toGoRegist" value="登録する" >
 			            </div>
-			        </form>
 
 		        </div>
 	        </div>

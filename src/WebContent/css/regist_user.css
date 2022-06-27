@@ -3,20 +3,66 @@
 caption{
 	font-size: 200%;
 }
+.registArea{
+	background-color: rgba(255, 255, 255, 0.67);
+	width: 75%;
+	margin-left: auto;
+	margin-right: auto;
+
+}
 
 table{
 	border-spacing: 15px;
-}
+	text-align: center;
+	width: 90%;
+	margin-left: 3%;
+	margin-right: 0;
 
-table{
-	margin-left: auto;
-	margin-right: auto;
 }
+form input[type='text'], input[type='email'], input[type='password']{
+	font: 15px/24px sans-serif;
+	width: 100%;
+	padding: 0.3em;
+	transition: 0.3s;
+	letter-spacing: 1px;
+	border: 1px solid #1b2538;
+	border-radius: 4px;
+}
+form input[type='text']:focus{
+	border: 1px solid #da3c41;
+	outline: none;
+	box-shadow: 0 0 5px 1px rgba(218,60,65, .5);
+}
+ input[type='email']:focus{
+ 	border: 1px solid #da3c41;
+	outline: none;
+	box-shadow: 0 0 5px 1px rgba(218,60,65, .5);
+ }
+ input[type='password']:focus{
+ 	border: 1px solid #da3c41;
+	outline: none;
+	box-shadow: 0 0 5px 1px rgba(218,60,65, .5);
 
+ }
 .center{
 	text-align: center;
 }
-
+.registBtn{
+	border-radius : 5%;          /* 角丸       */
+	font-size     : 18px;        /* 文字サイズ */
+	cursor        : pointer;     /* カーソル   */
+	padding       : 15px 30px;   /* 余白       */
+	background    : #DA3C41;     /* 背景色     */
+	color         : #FFFFFF;     /* 文字色     */
+	line-height   : 0.5em;         /* 1行の高さ  */
+	transition    : .3s;         /* なめらか変化 */
+	box-shadow    : 2px 2px 3px #666666;  /* 影の設定 */
+	border        : 2px solid #DA3C41;    /* 枠の指定 */
+}
+.registBtn:hover{
+	color: #DA3C41;
+	background: white;
+}
 .logo{
 	margin-left: auto;
 	margin-right: auto;
@@ -25,19 +71,22 @@ table{
 }
 
 .center{
-	width: 800px;
+	width: 700px;
 	margin: auto;
-	background-color: #fef9a7;
+	background-color: #ffffe0;
+	box-shadow: 2px 2px 3px #666666;
 
 }
 body {
-	background-color: #FFEE63;
+	background-image:url(/lunchBox/img/registUser.jpg);
+	background-size: cover;
+
 }
 
 form{
-	color: #8b4513
-}
+	color: #8b4513;
+	}
 
 h2{
-	color: #8b4513
+	color: #8b4513;
 }

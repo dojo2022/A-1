@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +26,9 @@ import model.UserMasterBeans;
 /**
  * Servlet implementation class MyPageServlet
  */
+
+@MultipartConfig(location = "C:\\dojo6\\src\\WebContent\\images")
+//アップロードファイルの一時的な保存先
 @WebServlet("/MyPageServlet")
 public class MyPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -36,6 +40,7 @@ public class MyPageServlet extends HttpServlet {
 		 HttpSession session = request.getSession();
 		 UserMasterBeans user = (UserMasterBeans) session.getAttribute("user");
 		 String emailAddress = user.getEmailAddress();
+
 
 		//メールアドレスを引数にしてランチ日記の情報を取ってくる-------------------------------------
 	     MyPageDAO mDao = new MyPageDAO();
@@ -195,7 +200,7 @@ public class MyPageServlet extends HttpServlet {
 			LdReactionDAO ldrDao = new LdReactionDAO();
 			ldrDao.insertLdReaction(ldr_lunch_id, ldr_email_address, to_go, to_tell, to_use);
 			}else if(request.getParameter("hdbtn") != null) {
-			//-----------------------リアクションの登録（インサート）を行うやつ手作り記録------------------------------
+		//-----------------------リアクションの登録（インサート）を行うやつ手作り記録------------------------------
 			request.setCharacterEncoding("UTF-8");
 			Integer hdr_handmade_id = Integer.parseInt(request.getParameter("handmade_id"));
 			String hdr_email_address = user.getEmailAddress();
@@ -217,28 +222,6 @@ public class MyPageServlet extends HttpServlet {
 			hdrDao.insertHdReaction(hdr_handmade_id, hdr_email_address, to_eat, hdr_to_tell, hdr_to_use);
 		}
 
-		//-----------------------リアクションの登録（インサート）を行うやつ手作り記録------------------------------
-		/*			request.setCharacterEncoding("UTF-8");
-					Integer hdr_lunch_id = Integer.parseInt(request.getParameter("handmade_id"));
-					String hdr_email_address = user.getEmailAddress();
-					Integer to_eat = 0;
-					Integer hdr_to_tell = 0;
-					Integer hdr_to_use = 0;
-		//				ボタン押したか押していないかを取得
-					String hd_button =request.getParameter("hdbtn");
-					if(hd_button.equals("食べたい")) {
-						to_eat = 1;
-					}else if (hd_button.equals("教えて")) {
-						hdr_to_tell= 1;
-					}else if(hd_button.equals("参考にします")){
-						hdr_to_use = 1;
-					}else {
-						System.out.println("失敗");
-					}
-					HdReactionDAO hdrDao = new HdReactionDAO();
-					hdrDao.insertHdReaction(hdr_lunch_id, hdr_email_address, to_eat, hdr_to_tell, hdr_to_use);
-		*/
-//				入力されたコメントを取得して登録するやつ
 				request.setCharacterEncoding("UTF-8");
 				String ldc_email_address = user.getEmailAddress();
 				Integer ldc_lunch_id = Integer.parseInt(request.getParameter("lunch_id"));
@@ -278,7 +261,33 @@ public class MyPageServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp");
 		dispatcher.forward(request, response);
 		}
+
 	}
+
+//-----------------------リアクションの登録（インサート）を行うやつ手作り記録------------------------------
+/*			request.setCharacterEncoding("UTF-8");
+			Integer hdr_lunch_id = Integer.parseInt(request.getParameter("handmade_id"));
+			String hdr_email_address = user.getEmailAddress();
+			Integer to_eat = 0;
+			Integer hdr_to_tell = 0;
+			Integer hdr_to_use = 0;
+//				ボタン押したか押していないかを取得
+			String hd_button =request.getParameter("hdbtn");
+			if(hd_button.equals("食べたい")) {
+				to_eat = 1;
+			}else if (hd_button.equals("教えて")) {
+				hdr_to_tell= 1;
+			}else if(hd_button.equals("参考にします")){
+				hdr_to_use = 1;
+			}else {
+				System.out.println("失敗");
+			}
+			HdReactionDAO hdrDao = new HdReactionDAO();
+			hdrDao.insertHdReaction(hdr_lunch_id, hdr_email_address, to_eat, hdr_to_tell, hdr_to_use);
+*/
+//		入力されたコメントを取得して登録するやつ
+
+
 
 
 

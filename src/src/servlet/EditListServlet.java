@@ -146,7 +146,6 @@ public class EditListServlet extends HttpServlet {
 			}
 		}
 
-		//途中です
 	}
 }
 
