@@ -126,33 +126,33 @@ ${comment_result}
 		<input type="button" name="to" value="参考にします" onclick="goAjax3(${status.index})">${lr.countLdToUse}<br>
 	</c:if>
 	</c:forEach>
-<%-- 		<input type="button" name="to" value="行きたい" onclick="goAjax1( ${status.index} )">
+ 		<%-- <input type="button" name="to" value="行きたい" onclick="goAjax1( ${status.index} )">
 		<input type="button" name="to" value="教えて" onclick="goAjax2(${status.index})">
 		<input type="button" name="to" value="参考にします" onclick="goAjax3(${status.index})"><br> --%>
 
 		<!--lunch_reactionのランチIDとallLunchのランチIDが一致するものの行きたいリアクションについて取得する（1or行がない）-->
 		<c:forEach var="a" items="${ldr}" varStatus="st">
 			<c:if test="${a.lunchId == e.lunchId and a.ldToGo ==1}">
-				${st.index}<input type = "hidden" name="iki" id="iki${st.index}${status.index}" value="${a.ldToGo}${st.index}">
+				<input type = "hidden" name="iki" id="iki${st.index}${status.index}" value="${a.ldToGo}${st.index}">
 			</c:if>
 			<c:if test="${a.lunchId!= e.lunchId}">
-				${st.index}<input type = "hidden" name="iki" id="iki${st.index}${status.index}" value="">
+				<input type = "hidden" name="iki" id="iki${st.index}${status.index}" value="">
 			</c:if>
 			<%-- ${a.lunchId} ----- ${e.lunchId}-------${a.ldToGo} ←ごー<br> --%>
 			<c:if test="${a.lunchId == e.lunchId and a.ldToTell ==1}">
 				alert("教えて");
 
-				${st.index}<input type = "hidden" name="oshi" id="oshi${st.index}${status.index}" value="${a.ldToTell}${st.index}">
+				<input type = "hidden" name="oshi" id="oshi${st.index}${status.index}" value="${a.ldToTell}${st.index}">
 			</c:if>
 			<c:if test="${a.lunchId!= e.lunchId}">
-				${st.index}<input type = "hidden" name="oshi" id="oshi${st.index}${status.index}" value="">
+				<input type = "hidden" name="oshi" id="oshi${st.index}${status.index}" value="">
 			</c:if>
 			<%-- ${a.lunchId} ----- ${e.lunchId}-------${a.ldToTell} ←てるー<br> --%>
 			<c:if test="${a.lunchId == e.lunchId and a.ldToUse ==1}">
-				${st.index}<input type = "hidden" name="san" id="san${st.index}${status.index}" value="${a.ldToUse}${st.index}">
+				<input type = "hidden" name="san" id="san${st.index}${status.index}" value="${a.ldToUse}${st.index}">
 			</c:if>
 			<c:if test="${a.lunchId!= e.lunchId}">
-				${st.index}<input type = "hidden" name="san" id="san${st.index}${status.index}" value="">
+				<input type = "hidden" name="san" id="san${st.index}${status.index}" value="">
 			</c:if>
 			<%-- ${a.lunchId} ----- ${e.lunchId}-------${a.ldToUse} ←ゆーず<br> --%>
 		</c:forEach>
