@@ -111,17 +111,18 @@ ${comment_result}
 	${e.ldStar}<br>
 	${e.ldFeeling}<br>
 	<input type="hidden" name="lunch_id" value="${e.lunchId}" id="lunch_id${status.index}">
-	<c:forEach var="lc" items="${LdComment}">
+	<c:forEach var="lc" items="${LdComment}" varStatus="vst">
 	<c:if test="${lc.lunchId == e.lunchId}">
 		${lc.accountName}：
 		${lc.ldComment}<br>
+		<%-- <input type="hidden" name="account_name" id="account_name" value="${lc.accountName}"> --%>
 	</c:if>
 	</c:forEach>
-		<input type="text" name="ld_comment" placeholder="コメントを入力してください">
-		<input type="submit" name="send_comment" value="ランチ日記コメントを送信する"><br>
+ 		<input type="text" name="ld_comment" placeholder="コメントを入力してください" id="ld_comment">
+		<input type="button" name="send_comment" value="ランチ日記コメントを送信する" onclick="goAjax4(${status.index})"><br>
 	<c:forEach var="lr" items="${ldReactionList}">
 	<c:if test="${lr.lunchId == e.lunchId}">
-		<input type="button" name="to" value="行きたい" onclick="goAjax1( ${status.index} )">${lr.countLdToGo}
+		<input type="button" name="to" value="行きたい" onclick="goAjax1(${status.index})">${lr.countLdToGo}
 		<input type="button" name="to" value="教えて" onclick="goAjax2(${status.index})">${lr.countLdToTell}
 		<input type="button" name="to" value="参考にします" onclick="goAjax3(${status.index})">${lr.countLdToUse}<br>
 	</c:if>
@@ -140,8 +141,6 @@ ${comment_result}
 			</c:if>
 			<%-- ${a.lunchId} ----- ${e.lunchId}-------${a.ldToGo} ←ごー<br> --%>
 			<c:if test="${a.lunchId == e.lunchId and a.ldToTell ==1}">
-				alert("教えて");
-
 				<input type = "hidden" name="oshi" id="oshi${st.index}${status.index}" value="${a.ldToTell}${st.index}">
 			</c:if>
 			<c:if test="${a.lunchId!= e.lunchId}">
@@ -395,6 +394,50 @@ function goAjax3(num){
 	  });
 }
 
+function goAjax4(num){
+	alert("functionはいったよ！");
+	//入力値を取得してくる
+	let ld_comment = document.getElementById('ld_comment').value;
+	//let account_name = document.getElementById('account_name').value;
+	let emailAddress = document.getElementById('emailAddress').value;
+	let lunch_id = document.getElementById('lunch_id'+num).value;
+	//alert(account_name);
+	alert(ld_comment);
+	alert(emailAddress);
+	alert(lunch_id);
+
+	//{変数名：中に入れるもの}みたいに書いて、複数の値をpostData変数に格納
+	let postData = {data1:ld_comment,data3:emailAddress,data4:lunch_id,data5:'ld_comment_submit'}
+
+
+	//非同期通信始めるよ
+	$.ajaxSetup({scriptCharset:'utf-8'});
+	$.ajax({
+		//どのサーブレットに送るか
+		//ajaxSampleのところは自分のプロジェクト名に変更する必要あり。
+		url: '/lunchBox/TimelineServlet',
+		//どのメソッドを使用するか
+		type:"POST",
+		//受け取るデータのタイプ
+		dataType:"text",
+		//何をサーブレットに飛ばすか（変数を記述）
+		data: postData,
+		//この下の２行はとりあえず書いてる（書かなくても大丈夫？）
+		processDate:false,
+		timeStamp: new Date().getTime()
+	   //非同期通信が成功したときの処理
+	}).done(function(data) {
+		alert("成功1");
+		// 今回は上の<div id="test"></div>の中に返ってきた文字列を入れる
+		//document.getElementById("test").innerText=data[0].name;
+		location.reload();
+	  })
+	   //非同期通信が失敗したときの処理
+	  .fail(function() {
+		//失敗とアラートを出す
+		alert("失敗！");
+	  });
+}
 </script>
 
 

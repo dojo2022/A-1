@@ -7,14 +7,30 @@
 <head>
 <meta charset="UTF-8">
 <title>マイページ </title>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script type="text/javascript" src="js/mypage.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/css/theme.default.min.css">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/js/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/js/jquery.tablesorter.widgets.min.js"></script>
 <link href="css/mypage.css" rel="stylesheet" type="text/css" />
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+<script type="text/javascript" src="js/mypage.js"></script>
+
+<!-- スタイルの適用--------------------------- -->
+<style>
+#list_table .tablesorter-header {
+	cursor: pointer;
+	outline: none;
+}
+#list_table .tablesorter-header-inner::after {
+	content: '▼';
+	font-size: 12px;
+	margin-left: 5px;
+}
+</style>
+
 </head>
 <jsp:include page="header.jsp" />
 <body>
-
 
 
 <%-- <form action="/lunchBox/MyPageServlet" method="post" enctype="multipart/form-data">
@@ -268,38 +284,40 @@
  <c:if test="${myList == null }">
 			登録はありません。
  </c:if>
-	<table>
+	<table id="list_table" class="tablesorter">
+	<thead>
 			<tr>
 				<th>お店の名前</th>
 				<th>ジャンル</th>
 				<th>メモ</th>
-				<th>リアクション</th>
 				<th>編集</th>
 			</tr>
-			<c:forEach var="e" items="${myList}" >
-				<tr>
-					<td width ="240px">${e.listResName}</td>
-					<td width ="150px">${e.listCategory}</td>
-					<td width ="200px">${e.togoMemo}</td>
-					<td width ="260px">
-						<input type="button" name="to" value="行きたい">
-						<input type="button" name="to" value="教えて">
-						<input type="button" name="to" value="参考にします"><br>
-					</td>
-					<td >
-						<form method="POST" action="EditListServlet">
-						<input type="hidden" name="list_res_name" value="${e.listResName}">
-						<input type="hidden" name="list_id" value="${e.listId}">
-						<input type="hidden" name="list_category" value="${e.listCategory}">
-						<input type="hidden" name="togo_memo" value="${e.togoMemo}">
-						<input type="submit" name="SUBMIT" value="編集">
-						</form>
-					</td>
-			</c:forEach>
-		</table>
+	</thead>
+	<tbody>
+		<c:forEach var="e" items="${myList}" >
+			<tr>
+				<td width ="240px">${e.listResName}</td>
+				<td width ="150px">${e.listCategory}</td>
+				<td width ="200px">${e.togoMemo}</td>
+<!-- 				<td width ="260px">
+					<input type="button" name="to" value="行きたい">
+					<input type="button" name="to" value="教えて">
+					<input type="button" name="to" value="参考にします"><br>
+				</td> -->
+				<td>
+					<form method="POST" action="EditListServlet">
+					<input type="hidden" name="list_res_name" value="${e.listResName}">
+					<input type="hidden" name="list_id" value="${e.listId}">
+					<input type="hidden" name="list_category" value="${e.listCategory}">
+					<input type="hidden" name="togo_memo" value="${e.togoMemo}">
+					<input type="submit" name="SUBMIT" value="編集">
+					</form>
+				</td>
+			</tr>
+		</c:forEach>
+	</tbody>
+	</table>
  </div>
-
-
 
   		<!-- 行きたい場所リスト更新編集 -->
 
@@ -333,6 +351,12 @@
 
 <!-- </form> -->
 <!-- コントロールシフト/でコメントアウト -->
+<script>
+//ページを読み込み後に、ソートを開始
+$(document).ready(function(){
+	        $("#list_table").tablesorter();
+});
+</script>
 
 </body>
 </html>

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import dao.HandmadeDiaryDAO;
 import dao.HdCommentDAO;
 import dao.HdReactionDAO;
+import dao.LdCommentDAO;
 import dao.LdJoin2DAO;
 import dao.LdReactionDAO;
 import dao.LunchDiaryDAO;
@@ -110,14 +111,14 @@ public class TimelineServlet extends HttpServlet {
 		System.out.println("doPost入ったよ");
 		//		data4で取ってきたボタンの種類がto_go(行きたい)だったらこの処理をする
 		if(request.getParameter("data4").equals("to_go")) {
-			HttpSession session = request.getSession();
+//			HttpSession session = request.getSession();
 			request.setCharacterEncoding("UTF-8");
 	        response.setContentType("application/json");
 			response.setHeader("Cache-Control", "nocache");
 			response.setCharacterEncoding("utf-8");
 
 	//		セッションにあるuserの情報を取得
-			UserMasterBeans user = (UserMasterBeans)session.getAttribute("user");
+//			UserMasterBeans user = (UserMasterBeans)session.getAttribute("user");
 	//-----------------------リアクションの登録、削除を行うやつ----------------------------------
 			request.setCharacterEncoding("UTF-8");
 	//		ランチ日記のリアクションボタンが押されたら(変えた方がいいかも？)(nullなのか""なのか）)
@@ -147,18 +148,19 @@ public class TimelineServlet extends HttpServlet {
 				}
 				PrintWriter out = response.getWriter();
 				out.print("戻り値");}
+				return;
 		}
 
 		//		data4で取ってきたボタンの種類がto_tell(教えて)だったらこの処理をする
 		if(request.getParameter("data4").equals("to_tell")) {
-			HttpSession session = request.getSession();
+//			HttpSession session = request.getSession();
 			request.setCharacterEncoding("UTF-8");
 	        response.setContentType("application/json");
 			response.setHeader("Cache-Control", "nocache");
 			response.setCharacterEncoding("utf-8");
 
 	//		セッションにあるuserの情報を取得
-			UserMasterBeans user = (UserMasterBeans)session.getAttribute("user");
+//			UserMasterBeans user = (UserMasterBeans)session.getAttribute("user");
 	//-----------------------リアクションの登録、削除を行うやつ----------------------------------
 			request.setCharacterEncoding("UTF-8");
 	//		ランチ日記のリアクションボタンが押されたら(変えた方がいいかも？)(nullなのか""なのか）)
@@ -188,18 +190,19 @@ public class TimelineServlet extends HttpServlet {
 				}
 				PrintWriter out = response.getWriter();
 				out.print("戻り値");}
+				return;
 		}
 
 		//		data4で取ってきたボタンの種類がto_use(参考にします)だったらこの処理をする
 		if(request.getParameter("data4").equals("to_use")) {
-			HttpSession session = request.getSession();
+//			HttpSession session = request.getSession();
 			request.setCharacterEncoding("UTF-8");
 	        response.setContentType("application/json");
 			response.setHeader("Cache-Control", "nocache");
 			response.setCharacterEncoding("utf-8");
 
 	//		セッションにあるuserの情報を取得
-			UserMasterBeans user = (UserMasterBeans)session.getAttribute("user");
+//			UserMasterBeans user = (UserMasterBeans)session.getAttribute("user");
 	//-----------------------リアクションの登録、削除を行うやつ----------------------------------
 			request.setCharacterEncoding("UTF-8");
 	//		ランチ日記のリアクションボタンが押されたら(変えた方がいいかも？)(nullなのか""なのか）)
@@ -229,9 +232,27 @@ public class TimelineServlet extends HttpServlet {
 				}
 				PrintWriter out = response.getWriter();
 				out.print("戻り値");}
+				return;
 		}
+		if(request.getParameter("data5").equals("ld_comment_submit")) {
+			request.setCharacterEncoding("UTF-8");
+	        response.setContentType("application/json");
+			response.setHeader("Cache-Control", "nocache");
+			response.setCharacterEncoding("utf-8");
 
-////		コメントの入力をゲットしてインサートする処理
+//			送信されたデータの取得
+			String ld_comment = request.getParameter("data1");
+//			String account_name = request.getParameter("data2");
+			String emailAddress = request.getParameter("data3");
+			Integer lunch_id = Integer.parseInt(request.getParameter("data4"));
+
+			LdCommentDAO ldcDao = new LdCommentDAO();
+			ldcDao.insertLdComment(0, lunch_id, emailAddress, ld_comment);
+			PrintWriter out = response.getWriter();
+			out.print("戻り値");
+
+		}
+//		コメントの入力をゲットしてインサートする処理
 //		request.setCharacterEncoding("UTF-8");
 //		String send_comment = request.getParameter("send_comment");
 //		if(request.getParameter("send_comment") != null && send_comment.equals("ランチ日記コメントを送信する")) {
