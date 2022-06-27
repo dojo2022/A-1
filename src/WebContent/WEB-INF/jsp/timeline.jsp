@@ -121,35 +121,40 @@ ${comment_result}
 		<input type="submit" name="send_comment" value="ランチ日記コメントを送信する"><br>
 	<c:forEach var="lr" items="${ldReactionList}">
 	<c:if test="${lr.lunchId == e.lunchId}">
-		<span id="ikiiki" > ${lr.countLdToGo}|</span>
-		<span id="ikiiki" > ${lr.countLdToTell}|</span>
-		${lr.countLdToUse}|
+		<input type="button" name="to" value="行きたい" onclick="goAjax1( ${status.index} )">${lr.countLdToGo}
+		<input type="button" name="to" value="教えて" onclick="goAjax2(${status.index})">${lr.countLdToTell}
+		<input type="button" name="to" value="参考にします" onclick="goAjax3(${status.index})">${lr.countLdToUse}<br>
 	</c:if>
 	</c:forEach>
-		<input type="button" name="to" value="行きたい" onclick="goAjax1( ${status.index} )">
+<%-- 		<input type="button" name="to" value="行きたい" onclick="goAjax1( ${status.index} )">
 		<input type="button" name="to" value="教えて" onclick="goAjax2(${status.index})">
-		<input type="button" name="to" value="参考にします" onclick="goAjax3(${status.index})"><br>
+		<input type="button" name="to" value="参考にします" onclick="goAjax3(${status.index})"><br> --%>
 
 		<!--lunch_reactionのランチIDとallLunchのランチIDが一致するものの行きたいリアクションについて取得する（1or行がない）-->
 		<c:forEach var="a" items="${ldr}" varStatus="st">
-			<c:if test="${a.lunchId == e.lunchId}">
-				<input type = "hidden" name="iki" id="iki${st.index}${status.index}" value="${a.ldToGo}${st.index}">
+			<c:if test="${a.lunchId == e.lunchId and a.ldToGo ==1}">
+				${st.index}<input type = "hidden" name="iki" id="iki${st.index}${status.index}" value="${a.ldToGo}${st.index}">
 			</c:if>
 			<c:if test="${a.lunchId!= e.lunchId}">
-				<input type = "hidden" name="iki" id="iki${st.index}${status.index}" value="">
+				${st.index}<input type = "hidden" name="iki" id="iki${st.index}${status.index}" value="">
 			</c:if>
-			<c:if test="${a.lunchId == e.lunchId}">
-				<input type = "hidden" name="oshi" id="oshi${st.index}${status.index}" value="${a.ldToTell}${st.index}">
-			</c:if>
-			<c:if test="${a.lunchId!= e.lunchId}">
-				<input type = "hidden" name="oshi" id="oshi${st.index}${status.index}" value="">
-			</c:if>
-			<c:if test="${a.lunchId == e.lunchId}">
-				<input type = "hidden" name="san" id="san${st.index}${status.index}" value="${a.ldToUse}${st.index}">
+			<%-- ${a.lunchId} ----- ${e.lunchId}-------${a.ldToGo} ←ごー<br> --%>
+			<c:if test="${a.lunchId == e.lunchId and a.ldToTell ==1}">
+				alert("教えて");
+
+				${st.index}<input type = "hidden" name="oshi" id="oshi${st.index}${status.index}" value="${a.ldToTell}${st.index}">
 			</c:if>
 			<c:if test="${a.lunchId!= e.lunchId}">
-				<input type = "hidden" name="san" id="san${st.index}${status.index}" value="">
+				${st.index}<input type = "hidden" name="oshi" id="oshi${st.index}${status.index}" value="">
 			</c:if>
+			<%-- ${a.lunchId} ----- ${e.lunchId}-------${a.ldToTell} ←てるー<br> --%>
+			<c:if test="${a.lunchId == e.lunchId and a.ldToUse ==1}">
+				${st.index}<input type = "hidden" name="san" id="san${st.index}${status.index}" value="${a.ldToUse}${st.index}">
+			</c:if>
+			<c:if test="${a.lunchId!= e.lunchId}">
+				${st.index}<input type = "hidden" name="san" id="san${st.index}${status.index}" value="">
+			</c:if>
+			<%-- ${a.lunchId} ----- ${e.lunchId}-------${a.ldToUse} ←ゆーず<br> --%>
 		</c:forEach>
  		<input type = "hidden" name="iki" id="iki0${status.index}" value="">
 		<input type = "hidden" name="oshi" id="oshi0${status.index}" value="">
@@ -210,7 +215,23 @@ function goAjax1(num){
 
 	let lunch_id = document.getElementById('lunch_id'+num).value;
 	//行きたいボタンを押したかおしてないかの情報を持ってくる
-	let iki = document.getElementById('iki0'+num).value;
+	//let iki = "";
+
+/* 	for(let i = 0; i<2000; i++){
+		if(document.getElementById('iki'+i+num).value != null){
+			let str = document.getElementById('iki'+i+num).value;
+			if(str.length!=0){
+				iki=document.getElementById('iki'+i+num).value;
+				break;
+			}
+		}
+	} */
+
+	 let iki = document.getElementById('iki0'+num).value;
+
+/* 	if(parseInt(iki)==0){
+		iki="";
+	} */
 	//alert(iki);
 	//数値の変化をさせるところ
 /* 	if(iki.length!=0){
@@ -265,6 +286,9 @@ function goAjax2(num){
 	let lunch_id = document.getElementById('lunch_id'+num).value;
 	//行きたいボタンを押したかおしてないかの情報を持ってくる
 	let oshi = document.getElementById('oshi0'+num).value;
+/* 	if(parseInt(oshi)==0){
+		oshi="";
+	} */
 	//alert(oshi);
 	//数値の変化をさせるところ
 /* 	if(iki.length!=0){
@@ -319,6 +343,10 @@ function goAjax3(num){
 	let lunch_id = document.getElementById('lunch_id'+num).value;
 	//行きたいボタンを押したかおしてないかの情報を持ってくる
 	let san = document.getElementById('san0'+num).value;
+
+/* 	if(parseInt(san)==0){
+		san="";
+	} */
 	//alert(san);
 	//数値の変化をさせるところ
 /* 	if(iki.length!=0){
