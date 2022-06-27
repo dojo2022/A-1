@@ -305,7 +305,7 @@ public class LunchDiaryDAO {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			//SQL文の？部分に変数を入れる
-			pStmt.setInt(0,lunchId);
+			pStmt.setInt(1,lunchId);
 			if(pStmt.executeUpdate() == 1) {
 				result = true;
 			}
