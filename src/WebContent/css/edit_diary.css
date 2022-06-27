@@ -1,0 +1,135 @@
+@charset "UTF-8";
+
+h1{
+	margin-top: 10%;
+    text-align: center;
+    color: #8b4513;
+    font-size: 25px;
+}
+
+table{
+	margin-right: auto;
+	margin-left: auto;
+	width: 50%;
+	padding: 0.5em 1em;
+    background: white;
+    border-top: solid 5px #FF8D29;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+#radioBtn{
+	text-align: center;
+}
+tr{
+	height: 60px;
+}
+th {
+    text-align: center;
+    width: 200px;
+    color: green;
+}
+.required{
+	background-color: red;
+	color: white;
+	font-weight: 10px;
+}
+#required1{
+	color: red;
+	font-size: 13px;
+}
+#required2{
+	color: red;
+	font-size: 13px;
+}
+#required3{
+	color: red;
+	font-size: 13px;
+}
+#required4{
+	color: red;
+	font-size: 13px;
+}
+.smallMessage{
+	font-weight: normal;
+	font-size: 13px;
+}
+td input[type ="text"]{
+	width: 15em;
+	font-size: 18px;
+}
+
+td select{
+	width: 20em;
+	font-size: 15px;
+}
+textarea{
+	font-family: sans-selif;
+	font-size: 15px;
+	width: 25em;
+	height: 10em;
+}
+.rate-form{
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: flex-end;
+}
+.rate-form input[type = radio]{
+position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+.rate-form label {
+ 	position: relative;
+	padding: 0 5px;
+ 	color: #ccc;
+ 	cursor: pointer;
+ 	font-size: 35px;
+}
+.rate-form label:hover {
+	color: #ffcc00;
+}
+.rate-form label:hover ~ label {
+ 	color: #ffcc00;
+}
+.rate-form input[type=radio]:checked ~ label {
+ 	color: #ffcc00;
+}
+input.submitBtn{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-right: 15%;
+	margin-left: 42%;
+	border-radius : 5%;          /* 角丸       */
+	font-size     : 15pt;        /* 文字サイズ */
+	text-align    : center;      /* 文字位置   */
+	cursor        : pointer;     /* カーソル   */
+	padding       : 15px 40px;   /* 余白       */
+	background    : #FF8D29;     /* 背景色     */
+	color         : #ffffff;     /* 文字色     */
+	line-height   : 0.5em;         /* 1行の高さ  */
+	transition    : .3s;         /* なめらか変化 */
+	box-shadow    : 2px 2px 3px #666666;  /* 影の設定 */
+	border        : 2px solid #FF8D29;    /* 枠の指定 */
+}
+input.submitBtn:hover{
+	box-shadow    : none;        /* カーソル時の影消去 */
+	color         : #FF8D29;     /* 背景色     */
+	background    : #ffffff;     /* 文字色     */
+
+}
+
+#displayBox .cm_box {
+  display: none;
+}
+#displayBox .cm_box.active {
+  display: block;
+}
+
+.hdbuttons{
+	display: flex;
+    justify-content: center;
+}
+.hdbuttons input{
+    margin: 15px;
+    margin-left: 25px;
+    margin-right: 25px;
+}
