@@ -192,7 +192,7 @@
 				<input type="hidden" name="Star" value="${e.ldStar}">
 				<input type="hidden" name="feeling" value="${e.ldFeeling}">
 				<!-- 外食ランチ日記更新削除 -->
-			<input type="submit" name="SUBMIT" value="編集">
+			<input type="submit" name="SUBMIT" value="編集" class="edit_btn">
 		</form>
 </c:forEach>
 
@@ -227,7 +227,7 @@
 					<input type="hidden" name="list_id" value="${e.listId}">
 					<input type="hidden" name="list_category" value="${e.listCategory}">
 					<input type="hidden" name="togo_memo" value="${e.togoMemo}">
-					<input type="submit" name="SUBMIT" value="編集する">
+					<input type="submit" name="SUBMIT" value="編集" class="sendText">
 					</form>
 				</td>
 			</tr>

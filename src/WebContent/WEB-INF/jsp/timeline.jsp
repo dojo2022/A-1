@@ -180,7 +180,7 @@
 		</c:forEach>
 
 </form>
-			</c:forEach>
+</c:forEach>
 
 </div>
 

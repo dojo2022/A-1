@@ -48,6 +48,8 @@
 }
 .panel.is-show{
   display:block;
+  margin:auto;
+  width:70%;
 }
 
 
@@ -64,8 +66,7 @@ h1{
 }
 
 div#list_table_wrapper{
-	margin:auto;
-	width:70%;
+
 	background: #FFEE63;
 }
 th{
@@ -84,7 +85,7 @@ td{
 
 .ld{
 	background-color: white;
-	margin-bottom: 50px;
+	margin-bottom: 0;
 	padding: 10px 10px;
 	box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
 }
@@ -110,7 +111,7 @@ td{
 .category{
 	color: white;
 	background-color: green;
-	margin-left: 30%;
+
 
 }
 .foodName{
@@ -202,4 +203,26 @@ td{
 
 }
 
+.edit_btn{
+	border-radius : 5%;          /* 角丸       */
+	font-size     : 14px;        /* 文字サイズ */
+	cursor        : pointer;     /* カーソル   */
+	padding       : 10px 15px;   /* 余白       */
+	background    : #DA3C41;     /* 背景色     */
+	color         : #FFFFFF;     /* 文字色     */
+	line-height   : 0.5em;         /* 1行の高さ  */
+	transition    : .3s;         /* なめらか変化 */
+	box-shadow    : 2px 2px 3px #666666;  /* 影の設定 */
+	border        : 2px solid #DA3C41;    /* 枠の指定 */
 
+}
+.edit_btn:hover{
+	color: #DA3C41;
+	background: white;
+
+}
+
+.btn_place{
+	position:fixed;
+	padding-left: 10%;
+}
