@@ -420,16 +420,16 @@ function goAjax3(num){
 }
 
 function goAjax4(num){
-	alert("functionはいったよ！");
+/* 	alert("functionはいったよ！"); */
 	//入力値を取得してくる
 	let ld_comment = document.getElementById('ld_comment').value;
 	//let account_name = document.getElementById('account_name').value;
 	let emailAddress = document.getElementById('emailAddress').value;
 	let lunch_id = document.getElementById('lunch_id'+num).value;
 	//alert(account_name);
-	alert(ld_comment);
+/* 	alert(ld_comment);
 	alert(emailAddress);
-	alert(lunch_id);
+	alert(lunch_id); */
 
 	//{変数名：中に入れるもの}みたいに書いて、複数の値をpostData変数に格納
 	let postData = {data1:ld_comment,data3:emailAddress,data4:lunch_id,data5:'ld_comment_submit'}
@@ -452,7 +452,7 @@ function goAjax4(num){
 		timeStamp: new Date().getTime()
 	   //非同期通信が成功したときの処理
 	}).done(function(data) {
-		alert("成功1");
+/* 		alert("成功1"); */
 		// 今回は上の<div id="test"></div>の中に返ってきた文字列を入れる
 		//document.getElementById("test").innerText=data[0].name;
 		location.reload();
@@ -460,7 +460,7 @@ function goAjax4(num){
 	   //非同期通信が失敗したときの処理
 	  .fail(function() {
 		//失敗とアラートを出す
-		alert("失敗！");
+/* 		alert("失敗！"); */
 	  });
 }
 </script>

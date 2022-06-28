@@ -14,118 +14,15 @@
 <jsp:include page="header.jsp" />
 <body>
 
-
-<%-- <form action="/lunchBox/MyPageServlet" method="post" enctype="multipart/form-data">
-<table class="tableTotalMypage" >
-
-		<tr>
-			<th colspan="2">
-			<!--  	<input type="file" name="icon" accept="image/*" onchange="previewImage(this);"><br>-->
-			</th>
-			<div class="mypagePhoto">
-			<canvas id="preview" style="max-width:200px;"></canvas>
-			</div>
-		</tr>
-		<tr>
-			<td class="tableMypage">
-				${uList.accountName}
-				<br><input type="hidden"  name="accountName" value="${e.accountName}" readOnly>
-			</td>
-	 	</tr>
-	 	<tr>
-			<td class="tableMypage">
-				${uList.depname}
-				<br><input type="text" name="depName" value="${e.depname}"readOnly>
-			</td>
-		</tr>
-	 	<tr>
-	 		<td class="tableMypage">
-	 			<a href="#">${uList.emailAddress}</a>
-	 			<br><input type="email" name="emailAddress" value="${e.emailAddress}" readOnly>
-	 		</td>
-		</tr>
-		<!-- メールアドレスはリンクで飛んでメールができるようにする -->
-
-
-
-
-<!-- ランチ日記のデータベース(LunchDiaryDAO)から取得 -->
-		<tr>
-	 		<td class="tableMypage">
-	 			${lList.lunch_id}
-	 		</td>
-		</tr>
-
-		<tr>
-			<td class="tableMypage">
-				${lList.res_name}
-			</td>
-		</tr>
-		<tr>
-			<td class="tableMypage">
-				${lList.foodtype}
-			</td>
-		</tr>
-		<tr>
-			<td class="tableMypage">
-				${lList.category}
-			</td>
-		</tr>
-		<tr>
-			<td class="tableMypage">
-				${lList.style}
-			</td>
-		</tr>
-		<tr>
-			<td class="tableMypage">
-				${lList.date}
-			</td>
-		</tr>
-		<tr>
-			<td class="tableMypage">
-				${lList.foodName}
-			</td>
-		</tr>
-		<tr>
-			<td class="tableMypage">
-				${lList.cost}
-			</td>
-		</tr><tr>
-			<td class="tableMypage">
-				${lList.time}
-			</td>
-		</tr>
-		<tr>
-			<td class="tableMypage">
-				${lList.distance}
-			</td>
-		</tr><tr>
-			<td class="tableMypage">
-				${lList.star}
-			</td>
-		</tr>
-		<tr>
-			<td class="tableMypage">
-				${lList.feeling}
-			</td>
-		</tr><tr>
-			<td class="tableMypage">
-				${lList.foodPhoto}
-			</td>
-		</tr>
- --%>
-
-	<!-- </table> -->
-
 <h1>結果出力欄</h1>
 <!--プロフィール-->
 <div class = prof>
 	<div class="right">
-		<img src = "/lunchBox/images/${user.icon}"width="193px" height="150px">
+		<img src = "/lunchBox/images/${user.icon}"width="150px" height="150px">
 	</div>
 	<div class="left">
-		<c:out value="${user.accountName}"/><br>
-		<c:out value="${user.depName}"/><br>
+		氏名：<c:out value="${user.accountName}"/><br>
+		部署名：<c:out value="${user.depName}"/><br>
 		Email:<a href="mailto:${user.emailAddress}">${user.emailAddress}</a><br>
 
 	</div>
@@ -200,23 +97,89 @@
 		<c:if test="${myLunch == null }">
 			登録はありません。
 		</c:if>
-		<c:forEach var="e" items="${myLunch}" varStatus="status">
-			<form method="POST" action="EditLunchServlet">
-				${e.lunchId}<br>
-				${e.accountName}<br>
-				${e.ldResName}<br>
-				<input type="hidden" name="ld_res_name" value="${e.ldResName}">
-				<img src = "/lunchBox/images/${e.ldFoodPhoto}" width="193px" height="130px"><br>
-				${e.ldCategory}<br>
-				${e.style}<br>
-				${e.ldDate}<br>
-				${e.ldFoodName}<br>
-				${e.ldCost}<br>
-				${e.time}<br>
-				${e.distance}<br>
-				${e.ldStar}<br>
-				${e.ldFeeling}<br>
-				<input type="hidden" name="lunch_id" value="${e.lunchId}" id="lunch_id${status.index} }">
+
+<input type="hidden" name="mailAddress" id="emailAddress" value="${user.emailAddress}">
+<c:forEach var="e" items="${myLunch}" varStatus="status">
+<div class="ld">
+	<b>${e.accountName}</b>
+	<a href="mailto:${e.emailAddress}">${e.emailAddress}</a>
+	<span class="date">食べた日：${e.ldDate}</span>
+	<span class="category"><b>${e.ldCategory}</b></span><br>
+
+
+
+	<%-- ${e.ldFoodPhoto} --%>
+	<div class=diarydata>
+		<div class = "foodphoto">
+			<img src = "/lunchBox/images/${e.ldFoodPhoto}" width="250px" height="180px"><br>
+		</div>
+		<div class="titles">
+		<span class="foodName"><b>${e.ldFoodName}</b></span><br>
+		<a href="http://maps.google.co.jp/maps?q=${e.ldResName}" target="_new">${e.ldResName}</a><br>
+
+		<span class="smallTitle">会社からの所要時間：${e.distance}<br>
+		費用：${e.ldCost}<br>
+		提供時間：${e.time}<br>
+		利用：${e.style}<br>
+		評価：<span class="star">★</span>${e.ldStar}<br>
+		メモ：${e.ldFeeling}<br>
+		</span>
+		<input type="hidden" name="lunch_id" value="${e.lunchId}" id="lunch_id${status.index}">
+		</div>
+	</div>
+
+
+		<c:forEach var="lr" items="${ldReactionList}">
+		<c:if test="${lr.lunchId == e.lunchId}">
+			<div class="buttons">
+			<input type="button" name="to" value="行きたい" onclick="goAjax1(${status.index})" class="toGo">${lr.countLdToGo}
+			<input type="button" name="to" value="教えて" onclick="goAjax2(${status.index})" class="toTell">${lr.countLdToTell}
+			<input type="button" name="to" value="参考にします" onclick="goAjax3(${status.index})" class="toUse">${lr.countLdToUse}<br>
+			</div>
+		</c:if>
+		</c:forEach>
+
+			<!--lunch_reactionのランチIDとallLunchのランチIDが一致するものの行きたいリアクションについて取得する（1or行がない）-->
+			<c:forEach var="a" items="${ldr}" varStatus="st">
+				<c:if test="${a.lunchId == e.lunchId and a.ldToGo ==1}">
+					<input type = "hidden" name="iki" id="iki${st.index}${status.index}" value="${a.ldToGo}${st.index}">
+				</c:if>
+				<c:if test="${a.lunchId!= e.lunchId}">
+					<input type = "hidden" name="iki" id="iki${st.index}${status.index}" value="">
+				</c:if>
+				<c:if test="${a.lunchId == e.lunchId and a.ldToTell ==1}">
+					<input type = "hidden" name="oshi" id="oshi${st.index}${status.index}" value="${a.ldToTell}${st.index}">
+				</c:if>
+				<c:if test="${a.lunchId!= e.lunchId}">
+					<input type = "hidden" name="oshi" id="oshi${st.index}${status.index}" value="">
+				</c:if>
+				<c:if test="${a.lunchId == e.lunchId and a.ldToUse ==1}">
+					<input type = "hidden" name="san" id="san${st.index}${status.index}" value="${a.ldToUse}${st.index}">
+				</c:if>
+				<c:if test="${a.lunchId!= e.lunchId}">
+					<input type = "hidden" name="san" id="san${st.index}${status.index}" value="">
+				</c:if>
+			</c:forEach>
+ 		<input type = "hidden" name="iki" id="iki0${status.index}" value="">
+		<input type = "hidden" name="oshi" id="oshi0${status.index}" value="">
+ 		<input type = "hidden" name="san" id="san0${status.index}" value="">
+
+		<div class="commentArea">
+ 		<input type="text" name="ld_comment" placeholder="コメントを入力してください" id="ld_comment" class="inputText">
+		<input type="button" name="send_comment" value="送信" onclick="goAjax4(${status.index})" class="sendText"><br>
+		</div>
+		<c:forEach var="lc" items="${LdComment}" varStatus="vst">
+			<c:if test="${lc.lunchId == e.lunchId}">
+				<div class="commentArea">
+					${lc.accountName}：
+					${lc.ldComment}<br>
+				</div>
+			</c:if>
+		</c:forEach>
+
+</div>
+<form method="POST" action="EditLunchServlet">
+				<input type="hidden" name="lunch_id" value="${e.lunchId}" id="lunch_id${status.index}">
 				<input type="hidden" name="resName" value="${e.ldResName}">
 				<input type="hidden" name="foodPhoto" value="${e.ldFoodPhoto}">
 				<input type="hidden" name="category" value="${e.ldCategory}">
@@ -230,34 +193,13 @@
 				<input type="hidden" name="feeling" value="${e.ldFeeling}">
 				<!-- 外食ランチ日記更新削除 -->
 			<input type="submit" name="SUBMIT" value="編集">
-			</form>
-		<!-- 手作りランチ日記コメント・リアクション表示 -->
-			<form method="POST" action="MyPageServlet">
-			<input type="hidden" name="lunch_id" value="${e.lunchId}">
-			<c:forEach var="lc" items="${LdComment}">
-				<c:if test="${lc.lunchId == e.lunchId}">
-					${lc.accountName}：
-					${lc.ldComment}<br>
-				</c:if>
-			</c:forEach>
-			<input type="text" name="ld_comment" placeholder="コメントを入力してください">
-			<input type="submit" name="lc_submit" value="送信する"><br>
-			<c:forEach var="lr" items="${ldReactionList}">
-				<c:if test="${lr.lunchId == e.lunchId}">
-					${lr.countLdToGo}|
-					${lr.countLdToTell}|
-					${lr.countLdToUse}|
-				</c:if>
-			</c:forEach>
-			<input type="button" name="to" value="行きたい" onclick="goAjax1(${status.index})">
-			<input type="button" name="to" value="教えて" onclick="goAjax2(${status.index})">
-			<input type="button" name="to" value="参考にします" onclick="goAjax3(${status.index})"><br>
-			<hr>
-			</form>
-		</c:forEach>
-	</div>
+		</form>
+</c:forEach>
 
 
+
+
+</div>
 
    <!-- 行きたい場所リストタブ  ----------------------------------------------------->
   <div class="panel">

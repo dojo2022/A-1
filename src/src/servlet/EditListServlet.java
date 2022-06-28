@@ -84,10 +84,10 @@ public class EditListServlet extends HttpServlet {
 
 		// リクエストパラメータを取得
 		request.setCharacterEncoding("UTF-8");
-		String listResName = request.getParameter("RES_NAME");
+		String listResName = request.getParameter("list_res_name");
 		String listCategory = request.getParameter("category");
-		String togoMemo = request.getParameter("TOGO_MEMO");
-		int listId = Integer.parseInt(request.getParameter("LIST_ID"));
+		String togoMemo = request.getParameter("togo_memo");
+		int listId = Integer.parseInt(request.getParameter("list_id"));
 
 
 		if(togoMemo.length() > 200) {

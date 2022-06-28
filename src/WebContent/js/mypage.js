@@ -16,10 +16,8 @@ jQuery(function($){
 }, false);*/
 
 $(document).ready(function () {
-    $('#list_table').DataTable({
-        // 日本語表示
-        "language": {
-            "url": "http://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Japanese.json"
-        }
-    });
+	$('#list_table').DataTable({
+	    displayLength: 5,
+	    lengthChange: false
+	});
 });
