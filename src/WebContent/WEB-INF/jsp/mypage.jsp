@@ -7,26 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>マイページ </title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/css/theme.default.min.css">
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/js/jquery.tablesorter.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/js/jquery.tablesorter.widgets.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
 <link href="css/mypage.css" rel="stylesheet" type="text/css" />
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
-<script type="text/javascript" src="js/mypage.js"></script>
-
-<!-- スタイルの適用--------------------------- -->
-<style>
-#list_table .tablesorter-header {
-	cursor: pointer;
-	outline: none;
-}
-#list_table .tablesorter-header-inner::after {
-	content: '▼';
-	font-size: 12px;
-	margin-left: 5px;
-}
-</style>
 
 </head>
 <jsp:include page="header.jsp" />
@@ -132,14 +114,6 @@
 			</td>
 		</tr>
  --%>
-
-
-
-
-
-
-
-
 
 	<!-- </table> -->
 
@@ -287,37 +261,31 @@
 
    <!-- 行きたい場所リストタブ  ----------------------------------------------------->
   <div class="panel">
-  		行きたい場所リスト
  <c:if test="${myList == null }">
 			登録はありません。
  </c:if>
-	<table id="list_table" class="tablesorter">
+	<table id="list_table">
 	<thead>
 			<tr>
 				<th>お店の名前</th>
 				<th>ジャンル</th>
 				<th>メモ</th>
-				<th>編集</th>
+				<th></th>
 			</tr>
 	</thead>
 	<tbody>
 		<c:forEach var="e" items="${myList}" >
 			<tr>
-				<td width ="240px">${e.listResName}</td>
-				<td width ="150px">${e.listCategory}</td>
-				<td width ="200px">${e.togoMemo}</td>
-<!-- 				<td width ="260px">
-					<input type="button" name="to" value="行きたい">
-					<input type="button" name="to" value="教えて">
-					<input type="button" name="to" value="参考にします"><br>
-				</td> -->
+				<td>${e.listResName}</td>
+				<td>${e.listCategory}</td>
+				<td>${e.togoMemo}</td>
 				<td>
 					<form method="POST" action="EditListServlet">
 					<input type="hidden" name="list_res_name" value="${e.listResName}">
 					<input type="hidden" name="list_id" value="${e.listId}">
 					<input type="hidden" name="list_category" value="${e.listCategory}">
 					<input type="hidden" name="togo_memo" value="${e.togoMemo}">
-					<input type="submit" name="SUBMIT" value="編集">
+					<input type="submit" name="SUBMIT" value="編集する">
 					</form>
 				</td>
 			</tr>
@@ -358,12 +326,8 @@
 
 <!-- </form> -->
 <!-- コントロールシフト/でコメントアウト -->
-<script>
-//ページを読み込み後に、ソートを開始
-$(document).ready(function(){
-	        $("#list_table").tablesorter();
-});
-</script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="js/mypage.js"></script>
 </body>
 </html>
