@@ -6,21 +6,22 @@
 .prof{
 	display: block;
 	width: 40%;
-	height: 225px;
-	margin-left: auto;
-	margin-right: auto;
+	height: 165px;
+/* 	margin-left: auto; */
+	margin: auto;
 	background-color: rgba(255, 255, 255, 0.67);
 	box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
 	padding: 10px 0px;
 	display: flex;
 }
 .right{
-	margin-top: 30px;
-	margin-left: 75px;
+	margin-top: 10px;
+	margin-left: 65px;
 }
 .left{
-	margin-top: 45px;
-	margin-left: 30px;
+	margin-top: 47px;
+	margin-left: 6px;
+
 }
 .tab{
   flex-grow: 1;
@@ -29,6 +30,7 @@
   border-bottom:solid 1px black;
   text-align:center;
   cursor:pointer;
+  background: #FFEE63;
 }
 /*
 .panel-group{
@@ -61,3 +63,42 @@ h1{
 	margin: auto;
 
 }
+
+div#list_table_wrapper{
+	margin:auto;
+	width:70%;
+	background: #FFEE63;
+
+}
+th{
+	background: #FFEE63;
+}
+td{
+	text-align: center;
+	background: #fef9a7;
+
+}
+
+input[type = 'submit']{
+	border-radius : 5%;          /* 角丸       */
+	font-size     : 14px;        /* 文字サイズ */
+	cursor        : pointer;     /* カーソル   */
+	padding       : 15px 15px;   /* 余白       */
+	background    : #DA3C41;     /* 背景色     */
+	color         : #FFFFFF;     /* 文字色     */
+	line-height   : 0;           /* 1行の高さ  */
+	/* width		  : 50%;		 ボタンの横の長さ */
+	transition    : .3s;         /* なめらか変化 */
+	box-shadow    : 2px 2px 3px #666666;  /* 影の設定 */
+	border        : 2px solid #DA3C41;    /* 枠の指定 */
+}
+input[type = 'submit']:hover{
+	color: #DA3C41;
+	background: white;
+}
+
+body {
+	background-image:url(/lunchBox/img/mypage_bgi.jpg);
+	background-size: cover;
+}
+

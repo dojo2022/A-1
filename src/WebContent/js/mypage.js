@@ -15,13 +15,11 @@ jQuery(function($){
   location.replace("/lunchBox/LeaveServlet");
 }, false);*/
 
-    // デフォルトの設定を変更
-    $.extend( $.fn.dataTable.defaults, {
-        language: {
-            url: "http://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Japanese.json"
+$(document).ready(function () {
+    $('#list_table').DataTable({
+        // 日本語表示
+        "language": {
+            "url": "http://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Japanese.json"
         }
     });
-
-	$("#list_table").DataTable({
-		autowidth: false
-	});
+});
