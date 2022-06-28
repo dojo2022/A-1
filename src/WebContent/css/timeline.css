@@ -67,4 +67,122 @@ main{
 	width:70%;
 	margin:auto;
 }
+.ld{
+	background-color: white;
+	margin-bottom: 50px;
+	padding: 10px 10px;
+	box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+.diarydata{
+	display: flex;
+}
+.foodphoto{
+	margin: 3% 10% 3% 5%;
+}
+.titles{
+	margin: 3%;
+}
+.buttons{
+	margin-left: 5%;
+}
+.commentArea{
+	margin-left: 5%;
+}
+.date{
+	color: gray;
+	font-size: 12px
+}
+.category{
+	color: white;
+	background-color: green;
+	margin-left: 30%;
 
+}
+.foodName{
+	font-size: 20px;
+}
+.smallTitle{
+	font-size: 14px;
+}
+.star{
+	color: yellow;
+}
+.toGo{
+	border-radius : 5%;          /* 角丸       */
+	font-size     : 14px;        /* 文字サイズ */
+	cursor        : pointer;     /* カーソル   */
+	padding       : 12px 10px;   /* 余白       */
+	background    : #FF4949;     /* 背景色     */
+	color         : #FFFFFF;     /* 文字色     */
+	line-height   : 0.5em;         /* 1行の高さ  */
+	transition    : .3s;         /* なめらか変化 */
+	box-shadow    : 2px 2px 3px #666666;  /* 影の設定 */
+	border        : 2px solid #FF4949;    /* 枠の指定 */
+}
+.toGo:hover{
+	color: #FF4949;
+	background: white;
+}
+.toTell{
+	border-radius : 5%;          /* 角丸       */
+	font-size     : 14px;        /* 文字サイズ */
+	cursor        : pointer;     /* カーソル   */
+	padding       : 12px 10px;   /* 余白       */
+	background    : #FF8D29;     /* 背景色     */
+	color         : #FFFFFF;     /* 文字色     */
+	line-height   : 0.5em;         /* 1行の高さ  */
+	transition    : .3s;         /* なめらか変化 */
+	box-shadow    : 2px 2px 3px #666666;  /* 影の設定 */
+	border        : 2px solid #FF8D29;    /* 枠の指定 */
+}
+.toTell:hover{
+	color: #DA3C41;
+	background: white;
+}
+.toUse{
+	border-radius : 5%;          /* 角丸       */
+	font-size     : 14px;        /* 文字サイズ */
+	cursor        : pointer;     /* カーソル   */
+	padding       : 12px 10px;   /* 余白       */
+	background    : #F8B400;     /* 背景色     */
+	color         : #FFFFFF;     /* 文字色     */
+	line-height   : 0.5em;         /* 1行の高さ  */
+	transition    : .3s;         /* なめらか変化 */
+	box-shadow    : 2px 2px 3px #666666;  /* 影の設定 */
+	border        : 2px solid #F8B400;    /* 枠の指定 */
+}
+.toUse:hover{
+	color: #F8B400;
+	background: white;
+}
+.inputText{
+	margin-top: 15px;
+	width: 46%;
+	padding: 0.3em;
+	transition: 0.3s;
+	border: 1px solid #1B2538;
+	border-radius: 4px;
+}
+.inputText:focus{
+	border: 1px solid #DA3C41;
+	outline: none;
+	box-shadow: 0 0 5px 1px rgba(218,60,65, .5);
+}
+.sendText{
+	border-radius : 5%;          /* 角丸       */
+	font-size     : 14px;        /* 文字サイズ */
+	cursor        : pointer;     /* カーソル   */
+	padding       : 10px 15px;   /* 余白       */
+	background    : #DA3C41;     /* 背景色     */
+	color         : #FFFFFF;     /* 文字色     */
+	line-height   : 0.5em;         /* 1行の高さ  */
+	transition    : .3s;         /* なめらか変化 */
+	box-shadow    : 2px 2px 3px #666666;  /* 影の設定 */
+	border        : 2px solid #DA3C41;    /* 枠の指定 */
+
+}
+.sendText:hover{
+	color: #DA3C41;
+	background: white;
+
+}

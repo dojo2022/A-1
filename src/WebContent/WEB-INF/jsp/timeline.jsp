@@ -16,7 +16,7 @@
 <header>
 
 
-<form method="POST" action="/lunchBox/SearchServlet" target="_new">
+<form method="POST" action="/lunchBox/SearchServlet" target="_new" >
 <div class="searchBox">
 <div id="radioBtn">
 	<label><input name="lunch" type="radio" value="lunch_diary" checked="checked" />ランチ日記</label>
@@ -95,28 +95,42 @@
 <div class="panel is-show">
 <input type="hidden" name="mailAddress" id="emailAddress" value="${user.emailAddress}">
 <c:forEach var="e" items="${allLunch}" varStatus="status">
-<form method="POST" action="TimelineServlet">
-	${e.accountName}
+<form method="POST" action="TimelineServlet" class="ld">
+	<b>${e.accountName}</b>
 	<a href="mailto:${e.emailAddress}">${e.emailAddress}</a>
-	${e.ldDate}
-	${e.style}<br>
-	${e.ldFoodName}<br>
-	<a href="http://maps.google.co.jp/maps?q=${e.ldResName}" target="_new">${e.ldResName}</a><br>
+	<span class="date">食べた日：${e.ldDate}</span>
+	<span class="category"><b>${e.ldCategory}</b></span><br>
+
+
+
 	<%-- ${e.ldFoodPhoto} --%>
-	<img src = "/lunchBox/images/${e.ldFoodPhoto}" width="193px" height="130px"><br>
-		ジャンル：${e.ldCategory}<br>
-		会社からの所要時間：${e.distance}<br>
+	<div class=diarydata>
+		<div class = "foodphoto">
+			<img src = "/lunchBox/images/${e.ldFoodPhoto}" width="250px" height="180px"><br>
+		</div>
+		<div class="titles">
+		<span class="foodName"><b>${e.ldFoodName}</b></span><br>
+		<a href="http://maps.google.co.jp/maps?q=${e.ldResName}" target="_new">${e.ldResName}</a><br>
+
+		<span class="smallTitle">会社からの所要時間：${e.distance}<br>
 		費用：${e.ldCost}<br>
 		提供時間：${e.time}<br>
-		評価：${e.ldStar}<br>
+		${e.style}<br>
+		評価：<span class="star">★</span>${e.ldStar}<br>
 		メモ：${e.ldFeeling}<br>
+		</span>
 		<input type="hidden" name="lunch_id" value="${e.lunchId}" id="lunch_id${status.index}">
+		</div>
+	</div>
+
 
 		<c:forEach var="lr" items="${ldReactionList}">
 		<c:if test="${lr.lunchId == e.lunchId}">
-			<input type="button" name="to" value="行きたい" onclick="goAjax1(${status.index})">${lr.countLdToGo}
-			<input type="button" name="to" value="教えて" onclick="goAjax2(${status.index})">${lr.countLdToTell}
-			<input type="button" name="to" value="参考にします" onclick="goAjax3(${status.index})">${lr.countLdToUse}<br>
+			<div class="buttons">
+			<input type="button" name="to" value="行きたい" onclick="goAjax1(${status.index})" class="toGo">${lr.countLdToGo}
+			<input type="button" name="to" value="教えて" onclick="goAjax2(${status.index})" class="toTell">${lr.countLdToTell}
+			<input type="button" name="to" value="参考にします" onclick="goAjax3(${status.index})" class="toUse">${lr.countLdToUse}<br>
+			</div>
 		</c:if>
 		</c:forEach>
 	 		<%-- <input type="button" name="to" value="行きたい" onclick="goAjax1( ${status.index} )">
@@ -151,16 +165,20 @@
 		<input type = "hidden" name="oshi" id="oshi0${status.index}" value="">
  		<input type = "hidden" name="san" id="san0${status.index}" value="">
 
- 		<input type="text" name="ld_comment" placeholder="コメントを入力してください" id="ld_comment">
-		<input type="button" name="send_comment" value="ランチ日記コメントを送信する" onclick="goAjax4(${status.index})"><br>
+		<div class="commentArea">
+ 		<input type="text" name="ld_comment" placeholder="コメントを入力してください" id="ld_comment" class="inputText">
+		<input type="button" name="send_comment" value="送信" onclick="goAjax4(${status.index})" class="sendText"><br>
+		</div>
 		<c:forEach var="lc" items="${LdComment}" varStatus="vst">
 		<c:if test="${lc.lunchId == e.lunchId}">
+		<div class="commentArea">
 			${lc.accountName}：
 			${lc.ldComment}<br>
 			<%-- <input type="hidden" name="account_name" id="account_name" value="${lc.accountName}"> --%>
+		</div>
 		</c:if>
 		</c:forEach>
-			<hr>
+
 </form>
 			</c:forEach>
 
