@@ -145,10 +145,17 @@
 
 <h1>結果出力欄</h1>
 <!--プロフィール-->
-<c:out value="${user.accountName}"/><br>
-<c:out value="${user.depName}"/><br>
-<a href="mailto:${user.emailAddress}">${user.emailAddress}</a><br>
-<img src = "/lunchBox/images/${user.icon}"width="193px" height="130px">
+<div class = prof>
+	<div class="right">
+		<img src = "/lunchBox/images/${user.icon}"width="193px" height="150px">
+	</div>
+	<div class="left">
+		<c:out value="${user.accountName}"/><br>
+		<c:out value="${user.depName}"/><br>
+		Email:<a href="mailto:${user.emailAddress}">${user.emailAddress}</a><br>
+
+	</div>
+</div>
 
 <ul class="tab-group">
   <li class="tab">手作り記録</li>
