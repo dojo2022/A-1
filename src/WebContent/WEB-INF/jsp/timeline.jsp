@@ -90,7 +90,6 @@
 </header>
 
 <main>
-${comment_result}
 <!--タブを切り替えて表示するコンテンツ-->
 <div class="panel-group">
 <div class="panel is-show">
@@ -99,29 +98,20 @@ ${comment_result}
 <form method="POST" action="TimelineServlet">
 	${e.accountName}
 	<a href="mailto:${e.emailAddress}">${e.emailAddress}</a>
-	${e.ldFoodType}<br>
+	${e.ldDate}
+	${e.style}<br>
+	${e.ldFoodName}<br>
 	<a href="http://maps.google.co.jp/maps?q=${e.ldResName}" target="_new">${e.ldResName}</a><br>
 	<%-- ${e.ldFoodPhoto} --%>
 	<img src = "/lunchBox/images/${e.ldFoodPhoto}" width="193px" height="130px"><br>
-		${e.ldCategory}<br>
-		${e.style}<br>
-		${e.ldDate}<br>
-		${e.ldFoodName}<br>
-		${e.ldCost}<br>
-		${e.time}<br>
-		${e.distance}<br>
-		${e.ldStar}<br>
-		${e.ldFeeling}<br>
+		ジャンル：${e.ldCategory}<br>
+		会社からの所要時間：${e.distance}<br>
+		費用：${e.ldCost}<br>
+		提供時間：${e.time}<br>
+		評価：${e.ldStar}<br>
+		メモ：${e.ldFeeling}<br>
 		<input type="hidden" name="lunch_id" value="${e.lunchId}" id="lunch_id${status.index}">
-		<c:forEach var="lc" items="${LdComment}" varStatus="vst">
-		<c:if test="${lc.lunchId == e.lunchId}">
-			${lc.accountName}：
-			${lc.ldComment}<br>
-			<%-- <input type="hidden" name="account_name" id="account_name" value="${lc.accountName}"> --%>
-		</c:if>
-		</c:forEach>
-	 		<input type="text" name="ld_comment" placeholder="コメントを入力してください" id="ld_comment">
-			<input type="button" name="send_comment" value="ランチ日記コメントを送信する" onclick="goAjax4(${status.index})"><br>
+
 		<c:forEach var="lr" items="${ldReactionList}">
 		<c:if test="${lr.lunchId == e.lunchId}">
 			<input type="button" name="to" value="行きたい" onclick="goAjax1(${status.index})">${lr.countLdToGo}
@@ -157,9 +147,19 @@ ${comment_result}
 				</c:if>
 				<%-- ${a.lunchId} ----- ${e.lunchId}-------${a.ldToUse} ←ゆーず<br> --%>
 			</c:forEach>
-	 		<input type = "hidden" name="iki" id="iki0${status.index}" value="">
-			<input type = "hidden" name="oshi" id="oshi0${status.index}" value="">
-	 		<input type = "hidden" name="san" id="san0${status.index}" value="">
+ 		<input type = "hidden" name="iki" id="iki0${status.index}" value="">
+		<input type = "hidden" name="oshi" id="oshi0${status.index}" value="">
+ 		<input type = "hidden" name="san" id="san0${status.index}" value="">
+
+ 		<input type="text" name="ld_comment" placeholder="コメントを入力してください" id="ld_comment">
+		<input type="button" name="send_comment" value="ランチ日記コメントを送信する" onclick="goAjax4(${status.index})"><br>
+		<c:forEach var="lc" items="${LdComment}" varStatus="vst">
+		<c:if test="${lc.lunchId == e.lunchId}">
+			${lc.accountName}：
+			${lc.ldComment}<br>
+			<%-- <input type="hidden" name="account_name" id="account_name" value="${lc.accountName}"> --%>
+		</c:if>
+		</c:forEach>
 			<hr>
 </form>
 			</c:forEach>
