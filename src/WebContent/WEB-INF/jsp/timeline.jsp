@@ -115,7 +115,7 @@
 		<span class="smallTitle">会社からの所要時間：${e.distance}<br>
 		費用：${e.ldCost}<br>
 		提供時間：${e.time}<br>
-		${e.style}<br>
+		利用：${e.style}<br>
 		評価：<span class="star">★</span>${e.ldStar}<br>
 		メモ：${e.ldFeeling}<br>
 		</span>

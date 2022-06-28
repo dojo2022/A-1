@@ -136,7 +136,7 @@ main{
 	border        : 2px solid #FF8D29;    /* 枠の指定 */
 }
 .toTell:hover{
-	color: #DA3C41;
+	color: #FF8D29;
 	background: white;
 }
 .toUse{
