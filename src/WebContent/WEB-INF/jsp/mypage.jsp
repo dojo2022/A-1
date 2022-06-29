@@ -95,7 +95,7 @@
  <!-- ランチ日記タブ  ----------------------------------------------------->
 	<div class="panel is-show">
 		<c:if test="${myLunch == null }">
-			登録はありません。
+<div class="none_info">登録はありません。</div>
 		</c:if>
 
 <input type="hidden" name="mailAddress" id="emailAddress" value="${user.emailAddress}">
@@ -203,9 +203,6 @@
 
    <!-- 行きたい場所リストタブ  ----------------------------------------------------->
   <div class="panel">
- <c:if test="${myList == null }">
-			登録はありません。
- </c:if>
 	<table id="list_table">
 	<thead>
 			<tr>

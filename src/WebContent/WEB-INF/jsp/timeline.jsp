@@ -127,9 +127,9 @@
 		<c:forEach var="lr" items="${ldReactionList}">
 		<c:if test="${lr.lunchId == e.lunchId}">
 			<div class="buttons">
-			<input type="button" name="to" value="行きたい" onclick="goAjax1(${status.index})" class="toGo">${lr.countLdToGo}
-			<input type="button" name="to" value="教えて" onclick="goAjax2(${status.index})" class="toTell">${lr.countLdToTell}
-			<input type="button" name="to" value="参考にします" onclick="goAjax3(${status.index})" class="toUse">${lr.countLdToUse}<br>
+			<input type="button" name="to" value="行きたい" onclick="goAjax1(${status.index})" class="toGo">　${lr.countLdToGo}　
+			<input type="button" name="to" value="教えて" onclick="goAjax2(${status.index})" class="toTell">　${lr.countLdToTell}　
+			<input type="button" name="to" value="参考にします" onclick="goAjax3(${status.index})" class="toUse">　${lr.countLdToUse}<br>
 			</div>
 		</c:if>
 		</c:forEach>
