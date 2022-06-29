@@ -141,6 +141,7 @@ textarea{
 	width: 80%;
 	font: 15px/24px sans-serif;
 	padding: 0.3em;
+	resize:none;
 	transition: 0.3s;
 	letter-spacing: 1px;
 	border: 1px solid #1B2538;
