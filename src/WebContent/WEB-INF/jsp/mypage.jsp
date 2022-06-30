@@ -39,7 +39,7 @@
 <div class="panel-group">
 	<div class="panel">
 		<c:if test="${myHandmade == null }">
-			登録はありません。
+	<div class="none_info">登録はありません。</div>
 		</c:if>
 		<c:forEach var="e" items="${myHandmade}" >
 			<form method="POST" action="EditHandmadeServlet">

@@ -85,7 +85,7 @@
 <!--タブ-->
 <ul class="tab-group">
   <li class="tab is-active">ランチ日記</li>
-  <li class="tab">手作り記録</li>
+  <li class="tab">手作り日記</li>
 </ul>
 </header>
 
